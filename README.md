@@ -7,10 +7,12 @@
 这是一个使用 [brunch](http://brunch.io/) 构建的 Web App 。
 后端数据接口部分，分离在 [curio-api](https://github.com/CuriosityChina/curio-api) 。
 
+需要 node 0.11.x 以上版本。
+
 ## 开始开发
 
 ```
-npm install curio -g
+npm install brunch -g
 npm install
 curio --watch --server
 ```
