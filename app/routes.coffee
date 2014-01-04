@@ -19,7 +19,7 @@ module.exports = (match) ->
   match 'users', ''
 
   # Super Admin pannel
-  match 'super', 'super#index' # super admin backend
+  match 'super', 'super/home#index' # super admin backend
   match 'super/users', 'super/user#index', name: __('Users')
   match 'super/user/:id', 'super/user#show', name: __('User'),
         constraints: {id: /\w+$/}

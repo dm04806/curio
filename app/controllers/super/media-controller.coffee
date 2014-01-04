@@ -1,4 +1,4 @@
-SuperHome = require './home'
+SuperHome = require './home-controller'
 
 MediaListView = require 'views/super/media/list'
 

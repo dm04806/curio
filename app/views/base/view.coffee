@@ -1,4 +1,4 @@
-require 'lib/view-helper' # Just load the view helpers, no return value
+helper = require 'lib/view-helper' # Just load the view helpers, no return value
 
 module.exports = class View extends Chaplin.View
    # Template data context
@@ -13,5 +13,8 @@ module.exports = class View extends Chaplin.View
 
   getTemplateData: ->
     data = super
-    data = _.extend {}, @context, data
+    context = @context
+    if 'function' is typeof context
+      context = @context(data)
+    data = _.extend {}, helper.globals, context, data
     return data

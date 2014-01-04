@@ -37,3 +37,7 @@ register 't', (i18n_key, args..., options) ->
 # include template
 register '>', (tmpl, options) ->
   (require tmpl)(options)
+
+
+exports.globals =
+  site_url: '/'
