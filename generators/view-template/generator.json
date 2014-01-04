@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "parentPath": "app/views",
+  "dependencies": [
+    {"type": "view"},
+    {"type": "template", "parentPath": "{{parentPath}}/templates"}
+  ]
+}

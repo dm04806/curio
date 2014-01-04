@@ -1,0 +1,29 @@
+{
+  "author": "ktmud",
+  "name": "curio",
+  "description": "wechat mp marketing",
+  "version": "0.0.1",
+  "homepage": "",
+  "repository": "CuriousityChina/curio",
+  "scripts": {
+    "start": "brunch watch --server",
+    "test": "brunch test"
+  },
+  "dependencies": {
+    "koa": "~0.2.1",
+    "koa-spa": "~0.1.0",
+    "javascript-brunch": ">= 1.0 < 1.8",
+    "coffee-script-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "stylus-brunch": ">= 1.0 < 1.8",
+    "jade-brunch": ">= 1.0 < 1.8",
+    "handlebars-brunch": ">= 1.0 < 1.8",
+    "uglify-js-brunch": ">= 1.0 < 1.8",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "auto-reload-brunch": "~1.7.1",
+    "yaml-i18n-brunch": "~0.1.0",
+    "js-yaml": "~3.0.1"
+  },
+  "devDependencies": {
+  }
+}

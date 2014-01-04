@@ -1,0 +1,9 @@
+site:
+  name: Curio
+  desc: This is ok
+login:
+  username: Username
+  password: Password
+  remember: Remember me
+  submit: Login
+

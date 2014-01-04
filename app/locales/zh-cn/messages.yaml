@@ -1,0 +1,8 @@
+site:
+  name: Curio
+  desc: 一站式微信公共号运营工具
+login:
+  username: 用户名
+  password: 密码
+  remember: 记住我
+  submit: 登录

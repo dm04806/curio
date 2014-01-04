@@ -1,0 +1,24 @@
+<div class="heading">
+  <h1>{{t 'site.name'}}</h1>
+  <p class="slogan">
+  {{t 'site.desc'}}
+  </p>
+</div>
+<form class="login-form main-container" action="{{login_url}}" method="post">
+  <div class="form-group">
+    <input class="form-control" type="text" name="username" placeholder="{{t 'login.username'}}">
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="password" name="password" placeholder="{{t 'login.password'}}">
+  </div>
+  <div class="form-group text-right">
+    <div class="checkbox pull-left">
+      <label>
+        <input name="remember" value="1" type="checkbox"> {{t 'login.remember'}}
+      </label>
+    </div>
+    <button class="btn btn-primary" type="submit">
+      {{t 'login.submit'}}
+    </button>
+  </div>
+</form>
