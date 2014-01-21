@@ -15,7 +15,7 @@ module.exports = class User extends Model
     return myRoles[mediaId] is role
 
   permitted: (action, mediaId=null) ->
-    roles = permissions[action]
+    roles = permissions[action] # ['editor', 'mananger']
     for role in roles
       if @hasRole(role, mediaId)
         return true

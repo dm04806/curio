@@ -1,6 +1,7 @@
 # Application-specific view helpers
 # http://handlebarsjs.com/#helpers
 # --------------------------------
+consts = require 'consts'
 utils = require './utils'
 
 register = (name, fn) ->
@@ -40,4 +41,6 @@ register '>', (tmpl, options) ->
 
 
 exports.globals =
-  site_url: '/'
+  consts: consts
+  mediator: Chaplin.mediator
+  site_url: consts.SITE_ROOT + '/'

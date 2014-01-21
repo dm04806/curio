@@ -1,5 +1,3 @@
-
 # shortcut
-mediator = Chaplin.mediator
+mediator = require 'mediator'
 
-module.exports = class SessionController extends Chaplin.Controller

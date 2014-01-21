@@ -1,19 +1,5 @@
 consts = require './app/consts'
 
-#lc_cookie = consts.LOCALE_COOKIE
-
-# Find out what languages user can use
-#detectLanguage = (availables) ->
-  #return `function *() {
-    #if (!this.cookie.get(lc_cookie)) {
-      #var accept = this.acceptLanguages(availables);
-      #if (accept) {
-        #this.cookie.set(lc_cookie, accept);
-      #}
-    #}
-  #}`
-
-
 exports.config =
   # See http://brunch.io/#documentation for docs.
   notifications: false
@@ -31,8 +17,6 @@ exports.config =
     templates:
       joinTo: 'js/app.js'
   plugins:
-    #koaServer:
-      #onRoute: detectLanguage(Object.keys(consts.LOCALES))
     autoReload:
       enabled:
         css: on
@@ -45,5 +29,5 @@ exports.config =
       imports: ['nib', 'app/styles/_variables']
     yamlI18n:
       locale:
-        default: 'en'
+        default: 'zh-cn'
         all: Object.keys(consts.LOCALES)

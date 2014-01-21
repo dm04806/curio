@@ -1,2 +1,7 @@
 start:
-	@node --harmony `which brunch` watch --server
+	@gnode `which coffee` `which brunch` watch --server
+
+deploy:
+	@npm install
+	@bower install
+	@brunch build --production

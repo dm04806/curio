@@ -30,15 +30,11 @@ detect = ->
 
 i18n.detect = detect
 i18n.locale = detect()
-i18n.ready = utils.getReady('i18n')
+
 i18n.fetch = (domain) ->
-  $.getJSON "/locales/#{i18n.locale}/#{domain}.json", (res) ->
+  jqxhr = $.getJSON "/locales/#{i18n.locale}/#{domain}.json"
+  jqxhr.done (res) ->
     i18n.load(res)
-    utils.fireReady('i18n')
-
-
-# Fetch basic translations
-i18n.fetch('messages')
-
+  return jqxhr
 
 module.exports = i18n

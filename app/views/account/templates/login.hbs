@@ -4,17 +4,19 @@
   {{t 'site.desc'}}
   </p>
 </div>
-<form class="login-form main-container" action="{{login_url}}" method="post">
+<form class="login-form main-container" action="{{consts.API_ROOT}}/auth" method="post">
+  <input type="hidden" class="redir" value="{{mediator.loginReturn}}">
+  <div class="form-message"></div>
   <div class="form-group">
-    <input class="form-control" type="text" name="username" placeholder="{{t 'login.username'}}">
+    <input required class="form-control" type="text" name="username" placeholder="{{t 'login.username'}}">
   </div>
   <div class="form-group">
-    <input class="form-control" type="password" name="password" placeholder="{{t 'login.password'}}">
+    <input required class="form-control" type="password" name="password" placeholder="{{t 'login.password'}}">
   </div>
   <div class="form-group text-right">
     <div class="checkbox pull-left">
       <label>
-        <input name="remember" value="1" type="checkbox"> {{t 'login.remember'}}
+        <input name="expires" value="365" type="checkbox"> {{t 'login.remember'}}
       </label>
     </div>
     <button class="btn btn-primary" type="submit">

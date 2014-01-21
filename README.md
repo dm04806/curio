@@ -7,7 +7,7 @@
 这是一个使用 [brunch](http://brunch.io/) 构建的 Web App 。
 后端数据接口部分，分离在 [curio-api](https://github.com/CuriosityChina/curio-api) 。
 
-需要 node 0.11.x 以上版本。
+需要 node 0.11.3 以上版本或者 [gnode](https://github.com/TooTallNate/gnode)。
 
 ## 开始开发
 
