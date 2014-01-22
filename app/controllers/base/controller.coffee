@@ -1,6 +1,7 @@
 PageView = require 'views/base/page'
 
 mediator = require 'mediator'
+{store} = require 'lib/utils'
 
 require './transition'
 require './site-error'
@@ -15,7 +16,7 @@ module.exports = class Controller extends Chaplin.Controller
     return true unless need_permit
     if need_permit
       if not mediator.user
-        mediator.store 'loginReturn', window.location.path
+        store 'login_return', window.location.path
         return @redirectTo 'login'
       if not mediator.user.permitted(need_permit)
         mediator.publish 'site-error', 403

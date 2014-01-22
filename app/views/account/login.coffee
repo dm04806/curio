@@ -14,16 +14,14 @@ module.exports = class LoginMain extends View
       node.removeClass('loading')
     .done (res) =>
       if res.user
-        @loginSuccess(res.user)
-        @showMessage('login.success', 'success')
+        @msg('login.success', 'success')
+        @publishEvent('login:success', res.user)
       else
-        @showMessage("error.#{res.error or 'general'}")
+        @msg("error.#{res.error or 'general'}")
     .fail (res) =>
       # show as server error
-      @showMessage('error.connection')
-  loginSuccess: (user) ->
-    mediator.publish('auth:login', user)
-  showMessage: (text, type='danger') ->
+      @msg('error.connection')
+  msg: (text, type='danger') ->
     @$el.find('.form-message')
       .attr('class', "form-message alert alert-#{type}")
       .html(__(text))
