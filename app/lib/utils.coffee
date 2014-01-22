@@ -6,8 +6,8 @@ utils = Chaplin.utils.beget Chaplin.utils
 
 _.extend utils,
   # collect client side error
-  log: (err) ->
-    console.error(err)
+  error: console.error.bind(console)
+  debug: console.debug.bind(console)
 
 # Prevent creating new properties and stuff.
 Object.seal? utils

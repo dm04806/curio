@@ -1,3 +1,0 @@
-# shortcut
-mediator = require 'mediator'
-

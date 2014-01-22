@@ -1,5 +1,5 @@
 site:
-  name: Curio
+  name: 奇智睿思
   desc: 一站式微信公共号运营工具
 login:
   username: 用户名
@@ -10,5 +10,6 @@ login:
 error:
   connection: 与服务器通信失败，请稍后再试
   general: 出现未知的服务器错误
-  login failed: 用户名或密码不正确
-  not allowed: 不存在的用户
+  login_failed: 用户名或密码不正确
+  not_allowed: 你没有权限执行这项操作
+  no_such_user: 不存在的用户

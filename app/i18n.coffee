@@ -32,7 +32,7 @@ i18n.detect = detect
 i18n.locale = detect()
 
 i18n.fetch = (domain) ->
-  jqxhr = $.getJSON "/locales/#{i18n.locale}/#{domain}.json"
+  jqxhr = $.get "/locales/#{i18n.locale}/#{domain}.json"
   jqxhr.done (res) ->
     i18n.load(res)
   return jqxhr

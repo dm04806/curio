@@ -8,10 +8,18 @@
   <input type="hidden" class="redir" value="{{mediator.loginReturn}}">
   <div class="form-message"></div>
   <div class="form-group">
-    <input required class="form-control" type="text" name="username" placeholder="{{t 'login.username'}}">
+    <input required class="form-control"
+    {{#if consts.DEBUG}}
+    value="super"
+    {{/if}}
+    type="text" name="username" placeholder="{{t 'login.username'}}">
   </div>
   <div class="form-group">
-    <input required class="form-control" type="password" name="password" placeholder="{{t 'login.password'}}">
+    <input required class="form-control"
+    {{#if consts.DEBUG}}
+    value="super"
+    {{/if}}
+    type="password" name="password" placeholder="{{t 'login.password'}}">
   </div>
   <div class="form-group text-right">
     <div class="checkbox pull-left">

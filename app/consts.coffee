@@ -8,6 +8,7 @@ if production
   API_ROOT = 'http://api.curiositychina.com'
 
 module.exports =
+  DEBUG: !production
   SITE_ROOT: SITE_ROOT
   API_ROOT: API_ROOT
   LOCALE_COOKIE: 'locale'
