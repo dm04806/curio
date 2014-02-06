@@ -5,12 +5,12 @@ navItems = [
   url: '/super'
   icon: 'home'
 ,
-  name: 'medias'
-  url: '/super/media'
+  name: 'medias.title'
+  url: '/super/medias'
   icon: 'msg'
 ,
-  name: 'users'
-  url: '/super/user'
+  name: 'users.title'
+  url: '/super/users'
   icon: 'head'
 ]
 

@@ -1,5 +1,9 @@
+Collection = require './collection'
+
 # Base model.
 module.exports = class Model extends Chaplin.Model
+  list: ->
+    new Collection model: this
   # Mixin a synchronization state machine.
   # _(@prototype).extend Chaplin.SyncMachine
   # initialize: ->

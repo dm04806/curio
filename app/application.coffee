@@ -1,9 +1,6 @@
 utils = require 'lib/utils'
 mediator = require 'mediator'
 
-ERRORS = require 'models/errors'
-
-
 module.exports = class Application extends Chaplin.Application
   title: 'Curio'
   start: ->
@@ -12,7 +9,12 @@ module.exports = class Application extends Chaplin.Application
       @title = __('site.name')
       if bs?.user
         mediator.execute 'login', bs.user
-      super
+        roles = {}
+        for item in bs.admins
+          roles[item.media_id] = item.role
+        mediator.user.roles = roles
+        utils.debug '[media admins]', roles
       mediator.unsubscribe 'initialize'
       if not bs
-        mediator.execute 'site-error', ERRORS.BOOT_FAIL
+        mediator.execute 'site-error', 'bootfail'
+      super

@@ -7,11 +7,11 @@ navItems = [
   url: '/'
   icon: 'home'
 ,
-  name: 'messages'
+  name: 'messages.title'
   url: '/messages'
   icon: 'msg'
 ,
-  name: 'contacts'
+  name: 'contacts.title'
   url: '/contacts/all'
   icon: 'head'
 ]

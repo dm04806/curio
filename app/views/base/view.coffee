@@ -18,3 +18,7 @@ module.exports = class View extends Chaplin.View
       context = @context(data)
     data = _.extend {}, helper.globals, context, data
     return data
+
+  dispose: ->
+    @trigger 'dispose'
+    super

@@ -13,17 +13,21 @@ module.exports = class LoginMain extends View
     .always ->
       node.removeClass('loading')
     .done (res) =>
-      if res.user
+      user = res?.user
+      if user
         @msg('login.success', 'success')
-        @publishEvent('login:success', res.user)
+        mediator.execute('login', user)
+        @publishEvent('auth:login', user)
       else
-        @msg("error.#{res.error or 'general'}")
+        @msg("error.#{res?.error or 'general'}")
     .fail (res) =>
       # show as server error
       @msg('error.connection')
   msg: (text, type='danger') ->
-    @$el.find('.form-message')
+    msg = @$el.find('.form-message')
       .attr('class', "form-message alert alert-#{type}")
       .html(__(text))
+    if type is 'danger'
+      msg.anim('shake')
   events:
     'submit .login-form': 'login'

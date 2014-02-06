@@ -21,16 +21,18 @@ initialize = (err, bs) ->
 # Initialize the application only when i18n ready.
 $.when(i18n.fetch('messages'), $.get(consts.API_ROOT))
 .done (arg1, arg2) ->
-  bs = arg2[0]
+  bs = arg2[0] # bootstrap data
   mediator.publish 'initialize', bs
 .fail (xhr, status, err)->
-  utils.error(status, err)
-  mediator.publish 'initialize'
+  console.log arguments
+  i18n.fetch('messages').done ->
+    utils.error('bootstrap', status, err)
+    mediator.publish 'initialize'
   #document.write 'Server error. Please try again letter.'
 
 $ ->
   # initialize on DOM ready
-  new Application {
+  mediator.app = new Application {
     title: __('site.name'),
     controllerSuffix: '-controller',
     routes

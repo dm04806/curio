@@ -1,10 +1,9 @@
 PageView = require 'views/base/page'
 
 mediator = require 'mediator'
+ERRORS = require 'models/errors'
+{SITE_ROOT} = require 'consts'
 {store} = require 'lib/utils'
-
-require './transition'
-require './site-error'
 
 module.exports = class Controller extends Chaplin.Controller
   pageLayout: 'normal'
@@ -16,16 +15,19 @@ module.exports = class Controller extends Chaplin.Controller
     return true unless need_permit
     if need_permit
       if not mediator.user
-        store 'login_return', window.location.path
-        return @redirectTo 'login'
+        store 'login_return', window.location.href
+        if not mediator.site_error
+          @redirectTo 'login#index'
+        return
       if not mediator.user.permitted(need_permit)
-        mediator.publish 'site-error', 403
+        mediator.execute 'site-error', 403
     true
 
   beforeAction: ->
     return 403 if @checkPermission() is false
-    @compose 'site', PageView, layout: @pageLayout
+    @reuse 'site', PageView, layout: @pageLayout
     return
 
   index: ->
-    @view = new @main region: 'main'
+    if @main
+      @view = new @main region: 'main'

@@ -4,9 +4,15 @@ consts = require 'consts'
 COOKIE_NAME = consts.LOCALE_COOKIE
 
 i18n = window.$.i18n
+i18n.dict = {}
 
 # Export the gettext global
 window.__ = _.bind(i18n._, i18n)
+# only return value when has key
+window.__g = (key) ->
+  if i18n.dict.hasOwnProperty(key)
+    return i18n._.apply(i18n, arguments)
+  utils.debug 'Please translate "%s"', key
 
 aliases =
   'en-us': 'en'
@@ -31,10 +37,15 @@ detect = ->
 i18n.detect = detect
 i18n.locale = detect()
 
+xhrs = {}
+
 i18n.fetch = (domain) ->
+  return xhrs[domain] if xhrs[domain]
   jqxhr = $.get "/locales/#{i18n.locale}/#{domain}.json"
   jqxhr.done (res) ->
     i18n.load(res)
+    xhrs[domain] = null
+  xhrs[domain] = jqxhr
   return jqxhr
 
 module.exports = i18n

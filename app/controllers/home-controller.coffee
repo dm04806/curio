@@ -7,8 +7,8 @@ PannelSidebar = require 'views/panel/sidebar'
 module.exports = class HomeController extends Controller
   needPermit: 'panel'
   beforeAction: ->
-    return if super
-    @compose 'header', PanelHeader, region: 'header'
-    @compose 'sidebar', PannelSidebar, region: 'sidebar'
+    return if super # exit when super has error
+    @reuse 'header', PanelHeader, region: 'header'
+    @reuse 'sidebar', PannelSidebar, region: 'sidebar'
 
   main: require 'views/panel/home'

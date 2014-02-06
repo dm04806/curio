@@ -5,9 +5,12 @@ module.exports = class LoginController extends Controller
   needPermit: null
   pageLayout: 'single'
   main: require 'views/account/login'
+  isRedirectable: (url) ->
+    return not /^\/(login|logout)/i.test(url)
   index: ->
     super
-    @subscribeEvent 'login:success', =>
-      redir = store 'login_return' or '/'
+    @subscribeEvent 'auth:login', =>
+      redir = (store 'login_return') or '/'
+      redir = '/' if not @isRedirectable(redir)
       @redirectTo { url: redir }
 

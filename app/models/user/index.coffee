@@ -1,17 +1,18 @@
-Model = require '/models/base/model'
-permissions = require './permissions'
+Model = require 'models/base/model'
+Collection = require 'models/base/collection'
 
-mediator = Chaplin.mediator
+permissions = require './permissions'
 
 module.exports = class User extends Model
 
-  hasRole: (role, mediaId=null) ->
-    mediaId = mediaId or mediator.mediaId
+  hasRole: (role, mediaId) ->
     if role is 'user'
       return @get('_id') isnt null
-    myRoles = @get('roles') or {}
     if role is 'super'
-      return myRoles['-1'] is 1
+      return @get('level') is 'super'
+    if not mediaId
+      return false
+    myRoles = @roles or {}
     return myRoles[mediaId] is role
 
   permitted: (action, mediaId=null) ->

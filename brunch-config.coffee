@@ -13,7 +13,11 @@ exports.config =
     stylesheets:
       joinTo:
         'css/app.css': /^app/
-        'css/bootstrap.css': /bootstrap/
+        'css/vendor.css': /^(?!app)/
+      order:
+        before: [
+          /base/,
+        ]
     templates:
       joinTo: 'js/app.js'
   plugins:
