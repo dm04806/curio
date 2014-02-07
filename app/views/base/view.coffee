@@ -1,4 +1,5 @@
 helper = require 'lib/view-helper' # Just load the view helpers, no return value
+utils = require 'lib/utils'
 
 module.exports = class View extends Chaplin.View
    # Template data context
@@ -12,12 +13,16 @@ module.exports = class View extends Chaplin.View
     @template
 
   getTemplateData: ->
-    data = super
     context = @context
     if 'function' is typeof context
       context = @context(data)
-    data = _.extend {}, helper.globals, context, data
-    return data
+    ret = {}
+    data = super
+    _.assign ret, helper.globals, context, data
+    ret.__proto__ = data.__proto__
+    if @debug
+      utils.debug '[template]', ret
+    return ret
 
   dispose: ->
     @trigger 'dispose'

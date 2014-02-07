@@ -15,17 +15,13 @@ $.ajaxSetup
     if @type in ['POST', 'PUT', 'DELETE']
       xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
 
-initialize = (err, bs) ->
-  utils.debug('[curio start]', bs)
-
 # Initialize the application only when i18n ready.
 $.when(i18n.fetch('messages'), $.get(consts.API_ROOT))
 .done (arg1, arg2) ->
   bs = arg2[0] # bootstrap data
   mediator.publish 'initialize', bs
 .fail (xhr, status, err)->
-  console.log arguments
-  i18n.fetch('messages').done ->
+  i18n.fetch('messages').always ->
     utils.error('bootstrap', status, err)
     mediator.publish 'initialize'
   #document.write 'Server error. Please try again letter.'

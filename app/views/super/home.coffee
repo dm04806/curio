@@ -1,7 +1,5 @@
-View = require 'views/base'
+MainView = require 'views/panel/main'
 
-module.exports = class HomeMain extends View
-  autoRender: true
-  className: 'main-container'
+module.exports = class SuperHome extends MainView
   template: require './templates/home'
 

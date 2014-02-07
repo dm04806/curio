@@ -2,7 +2,6 @@
 # ------------------------------
 {SITE_ROOT} = require 'consts'
 
-
 $.fn.anim = (cls) ->
   @removeClass("animated #{this[0]._last_anim or ''}")
   this[0]._last_anim = cls
@@ -36,10 +35,19 @@ store = (item, value) ->
     localStorage.setItem(item, '')
   return value
 
-_.extend utils,
+
+makeurl = (url, params) ->
+  payload = utils.queryParams.stringify params
+  if payload
+    sep = if url.indexOf('?') >= 0 then '&' else '?'
+    url = url + sep + payload
+  url
+
+_.assign utils,
   # collect client side error
   error: console.error.bind(console)
   debug: console.debug.bind(console)
+  makeurl: makeurl
   store: store
 
 # Prevent creating new properties and stuff.

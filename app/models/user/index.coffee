@@ -1,5 +1,4 @@
 Model = require 'models/base/model'
-Collection = require 'models/base/collection'
 
 permissions = require './permissions'
 

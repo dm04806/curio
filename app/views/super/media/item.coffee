@@ -1,4 +1,5 @@
 View = require 'views/base/view'
 
 module.exports = class MediaItemView extends View
-  template: require './templates/item'
+  tagName: 'tr'
+  template: require './templates/row'

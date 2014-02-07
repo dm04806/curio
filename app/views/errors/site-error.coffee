@@ -14,7 +14,10 @@ module.exports = class SiteErrorMain extends View
   listen:
     'addedToDOM': ->
       $('body').addClass('has-site-error')
-      $('#site-error').height($(window).height())
+      #setTimeout ->
+        #height = Math.max($(window).height(), $('body').outerHeight())
+        #$('#site-error').height(height)
+      #, 200
     'dispose': ->
       $('body').removeClass('has-site-error')
   resolve: ->

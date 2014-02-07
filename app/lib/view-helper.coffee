@@ -36,8 +36,13 @@ register 't', (i18n_key, args..., options) ->
   new Handlebars.SafeString(result)
 
 # include template
-register '>', (tmpl, options) ->
-  (require tmpl)(options)
+register 'include', (tmpl, options) ->
+  ret = ''
+  if 'string' is typeof tmpl
+    ret = (require tmpl)(this)
+  if 'function' is typeof tmpl
+    ret = tmpl this
+  new Handlebars.SafeString(ret)
 
 
 exports.globals =
