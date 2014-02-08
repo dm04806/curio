@@ -1,7 +1,7 @@
 PanelSidebar = require 'views/panel/sidebar'
 
 navItems = [
-  name: 'home'
+  name: 'super.home'
   url: '/super'
   icon: 'home'
 ,

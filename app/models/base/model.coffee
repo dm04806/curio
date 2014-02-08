@@ -3,11 +3,11 @@ utils = require 'lib/utils'
 
 # Base model.
 module.exports = class Model extends Chaplin.Model
+  _.extend @prototype, Chaplin.SyncMachine
+
   @all: (params) ->
     Collection = require './collection'
     new Collection [], {model: this, params: params}
-
-  _(@prototype).extend Chaplin.SyncMachine
 
   initialize: ->
     super
@@ -31,3 +31,6 @@ module.exports = class Model extends Chaplin.Model
       @collection.url()
     else
       throw new Error('Model must redefine urlPath')
+
+  parse: (res, options) ->
+    return res.item

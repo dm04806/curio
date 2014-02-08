@@ -4,7 +4,7 @@ utils = require 'lib/utils'
 
 module.exports = class Collection extends Chaplin.Collection
   # Mixin a synchronization state machine.
-  _(@prototype).extend Chaplin.SyncMachine
+  _.extend @prototype, Chaplin.SyncMachine
 
   # Use the project base model per default, not Chaplin.Model
   model: Model
@@ -27,4 +27,5 @@ module.exports = class Collection extends Chaplin.Collection
 
   parse: (res, options) ->
     @total = res.total
-    return res.items
+    return res.items.map (item) ->
+      { item: item }

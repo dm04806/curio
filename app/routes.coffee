@@ -7,7 +7,7 @@ module.exports = (match) ->
   match 'messages', 'messages#index'
 
   match 'contacts', 'contacts#index'
-  match 'contacts/:sid', 'contacts#show'
+  match 'contact/:sid', 'contacts#show'
 
   match 'autoreply', 'autoreply#index'
   match 'autoreply/:sid', 'autoreply#show'
@@ -19,7 +19,7 @@ module.exports = (match) ->
   # Super Admin pannel
   match 'super', 'super/home#index' # super admin backend
   match 'super/users', 'super/user#index'
-  match 'super/users/:id', 'super/user#show'
+  match 'super/user/:id', 'super/user#show'
   match 'super/medias', 'super/media#index'
-  match 'super/medias/:id', 'super/media#show'
+  match 'super/media/:id', 'super/media#show'
 

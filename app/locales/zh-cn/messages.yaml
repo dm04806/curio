@@ -12,6 +12,15 @@ login:
   submit: 登录
   success: 登录成功!
 
+# Common nouns:
+name: 名称
+desc: 描述
+title: 标题
+
+# common verbs:
+save: 保存
+next: 下一步
+
 error:
   connection: 与服务器通信失败，请稍后再试
   general: 出现未知的服务器错误
@@ -30,11 +39,25 @@ contacts:
   title: 联系人
 
 super:
+  home: 超级管理
   title: 超级管理中心
+
 medias:
   title: 微信号
   index:
     h1: 所有微信号
+
+media:
+  uid: 微信号
+  uid_tip: 公众平台的登录名
+  oid: 原始ID
+  oid_tip: 如 gh_abcd123 ，可在公众平台「设置->账号信息」找到
+  desc_tip: 账号的备注信息
+  appkey: AppId
+  appkey_tip: 开发者凭据中的 AppId
+  secret: AppSecret
+  secret_tip: 开发者凭据中的 AppSecret
+
 users:
   title: 系统用户
   index:

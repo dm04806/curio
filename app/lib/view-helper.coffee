@@ -30,9 +30,10 @@ register 'url', (routeName, params..., options) ->
 
 # translate text
 register 't', (i18n_key, args..., options) ->
-  result = $.i18n._(i18n_key, args...)
+  return unless i18n_key
   if i18n_key not of $.i18n.dict
     console.warn "Please translate [#{i18n_key}] !"
+  result = __(i18n_key, args...)
   new Handlebars.SafeString(result)
 
 # include template
@@ -44,6 +45,29 @@ register 'include', (tmpl, options) ->
     ret = tmpl this
   new Handlebars.SafeString(ret)
 
+
+register "form_rows", (size, col, options) ->
+  this.label_cls = "col-#{size}-#{col}"
+  this.row_cls = "col-#{size}-#{12 - col}"
+  return options.fn(this)
+
+# form control helpers
+['input', 'textarea'].forEach (widget) ->
+  register "form_#{widget}", (name, args..., options) ->
+    tmpl = require "views/widgets/templates/form/#{widget}_row"
+    [value, label, placeholder] = args
+    left_col = left_col or 2
+    # handle some default value
+    if label is undefined
+      label = name
+    if placeholder is undefined and not label
+      placeholder = name
+    _.assign this,
+      name: name
+      value: value
+      label: label
+      placeholder: placeholder
+    new Handlebars.SafeString tmpl this
 
 exports.globals =
   consts: consts

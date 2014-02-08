@@ -1,0 +1,11 @@
+<div class="form-group">
+  {{#if label}}
+    <label for="input-{{name}}" class="{{label_cls}} control-label">{{t label}}</label>
+  {{/if}}
+  <div class="{{row_cls}}">
+    <input class="form-control input-{{name}}" id="input-{{name}}" type="text"
+      name="{{name}}" placeholder="{{t placeholder}}" value="{{value}}">
+  </div>
+</div>
+
+

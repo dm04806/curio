@@ -3,7 +3,7 @@ Media = require 'models/media'
 
 module.exports = class SuperMediaView extends ListableView
   _model: Media
-  template: require './templates/index'
+  template: require './templates/media_index'
   context:
-    thead: require './templates/thead'
-  itemView: require './item'
+    thead: require './templates/media_thead'
+  itemView: require './media_row'

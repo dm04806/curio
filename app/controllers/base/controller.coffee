@@ -24,7 +24,7 @@ module.exports = class Controller extends Chaplin.Controller
     true
 
   beforeAction: ->
-    return 403 if @checkPermission() is false
+    return 403 if @checkPermission() isnt true
     @reuse 'site', PageView, layout: @pageLayout
     return
 
