@@ -1,5 +1,5 @@
 Application = require 'application'
-i18n = require 'i18n'
+i18n = require 'lib/i18n'
 utils = require 'lib/utils'
 routes = require 'routes'
 consts = require 'consts'

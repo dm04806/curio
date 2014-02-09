@@ -10,6 +10,8 @@ module.exports = class View extends Chaplin.View
 
   # Precompiled templates function initializer.
   getTemplateFunction: ->
+    if not @template
+      utils.error 'template for %s not found.', this
     @template
 
   getTemplateData: ->

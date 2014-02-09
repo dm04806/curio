@@ -29,8 +29,8 @@ exports.config =
       port: [1234, 2345, 3456]
       delay: 200 if require('os').platform() is 'win32'
     stylus:
-      plugins: ['nib']
-      imports: ['nib', 'app/styles/_variables']
+      paths: ['app/styles']
+      imports: ['nib', '_variables']
     yamlI18n:
       locale:
         default: 'zh-cn'

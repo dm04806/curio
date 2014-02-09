@@ -1,7 +1,8 @@
 <div class="navbar navbar-default">
   <div class="navbar-header">
     <a class="navbar-brand" href="{{site_url}}">
-      {{t 'site.name'}}
+      <i></i>
+      <span>{{t 'site.name'}}</span>
     </a>
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
       <span class="sr-only">toggle navigation</span>
@@ -10,10 +11,26 @@
       <span class="icon-bar"></span>
     </button>
   </div>
-  <div id="navbar-collapse-1" class="navbar-collapse collapse navbar-default-collapse">
+  <div id="header-navbar" class="navbar-collapse collapse navbar-default-collapse">
+    {{#unless in_super}}
+      <ul class="nav navbar-nav">
+        {{#if all_medias}}
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{media.name}} <b class="icon-arrow-down"></b></a>
+          <ul class="dropdown-menu" role="menu">
+            {{#each all_medias}}
+            <li><a href="#" data-media="{{id}}">{{name}} ({{uid}})</a></li>
+            {{/each}}
+          </ul>
+          </li>
+        {{else}}
+          <li><a href="/">{{media.name}}</a>
+        {{/if}}
+      </ul>
+    {{/unless}}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{t 'welcome'}}, {{user.name}} <b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{t 'header.hello' user.name}} <b class="icon-arrow-down"></b></a>
       <ul class="dropdown-menu" role="menu">
         {{#if is_super}}
           {{#unless in_super}}
@@ -23,6 +40,14 @@
         <!--<li class="divider"></li>-->
         <li><a href="/logout">{{t 'logout'}}</a></li>
       </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="icon-cog"></b></a>
+        <ul class="dropdown-menu toggle-locale">
+          {{#each consts.LOCALES}}
+            <li><a href="#" data-locale="{{@key}}">{{this}}</a></li>
+          {{/each}}
+        </ul>
       </li>
     </ul>
   </div>

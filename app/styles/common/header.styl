@@ -1,14 +1,33 @@
 #header
   position: relative
   z-index: header_index
+  a:hover
+    color: #666
+  .navbar-default
+    border-radius: 0
+    border-left: 0
+    border-right: 0
+  .navbar-brand
+    width: sidebar_width
+    overflow: hidden
+    font-size: 12px
+    white-space: nowrap
+    display: block
+    height: header_height
+    background: lighten(bg_sidebar, 10%)
+    padding: 8px
+    span
+      line-height: 9999em
+    i 
+      display: block
+      height: 100%
+      background: url('/images/logo-white.svg') no-repeat 50% 50%
+      background-size: 100%;
+    &:hover
+      color: #aaa
+      background-color: lighten(bg_sidebar, 8%)
 
-.navbar-default
-  border-radius: 0
-  background: bg_sidebar
-  border-color: darken(bg_sidebar, 10%)
 
-.navbar-brand
-  width: sidebar_width
-  display: block
-  height: 100%
-  background: lighten(bg_sidebar, 4%)
+#header-navbar
+  margin-left: sidebar_width
+

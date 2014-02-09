@@ -2,16 +2,23 @@
 .sidebar-nav
   height: 100%
   width: sidebar_width
-  margin-top: -1px
-  border-right: 1px solid darken(bg_sidebar, 5%)
   position: absolute
+  z-index: header_index + 1
   left: 0
-  top: 0
-  padding-top: header_height
+  border-right: 1px solid darken(bg_sidebar, 5%)
+  border-top: 4px solid darken(bg_sidebar, 5%)
+  top: header_height
   box-sizing: border-box
+  padding-top: 20px
   &, .nav
     background: bg_sidebar
-  a
-    color: #fff
-  a:hover
-    color: #333
+  .nav
+    a
+      color: #999
+      border-radius: 0
+    > li > a:hover
+      color: #aaa
+      background: lighten(bg_sidebar, 5%)
+    > li.active > a
+      color: #ccc
+      background: lighten(bg_sidebar, 12%)

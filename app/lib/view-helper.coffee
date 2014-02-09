@@ -3,12 +3,17 @@
 # --------------------------------
 consts = require 'consts'
 utils = require './utils'
+i18n = require 'lib/i18n'
+moment = require 'lib/moment'
 
 register = (name, fn) ->
   Handlebars.registerHelper name, fn
 
 # Map helpers
 # -----------
+
+register 'when', (bool, val, options) ->
+  return val if bool
 
 # Make 'with' behave a little more mustachey.
 register 'with', (context, options) ->
@@ -28,13 +33,27 @@ register 'without', (context, options) ->
 register 'url', (routeName, params..., options) ->
   utils.reverse routeName, params
 
+register 'json', (obj, options) ->
+  console.log obj
+  return JSON.stringify obj
+
+register 'widget', (tmpl, options) ->
+  tmpl = require "views/widgets/templates/#{tmpl}"
+  data = _.assign options.data, options.hash
+  new Handlebars.SafeString tmpl data
+
 # translate text
 register 't', (i18n_key, args..., options) ->
   return unless i18n_key
-  if i18n_key not of $.i18n.dict
+  if i18n_key not of i18n.dict
     console.warn "Please translate [#{i18n_key}] !"
   result = __(i18n_key, args...)
   new Handlebars.SafeString(result)
+
+register 'g', (i18n_key, args..., options) ->
+  return unless i18n_key
+  result = __g(i18n_key, args...)
+  new Handlebars.SafeString(result) if result
 
 # include template
 register 'include', (tmpl, options) ->
@@ -49,27 +68,38 @@ register 'include', (tmpl, options) ->
 register "form_rows", (size, col, options) ->
   this.label_cls = "col-#{size}-#{col}"
   this.row_cls = "col-#{size}-#{12 - col}"
+  this.context = this
   return options.fn(this)
 
 # form control helpers
 ['input', 'textarea'].forEach (widget) ->
   register "form_#{widget}", (name, args..., options) ->
     tmpl = require "views/widgets/templates/form/#{widget}_row"
-    [value, label, placeholder] = args
-    left_col = left_col or 2
+    [value, label, placeholder, attrs] = args
     # handle some default value
     if label is undefined
       label = name
-    if placeholder is undefined and not label
-      placeholder = name
-    _.assign this,
+    if placeholder is undefined
+      placeholder = if label then "#{name}_tip" else name
+    data = _.assign {}, this,
       name: name
       value: value
       label: label
       placeholder: placeholder
-    new Handlebars.SafeString tmpl this
+      attrs: attrs
+    new Handlebars.SafeString tmpl data
+
+
+
+# Content formating helpers
+register 'strftime', (date, format, options) ->
+  if format == 'locale'
+    return date.toLocaleString()
+  return moment(date).format(format)
 
 exports.globals =
   consts: consts
+  locale: i18n.locale
+  locale_text: consts.LOCALES[i18n.locale]
   mediator: Chaplin.mediator
   site_url: consts.SITE_ROOT + '/'

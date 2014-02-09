@@ -1,0 +1,16 @@
+{{widget 'heading2' back='/super/users' title='users.edit'}}
+<div class="main-content">
+  <form class="edit-form form-horizontal" method="post">
+    {{#form_rows 'sm' 2}}
+      {{form_input 'uid' uid 'login.username' 'user.uid_tip' 'readonly'}}
+      {{form_input 'name' name 'user.screen_name' 'user.screen_name_tip'}}
+      {{form_input 'email' email 'email' 'user.email_tip'}}
+      {{form_textarea 'desc' desc 'remark' 'user.desc_tip'}}
+    {{/form_rows}}
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

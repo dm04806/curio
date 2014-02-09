@@ -12,7 +12,7 @@ window.__ = _.bind(i18n._, i18n)
 window.__g = (key) ->
   if i18n.dict.hasOwnProperty(key)
     return i18n._.apply(i18n, arguments)
-  utils.debug 'Please translate "%s"', key
+  console.warn 'Please translate "%s"', key
 
 aliases =
   'en-us': 'en'
@@ -24,15 +24,19 @@ aliases =
 i18n.LOCALES = consts.LOCALES
 
 detect = ->
-  ret = $.cookie(COOKIE_NAME, { expires: 365, path: '/' })
-  ret = ret or navigator.language or navigator.userLanguage or 'zh'
-  ret = ret.toLowerCase()
-  if ret in aliases
-    ret = aliases[ret]
-  if ret not of i18n.LOCALES
-    ret = consts.DEFAULT_LOCALE
-  $.cookie(COOKIE_NAME, ret)
-  return ret
+  locale = $.cookie(COOKIE_NAME)
+  locale = locale or navigator.language or navigator.userLanguage or 'zh'
+  i18n.setLocale(locale)
+
+i18n.setLocale = (locale) ->
+  locale = locale.toLowerCase()
+  if locale in aliases
+    locale = aliases[locale]
+  if locale not of i18n.LOCALES
+    locale = consts.DEFAULT_LOCALE
+  $.removeCookie(COOKIE_NAME)
+  $.cookie(COOKIE_NAME, locale, { expires: 365, path: '/' })
+  return locale
 
 i18n.detect = detect
 i18n.locale = detect()

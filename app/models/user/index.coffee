@@ -3,6 +3,7 @@ Model = require 'models/base/model'
 permissions = require './permissions'
 
 module.exports = class User extends Model
+  urlPath: '/users'
 
   hasRole: (role, mediaId) ->
     if role is 'user'
@@ -12,7 +13,11 @@ module.exports = class User extends Model
     if not mediaId
       return false
     myRoles = @roles or {}
-    return myRoles[mediaId] is role
+    # super user can do anything
+    return myRoles[mediaId] is role or @isSuper()
+
+  isSuper: ->
+    return @hasRole('super')
 
   permitted: (action, mediaId=null) ->
     roles = permissions[action] # ['editor', 'mananger']

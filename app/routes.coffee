@@ -4,17 +4,15 @@ module.exports = (match) ->
   match 'login', 'login#index'
   match 'logout', 'logout#index'
 
-  match 'messages', 'messages#index'
-
+  # Media control pannel
+  match 'users', ''
   match 'contacts', 'contacts#index'
   match 'contact/:sid', 'contacts#show'
 
-  match 'autoreply', 'autoreply#index'
-  match 'autoreply/:sid', 'autoreply#show'
-  match 'autoreply/:sid/edit', 'autoreply#edit'
+  #match 'autoreply', 'autoreply#index'
+  #match 'autoreply/:sid', 'autoreply#show'
+  #match 'autoreply/:sid/edit', 'autoreply#edit'
 
-  # Media control pannel
-  match 'users', ''
 
   # Super Admin pannel
   match 'super', 'super/home#index' # super admin backend

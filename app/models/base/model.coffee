@@ -33,4 +33,8 @@ module.exports = class Model extends Chaplin.Model
       throw new Error('Model must redefine urlPath')
 
   parse: (res, options) ->
-    return res.item
+    ret = res.item
+    for field in ['created_at', 'updated_at']
+      if ret.hasOwnProperty(field)
+        ret[field] = new Date(ret[field])
+    return ret

@@ -1,43 +1,31 @@
 View = require 'views/base'
-
-mediator = Chaplin.mediator
+MenuView = require 'views/widgets/global_menu'
 
 navItems = [
-  name: 'home'
+  name: 'dashboard'
   url: '/'
+  strict: true
   icon: 'home'
 ,
   name: 'messages.title'
   url: '/messages'
-  icon: 'msg'
+  icon: 'chat'
 ,
   name: 'contacts.title'
-  url: '/contacts/all'
-  icon: 'head'
+  url: '/contacts'
+  icon: 'address-book'
 ]
-
-getNavItems = (items) ->
-  ret = []
-  user = mediator.user
-  for nav in items
-    role = nav.role
-    if role and not user.hasRole(nav.role)
-      continue
-    obj =
-      name: nav.name
-      url: nav.url
-      icon: nav.icon
-    if nav.subnav
-      obj.subnav = getNavItems(nav.subnav)
-    ret.push(obj)
-  return ret
-
 
 module.exports = class SidebarView extends View
   autoRender: true
   className: 'sidebar-nav'
   navItems: navItems
-  context: ->
-    nav: getNavItems(@navItems)
+  regions:
+    main_menu: '.main-menu'
   template: require './templates/sidebar'
-
+  render: ->
+    super
+    mainMenu = new MenuView
+      region: 'main_menu'
+      items: @navItems
+    @subview 'main_menu', mainMenu

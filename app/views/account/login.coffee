@@ -16,8 +16,8 @@ module.exports = class LoginMain extends View
       user = res?.user
       if user
         @msg('login.success', 'success')
-        mediator.execute('login', user)
-        @publishEvent('auth:login', user)
+        mediator.execute('login', res)
+        @publishEvent('auth:login')
       else
         @msg("error.#{res?.error or 'general'}")
     .fail (res) =>

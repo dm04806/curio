@@ -3,15 +3,16 @@ PanelSidebar = require 'views/panel/sidebar'
 navItems = [
   name: 'super.home'
   url: '/super'
+  strict: true
   icon: 'home'
 ,
   name: 'medias.title'
   url: '/super/medias'
-  icon: 'msg'
+  icon: 'vcard'
 ,
   name: 'users.title'
   url: '/super/users'
-  icon: 'head'
+  icon: 'users'
 ]
 
 

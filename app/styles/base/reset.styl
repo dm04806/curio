@@ -1,5 +1,25 @@
 html
   position: relative
   min-height: 100%
+
 h1
-  font-size: 20px
+  font-size: 22px
+  margin-bottom: 30px
+  margin-top: 10px
+
+$fff_text
+  color: #fff
+
+.table-bordered
+  thead, tbody
+    > tr >
+      th, td
+        border-color: #ddd
+
+
+.alert-danger
+  for n in (1..5)
+    h{n}, .h{n}
+      @extend $fff_text
+  .error-detail
+    color: lighten(brand-danger, 70%)

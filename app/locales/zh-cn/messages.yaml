@@ -2,7 +2,6 @@ site:
   name: 奇智睿思
   desc: 一站式微信公共号运营工具
 home: 首页
-welcome: 欢迎
 logout: 登出
 login:
   ing: 正在登录...
@@ -16,10 +15,18 @@ login:
 name: 名称
 desc: 描述
 title: 标题
+operations: 操作
+remark: 备注
+email: Email
 
 # common verbs:
 save: 保存
+edit: 编辑
+back: 返回
 next: 下一步
+
+header:
+  hello: 欢迎，%s
 
 error:
   connection: 与服务器通信失败，请稍后再试
@@ -45,7 +52,8 @@ super:
 medias:
   title: 微信号
   index:
-    h1: 所有微信号
+    h1: 管理微信号
+  edit: 编辑公共账号信息
 
 media:
   uid: 微信号
@@ -62,3 +70,9 @@ users:
   title: 系统用户
   index:
     h1: 管理系统用户
+  edit: 编辑用户资料
+
+user:
+  screen_name: 姓名
+  screen_name_tip: 用户的姓名
+  email_tip: username@example.com

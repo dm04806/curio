@@ -1,0 +1,7 @@
+{{~#each nav~}}
+<li data-name="{{name}}">
+<a href="{{this.url}}" title="{{t title}}">
+  {{#if icon}}<span class="icon-{{icon}}"></span>{{/if}}
+  {{t name}}
+</a>
+{{~/each~}}
