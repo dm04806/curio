@@ -3,14 +3,16 @@ mediator = require 'mediator'
 
 module.exports = class SiteErrorMain extends View
   autoRender: true
-  optionNames: View::optionNames.concat ['error', 'category']
+  optionNames: View::optionNames.concat ['error']
   container: 'body'
   id: 'site-error'
   template: require './templates/site-error'
   context: ->
-    category: @category or 'danger'
-    title: __g("error.#{@error}.title") or __('error.general')
-    detail: __g("error.#{@error}.detail")
+    error = @error
+    user: mediator.user
+    category: error.category
+    title: error.title
+    detail: error.detail
   listen:
     'addedToDOM': ->
       $('body').addClass('has-site-error')

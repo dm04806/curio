@@ -32,19 +32,17 @@ mediator.setHandler 'login', (data) ->
 
 noAdmin = ->
   stored = utils.store 'media'
-  if mediator.user.isSuper()
+  if mediator.user.isSuper
     # Super user can admin any media
     return stored
 
 pickMedia = (availables) ->
-  console.log availables, utils.store 'all_medias'
   if not availables or not availables.length
     return noAdmin()
   all_medias = availables.map (item) ->
     item.media.role = item.role
     return item.media
   utils.store 'all_medias', all_medias
-  console.log utils.store 'all_medias'
   # Find out which media is now managing
   current = utils.store 'media'
   if current

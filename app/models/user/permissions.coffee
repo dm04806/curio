@@ -1,3 +1,3 @@
 module.exports =
-  'panel': ['user']
+  'panel': ['media']
   'super': ['super']

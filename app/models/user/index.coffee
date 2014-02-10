@@ -6,18 +6,23 @@ module.exports = class User extends Model
   urlPath: '/users'
 
   hasRole: (role, mediaId) ->
-    if role is 'user'
+    if role is 'login'
+      # only need login
       return @get('_id') isnt null
-    if role is 'super'
-      return @get('level') is 'super'
-    if not mediaId
-      return false
+    isSuper = @isSuper
+    return isSuper if role is 'super'
+    return false if not mediaId
     myRoles = @roles or {}
+    if role is 'media'
+      # need at least a media
+      passed = mediaId isnt null
+    else if not mediaId
+      passed = false
+    else
+      mediaId = mediaId.id or mediaId
+      passed = myRoles[mediaId] is role
     # super user can do anything
-    return myRoles[mediaId] is role or @isSuper()
-
-  isSuper: ->
-    return @hasRole('super')
+    return isSuper or passed
 
   permitted: (action, mediaId=null) ->
     roles = permissions[action] # ['editor', 'mananger']
@@ -25,3 +30,7 @@ module.exports = class User extends Model
       if @hasRole(role, mediaId)
         return true
     return false
+
+Object.defineProperty User.prototype, 'isSuper',
+  get: ->
+    @get('level') is 'super'

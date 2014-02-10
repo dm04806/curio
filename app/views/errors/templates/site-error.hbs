@@ -8,5 +8,10 @@
       {{{detail}}}
     </div>
   {{/if}}
+  {{#if user.isSuper}}
+    <div class="error-detail">
+      <a href="/super">&raquo; 去超级管理后台</a>
+    </div>
+  {{/if}}
 </div>
 </div>

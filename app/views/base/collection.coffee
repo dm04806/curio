@@ -23,4 +23,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
     unless @collection.length is 0 and @collection.isSyncing()
       super
       return
-    setTimeout (=> super), 1000
+    setTimeout =>
+      if @collection
+        super
+    , 1000

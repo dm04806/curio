@@ -13,11 +13,12 @@ login:
 
 # Common nouns:
 name: 名称
-desc: 描述
+desc: 说明
 title: 标题
 operations: 操作
 remark: 备注
 email: Email
+created_at: 创建日期
 
 # common verbs:
 save: 保存
@@ -34,9 +35,12 @@ error:
   bootfail:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
-  403:
+  need_panel:
     title: 没有权限
-    detail: 你没有权限访问此页面，试试<a href="/login">用其他账号登录</a>
+    detail: 你名下没有任何微信公众号可供管理，试试<a href="/login">用其他账号登录</a>
+  need_super:
+    title: 不能继续
+    detail: 你并不是超级管理员
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
 

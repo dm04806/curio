@@ -12,8 +12,8 @@ register = (name, fn) ->
 # Map helpers
 # -----------
 
-register 'when', (bool, val, options) ->
-  return val if bool
+register 'when', (bool, vals..., options) ->
+  return if bool then vals[0] else vals[1]
 
 # Make 'with' behave a little more mustachey.
 register 'with', (context, options) ->

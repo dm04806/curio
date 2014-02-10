@@ -16,6 +16,7 @@ title: Title
 operations: Operations
 remark: Remarks
 email: Email
+created_at: 创建日期
 save: Save
 edit: Edit
 back: Back
@@ -23,14 +24,17 @@ next: Next
 header:
   hello: "Hello, %s"
 error:
-  "403":
-    title: Not Permitted
-    detail: You are not allowed to do so
   connection: "Connection failed, please try again later"
   general: "Oops, something strange happened."
   bootfail:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
+  need_panel:
+    title: 没有权限
+    detail: "你名下没有任何微信公众号可供管理，试试<a href=\"/login\">用其他账号登录</a>"
+  need_super:
+    title: 无法访问
+    detail: 你并不是超级管理员
   login failed: Username / password incorrect
   not allowed: You a not allowed to do so
 messages:

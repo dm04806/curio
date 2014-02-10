@@ -8,13 +8,13 @@ module.exports = class HeaderView extends View
   template: require './templates/header'
   context: ->
     user = mediator.user
+    media = mediator.media
     return unless user
     user: user.attributes
-    media: mediator.media.attributes
+    media: media and media.attributes
     all_medias: utils.store 'all_medias'
     in_super: false
-    is_super: user.isSuper()
-  debug: true
+    is_super: user.isSuper
   events:
     'click .toggle-locale a': (e) ->
       e.preventDefault()

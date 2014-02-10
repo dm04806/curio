@@ -1,5 +1,6 @@
 Controller = require 'controllers/base/controller'
 {store} = require 'lib/utils'
+mediator = require 'mediator'
 
 module.exports = class LoginController extends Controller
   needPermit: null
