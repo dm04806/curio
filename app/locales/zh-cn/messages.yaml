@@ -2,6 +2,7 @@ site:
   name: 奇智睿思
   desc: 一站式微信公共号运营工具
 home: 首页
+dashboard: 控制台
 logout: 登出
 login:
   ing: 正在登录...
@@ -25,6 +26,7 @@ save: 保存
 edit: 编辑
 back: 返回
 next: 下一步
+admin: 管理
 
 header:
   hello: 欢迎，%s
@@ -36,7 +38,7 @@ error:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
   need_panel:
-    title: 没有权限
+    title: 找不到公共号
     detail: 你名下没有任何微信公众号可供管理，试试<a href="/login">用其他账号登录</a>
   need_super:
     title: 不能继续

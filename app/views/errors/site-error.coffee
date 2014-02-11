@@ -14,18 +14,20 @@ module.exports = class SiteErrorMain extends View
     title: error.title
     detail: error.detail
   listen:
-    'addedToDOM': ->
-      $('body').addClass('has-site-error')
-      #setTimeout ->
-        #height = Math.max($(window).height(), $('body').outerHeight())
-        #$('#site-error').height(height)
-      #, 200
+    'resolve': 'dispose'
     'dispose': ->
       $('body').removeClass('has-site-error')
-  resolve: ->
-    setTimeout ->
-      mediator.publish 'site-error:resolve'
   events:
     'click a': 'resolve'
+  #render: ->
+    #super
+    #setTimeout (=> @adjustHeight()), 1000
+  adjustHeight: ->
+    return if @disposed
+    height = Math.max($(window).height(), $('body').outerHeight())
+    $('#site-error').height(height)
+  resolve: ->
+    setTimeout =>
+      @trigger 'resolve'
 
 

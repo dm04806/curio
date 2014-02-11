@@ -15,11 +15,21 @@ $fff_text
     > tr >
       th, td
         border-color: #ddd
+  thead th
+    text-transform: capitalize
 
+.error-detail a
+    color: inherit
+
+for n in (1..6)
+  h{n}, .h{n}
+    .view-title &
+      text-transform: capitalize
+    .alert &
+      @extend $fff_text
 
 .alert-danger
-  for n in (1..5)
-    h{n}, .h{n}
-      @extend $fff_text
-  .error-detail
-    color: lighten(brand-danger, 70%)
+  color: lighten(brand-danger, 70%)
+
+.alert-warning
+  color: lighten(brand-warning, 70%)

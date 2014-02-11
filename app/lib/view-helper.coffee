@@ -68,7 +68,6 @@ register 'include', (tmpl, options) ->
 register "form_rows", (size, col, options) ->
   this.label_cls = "col-#{size}-#{col}"
   this.row_cls = "col-#{size}-#{12 - col}"
-  this.context = this
   return options.fn(this)
 
 # form control helpers
@@ -81,12 +80,14 @@ register "form_rows", (size, col, options) ->
       label = name
     if placeholder is undefined
       placeholder = if label then "#{name}_tip" else name
-    data = _.assign {}, this,
+    data =
       name: name
       value: value
       label: label
       placeholder: placeholder
       attrs: attrs
+      label_cls: @label_cls
+      row_cls: @row_cls
     new Handlebars.SafeString tmpl data
 
 

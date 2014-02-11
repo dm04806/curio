@@ -1,6 +1,7 @@
 utils = require 'lib/utils'
 User = require 'models/user'
 Media = require 'models/media'
+session = require 'models/session'
 {API_ROOT} = require 'consts'
 
 mediator = require 'mediator'
@@ -15,42 +16,37 @@ mediator.setHandler 'logout', ->
   $.ajax
     url: "#{API_ROOT}/auth"
     type: 'DELETE'
+  .done ->
+    mediator.publish 'session:logout'
 
 mediator.setHandler 'login', (data) ->
   userInfo = data.user
   admins = data.admins
   user = mediator.user = new User(userInfo)
+  if user.isSuper and not admins or not admins.length
+    admins = session.allAdmins() or []
   roles = {}
   # assign media admin role to user
   for item in admins
     roles[item.media_id] = item.role
   mediator.user.roles = roles
-  utils.debug '[login]', user
-  admin = pickMedia(admins)
+  admin = session.pickAdmin(admins, user.isSuper)
   if admin
     mediator.media = new Media admin.media
+  utils.debug '[login]', user
+  mediator.publish 'session:login'
 
-noAdmin = ->
-  stored = utils.store 'media'
-  if mediator.user.isSuper
-    # Super user can admin any media
-    return stored
 
-pickMedia = (availables) ->
-  if not availables or not availables.length
-    return noAdmin()
-  all_medias = availables.map (item) ->
-    item.media.role = item.role
-    return item.media
-  utils.store 'all_medias', all_medias
-  # Find out which media is now managing
-  current = utils.store 'media'
-  if current
-    for admin in availables
-      if admin.media_id is current.media_id
-        return current
-  # Pick the first if the localStorage didn't matched
-  admin = availables[0]
-  utils.store 'media', admin
-  return admin
-
+mediator.setHandler 'toggle-media', (media_id) ->
+  all = session.allAdmins()
+  return unless all
+  for admin in all
+    if admin.media_id is media_id
+      utils.store 'media_admin',
+        role: admin.role
+        media_id: media_id
+        media: admin.media
+      utils.debug 'change media to ->', admin.media
+      mediator.media = new Media admin.media
+      mediator.publish 'session:togglemedia', admin
+      return admin

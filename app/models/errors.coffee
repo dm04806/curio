@@ -1,6 +1,7 @@
 
 class CurioError extends Error
   constructor: (@code) ->
+  category: 'danger'
 
 Object.defineProperties CurioError.prototype,
   title:

@@ -14,12 +14,16 @@ module.exports = class ListableView extends View
       title: 'error.noresult'
   render: ->
     super
-    collection = @_model.all @params
+    if @_collection
+      collection = new @_collection [], @params
+    else
+      collection = @_model.all @params
     listable = new @collectionView
       region: 'listable'
       itemView: @itemView
       context: @context
       collection: collection
+    @collection = collection
     @subview 'listable', listable
     #@subview 'pager', pager
     collection.fetch()

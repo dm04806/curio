@@ -1,26 +1,28 @@
 site:
   name: Curiosity China
   desc: Marketing in WeChat made easy.
-home: Home
-logout: Logout
+home: home
+dashboard: 控制台
+logout: logout
 login:
-  ing: Login..
-  username: Username
-  password: Password
-  remember: Remember me
-  submit: Sign me in
+  ing: login..
+  username: username
+  password: password
+  remember: remember me
+  submit: sign me in
   success: "login success!"
-name: Name
-desc: Description
-title: Title
-operations: Operations
-remark: Remarks
-email: Email
+name: name
+desc: description
+title: title
+operations: operations
+remark: remarks
+email: email
 created_at: 创建日期
-save: Save
-edit: Edit
-back: Back
-next: Next
+save: save
+edit: edit
+back: back
+next: next
+admin: admin
 header:
   hello: "Hello, %s"
 error:
@@ -30,7 +32,7 @@ error:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
   need_panel:
-    title: 没有权限
+    title: Not Available
     detail: "你名下没有任何微信公众号可供管理，试试<a href=\"/login\">用其他账号登录</a>"
   need_super:
     title: 无法访问
@@ -38,33 +40,33 @@ error:
   login failed: Username / password incorrect
   not allowed: You a not allowed to do so
 messages:
-  title: Messages
+  title: messages
 contacts:
-  title: Contacts
+  title: contacts
 super:
-  home: SuperAdmin
-  title: Super Administration
+  home: super admin
+  title: super administration
 medias:
-  title: Medias
+  title: medias
   index:
-    h1: All medias
-  edit: Edit media account
+    h1: all medias
+  edit: edit media account
 media:
-  uid: Wechat id
+  uid: wechat id
   uid_tip: 公众平台的登录名
-  oid: Original ID
+  oid: original id
   oid_tip: eg. gh_abcd123
   desc_tip: 账号的备注信息
-  appkey: AppId
-  appkey_tip: AppId
-  secret: APpSecret
-  secret_tip: AppSecret
+  appkey: appid
+  appkey_tip: appid
+  secret: appsecret
+  secret_tip: appsecret
 users:
-  title: Users
+  title: users
   index:
-    h1: All users
-  edit: Edit user account
+    h1: all users
+  edit: edit user account
 user:
-  screen_name: Screen name
+  screen_name: screen name
   screen_name_tip: 用户的姓名
   email_tip: "username@example.com"

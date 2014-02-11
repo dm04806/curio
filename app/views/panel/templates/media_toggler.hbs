@@ -1,0 +1,15 @@
+{{#if all_admins}}
+  <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <span class="current-media">{{media.name}}</span>
+    <b class="icon-arrow-down"></b>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    {{#each all_admins}}
+    <li><a href="" data-media="{{media.id}}">{{media.name}} ({{media.uid}})</a></li>
+    {{/each}}
+  </ul>
+  </li>
+{{else}}
+  <li><a href="/">{{media.name}}</a>
+{{/if}}

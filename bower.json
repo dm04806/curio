@@ -11,7 +11,8 @@
     "jquery-i18n": "~1.1.1",
     "animate.css": "~3.0.0",
     "jquery-cookie": "~1.4.0",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "backbone.stickit": "~0.7.0"
   },
   "overrides": {
     "backbone": {
@@ -20,6 +21,9 @@
         "jquery": "*"
       },
       "main": "backbone.js"
+    },
+    "backbone.stickit": {
+      "main": "backbone.stickit.js"
     },
     "bootstrap": {
       "main": [

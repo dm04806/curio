@@ -1,13 +1,18 @@
 {API_ROOT} = require 'consts'
 utils = require 'lib/utils'
 
+Collection = require './collection'
+
 # Base model.
 module.exports = class Model extends Chaplin.Model
   _.extend @prototype, Chaplin.SyncMachine
 
   @all: (params) ->
-    Collection = require './collection'
     new Collection [], {model: this, params: params}
+
+  @collection: (items, opts={}) ->
+    opts.model = this
+    new Collection items, opts
 
   initialize: ->
     super
@@ -37,4 +42,5 @@ module.exports = class Model extends Chaplin.Model
     for field in ['created_at', 'updated_at']
       if ret.hasOwnProperty(field)
         ret[field] = new Date(ret[field])
+    console.log ret
     return ret
