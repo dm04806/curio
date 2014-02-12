@@ -17,14 +17,14 @@
   <div class="form-group">
     <input required class="form-control"
     {{#if consts.DEBUG}}
-    value="super"
+    value="test"
     {{/if}}
     type="password" name="password" placeholder="{{t 'login.password'}}">
   </div>
   <div class="form-group text-right">
     <div class="checkbox pull-left">
       <label>
-        <input name="expires" value="365" type="checkbox"> {{t 'login.remember'}}
+        <input checked name="remember" value="1" type="checkbox"> {{t 'login.remember'}}
       </label>
     </div>
     <button class="btn btn-primary" type="submit">

@@ -7,9 +7,13 @@ module.exports = class HeaderView extends View
   noWrap: true
   in_super: false
   container: '#header',
+  containerMethod: 'html',
   template: require './templates/header'
   context: ->
     user = mediator.user
+    if not user
+      @subscribeEvent 'session:login', =>
+        @render $el: @$el
     return unless user
     user: user.attributes
     all_admins: session.allAdmins()

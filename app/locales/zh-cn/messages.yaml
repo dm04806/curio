@@ -8,7 +8,7 @@ login:
   ing: 正在登录...
   username: 用户名
   password: 密码
-  remember: 记住我
+  remember: 记住用户名
   submit: 登录
   success: 登录成功!
 
@@ -28,6 +28,9 @@ back: 返回
 next: 下一步
 admin: 管理
 
+edit:
+  fail: '保存失败'
+
 header:
   hello: 欢迎，%s
 
@@ -42,7 +45,7 @@ error:
     detail: 你名下没有任何微信公众号可供管理，试试<a href="/login">用其他账号登录</a>
   need_super:
     title: 不能继续
-    detail: 你并不是超级管理员
+    detail: 你并不是超级管理员，<a href="/">返回首页</a>
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
 

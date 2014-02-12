@@ -1,30 +1,11 @@
-{API_ROOT} = require 'consts'
-{BootError} = require 'models/boot'
 utils = require 'lib/utils'
 mediator = require 'mediator'
+{BootError} = require 'models/boot'
 
-$.ajaxSetup
-  dataType: 'json',
-  beforeSend: (xhr) ->
-    url = @url or ''
-    if url.indexOf(API_ROOT) == 0
-      @xhrFields =
-        withCredentials: true
-    if @type in ['POST', 'PUT', 'DELETE']
-      xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
-
-sync = Backbone.sync
-Backbone.sync = (args...) ->
-  return sync.apply(this, args) unless mediator.site_error
-  # if site error found, do fetch when error resolved
-  promise = $.Deferred()
-  mediator.site_error.on 'resolve', =>
-    sync.apply(this, args)
-    .done ->
-      promise.resolve arguments...
-    .error ->
-      promise.reject arguments...
-  return promise
+# load middlewares
+require 'controllers/base/transition'
+require 'controllers/base/site-error'
+require 'controllers/base/session'
 
 module.exports = class Application extends Chaplin.Application
   title: 'Curio'

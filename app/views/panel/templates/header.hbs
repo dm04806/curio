@@ -34,7 +34,7 @@
     {{/unless}}
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{t 'header.hello' user.name}} <b class="icon-arrow-down"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{g 'header.hello' user.name}} <b class="icon-arrow-down"></b></a>
       <ul class="dropdown-menu" role="menu">
         {{#if is_super}}
           {{#unless in_super}}
@@ -54,5 +54,8 @@
         </ul>
       </li>
     </ul>
+    <div class="bouncing-bar">
+      <div class="bar"></div>
+    </div>
   </div>
 </div>

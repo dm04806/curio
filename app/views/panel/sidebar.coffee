@@ -9,7 +9,7 @@ navItems = [
 ,
   name: 'messages.title'
   url: '/messages'
-  icon: 'chat'
+  icon: 'bubbles'
 ,
   name: 'contacts.title'
   url: '/contacts'

@@ -3,7 +3,7 @@ Model = require 'models/base/model'
 permissions = require './permissions'
 
 module.exports = class User extends Model
-  urlPath: '/users'
+  kind: 'user'
 
   hasRole: (role, mediaId) ->
     if role is 'login'

@@ -8,7 +8,7 @@ navItems = [
 ,
   name: 'medias.title'
   url: '/super/medias'
-  icon: 'vcard'
+  icon: 'media'
 ,
   name: 'users.title'
   url: '/super/users'

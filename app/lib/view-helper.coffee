@@ -12,6 +12,21 @@ register = (name, fn) ->
 # Map helpers
 # -----------
 
+# translate text
+register 't', (i18n_key, args..., options) ->
+  return unless i18n_key
+  if i18n_key not of i18n.dict
+    console.warn "Please translate [#{i18n_key}] !"
+  result = __(i18n_key, args...)
+  new Handlebars.SafeString(result)
+
+register 'g', (i18n_key, args..., options) ->
+  return unless i18n_key
+  args = args.map (item) ->
+    return item ? ''
+  result = __g(i18n_key, args...)
+  new Handlebars.SafeString(result) if result
+
 register 'when', (bool, vals..., options) ->
   return if bool then vals[0] else vals[1]
 
@@ -41,19 +56,6 @@ register 'widget', (tmpl, options) ->
   tmpl = require "views/widgets/templates/#{tmpl}"
   data = _.assign options.data, options.hash
   new Handlebars.SafeString tmpl data
-
-# translate text
-register 't', (i18n_key, args..., options) ->
-  return unless i18n_key
-  if i18n_key not of i18n.dict
-    console.warn "Please translate [#{i18n_key}] !"
-  result = __(i18n_key, args...)
-  new Handlebars.SafeString(result)
-
-register 'g', (i18n_key, args..., options) ->
-  return unless i18n_key
-  result = __g(i18n_key, args...)
-  new Handlebars.SafeString(result) if result
 
 # include template
 register 'include', (tmpl, options) ->

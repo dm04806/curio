@@ -30,6 +30,8 @@ module.exports = class Model extends Chaplin.Model
     urlPath = @urlPath
     if 'function' is typeof urlPath
       urlPath = @urlPath()
+    if not urlPath and @kind
+      urlPath = "/#{@kind}s"
     if urlPath
       @apiRoot + urlPath
     else if @collection
@@ -42,5 +44,4 @@ module.exports = class Model extends Chaplin.Model
     for field in ['created_at', 'updated_at']
       if ret.hasOwnProperty(field)
         ret[field] = new Date(ret[field])
-    console.log ret
     return ret

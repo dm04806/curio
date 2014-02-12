@@ -2,13 +2,13 @@ site:
   name: Curiosity China
   desc: Marketing in WeChat made easy.
 home: home
-dashboard: 控制台
+dashboard: dashboard
 logout: logout
 login:
   ing: login..
   username: username
   password: password
-  remember: remember me
+  remember: remember username
   submit: sign me in
   success: "login success!"
 name: name
@@ -19,7 +19,8 @@ remark: remarks
 email: email
 created_at: 创建日期
 save: save
-edit: edit
+edit:
+  fail: 保存失败
 back: back
 next: next
 admin: admin

@@ -1,6 +1,7 @@
 {API_ROOT} = require 'consts'
-{CurioError} = require 'models/errors'
+utils = require 'lib/utils'
 mediator = require 'mediator'
+{CurioError} = require 'models/errors'
 
 boot = ->
   $.get(API_ROOT).done (bs) ->
@@ -15,6 +16,9 @@ boot.BootError = class BootError extends CurioError
       boot().done (res) ->
         if res
           view.resolve()
+          if not res.user
+            utils.store 'login_return', window.location.href
+            utils.redirectTo 'login#index'
         else
           # no res means server error
           setTimeout check, 6000

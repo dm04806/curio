@@ -1,6 +1,7 @@
 # Application-specific utilities
 # ------------------------------
-{SITE_ROOT} = require 'consts'
+mediator = require 'mediator'
+{SITE_ROOT,API_ROOT} = require 'consts'
 
 $.fn.anim = (cls) ->
   @removeClass("animated #{this[0]._last_anim or ''}")
@@ -8,7 +9,18 @@ $.fn.anim = (cls) ->
   setTimeout =>
     @addClass("animated #{cls}")
 
+$.ajaxSetup
+  dataType: 'json',
+  beforeSend: (xhr) ->
+    url = @url or ''
+    if url.indexOf(API_ROOT) == 0
+      @xhrFields =
+        withCredentials: true
+    if @type in ['POST', 'PUT', 'DELETE']
+      xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
 
+
+# Override library functions
 redirectTo = Chaplin.utils.redirectTo
 Chaplin.utils.redirectTo = (params) ->
   url = params?.url
@@ -20,6 +32,31 @@ Chaplin.utils.redirectTo = (params) ->
       url = url.replace '/', ''
     params.url = url
   redirectTo.apply Chaplin.utils, arguments
+
+sync = Backbone.sync
+Backbone.sync = (args...) ->
+  resolved = false
+  setTimeout ->
+    if not resolved
+      $('body').addClass('syncing')
+  , 300
+  _sync = =>
+    sync.apply(this, args).always ->
+      resolved = true
+      $('body').removeClass('syncing')
+  return _sync() unless mediator.site_error
+  # if site error found, do fetch when error resolved
+  promise = $.Deferred()
+  # fake delay for loading spinner debug
+  #setTimeout =>
+  mediator.site_error.on 'resolve', =>
+    _sync()
+    .done ->
+      promise.resolve arguments...
+    .error ->
+      promise.reject arguments...
+  #, 1000
+  return promise
 
 
 # Delegate to Chaplin’s utils module.
