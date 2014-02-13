@@ -10,13 +10,8 @@ module.exports = class LoginMain extends FormView
     last_login = utils.store 'last_login'
     if last_login
       @$el.find('[name=username]').val last_login
-  msg: (text, type='danger') ->
-    alerted = @$el.find('.alert').length
-    msg = super
-    if type == 'danger' and alerted
-      msg.anim('shake')
   submit: (e) ->
-    e.preventDefault()
+    super
     node = @$el
     node.addClass('loading')
     form = $(e.target)
@@ -25,8 +20,11 @@ module.exports = class LoginMain extends FormView
     else
       utils.store 'last_login', null
     $.post(e.target.action, form.serialize())
-    .always ->
+    .always =>
       node.removeClass('loading')
+      setTimeout =>
+        @enable()
+      , 500
     .done (res) =>
       user = res?.user
       if user

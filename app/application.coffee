@@ -12,7 +12,6 @@ module.exports = class Application extends Chaplin.Application
   start: ->
     mediator.subscribe 'initialize', (bs) =>
       utils.debug '[curio start]', bs
-      @title = __('site.name')
       if not bs
         mediator.execute 'site-error', new BootError 'start'
       mediator.unsubscribe 'initialize'

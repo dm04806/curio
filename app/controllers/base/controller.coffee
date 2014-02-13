@@ -25,6 +25,14 @@ module.exports = class Controller extends Chaplin.Controller
 
   beforeAction: ->
     @reuse 'site', PageView, layout: @pageLayout
+    setTimeout =>
+      title = null
+      if @view
+        title = @view.$el.find('.view-title h1').text()
+      else if document.title == 'Loading..'
+        title = ''
+      if title != null
+        @adjustTitle(title)
     return 403 if @checkPermission() isnt true
 
   index: ->

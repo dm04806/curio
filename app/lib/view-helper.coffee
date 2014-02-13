@@ -75,6 +75,7 @@ register "form_rows", (size, col, options) ->
 # form control helpers
 ['input', 'textarea'].forEach (widget) ->
   register "form_#{widget}", (name, args..., options) ->
+    hash = options.hash
     tmpl = require "views/widgets/templates/form/#{widget}_row"
     [value, label, placeholder, attrs] = args
     # handle some default value
@@ -88,6 +89,7 @@ register "form_rows", (size, col, options) ->
       label: label
       placeholder: placeholder
       attrs: attrs
+      tip: hash.tip
       label_cls: @label_cls
       row_cls: @row_cls
     new Handlebars.SafeString tmpl data

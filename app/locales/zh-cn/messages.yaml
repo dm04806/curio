@@ -29,7 +29,13 @@ next: 下一步
 admin: 管理
 
 edit:
-  fail: '保存失败'
+  success: 保存成功
+  network_error: 保存失败&nbsp;&nbsp; :-(
+  bad fields: 请正确填写每一项
+  email:
+    bad: 错误的Email格式
+    conflict: 系统中已存在此Email
+    is blank: Email不能为空
 
 header:
   hello: 欢迎，%s

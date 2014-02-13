@@ -20,7 +20,13 @@ email: email
 created_at: 创建日期
 save: save
 edit:
-  fail: 保存失败
+  success: 保存成功
+  network_error: 保存失败
+  bad fields: 保存失败，请正确填写
+  email:
+    bad: 错误的Email格式
+    conflict: 系统中已存在此Email
+    is blank: Email不能为空
 back: back
 next: next
 admin: admin

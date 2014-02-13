@@ -5,6 +5,12 @@ permissions = require './permissions'
 module.exports = class User extends Model
   kind: 'user'
 
+  defaults:
+    uid: null
+    name: null
+    email: null
+    desc: null
+
   hasRole: (role, mediaId) ->
     if role is 'login'
       # only need login

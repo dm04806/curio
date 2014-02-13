@@ -20,6 +20,9 @@ $ ->
   # initialize on DOM ready
   mediator.app = new Application {
     title: __('site.name'),
+    titleTemplate: (data) ->
+      st = if data.subtitle then "#{data.subtitle} \u2013 " else ''
+      st + __(data.title)
     controllerSuffix: '-controller',
     routes
   }
