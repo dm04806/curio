@@ -3,11 +3,29 @@
 mediator = require 'mediator'
 {SITE_ROOT,API_ROOT} = require 'consts'
 
-$.fn.anim = (cls) ->
-  @removeClass("animated #{this[0]._last_anim or ''}")
-  this[0]._last_anim = cls
-  setTimeout =>
-    @addClass("animated #{cls}")
+
+ANIMATION_END = "webkitAnimationEnd mozAnimationEnd
+ MSAnimationEnd oanimationend
+ animationend"
+
+$.fn.anim = (cls, options, nextDelay) ->
+  @removeClass("animated #{@data('_last_anim')}")
+  @data '_last_anim', cls
+  if 'number' is typeof options
+    options = { duration: "#{options/1000}s" }
+  if options?
+    css = {}
+    for k of options
+      css["animation-#{k}"] = options[k]
+    @css css
+  @queue 'fx', (next) =>
+    setTimeout =>
+      @addClass("animated #{cls}")
+    if nextDelay
+      setTimeout next, nextDelay
+    else
+      this.one ANIMATION_END, next
+  return this
 
 $.ajaxSetup
   dataType: 'json',

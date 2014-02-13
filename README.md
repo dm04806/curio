@@ -14,7 +14,7 @@
 ```
 npm install brunch -g
 npm install
-curio --watch --server
+make
 ```
 
 同时，你还需要启动 curio-api 服务。

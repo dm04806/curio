@@ -1,19 +1,17 @@
 {{widget 'heading2' back='/super/medias' title='medias.edit'}}
-<div class="main-content">
-  <form class="edit-form form-horizontal" method="post">
-    <div class="form-message fixed"></div>
-    {{#form_rows 'sm' 2}}
-      {{form_input 'name' name 'name' 'media.name_tip'}}
-      {{form_input 'uid' uid 'media.uid' 'media.uid_tip'}}
-      {{form_input 'oid' oid 'media.oid' 'media.oid_tip'}}
-      {{form_input 'wx_appkey' wx_appkey 'media.appkey' 'media.appkey_tip'}}
-      {{form_input 'wx_secret' wx_secret 'media.secret' 'media.secret_tip'}}
-      {{form_textarea 'desc' desc 'desc' 'media.desc_tip'}}
-    {{/form_rows}}
-    <div class="form-group">
-      <div class="col-sm-10 col-sm-offset-2">
-        <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
-      </div>
+<form class="main-content edit-form form-horizontal" method="post">
+  {{#form_rows 'sm' 2}}
+    {{form_input 'name' name 'name' 'media.name_tip'}}
+    {{form_input 'uid' uid 'media.uid' 'media.uid_tip'}}
+    {{form_input 'oid' oid 'media.oid' 'media.oid_tip'}}
+    {{form_input 'wx_appkey' wx_appkey 'media.appkey' 'media.appkey_tip'}}
+    {{form_input 'wx_secret' wx_secret 'media.secret' 'media.secret_tip'}}
+    {{form_textarea 'desc' desc 'desc' 'media.desc_tip'}}
+  {{/form_rows}}
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <div class="form-message holded"></div>
+      <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
     </div>
-  </form>
-</div>
+  </div>
+</form>

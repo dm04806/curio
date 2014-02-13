@@ -3,6 +3,8 @@ utils = require 'lib/utils'
 mediator = require 'mediator'
 session = require 'models/session'
 
+# === this modules is NOT IN USE ==
+
 module.exports = class MediaTogglerView extends View
   autoRender: true
   className: 'nav navbar-nav'

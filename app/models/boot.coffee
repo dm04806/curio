@@ -16,7 +16,7 @@ boot.BootError = class BootError extends CurioError
       boot().done (res) ->
         if res
           view.resolve()
-          if not res.user
+          if not res.user and not ('login' in location.href)
             utils.store 'login_return', window.location.href
             utils.redirectTo 'login#index'
         else
