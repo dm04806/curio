@@ -1,5 +1,11 @@
 dot_color = rgba(200,100,10, 0.9)
 
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
 @keyframes bouncing-dot
   0%
     left: 0
@@ -52,3 +58,28 @@ dot_color = rgba(200,100,10, 0.9)
 
 .syncing .bouncing-bar
   opacity: 1
+
+
+spinner-size(size)
+  border-width: (size/7)
+  border-style: solid
+  border-radius: size
+  width: size
+  height: size
+
+spinner-color(color)
+  border-color: rgba(0,0,0,0)
+  //border-top-color: complement(color)
+  border-right-color: color
+  border-bottom-color: color
+  border-left-color: color
+
+.spinner
+  display: inline-block
+  animation: spin .5s infinite linear
+  //border-left-color: rgba(0,0,0,0)
+  spinner-color(lighten(brand-primary, 40%))
+
+.spinner30
+  @extend .spinner
+  spinner-size(30px)

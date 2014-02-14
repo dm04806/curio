@@ -51,24 +51,27 @@ Chaplin.utils.redirectTo = (params) ->
     params.url = url
   redirectTo.apply Chaplin.utils, arguments
 
-sync = Backbone.sync
-Backbone.sync = (args...) ->
+ajax = Backbone.ajax
+Backbone.ajax = (opts, args...) ->
   resolved = false
   setTimeout ->
-    if not resolved
+    # show global syncing state when not GET
+    # (POST, PUT, DELETE always mean user actions)
+    # show loading is this takes too long
+    if not resolved and not $('body').find('.loading-indicator:visible').length
       $('body').addClass('syncing')
-  , 300
-  _sync = =>
-    sync.apply(this, args).always ->
+  , 500
+  _ajax = =>
+    ajax.call(this, opts, args...).always ->
       resolved = true
       $('body').removeClass('syncing')
-  return _sync() unless mediator.site_error
-  # if site error found, do fetch when error resolved
+  return _ajax() unless mediator.site_error
   promise = $.Deferred()
+  # if site error found, do fetch when error resolved
+  mediator.site_error.on 'resolve', ->
   # fake delay for loading spinner debug
-  #setTimeout =>
-  mediator.site_error.on 'resolve', =>
-    _sync()
+  #setTimeout ->
+    _ajax()
     .done ->
       promise.resolve arguments...
     .error ->
@@ -82,6 +85,7 @@ utils = Chaplin.utils.beget Chaplin.utils
 
 store = (item, value) ->
   if value isnt undefined
+    utils.debug '[storage] %s -> ', item, value
     return localStorage.setItem(item, JSON.stringify(value))
   try
     value = JSON.parse(localStorage.getItem(item))

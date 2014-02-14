@@ -35,6 +35,8 @@ add: 添加
 delete: 删除
 cancel: 取消
 
+loading: 正在加载...
+
 edit:
   success: 保存成功
   network_error: 保存失败&nbsp;&nbsp; :-(

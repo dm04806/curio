@@ -1,0 +1,20 @@
+<table class="table table-bordered table-striped">
+  {{include thead}}
+  <tbody>
+  </tbody>
+</table>
+<div class="placeholder">
+  <div class="main">
+    <div class="loading-indicator spinner spinner30">
+      <!--{{t 'loading'}}-->
+    </div>
+  </div>
+</div>
+<div class="fallback">
+  {{#if fallback.title}}
+    <h2>{{t fallback.title}}</h2>
+  {{/if}}
+  {{#if fallback.message}}
+    <p>{{t fallback.message}}</p>
+  {{/if}}
+</div>

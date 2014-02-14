@@ -24,9 +24,8 @@ pickAdmin = (availables, can_empty) ->
 currentAdmin = ->
   utils.store SK_MEDIA_ADMIN
 
-allAdmins = ->
-  utils.store SK_ALL_MEDIA_ADMINS
-
+allAdmins = (value) ->
+  utils.store SK_ALL_MEDIA_ADMINS, value
 
 module.exports =
   pickAdmin: pickAdmin

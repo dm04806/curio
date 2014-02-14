@@ -8,17 +8,17 @@ module.exports = class CollectionView extends Chaplin.CollectionView
 
   optionNames: CollectionView::optionNames.concat ['context']
 
-  template: require './templates/collection'
-  className: 'listable-container'
+  template: require './templates/listable'
+  className: 'listable'
 
-  listSelector: '.listable tbody'
-  loadingSelector: '.collection-indicator'
-  fallbackSelector: '.collection-fallback'
+  listSelector: 'tbody'
+  loadingSelector: 'div.placeholder'
+  fallbackSelector: 'div.fallback'
 
   push: (item) ->
     @collection.push item
 
-  # Show spinner only for >1s queries.
+  # Show spinner only for >0.5s queries.
   toggleLoadingIndicator: ->
     unless @collection.length is 0 and @collection.isSyncing()
       super
