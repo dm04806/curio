@@ -26,3 +26,8 @@ module.exports = class Collection extends Chaplin.Collection
     @total = res.total
     return res.items.map (item) ->
       { item: item }
+
+  load: (what) ->
+    all = @map (item) ->
+      item.load(what)
+    $.when(all)

@@ -28,7 +28,7 @@ module.exports = class LoginMain extends FormView
     .done (res) =>
       user = res?.user
       if user
-        @msg('login.success', 'success')
+        #@msg('login.success', 'success')
         mediator.execute 'login', res
         @publishEvent 'auth:login'
       else

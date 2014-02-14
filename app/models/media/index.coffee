@@ -10,3 +10,9 @@ module.exports = class Media extends Model
     wx_secret: null
     wx_token: null
     desc: null
+
+  loaders:
+    admins:
+      url: -> "#{@url()}/admins"
+      parse: (res) -> res.items
+

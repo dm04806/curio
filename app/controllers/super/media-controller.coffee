@@ -5,6 +5,7 @@ Media = require 'models/media'
 
 module.exports = class MediaHome extends SuperHome
   index: (params, route, options) ->
+    params.include = 'admins'
     @view = new MediaIndexView region: 'main', params: params
   show: (params) ->
     model = new Media({ id: params.id })

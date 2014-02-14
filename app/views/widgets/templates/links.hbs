@@ -1,0 +1,6 @@
+{{! links for a router }}
+{{#each items}}
+<a href="{{url ../route id}}" {{../metas}}>{{attr 'name'}}</a>
+  {{#unless @last}}{{{sep}}}{{/unless}}
+{{/each}}
+

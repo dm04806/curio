@@ -18,7 +18,10 @@ operations: operations
 remark: remarks
 email: email
 created_at: 创建日期
+admins: 管理员
 save: save
+save changes: 保存变更
+update: 更新
 edit:
   success: 保存成功
   network_error: 保存失败
@@ -30,6 +33,10 @@ edit:
 back: back
 next: next
 admin: admin
+close: 关闭
+add: 添加
+delete: 删除
+cancel: 取消
 header:
   hello: "Hello, %s"
 error:
@@ -58,6 +65,7 @@ medias:
   index:
     h1: all medias
   edit: edit media account
+  dashboard: 进入后台
 media:
   uid: wechat id
   uid_tip: 公众平台的登录名
@@ -68,12 +76,20 @@ media:
   appkey_tip: appid
   secret: appsecret
   secret_tip: appsecret
+  admin:
+    assign: 设置管理员
+    assign_for: "为微信号 <strong>%s</strong> 设置管理员"
+    not_set: 还没有设置管理员
+    role: 权限
+    roles:
+      chief: 全权
 users:
   title: users
   index:
     h1: all users
   edit: edit user account
 user:
+  name: 用户名
   screen_name: screen name
   screen_name_tip: 用户的姓名
   email_tip: "username@example.com"

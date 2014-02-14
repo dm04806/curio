@@ -1,5 +1,5 @@
 site:
-  name: 奇智睿思
+  name: Curio
   desc: 一站式微信公共号运营工具
 home: 首页
 dashboard: 控制台
@@ -20,13 +20,20 @@ operations: 操作
 remark: 备注
 email: Email
 created_at: 创建日期
+admins: 管理员
 
 # common verbs:
 save: 保存
+save changes: 保存变更
+update: 更新
 edit: 编辑
 back: 返回
 next: 下一步
 admin: 管理
+close: 关闭
+add: 添加
+delete: 删除
+cancel: 取消
 
 edit:
   success: 保存成功
@@ -69,6 +76,7 @@ medias:
   index:
     h1: 管理微信号
   edit: 编辑公共账号信息
+  dashboard: 去后台
 
 media:
   uid: 微信号
@@ -80,6 +88,13 @@ media:
   appkey_tip: 开发者凭据中的 AppId
   secret: AppSecret
   secret_tip: 开发者凭据中的 AppSecret
+  admin:
+    assign: 设置管理员
+    assign_for: 为微信号 <strong>%s</strong> 设置管理员
+    not_set: 还没有设置管理员
+    role: 权限
+    roles:
+      chief: 全权
 
 users:
   title: 系统用户
@@ -88,6 +103,7 @@ users:
   edit: 编辑用户资料
 
 user:
+  name: 用户名
   screen_name: 姓名
   screen_name_tip: 用户的姓名
   email_tip: username@example.com

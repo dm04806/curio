@@ -1,4 +1,5 @@
 utils = require 'lib/utils'
+Layout = require 'views/layout'
 mediator = require 'mediator'
 {BootError} = require 'models/boot'
 
@@ -9,6 +10,12 @@ require 'controllers/base/session'
 
 module.exports = class Application extends Chaplin.Application
   title: 'Curio'
+
+  initLayout: (options = {}) ->
+    options.title ?= @title
+    options.skipRouting = '.noscript, [data-toggle]'
+    @layout = new Layout options
+
   start: ->
     mediator.subscribe 'initialize', (bs) =>
       utils.debug '[curio start]', bs

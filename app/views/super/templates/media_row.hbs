@@ -5,14 +5,14 @@
   {{uid}}
 </td>
 <td class="name">
-  <a href="/super/media/{{id}}">{{name}}</a>
+  <a href="{{url 'super/media#show' id}}">{{name}}</a>
 </td>
 <td class="oid">
   {{oid}}
 </td>
-<td class="desc">
-  {{desc}}
+<td class="admins">
+  {{widget 'links' route='super/user#show' items=admins sep=','}}
 </td>
 <td>
-  <a data-media="{{id}}" class="to-admin btn btn-xs btn-info" href="/">{{t 'admin'}}</a>
+  <a data-media="{{id}}" class="to-admin btn btn-xs btn-info" href="/">{{t 'medias.dashboard'}}</a>
 </td>

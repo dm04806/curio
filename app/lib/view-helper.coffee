@@ -6,6 +6,8 @@ utils = require './utils'
 i18n = require 'lib/i18n'
 moment = require 'lib/moment'
 
+_.assign consts, require 'models/consts'
+
 register = (name, fn) ->
   Handlebars.registerHelper name, fn
 
@@ -54,8 +56,7 @@ register 'json', (obj, options) ->
 
 register 'widget', (tmpl, options) ->
   tmpl = require "views/widgets/templates/#{tmpl}"
-  data = _.assign options.data, options.hash
-  new Handlebars.SafeString tmpl data
+  new Handlebars.SafeString tmpl options.hash
 
 # include template
 register 'include', (tmpl, options) ->
@@ -95,12 +96,19 @@ register "form_rows", (size, col, options) ->
     new Handlebars.SafeString tmpl data
 
 
-
 # Content formating helpers
 register 'strftime', (date, format, options) ->
   if format == 'locale'
     return date.toLocaleString()
   return moment(date).format(format)
+
+# get model attributes
+register 'attr', (name) ->
+  val = this[name]
+  val = this.get?(name) or this[name]
+  if 'function' is typeof val
+    val = val.call(this)
+  return val
 
 exports.globals =
   consts: consts
