@@ -27,6 +27,9 @@
         <tr>
           <td>
             <a href="{{url 'super/user#show' id}}" target="_blank">{{name}}</a>
+            {{#if uid}}
+            ({{uid}})
+            {{/if}}
             <input type="hidden" name="user_id" value="{{id}}">
           </td>
           <td>

@@ -1,12 +1,12 @@
 <div class="form-group" for="{{name}}">
   {{#if label}}
-    <label for="input-{{name}}" class="{{label_cls}} control-label">{{t label}}</label>
+    <label for="input-{{name}}" class="{{label_cls}} control-label">{{label}}</label>
   {{/if}}
   <div class="{{row_cls}}">
-    <input class="form-control input-{{name}}" id="input-{{name}}" type="text"
-    name="{{name}}" placeholder="{{g placeholder}}" value="{{value}}" {{attrs}}>
-    <div class="form-tip" for="{{name}}">{{tip}}</div>
+    <input {{{attrs}}}>
+    <div class="help-block form-tip" for="{{name}}">{{t tip}}</div>
   </div>
+  {{caller}}
 </div>
 
 

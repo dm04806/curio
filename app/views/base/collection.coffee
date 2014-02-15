@@ -11,14 +11,14 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   template: require './templates/listable'
   className: 'listable'
 
-  listSelector: 'tbody'
+  listSelector: '.list'
   loadingSelector: 'div.placeholder'
   fallbackSelector: 'div.fallback'
 
   push: (item) ->
     @collection.push item
 
-  # Show spinner only for >0.5s queries.
+  # Show spinner only for >0.3s queries.
   toggleLoadingIndicator: ->
     unless @collection.length is 0 and @collection.isSyncing()
       super
@@ -26,4 +26,4 @@ module.exports = class CollectionView extends Chaplin.CollectionView
     setTimeout =>
       if @collection
         super
-    , 1000
+    , 300

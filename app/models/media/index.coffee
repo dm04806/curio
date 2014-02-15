@@ -13,6 +13,12 @@ module.exports = class Media extends Model
 
   loaders:
     admins:
-      url: -> "#{@url()}/admins"
+      url: '/admins'
       parse: (res) -> res.items
 
+  relations:
+    messages: (opts) ->
+      Message = require '../message'
+      opts = opts or {}
+      opts.media_id = @id
+      Message.collection opts

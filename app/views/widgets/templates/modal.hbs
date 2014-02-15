@@ -1,0 +1,22 @@
+<{{any tagname 'div'}} class="modal {{unless_false fade 'fade'}}" id="{{id}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      {{#if title}}
+      <div class="modal-header">
+        {{#compare closable '!==' false}}
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        {{/compare}}
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      {{/if}}
+      <div class="modal-body">
+        {{{caller}}}
+      </div>
+      {{#if footer}}
+        <div class="modal-footer">
+          {{footer}}
+        </div>
+      {{/if}}
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</{{any tagname 'div'}}><!-- /.modal -->

@@ -1,4 +1,4 @@
-ListableCollectionView = require 'views/base/listable_collection'
+CollectionView = require 'views/base/collection'
 View = require './view'
 
 module.exports = class ListableView extends View
@@ -7,7 +7,7 @@ module.exports = class ListableView extends View
   optionNames: View::optionNames.concat ['itemView', 'params']
   params: null
   itemView: null
-  collectionView: ListableCollectionView
+  collectionView: CollectionView
   #pagerView: PagerView
   regions:
     'listable': '#listable'
@@ -26,7 +26,7 @@ module.exports = class ListableView extends View
     collection.fetch() if not collection.length
     listable = new @collectionView
       region: 'listable'
-      itemView: @itemView
+      itemView: @itemView or @collectionView::itemView
       context: @context
       collection: collection
     @subview 'listable', listable

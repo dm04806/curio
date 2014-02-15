@@ -1,10 +1,9 @@
 <div class="form-group" for="{{name}}">
   {{#if label}}
-    <label for="input-{{name}}" class="{{label_cls}} control-label">{{t label}}</label>
+    <label for="input-{{name}}" class="{{label_cls}} control-label">{{label}}</label>
   {{/if}}
   <div class="{{row_cls}}">
-    <textarea class="form-control input-{{name}}" id="input-{{name}}"
-      rows="4" name="{{name}}" placeholder="{{g placeholder}}">{{value}}</textarea>
+    <textarea {{{attrs}}}></textarea>
     <div class="form-tip" for="{{name}}">{{tip}}</div>
   </div>
 </div>

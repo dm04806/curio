@@ -13,6 +13,7 @@ function detectLanguage(availables) {
   return function *(next) {
     if (!this.cookies.get(lc_cookie)) {
       var accept = this.acceptsLanguages(availables);
+      console.log(availables, accept)
       if (accept) {
         this.cookies.set(lc_cookie, accept, {
           httpOnly: false,
@@ -34,7 +35,7 @@ exports.startServer = function(port, path, callback) {
   require('./app/routes')(spa.routeCollector(routes));
 
   app.use(spa(path_.join(__dirname, path), {
-     index: 'index.html',
+     index: 'debug.html',
      routeBase: '/',
      routes: routes
   }));

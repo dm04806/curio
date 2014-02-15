@@ -1,42 +1,43 @@
 site:
   name: Curiosity China
   desc: Marketing in WeChat made easy.
-home: home
-dashboard: dashboard
-logout: logout
+home: Home
+logout: Logout
 login:
-  ing: login..
-  username: username
-  password: password
-  remember: remember username
-  submit: sign me in
+  ing: Login..
+  username: Username
+  password: Password
+  remember: Remember username
+  submit: Sign me in
   success: "login success!"
-name: name
-desc: description
-title: title
-operations: operations
-remark: remarks
-email: email
-created_at: 创建日期
-admins: 管理员
-save: save
-save changes: 保存变更
-update: 更新
+name: Name
+desc: Description
+title: Title
+operations: Operations
+remark: Remarks
+email: Email
+created_at: Created At
+admins: Admins
+save: Save
+save changes: Save changes
+create: Create
+update: Update
 edit:
-  success: 保存成功
-  network_error: 保存失败
-  bad fields: 保存失败，请正确填写
+  success: "Edit success!"
+  network_error: Save failed..
+  bad fields: Please fill the form correctly
   email:
-    bad: 错误的Email格式
-    conflict: 系统中已存在此Email
-    is blank: Email不能为空
+    bad: Bad email format
+    conflict: There is already a user with that email
+    is blank: Email is required
+modify: Modify
 back: back
 next: next
 admin: admin
-close: 关闭
-add: 添加
-delete: 删除
-cancel: 取消
+close: Close
+add: Add
+delete: Delete
+cancel: Cancel
 loading: Loading...
 header:
   hello: "Hello, %s"
@@ -48,49 +49,73 @@ error:
     detail: "This may be temporary, please try again later"
   need_panel:
     title: Not Available
-    detail: "你名下没有任何微信公众号可供管理，试试<a href=\"/login\">用其他账号登录</a>"
+    detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
   need_super:
-    title: 无法访问
-    detail: 你并不是超级管理员
+    title: Not Accessible
+    detail: You are not a super admin
   login failed: Username / password incorrect
   not allowed: You a not allowed to do so
+  noresult: 暂时什么都没有
 messages:
-  title: messages
-contacts:
-  title: contacts
-super:
-  home: super admin
-  title: super administration
-medias:
-  title: medias
+  "": Messages
   index:
-    h1: all medias
-  edit: edit media account
-  dashboard: 进入后台
+    h1: 全部消息
+contacts:
+  "": Contacts
+stats:
+  "": Statistics
+dashboard:
+  "": Dashboard
+  subtitle: start from here
+  key_index: Key Indexes
+  realtime: Realtime graph
+  yesterday: Yesterday
+subscribers:
+  "": Subscribers
+channels:
+  "": Channels
+super:
+  home: Super Admin
+  title: Super Administration
+medias:
+  title: Medias
+  index:
+    h1: All medias
+  edit: Edit media account
+  dashboard: Dashboard
 media:
-  uid: wechat id
-  uid_tip: 公众平台的登录名
-  oid: original id
+  uid: Wechat ID
+  uid_tip: The login name for mp.weixin.qq.com
+  oid: Original ID
   oid_tip: eg. gh_abcd123
-  desc_tip: 账号的备注信息
-  appkey: appid
-  appkey_tip: appid
-  secret: appsecret
-  secret_tip: appsecret
+  desc_tip: " "
+  appkey: AppId
+  appkey_tip: AppId for wechat API
+  secret: AppSecret
+  secret_tip: AppSecret
+  token: Token
+  token_tip: 微信自动回复接口的token
   admin:
-    assign: 设置管理员
-    assign_for: "为微信号 <strong>%s</strong> 设置管理员"
-    not_set: 还没有设置管理员
-    role: 权限
+    assign: Assign Admins
+    assign_for: "Assign admins for <strong>%s</strong>"
+    not_set: Admins not setted
+    role: Role
     roles:
-      chief: 全权
+      chief: Chief
 users:
   title: users
   index:
     h1: all users
   edit: edit user account
 user:
-  name: 用户名
-  screen_name: screen name
-  screen_name_tip: 用户的姓名
+  name: Username
+  password: Password
+  screen_name: Screen name
+  screen_name_tip: How do we call you
   email_tip: "username@example.com"
+  modify_password: Modify password
+  modify_password_for: "Modify password for <strong>%s</strong>"
+  new_password: New password
+  new_password_tip: At lease 6 characters
+  new_password2: Input again
+  new_password2_tip: Input the password again to confirm

@@ -1,8 +1,8 @@
 Controller = require 'controllers/base/controller'
 mediator = require 'mediator'
 
-PanelHeader = require 'views/panel/header'
-PannelSidebar = require 'views/panel/sidebar'
+PanelHeader = require 'views/common/header'
+PannelSidebar = require 'views/common/sidebar'
 
 # Control Panel Home
 module.exports = class HomeController extends Controller

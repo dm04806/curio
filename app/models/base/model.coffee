@@ -51,19 +51,35 @@ module.exports = class Model extends Chaplin.Model
     return ret
 
   loaders: {}
+  relations: {}
 
-  load: (what, callback) ->
+  load: (what, args..., callback) ->
     config = @loaders[what]
+    if not config and @relations[what]
+      config = ->
+        @related(what, args...).fetch()
     if not config
       throw new Error "don't know how to load '#{what}'"
+
+    if 'function' == typeof config
+      return config.call(this, args..., callback)
+
+    # default arguments
     callback = callback or ->
+    url = config.url
+    if 'string' is typeof url
+      url = (=> @url() + config.url)
+
     $.ajax
       type: config.method or 'get',
       data: config.params,
-      url: config.url.call(this)
+      url: url.call(this)
     .done (res) =>
       callback null, config.parse.call(this, res)
-    .error ->
-      callback 'network'
+    .error (xhr, error) =>
+      callback error
+
+  related: (what, args...) ->
+    @relations[what].call(this, args...)
 
 

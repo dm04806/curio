@@ -1,7 +1,7 @@
 Controller = require 'controllers/base/controller'
 
-SuperHeader = require 'views/super/header'
-SuperSidebar = require 'views/super/sidebar'
+SuperHeader = require 'views/super/widgets/header'
+SuperSidebar = require 'views/super/widgets/sidebar'
 
 module.exports = class SuperHome extends Controller
   needPermit: 'super'

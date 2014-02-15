@@ -23,17 +23,20 @@ aliases =
 
 i18n.LOCALES = consts.LOCALES
 
-detect = ->
-  locale = $.cookie(COOKIE_NAME)
+detect = (locale) ->
+  locale = locale or $.cookie(COOKIE_NAME)
   locale = locale or navigator.language or navigator.userLanguage or 'zh'
-  i18n.setLocale(locale)
-
-i18n.setLocale = (locale) ->
   locale = locale.toLowerCase()
-  if locale in aliases
+  utils.debug 'language: %s', locale
+  if locale of aliases
+    utils.debug 'language aliase: %s -> %s', locale, aliases[locale]
     locale = aliases[locale]
   if locale not of i18n.LOCALES
     locale = consts.DEFAULT_LOCALE
+  return locale
+
+i18n.setLocale = (locale) ->
+  locale = detect(locale)
   $.removeCookie(COOKIE_NAME)
   $.cookie(COOKIE_NAME, locale, { expires: 365, path: '/' })
   return locale

@@ -1,9 +1,15 @@
 <div class="view-title">
   {{#if back}}
-  <a class="btn btn-default" href="{{back}}">
+  <a class="back-btn btn btn-default" href="{{back}}">
     <span class="icon-arrow-left"></span>
   </a>
   {{/if}}
-  <h1>{{t title}}</h1>
+  <h1>
+    {{t title}}
+  </h1>
+  {{#if subtitle}}
+  <span class="subtitle">{{t subtitle}}</span>
+  {{/if}}
+  {{{caller}}}
 </div>
 

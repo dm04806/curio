@@ -1,4 +1,4 @@
-PanelSidebar = require 'views/panel/sidebar'
+PanelSidebar = require 'views/common/sidebar'
 
 navItems = [
   name: 'super.home'

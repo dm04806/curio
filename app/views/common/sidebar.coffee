@@ -7,13 +7,21 @@ navItems = [
   strict: true
   icon: 'home'
 ,
-  name: 'messages.title'
+  name: 'messages'
   url: '/messages'
   icon: 'bubbles'
 ,
-  name: 'contacts.title'
+  name: 'contacts'
   url: '/contacts'
   icon: 'address-book'
+,
+  name: 'stats'
+  url: '/stats'
+  icon: 'stats'
+,
+  name: 'channels'
+  url: '/channels'
+  icon: 'filter'
 ]
 
 module.exports = class SidebarView extends View

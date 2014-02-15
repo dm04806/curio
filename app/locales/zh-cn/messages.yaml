@@ -2,7 +2,6 @@ site:
   name: Curio
   desc: 一站式微信公共号运营工具
 home: 首页
-dashboard: 控制台
 logout: 登出
 login:
   ing: 正在登录...
@@ -25,8 +24,10 @@ admins: 管理员
 # common verbs:
 save: 保存
 save changes: 保存变更
+create: 创建
 update: 更新
 edit: 编辑
+modify: 修改
 back: 返回
 next: 下一步
 admin: 管理
@@ -63,12 +64,32 @@ error:
     detail: 你并不是超级管理员，<a href="/">返回首页</a>
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
+  noresult: 暂时什么都还没有
 
 messages:
-  title: 消息记录
+  '': 消息
+  index:
+    h1: 全部消息
 contacts:
-  title: 联系人
+  '': 用户
+stats:
+  '': 统计
 
+dashboard:
+  '': 控制台
+  subtitle: 每日关键指标
+  key_index: 关键指标
+  realtime: 实时统计
+  yesterday: 昨日新增
+
+subscribers:
+  '': 订阅者
+
+channels:
+  '': 渠道
+
+
+# ======= Super Admin Panel =====
 super:
   home: 超级管理
   title: 超级管理中心
@@ -90,6 +111,8 @@ media:
   appkey_tip: 开发者凭据中的 AppId
   secret: AppSecret
   secret_tip: 开发者凭据中的 AppSecret
+  token: Token
+  token_tip: 微信自动回复接口的 token
   admin:
     assign: 设置管理员
     assign_for: 为微信号 <strong>%s</strong> 设置管理员
@@ -106,6 +129,13 @@ users:
 
 user:
   name: 用户名
+  password: 登录密码
   screen_name: 姓名
   screen_name_tip: 用户的姓名
   email_tip: username@example.com
+  modify_password: 修改登录密码
+  modify_password_for: 修改 <strong>%s</strong> 的登录密码
+  new_password: 新密码
+  new_password_tip: 不少于6位的字母、标点符号或数字
+  new_password2: 确认新密码
+  new_password2_tip: 再次输入以确认

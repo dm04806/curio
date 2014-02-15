@@ -2,6 +2,9 @@ html
   position: relative
   min-height: 100%
 
+svg
+  height: 220px
+
 h1
   font-size: 22px
   margin-bottom: 30px
@@ -19,7 +22,7 @@ $fff_text
       th, td
         border-color: #ddd
 
-.navbar, thead th, .view-title
+thead th
   text-transform: capitalize
 
 .error-detail a
@@ -35,10 +38,6 @@ for n in (1..6)
 
 .alert-warning
   color: lighten(brand-warning, 90%)
-
-
-[class^="icon-"], [class*=" icon-"]
-  margin-right: 0.05em
 
 
 .navbar-default

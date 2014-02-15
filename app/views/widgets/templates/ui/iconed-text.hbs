@@ -1,0 +1,16 @@
+<div class="iconed-text {{cls}}">
+  <div class="icon">
+    <span class="icon-{{icon}}"></span>
+  </div>
+  <div class="text">
+    {{#if num includeZero=true}}
+      <strong>{{num}}</strong><br>
+    {{/if}}
+    {{#if signed_num includeZero=true}}
+    <strong>
+      {{#compare signed_num '<' 0}}-{{else}}+{{/compare}}{{signed_num}}
+    </strong><br>
+    {{/if}}
+    <span>{{t text}}</span>
+  </div>
+</div>

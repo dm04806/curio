@@ -8,11 +8,10 @@ moment = require 'lib/moment'
 
 _.assign consts, require 'models/consts'
 
+SafeString = Handlebars.SafeString
+
 register = (name, fn) ->
   Handlebars.registerHelper name, fn
-
-# Map helpers
-# -----------
 
 # translate text
 register 't', (i18n_key, args..., options) ->
@@ -20,17 +19,53 @@ register 't', (i18n_key, args..., options) ->
   if i18n_key not of i18n.dict
     console.warn "Please translate [#{i18n_key}] !"
   result = __(i18n_key, args...)
-  new Handlebars.SafeString(result)
+  new SafeString(result)
 
 register 'g', (i18n_key, args..., options) ->
   return unless i18n_key
   args = args.map (item) ->
     return item ? ''
   result = __g(i18n_key, args...)
-  new Handlebars.SafeString(result) if result
+  new SafeString(result) if result
 
 register 'when', (bool, vals..., options) ->
-  return if bool then vals[0] else vals[1]
+  if bool then vals[0] else vals[1]
+
+register 'unless_false', (bool, vals..., options) ->
+  if bool is false then vals[1] else vals[0]
+
+register 'any', (vals..., options) ->
+  _.find(vals)
+
+register 'compare', (args..., options) ->
+  if args.length < 2
+    throw new Error('Handlerbars Helper "compare" needs 2 parameters')
+  [left, operator, right] = args
+  if right is undefined
+    right = operator
+    operator = '==='
+
+  operators = `{
+    '==':     function(l, r) {return l == r; },
+    '===':    function(l, r) {return l === r; },
+    '!=':     function(l, r) {return l != r; },
+    '!==':    function(l, r) {return l !== r; },
+    '<':      function(l, r) {return l < r; },
+    '>':      function(l, r) {return l > r; },
+    '<=':     function(l, r) {return l <= r; },
+    '>=':     function(l, r) {return l >= r; },
+    'typeof': function(l, r) {return typeof l == r; }
+  }`
+
+  if not operators[operator]
+    throw new Error('don\'t know how to "compare": ' + operator)
+
+  result = operators[operator](left, right)
+
+  if result
+    return options.fn(this)
+  else
+    return options.inverse(this)
 
 # Make 'with' behave a little more mustachey.
 register 'with', (context, options) ->
@@ -46,17 +81,27 @@ register 'without', (context, options) ->
   options.fn = inverse
   Handlebars.helpers.with.call(this, context, options)
 
-# Get Chaplin-declared named routes. {{url "likes#show" "105"}}
-register 'url', (routeName, params..., options) ->
-  utils.reverse routeName, params
-
 register 'json', (obj, options) ->
   console.log obj
   return JSON.stringify obj
 
 register 'widget', (tmpl, options) ->
   tmpl = require "views/widgets/templates/#{tmpl}"
-  new Handlebars.SafeString tmpl options.hash
+  data = options.hash
+  data.caller = options.fn?(this) or ''
+  data.__proto__ = this
+  new SafeString tmpl data
+
+# update context with a caller
+register 'set', (name, value, options) ->
+  if options is undefined
+    options = value
+    value = options.fn
+  if 'function' is typeof value
+    value = value(this)
+  # extend the context
+  this[name] = new SafeString value
+  return
 
 # include template
 register 'include', (tmpl, options) ->
@@ -65,7 +110,7 @@ register 'include', (tmpl, options) ->
     ret = (require tmpl)(this)
   if 'function' is typeof tmpl
     ret = tmpl this
-  new Handlebars.SafeString(ret)
+  new SafeString(ret)
 
 
 register "form_rows", (size, col, options) ->
@@ -83,18 +128,30 @@ register "form_rows", (size, col, options) ->
     if label is undefined
       label = name
     if placeholder is undefined
-      placeholder = if label then "#{name}_tip" else name
-    data =
+      placeholder = if label then "#{label}_tip" else name
+
+    tip = hash.tip
+    delete hash.tip
+
+    attrs = _.defaults hash,
+      class: "form-control input-#{name}"
       name: name
       value: value
-      label: label
-      placeholder: placeholder
+      placeholder: __g(placeholder)
+
+    attrs = ("#{k}=\"#{v ? ''}\"" for k, v of attrs).join(' ')
+    data =
+      name: name
       attrs: attrs
-      tip: hash.tip
+      tip: tip
+      label: __(label)
       label_cls: @label_cls
       row_cls: @row_cls
-    new Handlebars.SafeString tmpl data
+    new SafeString tmpl data
 
+# Get Chaplin-declared named routes. {{url "likes#show" "105"}}
+register 'url', (routeName, params..., options) ->
+  utils.reverse routeName, params
 
 # Content formating helpers
 register 'strftime', (date, format, options) ->

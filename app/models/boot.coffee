@@ -21,10 +21,10 @@ boot.BootError = class BootError extends CurioError
             utils.redirectTo 'login#index'
         else
           # no res means server error
-          setTimeout check, 6000
+          setTimeout check, 10000
       .error ->
         # request error is more like connection problem
-        setTimeout check, 3000
+        setTimeout check, 5000
     check()
 
 module.exports = boot

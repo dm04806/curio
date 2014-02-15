@@ -6,12 +6,18 @@ module.exports = (match) ->
 
   # Media control pannel
   match 'users', ''
-  match 'contacts', 'contacts#index'
-  match 'contact/:sid', 'contacts#show'
+  match 'messages', 'message#index'
+  match 'subscribers', 'subscriber#index'
+  match 'subscriber/:id', 'subscriber#show'
 
-  #match 'autoreply', 'autoreply#index'
-  #match 'autoreply/:sid', 'autoreply#show'
-  #match 'autoreply/:sid/edit', 'autoreply#edit'
+  match 'stats', 'stats#index'
+
+  match 'channels', 'channel#index'
+  match 'channel/:id', 'channel#show'
+
+  match 'autoreply', 'autoreply#index'
+  match 'autoreply/:id', 'autoreply#show'
+  match 'autoreply/:id/edit', 'autoreply#edit'
 
 
   # Super Admin pannel

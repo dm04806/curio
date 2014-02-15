@@ -1,1 +1,30 @@
-{{widget 'heading2' title='dashboard'}}
+{{widget 'heading2' title='dashboard' subtitle='dashboard.subtitle'}}
+<div class="row">
+  <div class="col col-sm-9">
+    <div class="card" id="realtime">
+      <h4 class="hd">
+        {{t 'dashboard.realtime'}}
+      </h4>
+      <div class="bd">
+        <svg></svg>
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-3">
+    <div class="card">
+      <h4 class="hd">
+        {{t 'dashboard.yesterday'}}
+      </h4>
+      <div class="bd">
+        <ul class="list-unstyled list-stacked">
+          <li>
+            {{widget 'ui/iconed-text' icon='user' signed_num=0 text='subscribers' cls='success'}}
+          </li>
+          <li>
+            {{widget 'ui/iconed-text' icon='bubble2' signed_num=1942 text='messages' cls='success'}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
