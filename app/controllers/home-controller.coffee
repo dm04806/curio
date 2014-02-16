@@ -8,7 +8,7 @@ PannelSidebar = require 'views/common/sidebar'
 module.exports = class HomeController extends Controller
   needPermit: 'panel'
   beforeAction: ->
-    super # exit when super has error
+    super
     header = @reuse 'header', PanelHeader, region: 'header'
     @reuse 'sidebar', PannelSidebar, region: 'sidebar'
 

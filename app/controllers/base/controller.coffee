@@ -3,7 +3,7 @@ PageView = require 'views/base/page'
 mediator = require 'mediator'
 {AccessError} = require 'models/errors'
 {SITE_ROOT} = require 'consts'
-{store} = require 'lib/utils'
+{reverse,store} = require 'lib/utils'
 
 module.exports = class Controller extends Chaplin.Controller
   pageLayout: 'normal'
@@ -17,7 +17,7 @@ module.exports = class Controller extends Chaplin.Controller
       if not mediator.user
         store 'login_return', window.location.href
         if not mediator.site_error
-          @redirectTo 'login#index'
+          window.location = reverse 'login#index'
         return
       if not mediator.user.permitted(permit, mediator.media)
         mediator.execute 'site-error', new AccessError "need_#{permit}"
