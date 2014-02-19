@@ -155,6 +155,8 @@ register 'url', (routeName, params..., options) ->
 
 # Content formating helpers
 register 'strftime', (date, format, options) ->
+  if isNaN(date)
+    return
   if format == 'locale'
     return date.toLocaleString()
   return moment(date).format(format)

@@ -21,4 +21,4 @@ module.exports = class Media extends Model
       Message = require '../message'
       opts = opts or {}
       opts.media_id = @id
-      Message.collection opts
+      Message.collection params: opts

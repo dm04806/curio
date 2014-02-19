@@ -1,0 +1,21 @@
+<li class="media">
+<a class="pull-left" href="">
+  <img class="media-object img-circle" src="{{subscriber.avatar}}" alt="">
+  <span class="name">{{subscriber.avatar}}</span>
+</a>
+<div class="media-body">
+  {{#compare contentType 'text'}}
+    <div class="text">{{content.content}}</div>
+  {{/compare}}
+  {{#compare contentType 'image'}}
+    <div class="image">
+      <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
+    </div>
+  {{/compare}}
+  {{#compare contentType 'location'}}
+  {{/compare}}
+  {{#compare contentType 'voice'}}
+  {{/compare}}
+  <p class="time">{{strftime 'LLL' create_at}}</p>
+</div>
+</li>

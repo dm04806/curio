@@ -11,6 +11,9 @@ module.exports = class Model extends Chaplin.Model
     new Collection [], {model: this, params: params}
 
   @collection: (items, opts={}) ->
+    if !Array.isArray(items)
+      opts = items
+      items = []
     opts.model = this
     new Collection items, opts
 
@@ -51,8 +54,10 @@ module.exports = class Model extends Chaplin.Model
     return ret
 
   loaders: {}
+  # loaders use a raw ajax request, relation use Backbone.sync to load data,
   relations: {}
 
+  # return a jqXHR promise
   load: (what, args..., callback) ->
     config = @loaders[what]
     if not config and @relations[what]
@@ -60,16 +65,13 @@ module.exports = class Model extends Chaplin.Model
         @related(what, args...).fetch()
     if not config
       throw new Error "don't know how to load '#{what}'"
-
     if 'function' == typeof config
       return config.call(this, args..., callback)
-
     # default arguments
     callback = callback or ->
     url = config.url
     if 'string' is typeof url
       url = (=> @url() + config.url)
-
     $.ajax
       type: config.method or 'get',
       data: config.params,
@@ -79,6 +81,7 @@ module.exports = class Model extends Chaplin.Model
     .error (xhr, error) =>
       callback error
 
+  # always return a Model / Collection
   related: (what, args...) ->
     @relations[what].call(this, args...)
 

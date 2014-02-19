@@ -24,6 +24,7 @@ module.exports = class Controller extends Chaplin.Controller
     true
 
   beforeAction: ->
+    return 403 if @checkPermission() isnt true
     @reuse 'site', PageView, layout: @pageLayout
     setTimeout =>
       title = null
@@ -33,7 +34,6 @@ module.exports = class Controller extends Chaplin.Controller
         title = ''
       if title != null
         @adjustTitle(title)
-    return 403 if @checkPermission() isnt true
 
   index: ->
     if @main

@@ -56,6 +56,9 @@ error:
   bootfail:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
+  session_timeout:
+    title: 无法请求所需资源
+    detail: 可能是你的登录已过期，试试<a href="/login">重新登录</a>
   need_panel:
     title: 找不到公共号
     detail: 你名下没有任何微信公众号可供管理，试试<a href="/login">用其他账号登录</a>

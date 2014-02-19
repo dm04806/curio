@@ -47,6 +47,9 @@ error:
   bootfail:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
+  session_timeout:
+    title: 无法请求所需资源
+    detail: "可能是你的登录已过期，试试<a href=\"/login\">重新登录</a>"
   need_panel:
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
@@ -103,9 +106,9 @@ media:
     roles:
       chief: Chief
 users:
-  title: users
+  title: Users
   index:
-    h1: all users
+    h1: All users
   edit: edit user account
 user:
   name: Username

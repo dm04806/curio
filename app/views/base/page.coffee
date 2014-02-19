@@ -12,7 +12,7 @@ module.exports = class PageView extends View
     footer: '#footer'
   setLayout: (layout) ->
     layout = layout or @layout
-    body = $(document.body)
+    body = $('html')
     cls = body.attr('class') or ''
     tmp = cls.split('layout')
     tmp[1] = "layout-#{layout}"
