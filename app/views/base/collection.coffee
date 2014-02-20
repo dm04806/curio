@@ -14,6 +14,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   listSelector: '.list'
   loadingSelector: 'div.placeholder'
   fallbackSelector: 'div.fallback'
+  useCssAnimation: true
 
   push: (item) ->
     @collection.push item

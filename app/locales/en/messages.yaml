@@ -44,6 +44,9 @@ header:
 error:
   connection: "Connection failed, please try again later"
   general: "Oops, something strange happened."
+  noresult: Nothing right now
+  goback: Go to dashboard
+  gosuper: Go to Super Admin
   bootfail:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
@@ -56,15 +59,30 @@ error:
   need_super:
     title: Not Accessible
     detail: You are not a super admin
-  login failed: Username / password incorrect
-  not allowed: You a not allowed to do so
-  noresult: 暂时什么都没有
+  not_found:
+    title: Not Found
+    detail: The resource you requested seems missing.
+api_error:
+  login failed: 用户名或密码不正确
+  not allowed: 你没有权限执行这项操作
+unknown time: 未知时间
 messages:
   "": Messages
   index:
     h1: 全部消息
-contacts:
-  "": Contacts
+  mylocation: 我的位置
+subscribers:
+  "": Subscribers
+  index:
+    h1: "All Subscribers (%s)"
+subscriber:
+  city: 城市
+  sex: 性别
+  updated_at: 最近活跃
+  created_at: 首次关注时间
+  status: 状态
+  subscribed: 已关注
+  unsubscribed: 已关注
 stats:
   "": Statistics
 dashboard:
@@ -73,8 +91,6 @@ dashboard:
   key_index: Key Indexes
   realtime: Realtime graph
   yesterday: Yesterday
-subscribers:
-  "": Subscribers
 channels:
   "": Channels
 super:

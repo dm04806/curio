@@ -12,7 +12,7 @@ module.exports = class Collection extends Chaplin.Collection
     @on 'sync', @finishSync
     @on 'error', @unsync
     if not @urlRoot and @model
-      @urlRoot = @model::urlRoot()
+      @urlRoot = @model::urlRoot
     if options?.params
       @params = options.params
 
@@ -20,6 +20,8 @@ module.exports = class Collection extends Chaplin.Collection
 
   url: ->
     url = @urlRoot
+    if 'function' == typeof url
+      url = @urlRoot()
     return utils.makeurl(url, @params)
 
   parse: (res, options) ->

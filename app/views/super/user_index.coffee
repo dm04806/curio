@@ -6,4 +6,4 @@ module.exports = class UserIndexView extends ListableView
   template: require './templates/user_index'
   context:
     thead: require './templates/user_thead'
-  itemView: require './user_row'
+  itemTemplate: require './templates/user_row'

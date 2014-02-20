@@ -1,5 +1,7 @@
 Model = require 'models/base/model'
 
+Subscriber = require '../subscriber'
+
 module.exports = class Media extends Model
   kind: 'media'
   defaults:
@@ -17,8 +19,10 @@ module.exports = class Media extends Model
       parse: (res) -> res.items
 
   relations:
-    messages: (opts) ->
-      Message = require '../message'
-      opts = opts or {}
-      opts.media_id = @id
-      Message.collection params: opts
+    messages: require '../message'
+    subscribers: Subscriber
+    subscriber: (params) ->
+      ret = new Subscriber id: params.id
+      ret.media_id = @id
+      return ret
+

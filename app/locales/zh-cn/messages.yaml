@@ -53,6 +53,9 @@ header:
 error:
   connection: 与服务器通信失败，请稍后再试
   general: 出现未知的服务器错误
+  noresult: 暂时什么都还没有
+  goback: 返回首页
+  gosuper: 去超级管理后台
   bootfail:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
@@ -65,16 +68,36 @@ error:
   need_super:
     title: 不能继续
     detail: 你并不是超级管理员，<a href="/">返回首页</a>
+  not_found:
+    title: 没有了
+    detail: 这个东西好像已经没有了
+
+api_error:
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
-  noresult: 暂时什么都还没有
+
+unknown time: 未知时间
 
 messages:
   '': 消息
   index:
     h1: 全部消息
-contacts:
-  '': 用户
+  mylocation: 我的位置
+
+subscribers:
+  '': 订阅者
+  index:
+    h1: 全部订阅者(%s)
+
+subscriber:
+  city: 城市
+  sex: 性别
+  updated_at: 最近活跃
+  created_at: 首次关注时间
+  status: 状态
+  subscribed: 活跃
+  unsubscribed: 已退订
+
 stats:
   '': 统计
 
@@ -84,9 +107,6 @@ dashboard:
   key_index: 关键指标
   realtime: 实时统计
   yesterday: 昨日新增
-
-subscribers:
-  '': 订阅者
 
 channels:
   '': 渠道

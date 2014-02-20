@@ -1,21 +1,34 @@
-<li class="media">
-<a class="pull-left" href="">
-  <img class="media-object img-circle" src="{{subscriber.avatar}}" alt="">
-  <span class="name">{{subscriber.avatar}}</span>
-</a>
-<div class="media-body">
-  {{#compare contentType 'text'}}
-    <div class="text">{{content.content}}</div>
+<li class="media {{type}}">
+  {{#compare type "incoming"}}
+    <a class="avatar pull-left" href="{{url 'subscriber#show' subscriber.id}}">
+      <img class="media-object img-rounded" src="{{subscriber.headimgurl}}" alt="">
+      <span class="name">{{any subscriber.name subscriber.oid}}</span>
+    </a>
+  {{else}}
+    <a class="avatar pull-right">
+      <img class="media-object img-rounded" src="{{subscriber.headimgurl}}" alt="">
+      <span class="name">{{media.headimgurl}}</span>
+    </a>
   {{/compare}}
-  {{#compare contentType 'image'}}
-    <div class="image">
-      <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
+  <div class="media-body">
+    <div class="{{contentType}}">
+      {{#compare contentType 'text'}}
+        {{content.content}}
+      {{/compare}}
+      {{#compare contentType 'image'}}
+        <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
+      {{/compare}}
+      {{#compare contentType 'location'}}
+        <p>{{t 'messages.mylocation'}}:</p>
+        {{#with content.content}}
+          <img src="{{mapImg lat lng}}" alt="{{label}}" class="img-thumbnail">
+        {{/with}}
+      {{/compare}}
+      {{#compare contentType 'voice'}}
+      {{/compare}}
     </div>
-  {{/compare}}
-  {{#compare contentType 'location'}}
-  {{/compare}}
-  {{#compare contentType 'voice'}}
-  {{/compare}}
-  <p class="time">{{strftime 'LLL' create_at}}</p>
-</div>
+    <p class="time">
+      {{strftime 'fromnow' created_at showInvalid=true}}
+    </p>
+  </div>
 </li>

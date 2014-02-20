@@ -35,6 +35,6 @@ module.exports = class Controller extends Chaplin.Controller
       if title != null
         @adjustTitle(title)
 
-  index: ->
-    if @main
-      @view = new @main region: 'main'
+  index: (params) ->
+    if not @view and @main
+      @view = new @main region: 'main', params: params

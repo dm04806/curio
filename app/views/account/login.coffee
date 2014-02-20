@@ -32,7 +32,7 @@ module.exports = class LoginMain extends FormView
         mediator.execute 'login', res
         @publishEvent 'auth:login'
       else
-        @msg("error.#{res?.error or 'general'}")
+        @msg("api_error.#{res?.error or 'general'}")
     .fail (res) =>
       # show as server error
       @msg('error.connection')

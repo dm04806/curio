@@ -33,7 +33,7 @@ Backbone.ajax = (opts, args...) ->
     # show loading when ajax takes too long
     if not resolved and not $('body').find('.loading-indicator:visible').length
       $('body').addClass('syncing')
-  , 500
+  , 1000
   _ajax = =>
     ajax.call(this, opts, args...).always (xhr) ->
       resolved = true
@@ -41,6 +41,8 @@ Backbone.ajax = (opts, args...) ->
       # this ajax request is unauthorized
       if xhr.status == 401
         mediator.execute 'site-error', new AccessError('session_timeout')
+      if xhr.status == 404
+        mediator.execute 'site-error', 'not_found'
   return _ajax() unless mediator.site_error
   promise = $.Deferred()
   # if site error found, do fetch when error resolved

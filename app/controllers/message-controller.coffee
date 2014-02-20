@@ -8,5 +8,9 @@ module.exports = class MessageController extends HomeController
     params.type = 'incoming'
     params.include = 'subscriber'
     collection = mediator.media.related 'messages', params
-    @view = new MessageIndexView region: 'main', collection: collection
-    collection.fetch()
+    @view = new MessageIndexView
+      region: 'main'
+      autoRender: false
+      collection: collection
+    collection.fetch().done =>
+      @view.render()

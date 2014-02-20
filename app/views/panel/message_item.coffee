@@ -3,6 +3,6 @@ mediator = require 'mediator'
 
 module.exports = class MessageItemView extends View
   template: require './templates/message_item'
-  debug: true
+  noWrap: true
   context: ->
     media: mediator.media

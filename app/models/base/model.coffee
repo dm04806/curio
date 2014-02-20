@@ -83,6 +83,15 @@ module.exports = class Model extends Chaplin.Model
 
   # always return a Model / Collection
   related: (what, args...) ->
-    @relations[what].call(this, args...)
+    model = @relations[what]
+    if not model
+      throw new Error("No relation about '#{what}' for #{@kind}")
+    if model.__super__?.constructor is Model
+      opts = args[0] || {}
+      #opts["#{@kind}_id"] = @id
+      collection = model.collection params: opts
+      collection.urlRoot = "#{@url()}/#{model::kind}s"
+      return collection
+    model.call(this, args...)
 
 

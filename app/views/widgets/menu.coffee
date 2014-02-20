@@ -3,8 +3,9 @@ mediator = require 'mediator'
 
 isActive = (obj) ->
   path = location.pathname
-  return path is obj.url if obj.strict
-  path.indexOf(obj.url) is 0
+  url = obj.url.replace(/s$/, '')
+  return path is url if obj.strict
+  path.indexOf(url) is 0
 
 getNavItems = (items) ->
   ret = []

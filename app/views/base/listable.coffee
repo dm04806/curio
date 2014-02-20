@@ -1,20 +1,33 @@
 CollectionView = require 'views/base/collection'
 View = require './view'
 
-module.exports = class ListableView extends View
+class ItemView extends View
   autoRender: true
+  tagName: 'tr'
+
+module.exports = class ListableView extends View
+  autoRender: false
   className: 'main-container'
   optionNames: View::optionNames.concat ['itemView', 'params']
   params: null
   itemView: null
+  itemTemplate: null
   collectionView: CollectionView
+  collectionTemplate: null
   #pagerView: PagerView
   regions:
     'listable': '#listable'
   context: ->
     fallback:
       title: 'error.noresult'
-  render: ->
+  getItemView: ->
+    view = @itemView or @collectionView::itemView
+    if not view
+      itemTemplate = @itemTemplate
+      view = @itemView = class MyItemView extends ItemView
+        template: itemTemplate
+    return view
+  initialize: ->
     super
     collection = @collection
     if not collection
@@ -23,10 +36,16 @@ module.exports = class ListableView extends View
       else
         collection = @_model.all @params
       @collection = collection
+    if not @autoRender
+      collection.fetch().done =>
+        @render()
+  render: ->
+    super
+    collection = @collection
     collection.fetch() if not collection.length
     listable = new @collectionView
       region: 'listable'
-      itemView: @itemView or @collectionView::itemView
+      itemView: @getItemView()
       context: @context
       collection: collection
     @subview 'listable', listable

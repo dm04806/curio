@@ -1,5 +1,6 @@
 View = require 'views/base'
 MenuView = require 'views/widgets/global_menu'
+mediator = require 'mediator'
 
 navItems = [
   name: 'dashboard'
@@ -11,8 +12,8 @@ navItems = [
   url: '/messages'
   icon: 'bubbles'
 ,
-  name: 'contacts'
-  url: '/contacts'
+  name: 'subscribers'
+  url: '/subscribers'
   icon: 'address-book'
 ,
   name: 'stats'
@@ -32,6 +33,7 @@ module.exports = class SidebarView extends View
     main_menu: '.main-menu'
   template: require './templates/sidebar'
   render: ->
+    #@model = mediator.media
     super
     mainMenu = new MenuView
       region: 'main_menu'

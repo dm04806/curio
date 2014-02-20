@@ -21,7 +21,7 @@ mediator.setHandler 'logout', ->
 
 mediator.setHandler 'login', (data) ->
   userInfo = data.user
-  admins = data.admins
+  admins = userInfo.mediaAdmins
   user = mediator.user = new User(userInfo)
   if user.isSuper and not admins or not admins.length
     admins = session.allAdmins() or []

@@ -153,14 +153,6 @@ register "form_rows", (size, col, options) ->
 register 'url', (routeName, params..., options) ->
   utils.reverse routeName, params
 
-# Content formating helpers
-register 'strftime', (date, format, options) ->
-  if isNaN(date)
-    return
-  if format == 'locale'
-    return date.toLocaleString()
-  return moment(date).format(format)
-
 # get model attributes
 register 'attr', (name) ->
   val = this[name]
@@ -168,6 +160,25 @@ register 'attr', (name) ->
   if 'function' is typeof val
     val = val.call(this)
   return val
+
+
+# Content formating helpers
+register 'strftime', (format, date, options) ->
+  if isNaN(date) and options.hash.showInvalid
+    return __('unknown time')
+  if format == 'locale'
+    return date.toLocaleString()
+  if format == 'fromnow'
+    return moment(date).fromNow()
+  return moment(date).format(format)
+
+# Map Static img url
+register 'mapImg', (lat, lng, args..., options) ->
+  size = args[0] || '350*180'
+  zoom = args[1] || 16
+  "http://st.map.qq.com/api?size=#{size}&center=#{lng},#{lat}&zoom=#{zoom}"
+
+
 
 exports.globals =
   consts: consts
