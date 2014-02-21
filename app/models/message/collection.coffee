@@ -11,7 +11,7 @@ module.exports = class MessageCollection extends Collection
       if item.subscriber
         item.subscriber = new Subscriber(item.subscriber)
       else if @subscriber
-        item.subscriber = @subscriber_id
+        item.subscriber = @subscriber
       else
         item.subscriber = new Subscriber subscriber_id: item.subscriber_id
       return item

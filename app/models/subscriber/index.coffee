@@ -5,14 +5,16 @@ getAvatar = (id) ->
 
 module.exports = class Subscriber extends Model
   kind: 'subscriber'
-  defaults:
+  defaults: ->
     oid: null
     phone: null
     name: null
     active: true
   urlPath: ->
-    return super unless @media_id
+    return unless @media_id
     "/medias/#{@media_id}/subscribers"
-  initialize: ->
+  set: ->
     super
-    @set 'avatar', (@get 'headimgurl') or getAvatar(@id)
+    attrs = @attributes
+    attrs.avatar = attrs.headimgurl or getAvatar(attrs.id)
+    attrs.name = attrs.name or attrs.oid

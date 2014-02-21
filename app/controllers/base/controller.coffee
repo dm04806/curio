@@ -23,17 +23,20 @@ module.exports = class Controller extends Chaplin.Controller
         mediator.execute 'site-error', new AccessError "need_#{permit}"
     true
 
-  beforeAction: ->
-    return 403 if @checkPermission() isnt true
+  _beforeAction: ->
     @reuse 'site', PageView, layout: @pageLayout
-    setTimeout =>
-      title = null
-      if @view
-        title = @view.$el.find('.view-title h1').text()
-      else if document.title == 'Loading..'
-        title = ''
-      if title != null
-        @adjustTitle(title)
+
+  beforeAction: ->
+    defer = ->
+      promise = $.Deferred()
+      promise.done run
+      mediator.site_error.on 'resolve', ->
+        promise.resolve()
+      return promise
+    run = =>
+      @checkPermission()
+      @_beforeAction()
+    return if mediator.site_error then defer() else run()
 
   index: (params) ->
     if not @view and @main

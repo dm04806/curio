@@ -26,6 +26,21 @@
       {{/compare}}
       {{#compare contentType 'voice'}}
       {{/compare}}
+      {{#compare contentType 'news'}}
+        {{#each content.content}}
+        <div class="news-message">
+          <a href="{{url}}">
+            <span class="title">{{title}}</span>
+            <img class="img-rounded" src="{{picUrl}}" alt="">
+            {{#if description}}
+              <span class="description">
+                {{description}}
+              </span>
+            {{/if}}
+          </a>
+        </div>
+        {{/each}}
+      {{/compare}}
     </div>
     <p class="time">
       {{strftime 'fromnow' created_at showInvalid=true}}

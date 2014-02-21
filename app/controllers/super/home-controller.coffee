@@ -5,7 +5,7 @@ SuperSidebar = require 'views/super/widgets/sidebar'
 
 module.exports = class SuperHome extends Controller
   needPermit: 'super'
-  beforeAction: ->
+  _beforeAction: ->
     super
     @reuse 'super-header', SuperHeader, region: 'header'
     @reuse 'super-sidebar', SuperSidebar, region: 'sidebar'
