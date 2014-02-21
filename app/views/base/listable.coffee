@@ -34,7 +34,7 @@ module.exports = class ListableView extends View
       if @_collection
         collection = new @_collection [], params: @params
       else
-        collection = @_model.all @params
+        collection = @_model.collection [], params: @params
       @collection = collection
     if not @autoRender
       collection.fetch().done =>

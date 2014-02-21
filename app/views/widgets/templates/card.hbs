@@ -1,0 +1,15 @@
+<div class="card">
+  {{#if title}}
+    <h4 class="hd">
+      {{t title}}
+    </h4>
+  {{/if}}
+  <div class="bd">
+    {{{caller}}}
+  </div>
+  {{#if footer}}
+    <div class="ft">
+      {{{footer}}}
+    </div>
+  {{/if}}
+</div>

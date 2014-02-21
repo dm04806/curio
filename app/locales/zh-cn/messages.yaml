@@ -84,10 +84,15 @@ messages:
     h1: 全部消息
   mylocation: 我的位置
 
+message:
+  '': 消息
+
 subscribers:
   '': 订阅者
   index:
     h1: 全部订阅者(%s)
+  show:
+    h1: 与 %s 的会话记录
 
 subscriber:
   city: 城市
@@ -98,18 +103,31 @@ subscriber:
   subscribed: 活跃
   unsubscribed: 已退订
 
+subscribe:
+  '': 订阅
+unsubscribe: 退订
+
 stats:
   '': 统计
 
 dashboard:
   '': 控制台
   subtitle: 每日关键指标
-  key_index: 关键指标
-  realtime: 实时统计
-  yesterday: 昨日新增
+  realtime: 最新动态
 
 channels:
   '': 渠道
+
+shares:
+  '': 图文分享
+
+# ===== Statstics ==========
+graph:
+  key_index: 关键指标
+  realtime: 实时统计
+  last30: 最近30天
+  last7: 最近七天
+  yesterday: 昨日摘要
 
 
 # ======= Super Admin Panel =====

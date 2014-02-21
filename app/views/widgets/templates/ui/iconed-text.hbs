@@ -8,7 +8,7 @@
     {{/if}}
     {{#if signed_num includeZero=true}}
     <strong>
-      {{#compare signed_num '<' 0}}-{{else}}+{{/compare}}{{signed_num}}
+      {{#compare signed_num '>' 0}}+{{/compare}}{{signed_num}}
     </strong><br>
     {{/if}}
     <span>{{t text}}</span>

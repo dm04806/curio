@@ -7,6 +7,10 @@ PageView = require 'views/base/page'
 mediator.site_error = null
 
 mediator.setHandler 'site-error', (err)->
+  # dispose old errors first
+  if mediator.site_error
+    mediator.site_error.dispose()
+    mediator.site_error = null
   if err not instanceof CurioError
     err = new CurioError err
   if err.code is 'need_panel' and mediator.user?.isSuper

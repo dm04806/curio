@@ -1,13 +1,13 @@
 <li class="media {{type}}">
   {{#compare type "incoming"}}
     <a class="avatar pull-left" href="{{url 'subscriber#show' subscriber.id}}">
-      <img class="media-object img-rounded" src="{{subscriber.headimgurl}}" alt="">
+      <img class="media-object img-rounded" src="{{subscriber.avatar}}" alt="">
       <span class="name">{{any subscriber.name subscriber.oid}}</span>
     </a>
   {{else}}
     <a class="avatar pull-right">
-      <img class="media-object img-rounded" src="{{subscriber.headimgurl}}" alt="">
-      <span class="name">{{media.headimgurl}}</span>
+      <img class="media-object img-rounded" src="{{media.avatar}}" alt="">
+      <span class="name">{{media.name}}</span>
     </a>
   {{/compare}}
   <div class="media-body">

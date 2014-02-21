@@ -1,6 +1,7 @@
 Model = require 'models/base/model'
 
 Subscriber = require '../subscriber'
+MessageCollection = require 'models/message/collection'
 
 module.exports = class Media extends Model
   kind: 'media'
@@ -19,10 +20,16 @@ module.exports = class Media extends Model
       parse: (res) -> res.items
 
   relations:
-    messages: require '../message'
     subscribers: Subscriber
     subscriber: (params) ->
       ret = new Subscriber id: params.id
       ret.media_id = @id
       return ret
-
+    messages: (params, subscriber) ->
+      if params instanceof Subscriber
+        subscriber = params
+        params = { subscriber_id: subscriber.id }
+      coll = new MessageCollection [], params: params
+      coll.media = this
+      coll.subscriber = subscriber
+      return coll

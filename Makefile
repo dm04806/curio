@@ -1,6 +1,9 @@
 start:
 	@gnode `which coffee` `which brunch` watch --server
 
+server:
+	@gnode `which coffee` `which brunch` watch -P --server
+
 extract_fonts:
 	@rm -rf ./misc/curio
 	@unzip ./misc/curio.zip -d ./misc/curio

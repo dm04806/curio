@@ -35,16 +35,11 @@ exports.startServer = function(port, path, callback) {
 
   app.use(spa(path_.join(__dirname, path), {
      index: 'debug.html',
+     404: '404.html',
      routeBase: '/',
      routes: routes
   }));
   app.use(detectLanguage(Object.keys(consts.LOCALES)));
-  // add your custom 404 page
-  app.use(function* () {
-    if (this.status == 404) {
-      this.body = '没有这个玩意儿';
-    }
-  });
 
   server = app.listen(port);
 

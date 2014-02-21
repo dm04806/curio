@@ -1,0 +1,25 @@
+<td class="avatar">
+  <img class="img-rounded" src="{{avatar}}" alt="">
+</td>
+<td class="name">
+  <a href="{{url 'subscriber#show' id}}">{{any name oid}}</a>
+</td>
+<td class="city">
+  {{city}}
+</td>
+<td class="sex">
+  {{sex}}
+</td>
+<td class="datetime">
+  {{strftime 'YYYY-MM-DD HH:mm:ss' created_at}}
+</td>
+<td class="datetime">
+  {{strftime 'YYYY-MM-DD HH:mm:ss' updated_at}}
+</td>
+<td>
+  {{#if subscribe}}
+    {{t 'subscriber.subscribed'}}
+  {{else}}
+    {{t 'subscriber.unsubscribed'}}
+  {{/if}}
+</td>

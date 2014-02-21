@@ -71,10 +71,14 @@ messages:
   index:
     h1: 全部消息
   mylocation: 我的位置
+message:
+  "": 消息
 subscribers:
   "": Subscribers
   index:
     h1: "All Subscribers (%s)"
+  show:
+    h1: "与 %s 的回话记录"
 subscriber:
   city: 城市
   sex: 性别
@@ -83,16 +87,25 @@ subscriber:
   status: 状态
   subscribed: 已关注
   unsubscribed: 已关注
+subscribe:
+  "": 订阅
+unsubscribe: 退订
 stats:
   "": Statistics
 dashboard:
   "": Dashboard
   subtitle: start from here
-  key_index: Key Indexes
-  realtime: Realtime graph
-  yesterday: Yesterday
+  realtime: 实时动态
 channels:
   "": Channels
+shares:
+  "": 图文分享
+graph:
+  key_index: 关键指标
+  realtime: 实时统计
+  last30: 最近30天
+  last7: 最近七天
+  yesterday: 昨日摘要
 super:
   home: Super Admin
   title: Super Administration
