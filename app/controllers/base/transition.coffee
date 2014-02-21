@@ -38,17 +38,22 @@ Backbone.ajax = (opts, args...) ->
     ajax.call(this, opts, args...).always (xhr) ->
       resolved = true
       $('body').removeClass('syncing')
-      # this ajax request is unauthorized
+    .error (xhr) ->
       if xhr.status == 401
-        mediator.execute 'site-error', new AccessError('session_timeout')
-      if xhr.status == 404
-        mediator.execute 'site-error', 'not_found'
+        # this ajax request is unauthorized
+        err = new AccessError('session_timeout')
+      else if xhr.status == 403
+        err = new AccessError('not_allowed')
+      else if xhr.status == 404
+        err = 'not_found'
+      else
+        err = 'network'
+      mediator.execute 'site-error', err
   return _ajax() unless mediator.site_error
   promise = $.Deferred()
   # if site error found, do fetch when error resolved
   mediator.site_error.on 'resolve', ->
-    _ajax()
-    .done ->
+    _ajax().done ->
       promise.resolve arguments...
     .error ->
       promise.reject arguments...

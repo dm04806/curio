@@ -13,5 +13,24 @@ Object.defineProperties CurioError.prototype,
       __g("error.#{@code}.detail")
 
 exports.CurioError = CurioError
+
+exports.RetriableError = class RetriableError extends CurioError
+  constructor: (@code) ->
+  retry: null
+  resolver: (view) ->
+    return unless @retry
+    check = =>
+      @retry().done (res) ->
+        if res
+          view.resolve()
+        else
+          # no res means server error
+          setTimeout check, 10000
+      .error ->
+        # request error is more like connection problem
+        setTimeout check, 5000
+    setTimeout check, 5000
+
+
 exports.AccessError = class AccessError extends CurioError
   category: 'warning' # css class="alert-#{category}"

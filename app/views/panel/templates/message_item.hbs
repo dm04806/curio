@@ -27,19 +27,28 @@
       {{#compare contentType 'voice'}}
       {{/compare}}
       {{#compare contentType 'news'}}
-        {{#each content.content}}
-        <div class="news-message">
-          <a href="{{url}}">
-            <span class="title">{{title}}</span>
-            <img class="img-rounded" src="{{picUrl}}" alt="">
-            {{#if description}}
-              <span class="description">
-                {{description}}
-              </span>
-            {{/if}}
-          </a>
-        </div>
-        {{/each}}
+        {{#compare content.content.length '>' 1}}
+          <div class="news-message-multi">
+            {{#each content.content}}
+              <a class="thumbnail" href="{{url}}">
+                <h3 class="title">{{title}}</h3>
+                <img src="{{picUrl}}" alt="">
+              </a>
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="news-message">
+            {{#each content.content}}
+              <a class="thumbnail" href="{{url}}">
+                <h3 class="title">{{title}}</h3>
+                <img src="{{picUrl}}" alt="">
+                <div class="description">
+                  {{description}}
+                </div>
+              </a>
+            {{/each}}
+          </div>
+        {{/compare}}
       {{/compare}}
     </div>
     <p class="time">

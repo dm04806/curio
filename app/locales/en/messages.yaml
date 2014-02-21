@@ -43,13 +43,22 @@ header:
   hello: "Hello, %s"
 error:
   connection: "Connection failed, please try again later"
-  general: "Oops, something strange happened."
   noresult: Nothing right now
   goback: Go to dashboard
   gosuper: Go to Super Admin
+  general:
+    "": 未知错误
+    title: 出现未知的服务器错误
+    detail: 抱歉给你带来不便，请稍后再试
   bootfail:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
+  server:
+    title: 服务器故障
+    detail: 我们临时遇到一点问题，请稍后再试
+  network:
+    title: 网络故障
+    detail: 请检查你的网络链接
   session_timeout:
     title: 无法请求所需资源
     detail: "可能是你的登录已过期，试试<a href=\"/login\">重新登录</a>"
@@ -95,7 +104,9 @@ stats:
 dashboard:
   "": Dashboard
   subtitle: start from here
+  docker: 待办事项
   realtime: 实时动态
+  "#highlights": 值得注意
 channels:
   "": Channels
 shares:

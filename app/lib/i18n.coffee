@@ -1,6 +1,8 @@
 utils = require 'lib/utils'
 consts = require 'consts'
 
+
+
 COOKIE_NAME = consts.LOCALE_COOKIE
 
 i18n = window.$.i18n

@@ -1,8 +1,8 @@
-<td class="avatar">
-  <img class="img-rounded" src="{{avatar}}" alt="">
-</td>
-<td class="name">
-  <a href="{{url 'subscriber#show' id}}">{{any name oid}}</a>
+<td>
+  <a class="avatar" href="{{url 'subscriber#show' id}}"><img class="img-rounded" src="{{avatar}}" alt=""></a>
+  <a href="{{url 'subscriber#show' id}}">
+    {{any name oid}}
+  </a>
 </td>
 <td class="city">
   {{city}}

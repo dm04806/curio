@@ -52,13 +52,22 @@ header:
 
 error:
   connection: 与服务器通信失败，请稍后再试
-  general: 出现未知的服务器错误
   noresult: 暂时什么都还没有
   goback: 返回首页
   gosuper: 去超级管理后台
+  general:
+    '': 未知错误
+    title: 出现未知的服务器错误
+    detail: 抱歉给你带来不便，请稍后再试
   bootfail:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
+  server:
+    title: 服务器故障
+    detail: 我们临时遇到一点问题，请稍后再试
+  network:
+    title: 网络故障
+    detail: 请检查你的网络链接
   session_timeout:
     title: 无法请求所需资源
     detail: 可能是你的登录已过期，试试<a href="/login">重新登录</a>
@@ -113,6 +122,7 @@ stats:
 dashboard:
   '': 控制台
   subtitle: 每日关键指标
+  docker: 待办事项
   realtime: 最新动态
 
 channels:

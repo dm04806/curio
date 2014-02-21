@@ -6,4 +6,4 @@ module.exports = class HomeRealTime extends View
   noWrap: true
   template: require './templates/realtime'
   context: ->
-    activities: _.range(4)
+    activities: _.range(3)
