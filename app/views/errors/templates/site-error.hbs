@@ -10,9 +10,11 @@
   {{/if}}
   <div class="error-detail">
     {{#if user.isSuper}}
-      <a href="/super">&raquo; {{t 'error.gosuper'}}</a> &nbsp;&nbsp;
+      <a href="/super" class="noscript">&raquo; {{t 'error.gosuper'}}</a> &nbsp;&nbsp;
     {{/if}}
-    <a href="/">&raquo; {{t 'error.goback'}}</a>
+    {{#compare code '!=' 'bootfail'}}
+      <a href="/" class="noscript">&raquo; {{t 'error.goback'}}</a>
+    {{/compare}}
   </div>
 </div>
 </div>

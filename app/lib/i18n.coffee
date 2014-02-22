@@ -35,12 +35,14 @@ detect = (locale) ->
     locale = aliases[locale]
   if locale not of i18n.LOCALES
     locale = consts.DEFAULT_LOCALE
+  moment.lang locale
   return locale
 
 i18n.setLocale = (locale) ->
   locale = detect(locale)
   $.removeCookie(COOKIE_NAME)
   $.cookie(COOKIE_NAME, locale, { expires: 365, path: '/' })
+  i18n.locale = locale
   return locale
 
 i18n.detect = detect

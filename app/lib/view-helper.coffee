@@ -170,6 +170,8 @@ register 'strftime', (format, date, options) ->
     return date.toLocaleString()
   if format == 'fromnow'
     return moment(date).fromNow()
+  if format == 'MMM Do' and i18n.locale == 'zh-cn'
+    format = 'MMMDo'
   return moment(date).format(format)
 
 # Map Static img url

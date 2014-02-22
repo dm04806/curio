@@ -11,7 +11,10 @@ module.exports = class LoginController extends Controller
   index: ->
     super
     @subscribeEvent 'auth:login', =>
-      redir = (store 'login_return') or '/'
-      redir = '/' if not @isRedirectable(redir)
-      @redirectTo { url: redir }
+      redir = store 'redirecting'
+      if not redir
+        redir = (store 'login_return') or '/'
+        redir = '/' if not @isRedirectable(redir)
+        redir = { url: redir }
+      @redirectTo redir
 

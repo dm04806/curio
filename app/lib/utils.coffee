@@ -2,7 +2,6 @@
 # ------------------------------
 mediator = require 'mediator'
 {SITE_ROOT,API_ROOT} = require 'consts'
-RE_EXTERNAL = /https?:\/\//i
 
 $.ajaxSetup
   dataType: 'json',
@@ -13,25 +12,6 @@ $.ajaxSetup
         withCredentials: true
     if @type in ['POST', 'PUT', 'DELETE']
       xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
-
-# Override library functions
-redirectTo = Chaplin.utils.redirectTo
-Chaplin.utils.redirectTo = (params) ->
-  url = params?.url
-  if url
-    # clean url for chaplin
-    if ~url.indexOf(SITE_ROOT)
-      url = url.replace SITE_ROOT, ''
-    if url[0] is '/'
-      url = url.replace '/', ''
-    if RE_EXTERNAL.test(url)
-      location.href = url
-      return
-    params.url = url
-  try
-    redirectTo.apply Chaplin.utils, arguments
-  catch e
-    location.href = url or '/'
 
 # Delegate to Chaplin’s utils module.
 utils = Chaplin.utils.beget Chaplin.utils

@@ -9,6 +9,8 @@ require 'controllers/base/transition'
 require 'controllers/base/site-error'
 require 'controllers/base/session'
 
+mediator.current_router = null
+
 module.exports = class Application extends Chaplin.Application
   title: 'Curio'
 
@@ -25,11 +27,9 @@ module.exports = class Application extends Chaplin.Application
       mediator.unsubscribe 'initialize'
       super
       mediator.publish 'initialized'
+    # change title every time router changed
     mediator.subscribe 'dispatcher:dispatch', (router) ->
       title = null
       if router.view
         title = router.view.$el.find('.view-title h1').text()
-      else if document.title == 'Loading..'
-        title = ''
-      if title != null
-        router.adjustTitle(title)
+      router.adjustTitle(title || '')

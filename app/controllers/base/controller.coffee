@@ -4,6 +4,28 @@ mediator = require 'mediator'
 {AccessError} = require 'models/errors'
 {SITE_ROOT} = require 'consts'
 {reverse,store} = require 'lib/utils'
+RE_EXTERNAL = /https?:\/\//i
+
+
+# More reasonable redirections
+redirectTo = Chaplin.utils.redirectTo
+Chaplin.utils.redirectTo = (params) ->
+  url = params?.url
+  if url
+    # clean url for chaplin
+    if ~url.indexOf(SITE_ROOT)
+      url = url.replace SITE_ROOT, ''
+    if url[0] is '/'
+      url = url.replace '/', ''
+    if RE_EXTERNAL.test(url)
+      location.href = url
+      return
+    params.url = url
+  try
+    redirectTo.apply Chaplin.utils, arguments
+  catch e
+    location.href = url or '/'
+
 
 module.exports = class Controller extends Chaplin.Controller
   pageLayout: 'normal'

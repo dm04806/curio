@@ -8,11 +8,9 @@ module.exports = class SiteErrorMain extends View
   id: 'site-error'
   template: require './templates/site-error'
   context: ->
-    error = @error
-    user: mediator.user
-    category: error.category
-    title: error.title
-    detail: error.detail
+    json = @error.toJSON()
+    json.user = mediator.user
+    return json
   listen:
     'resolve': 'dispose'
     'dispose': ->

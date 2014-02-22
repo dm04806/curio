@@ -47,21 +47,21 @@ error:
   goback: Go to dashboard
   gosuper: Go to Super Admin
   general:
-    "": 未知错误
-    title: 出现未知的服务器错误
-    detail: 抱歉给你带来不便，请稍后再试
+    "": Unknow Error
+    title: Something strange happened...
+    detail: "Sorry for the inconvenient, please try again later."
   bootfail:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
   server:
-    title: 服务器故障
-    detail: 我们临时遇到一点问题，请稍后再试
+    title: Server Fault
+    detail: Sorry...
   network:
-    title: 网络故障
-    detail: 请检查你的网络链接
+    title: Network Issue
+    detail: Please check your network connection
   session_timeout:
-    title: 无法请求所需资源
-    detail: "可能是你的登录已过期，试试<a href=\"/login\">重新登录</a>"
+    title: Session Timeout
+    detail: "Please try <a href=\"/login\">Login</a> again."
   need_panel:
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
@@ -72,51 +72,52 @@ error:
     title: Not Found
     detail: The resource you requested seems missing.
 api_error:
-  general: 请求失败，可能是参数错误
-  login failed: 用户名或密码不正确
-  not allowed: 你没有权限执行这项操作
-unknown time: 未知时间
+  general: Request failed..
+  login failed: Incorrect username or password
+  not allowed: You are not allowed to do this
+unknown time: Unknown time
 messages:
   "": Messages
   index:
-    h1: 全部消息
-  mylocation: 我的位置
+    h1: All Messages
+  mylocation: My location
 message:
-  "": 消息
+  "": Message
+  view_full: Full article
 subscribers:
   "": Subscribers
   index:
     h1: "All Subscribers (%s)"
   show:
-    h1: "与 %s 的回话记录"
+    h1: "Dialog with %s"
 subscriber:
-  city: 城市
-  sex: 性别
-  updated_at: 最近活跃
-  created_at: 首次关注时间
-  status: 状态
-  subscribed: 已关注
-  unsubscribed: 已关注
+  city: City
+  sex: Sex
+  updated_at: Last activity
+  created_at: First subscribe
+  status: Status
+  subscribed: Subscribed
+  unsubscribed: Unsubscribed
 subscribe:
-  "": 订阅
-unsubscribe: 退订
+  "": Subscribe
+unsubscribe: Unsubscribe
 stats:
   "": Statistics
 dashboard:
   "": Dashboard
   subtitle: start from here
-  docker: 待办事项
-  realtime: 实时动态
+  docker: Docker
+  realtime: Realtime
 channels:
   "": Channels
 shares:
-  "": 图文分享
+  "": Shares
 graph:
-  key_index: 关键指标
-  realtime: 实时统计
-  last30: 最近30天
-  last7: 最近七天
-  yesterday: 昨日摘要
+  key_index: Key Indexes
+  realtime: Realtime
+  last30: Last 30 days
+  last7: Last 7 days
+  yesterday: Yesterday
 super:
   home: Super Admin
   title: Super Administration
