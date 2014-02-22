@@ -12,7 +12,7 @@ if (DEBUG) {
 }
 
 module.exports = {
-  DEBUG: !DEBUG,
+  DEBUG: DEBUG,
   SITE_ROOT: SITE_ROOT,
   API_ROOT: API_ROOT,
   LOCALE_COOKIE: 'locale',
