@@ -14,29 +14,32 @@ module.exports = class Controller extends Chaplin.Controller
     permit = @needPermit
     return true unless permit
     if permit
+      # There is already an error, don't continue no matter what
+      return false if mediator.site_error
       if not mediator.user
         store 'login_return', window.location.href
-        if not mediator.site_error
-          window.location = reverse 'login#index'
-        return
+        @redirectTo 'login#index'
+        return false
       if not mediator.user.permitted(permit, mediator.media)
         mediator.execute 'site-error', new AccessError "need_#{permit}"
+        return false
     true
 
   _beforeAction: ->
     @reuse 'site', PageView, layout: @pageLayout
 
   beforeAction: ->
+    promise = $.Deferred()
+    promise.done (=> @_beforeAction())
     defer = ->
-      promise = $.Deferred()
-      promise.done run
       mediator.site_error.on 'resolve', ->
         promise.resolve()
       return promise
-    run = =>
-      @checkPermission()
-      @_beforeAction()
-    return if mediator.site_error then defer() else run()
+    permit = =>
+      if @checkPermission()
+        promise.resolve()
+      return promise
+    return if mediator.site_error then defer() else permit()
 
   index: (params) ->
     if not @view and @main
