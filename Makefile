@@ -6,6 +6,7 @@ server:
 
 build:
 	bower install
+	npm install --production
 	brunch build --production
 
 extract_fonts:
