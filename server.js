@@ -50,6 +50,6 @@ exports.startServer = function(port, path, callback) {
   return server;
 };
 
-if (!module.parent) {
+if (!module.parent || ~module.parent.filename.indexOf('/pm2/')) {
   exports.startServer(process.env.PORT || 3300, '/public')
 }
