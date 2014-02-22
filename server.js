@@ -34,7 +34,7 @@ exports.startServer = function(port, path, callback) {
   require('./app/routes')(spa.routeCollector(routes));
 
   app.use(spa(path_.join(__dirname, path), {
-     index: 'debug.html',
+     index: process.env.NODE_ENV !== 'production' ? 'debug.html' : 'index.html',
      404: '404.html',
      routeBase: '/',
      routes: routes
@@ -43,7 +43,13 @@ exports.startServer = function(port, path, callback) {
 
   server = app.listen(port);
 
-  callback();
+  callback && callback();
+
+  console.log('Curio server starts at %s', port);
 
   return server;
 };
+
+if (!module.parent) {
+  exports.startServer(process.env.PORT || 3300, '/public')
+}

@@ -106,7 +106,6 @@ dashboard:
   subtitle: start from here
   docker: 待办事项
   realtime: 实时动态
-  "#highlights": 值得注意
 channels:
   "": Channels
 shares:
