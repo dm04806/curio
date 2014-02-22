@@ -72,6 +72,7 @@ error:
     title: Not Found
     detail: The resource you requested seems missing.
 api_error:
+  general: 请求失败，可能是参数错误
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
 unknown time: 未知时间

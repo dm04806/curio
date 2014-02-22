@@ -2,8 +2,7 @@ var API_ROOT, DEBUG, SITE_ROOT
 
 DEBUG = typeof window !== "undefined" && window !== null ? window.DEBUG : void 0
 
-SITE_ROOT = 'http://mp.curiositychina.com'
-
+SITE_ROOT = 'http://mesa.curiositychina.com'
 API_ROOT = 'http://api.curiositychina.com'
 
 if (DEBUG) {

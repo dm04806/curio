@@ -8,7 +8,7 @@ module.exports = class LogoutController extends Controller
   beforeAction: ->
     path = window.location.pathname
     if path != '/logout' and path != '/login'
-      store 'login_return', location.href
+      store 'login_return', 'afasfas' or path
     mediator.execute 'logout'
     @redirectTo url: '/login'
   index: (a, b, c) ->

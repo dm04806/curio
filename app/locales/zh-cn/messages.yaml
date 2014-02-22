@@ -82,6 +82,7 @@ error:
     detail: 这个东西好像已经没有了
 
 api_error:
+  general: 请求失败
   login failed: 用户名或密码不正确
   not allowed: 你没有权限执行这项操作
 

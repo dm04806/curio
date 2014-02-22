@@ -17,7 +17,7 @@ module.exports = class Controller extends Chaplin.Controller
       # There is already an error, don't continue no matter what
       return false if mediator.site_error
       if not mediator.user
-        store 'login_return', window.location.href
+        store 'login_return', window.location.pathname
         @redirectTo 'login#index'
         return false
       if not mediator.user.permitted(permit, mediator.media)

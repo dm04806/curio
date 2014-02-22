@@ -2,6 +2,7 @@
 # ------------------------------
 mediator = require 'mediator'
 {SITE_ROOT,API_ROOT} = require 'consts'
+RE_EXTERNAL = /https?:\/\//i
 
 $.ajaxSetup
   dataType: 'json',
@@ -23,8 +24,14 @@ Chaplin.utils.redirectTo = (params) ->
       url = url.replace SITE_ROOT, ''
     if url[0] is '/'
       url = url.replace '/', ''
+    if RE_EXTERNAL.test(url)
+      location.href = url
+      return
     params.url = url
-  redirectTo.apply Chaplin.utils, arguments
+  try
+    redirectTo.apply Chaplin.utils, arguments
+  catch e
+    location.href = url or '/'
 
 # Delegate to Chaplin’s utils module.
 utils = Chaplin.utils.beget Chaplin.utils

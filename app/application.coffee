@@ -24,6 +24,7 @@ module.exports = class Application extends Chaplin.Application
         mediator.execute 'site-error', new BootError 'start'
       mediator.unsubscribe 'initialize'
       super
+      mediator.publish 'initialized'
     mediator.subscribe 'dispatcher:dispatch', (router) ->
       title = null
       if router.view
