@@ -1,0 +1,48 @@
+<table class="table table-striped">
+  <colgroup>
+    <col>
+    <col>
+    <col width="100">
+  </colgroup>
+  <tr>
+    <th>
+      {{t 'user.name'}}
+    </th>
+    <th>
+      {{t 'media.admin.role'}}
+    </th>
+    <th>
+    </th>
+  </tr>
+  {{#each admins}}
+  <tr>
+    <td>
+      <a href="{{url 'super/user#show' id}}" target="_blank">{{name}}</a>
+      {{#if uid}}
+      ({{uid}})
+      {{/if}}
+      <input type="hidden" name="user_id" value="{{id}}">
+    </td>
+    <td>
+      {{widget 'form/select' name='role' value=role options=../consts.MEDIA_ROLES}}
+    </td>
+    <td>
+      <a class="btn btn-xs btn-default delete">
+        <span class="icon-remove"></span>
+        {{t 'delete'}}
+      </a>
+    </td>
+  </tr>
+  {{else}}
+  {{/each}}
+  <tfoot>
+  <tr class="add-row">
+    <td colspan="3">
+      <a class="btn btn-xs btn-default delete">
+        <span class="icon-plus2"></span>
+        {{t 'add'}}
+      </a>
+    </td>
+  </tr>
+  </tfoot>
+</table>

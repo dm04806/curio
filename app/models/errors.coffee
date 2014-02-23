@@ -2,6 +2,7 @@
 class CurioError extends Error
   constructor: (@code) ->
   category: 'danger'
+  closable: true
   toJSON: ->
     code: @code
     title: @title
@@ -39,3 +40,4 @@ exports.RetriableError = class RetriableError extends CurioError
 
 exports.AccessError = class AccessError extends CurioError
   category: 'warning' # css class="alert-#{category}"
+  closable: false

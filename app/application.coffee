@@ -9,8 +9,6 @@ require 'controllers/base/transition'
 require 'controllers/base/site-error'
 require 'controllers/base/session'
 
-mediator.current_router = null
-
 module.exports = class Application extends Chaplin.Application
   title: 'Curio'
 

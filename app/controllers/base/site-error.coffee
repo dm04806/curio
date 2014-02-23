@@ -4,6 +4,14 @@ ErrorView = require 'views/errors/site-error'
 PageView = require 'views/base/page'
 {CurioError} = require 'models/errors'
 
+$(window).on 'popstate', ->
+  if mediator.site_error
+    # closable error will be removed when navigate to other url
+    if mediator.site_error.error.closable
+      mediator.site_error.resolve()
+    else
+      location.reload()
+
 mediator.site_error = null
 
 mediator.setHandler 'site-error', (err)->

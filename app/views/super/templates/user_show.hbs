@@ -1,16 +1,28 @@
-{{widget 'heading2' back='/super/users' title='users.edit'}}
+{{#widget 'heading2' back='/super/users'}}
+{{#set 'title'}}
+  {{#if isNew}}
+    {{t 'users.create'}}
+  {{else}}
+    {{t 'users.edit' name}}
+  {{/if}}
+{{/set}}
+{{/widget}}
 <div class="box">
   <form class="main-content edit-form form-horizontal" method="post">
     {{#form_rows 'sm' 2}}
-      {{form_input 'uid' uid 'login.username' 'user.uid_tip' readonly=true}}
-      <div class="form-group" for="password">
-        <label class="col-sm-2 control-label">{{t 'user.password'}}</label>
-        <div class="col-sm-10">
-          <div class="help-block">
-            <a data-toggle="modal" href="#edit-password" class="edit-password">{{t 'modify'}}</a>
+      {{#if isNew}}
+        {{form_input 'uid' uid 'login.username' 'user.uid_tip'}}
+      {{else}}
+        {{form_input 'uid' uid 'login.username' 'user.uid_tip' readonly='readonly'}}
+        <div class="form-group" for="password">
+          <label class="col-sm-2 control-label">{{t 'user.password'}}</label>
+          <div class="col-sm-10">
+            <div class="help-block">
+              <a data-toggle="modal" href="#edit-password" class="edit-password">{{t 'modify'}}</a>
+            </div>
           </div>
         </div>
-      </div>
+      {{/if}}
       {{form_input 'name' name 'user.screen_name' 'user.screen_name_tip'}}
       {{form_input 'email' email 'email' 'user.email_tip'}}
       {{form_textarea 'desc' desc 'remark' 'user.desc_tip' rows=4}}

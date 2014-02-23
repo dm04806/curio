@@ -10,3 +10,11 @@ module.exports = class UserHome extends SuperHome
     model = new User({ id: params.id })
     model.fetch().then =>
       @view = new UserShow region: 'main', model: model
+  create: (params) ->
+    model = new User(params)
+    model.on 'sync', () =>
+      if model.id
+        setTimeout =>
+          @redirectTo 'super/user#show', id: model.id
+        , 400
+    @view = new UserShow region: 'main', model: model

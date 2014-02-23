@@ -1,20 +1,37 @@
-{{widget 'heading2' back='/super/medias' title='medias.edit'}}
+{{#widget 'heading2' back='/super/medias'}}
+{{#set 'title'}}
+  {{#if isNew}}
+    {{t 'medias.create'}}
+  {{else}}
+    {{t 'medias.edit' name}}
+  {{/if}}
+{{/set}}
+{{/widget}}
 <div class="box">
   <form class="main-content edit-form form-horizontal" method="post">
     {{#form_rows 'sm' 2}}
-      {{form_input 'name' name 'name' 'media.name_tip'}}
-      {{form_input 'uid' uid 'media.uid' 'media.uid_tip'}}
-      {{form_input 'oid' oid 'media.oid' 'media.oid_tip'}}
-      {{form_input 'wx_appkey' wx_appkey 'media.appkey'}}
-      {{form_input 'wx_secret' wx_secret 'media.secret'}}
-      {{form_input 'wx_token' wx_token 'media.token'}}
-      {{form_textarea 'desc' desc 'desc' 'media.desc_tip'}}
-    {{/form_rows}}
-    <div class="form-group">
-      <div class="col-sm-10 col-sm-offset-2">
-        <div class="form-message holded"></div>
-        <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+      <fieldset class="splitted">
+        {{form_input 'name' name 'name' 'media.name_tip'}}
+        {{form_input 'uid' uid 'media.uid' 'media.uid_tip'}}
+        {{form_input 'oid' oid 'media.oid' 'media.oid_tip'}}
+        {{form_textarea 'desc' desc 'desc' 'media.desc_tip' rows=3}}
+      </fieldset>
+      <fieldset class="splitted">
+        <legend>
+          <span>{{t 'media.advanced'}}</span>
+        </legend>
+        {{form_input 'wx_appkey' wx_appkey 'media.appkey'}}
+        {{form_input 'wx_secret' wx_secret 'media.secret'}}
+        {{form_input 'wx_token' wx_token 'media.token'}}
+      </fieldset>
+      <fieldset class="splitted">
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <div class="form-message holded"></div>
+          <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+        </div>
       </div>
-    </div>
+      </fieldset>
+    {{/form_rows}}
   </form>
 </div>

@@ -2,8 +2,24 @@ MainView = require './main'
 utils = require 'lib/utils'
 
 module.exports = class EditModelView extends MainView
+  render: ->
+    super
+    @$form = @$el.find('form')
+
   t: (text) ->
+    # will fallback to none model specified message
+    # so you can set error in messages.yaml like this:
+    #
+    #   edit_user:
+    #     name:
+    #       is blank: 用户名不能为空
+    #
+    #   edit:
+    #     name:
+    #       is blank: 名称不能为空
+    #
     __g(text) or __(text.replace "_#{@model?.kind}", '')
+
   msg: (text, type='danger', expires='flash') ->
     alerted = @$el.find('.alert').length
     text = @t(text)
@@ -23,6 +39,7 @@ module.exports = class EditModelView extends MainView
     else if alerted and type != 'success'
       msg.anim(expires)
     return msg
+
   row_msg: (name, text, type='danger') ->
     msg = @$el.find(".form-tip[for=\"#{name}\"]")
     row = @$el.find(".form-group[for=\"#{name}\"]")
@@ -36,16 +53,22 @@ module.exports = class EditModelView extends MainView
     else
       row.removeClass('has-error')
       msg.attr('class', 'form-tip').html('').hide()
-  render: ->
-    super
-    @$form = @$el.find('form')
+
+  clearErrors: ->
+    @$el.find('.has-error').removeClass('has-error')
+      .find('.form-message').text('')
+
   submit: (e) ->
     e.preventDefault()
+    @clearErrors()
     @disable()
+
   disable: (e) ->
     @$form.find('[type=submit]').attr('disabled', true)
+
   enable: (e) ->
     @$form.find('[type=submit]').removeAttr('disabled')
+
   events:
     'submit form': 'submit'
 

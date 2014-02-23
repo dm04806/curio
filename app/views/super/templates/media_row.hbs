@@ -2,7 +2,7 @@
   {{id}}
 </td>
 <td class="id">
-  {{uid}}
+  <a href="{{url 'super/media#show' id}}">{{uid}}</a>
 </td>
 <td class="name">
   <a href="{{url 'super/media#show' id}}">{{name}}</a>
@@ -11,7 +11,11 @@
   {{oid}}
 </td>
 <td class="admins">
-  {{widget 'links' route='super/user#show' items=admins sep=','}}
+  {{#if admins}}
+    {{widget 'links' route='super/user#show' items=admins sep=','}}
+  {{else}}
+    <a class="link" href="">[+{{t 'add'}}]</a>
+  {{/if}}
 </td>
 <td>
   <a data-media="{{id}}" class="to-admin btn btn-xs btn-info" href="/">{{t 'medias.dashboard'}}</a>

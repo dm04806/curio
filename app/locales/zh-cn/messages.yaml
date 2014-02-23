@@ -26,7 +26,6 @@ save: 保存
 save changes: 保存变更
 create: 创建
 update: 更新
-edit: 编辑
 modify: 修改
 back: 返回
 next: 下一步
@@ -39,6 +38,7 @@ cancel: 取消
 loading: 正在加载...
 
 edit:
+  '': 编辑
   success: 保存成功
   network_error: 保存失败&nbsp;&nbsp; :-(
   bad fields: 请正确填写每一项
@@ -46,6 +46,12 @@ edit:
     bad: 错误的Email格式
     conflict: 系统中已存在此Email
     is blank: Email不能为空
+  name:
+    "can't be blank": 名称不能为空
+    is blank: 名称不能为空
+  uid:
+    must lowercase: 必须全部为小写字母
+    not word: 只能包含英文字母、数字和下划线(_)
 
 header:
   hello: 欢迎，%s
@@ -84,7 +90,9 @@ error:
 api_error:
   general: 请求失败
   login failed: 用户名或密码不正确
+  not found: 找不到请求的资源
   not allowed: 你没有权限执行这项操作
+  Internal Server Error: 服务器内部错误
 
 unknown time: 未知时间
 
@@ -151,12 +159,14 @@ medias:
   title: 微信号
   index:
     h1: 管理微信号
-  edit: 编辑公共账号信息
   dashboard: 去后台
+  edit: 编辑公共账号 %s
+  create: 添加新的微信号
 
 media:
+  name_tip: 微信号的名称
   uid: 微信号
-  uid_tip: 公众平台的登录名
+  uid_tip: 在微信公众平台的登录名
   oid: 原始ID
   oid_tip: 如 gh_abcd123 ，可在公众平台「设置->账号信息」找到
   desc_tip: 账号的备注信息
@@ -166,6 +176,7 @@ media:
   secret_tip: 开发者凭据中的 AppSecret
   token: Token
   token_tip: 微信自动回复接口的 token
+  advanced: 高级功能
   admin:
     assign: 设置管理员
     assign_for: 为微信号 <strong>%s</strong> 设置管理员
@@ -174,11 +185,20 @@ media:
     roles:
       chief: 全权
 
+edit_media:
+  uid:
+    is blank: 微信号不能为空
+    conflict: 已存在此微信号
+  oid:
+    is blank: 原始ID不能为空
+    oid: 已存在此原始ID
+
 users:
   title: 系统用户
   index:
     h1: 管理系统用户
-  edit: 编辑用户资料
+  edit: 编辑用户 %s 的资料
+  create: 创建用户
 
 user:
   name: 用户名

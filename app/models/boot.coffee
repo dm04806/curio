@@ -10,6 +10,7 @@ boot = ->
 
 boot.BootError = class BootError extends RetriableError
   code: 'bootfail'
+  closable: true
   retry: boot
   constructor: ->
 

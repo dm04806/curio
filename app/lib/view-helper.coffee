@@ -16,6 +16,9 @@ register = (name, fn) ->
 # translate text
 register 't', (i18n_key, args..., options) ->
   return unless i18n_key
+  if i18n_key instanceof SafeString
+    # already translated
+    return i18n_key
   if i18n_key not of i18n.dict
     console.warn "Please translate [#{i18n_key}] !"
   result = __(i18n_key, args...)
@@ -36,6 +39,9 @@ register 'unless_false', (bool, vals..., options) ->
 
 register 'any', (vals..., options) ->
   _.find(vals)
+
+register 'not', (val) ->
+  return !val
 
 register 'compare', (args..., options) ->
   if args.length < 2
@@ -139,10 +145,12 @@ register "form_rows", (size, col, options) ->
       value: value
       placeholder: __g(placeholder)
 
-    attrs = ("#{k}=\"#{v ? ''}\"" for k, v of attrs).join(' ')
+    attrs = ("#{k}=\"#{v ? ''}\"" for k, v of attrs when v).join(' ')
+    console.log attrs
     data =
       name: name
       attrs: attrs
+      value: value
       tip: tip
       label: __(label)
       label_cls: @label_cls

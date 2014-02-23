@@ -26,13 +26,18 @@ module.exports = class EditFormView extends FormView
       @$el.delay(1000)
       if not json
         return @msg "edit_#{model.kind}.#{error}"
-      detail = json.detail or {}
+      detail = if 'object' == typeof json.detail then json.detail else {}
       if Object.keys(detail).length
         for row, errs of json.detail
           @row_msg row, "edit_#{model.kind}.#{row}.#{errs.pop()}"
+        first = @$el.find('.has-error:visible').eq(0)
+        if first.length
+          $('body,html').animate { scrollTop: first.offset().top - 80 }, ->
+            first.find(':input').focus()
       else
         @msg "edit_#{model.kind}.#{error}", 'warning'
-    .done =>
+    .done (res) =>
+      @model.set(res)
       @msg "edit_#{model.kind}.success", 'success', 1200
     .always =>
       @$el.promise().done (=> @enable())

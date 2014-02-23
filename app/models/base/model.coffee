@@ -40,6 +40,7 @@ module.exports = class Model extends Chaplin.Model
 
   url: ->
     root = @urlRoot()
+    return root if @isNew()
     "#{root}/#{@get @urlKey}"
 
   parse: (res, options) ->

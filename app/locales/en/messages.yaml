@@ -22,14 +22,6 @@ save: Save
 save changes: Save changes
 create: Create
 update: Update
-edit:
-  success: "Edit success!"
-  network_error: Save failed..
-  bad fields: Please fill the form correctly
-  email:
-    bad: Bad email format
-    conflict: There is already a user with that email
-    is blank: Email is required
 modify: Modify
 back: back
 next: next
@@ -39,6 +31,21 @@ add: Add
 delete: Delete
 cancel: Cancel
 loading: Loading...
+edit:
+  "": 编辑
+  success: "Edit success!"
+  network_error: Save failed..
+  bad fields: Please fill the form correctly
+  email:
+    bad: Bad email format
+    conflict: There is already a user with that email
+    is blank: Email is required
+  name:
+    "can't be blank": 名称不能为空
+    is blank: 名称不能为空
+  uid:
+    must lowercase: 必须全部为小写字母
+    not word: 只能包含字母、数字和下划线
 header:
   hello: "Hello, %s"
 error:
@@ -74,7 +81,9 @@ error:
 api_error:
   general: Request failed..
   login failed: Incorrect username or password
+  not found: 找不到请求的资源
   not allowed: You are not allowed to do this
+  Internal Server Error: 服务器内部错误
 unknown time: Unknown time
 messages:
   "": Messages
@@ -125,9 +134,11 @@ medias:
   title: Medias
   index:
     h1: All medias
-  edit: Edit media account
   dashboard: Dashboard
+  edit: Edit media account
+  create: 添加新的微信号
 media:
+  name_tip: 微信号的名称
   uid: Wechat ID
   uid_tip: The login name for mp.weixin.qq.com
   oid: Original ID
@@ -139,6 +150,7 @@ media:
   secret_tip: AppSecret
   token: Token
   token_tip: 微信自动回复接口的token
+  advanced: 高级功能
   admin:
     assign: Assign Admins
     assign_for: "Assign admins for <strong>%s</strong>"
@@ -146,11 +158,19 @@ media:
     role: Role
     roles:
       chief: Chief
+edit_media:
+  uid:
+    is blank: 微信号不能为空
+    conflict: 已存在此微信号
+  oid:
+    is blank: 原始ID不能为空
+    oid: 已存在此原始ID
 users:
   title: Users
   index:
     h1: All users
-  edit: edit user account
+  edit: Edit user account %s
+  create: Create user
 user:
   name: Username
   password: Password

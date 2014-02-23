@@ -11,3 +11,11 @@ module.exports = class MediaHome extends SuperHome
     model = new Media({ id: params.id })
     model.fetch().then =>
       @view = new MediaShow region: 'main', model: model
+  create: (params) ->
+    model = new Media(params)
+    model.on 'sync', () =>
+      if model.id
+        setTimeout =>
+          @redirectTo 'super/media#show', id: model.id
+        , 400
+    @view = new MediaShow region: 'main', model: model

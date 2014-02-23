@@ -3,8 +3,8 @@ User = require 'models/user'
 
 class AssignAdmin extends View
   autoRender: true
-  className: 'modal fade'
-  template: require './templates/media/assign_admin'
+  noWrap: true
+  template: require './media/templates/assign_admin_modal'
   render: ->
     super
    # show the modal when rendered
@@ -19,7 +19,7 @@ module.exports = class MediaRowView extends View
   tagName: 'tr'
   template: require './templates/media_row'
   assign: (e) ->
-    view = new AssignAdmin model: @model, container: @el
+    view = new AssignAdmin model: @model, container: 'body'
     return unless e
     e.preventDefault()
     e.stopPropagation()
