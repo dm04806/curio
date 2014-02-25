@@ -18,7 +18,7 @@
           <label class="col-sm-2 control-label">{{t 'user.password'}}</label>
           <div class="col-sm-10">
             <div class="help-block">
-              <a data-toggle="modal" href="#edit-password" class="edit-password">{{t 'modify'}}</a>
+              <a href="#edit-password" class="modify-passwd">{{t 'modify'}}</a>
             </div>
           </div>
         </div>
@@ -35,18 +35,3 @@
     </div>
   </form>
 </div>
-{{#widget 'modal' id='edit-password'}}
-  {{#set 'title'}}
-  {{t 'user.modify_password_for' name}}
-  {{/set}}
-  <form class="form-horizontal" action="" method="post">
-    {{#form_rows 'sm' 3}}
-      {{form_input 'password' '' 'user.new_password' type='password'}}
-      {{form_input 'password2' '' 'user.new_password2' type='password'}}
-    {{/form_rows}}
-  </form>
-  {{#set 'footer'}}
-  <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
-  <button type="button" class="btn btn-primary">{{t 'save'}}</button>
-  {{/set}}
-{{/widget}}

@@ -1,5 +1,11 @@
-<select id="inp-{{name}}" name="{{name}}">
+<select id="inp-{{name}}" name="{{name}}" class="{{any className 'form-control'}}">
   {{#each options}}
-    <option value="{{value}}">{{t text}}</option>
+    <option value="{{value}}">
+      {{#if text}}
+        {{t text}}
+      {{else}}
+        {{ttext}} {{!translated text}}
+      {{/if}}
+    </option>
   {{/each}}
 </select>

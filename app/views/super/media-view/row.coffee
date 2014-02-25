@@ -1,27 +1,7 @@
-View = require 'views/base/view'
+ItemView = require 'views/base/collection_item'
 User = require 'models/user'
 
-class AssignAdmin extends View
-  autoRender: true
-  noWrap: true
-  template: require './templates/assign_admin_modal'
-  render: ->
-    super
-   # show the modal when rendered
-    @$el.modal()
-    .on 'hidden.bs.modal', =>
-      items = @$el.find('li')
-      # dispose when modal closed
-      @dispose()
-
-
-module.exports = class MediaRowView extends View
-  tagName: 'tr'
+module.exports = class MediaRowView extends ItemView
   template: require './templates/row'
-  assign: (e) ->
-    view = new AssignAdmin model: @model, container: 'body'
-    return unless e
-    e.preventDefault()
-    e.stopPropagation()
-  events:
-    'click .admins a': 'assign'
+  listen:
+    'change model': 'render'

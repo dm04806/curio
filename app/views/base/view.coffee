@@ -15,16 +15,12 @@ module.exports = class View extends Chaplin.View
     @template
 
   getTemplateData: ->
-    context = @context
-    if 'function' is typeof context
-      context = @context(data)
-    ret = {}
     data = super
-    _.assign ret, helper.globals, context, data
-    ret.__proto__ = data.__proto__
+    context = _.result this, 'context'
+    _.defaults data, context, helper.globals
     if @debug
-      utils.debug '[template]', ret
-    return ret
+      utils.debug '[template]', data
+    return data
 
   dispose: ->
     @trigger 'dispose'

@@ -17,18 +17,7 @@ Backbone.ajax = (opts, args...) ->
       $('body').removeClass('syncing')
     .error (xhr) ->
       return if opts.type isnt 'GET'
-      if xhr.status == 401
-        # this ajax request is unauthorized
-        err = new AccessError('session_timeout')
-      else if xhr.status == 403
-        err = new AccessError('not_allowed')
-      else if xhr.status == 404
-        err = 'not_found'
-      else if xhr.status
-        err = 'server'
-      else
-        err = 'network'
-      mediator.execute 'site-error', err
+      mediator.execute 'ajax-error', xhr
   return _ajax() unless mediator.site_error
   promise = $.Deferred()
   # if site error found, do fetch when error resolved

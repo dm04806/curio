@@ -88,8 +88,10 @@ register 'without', (context, options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 register 'json', (obj, options) ->
-  console.log obj
   return JSON.stringify obj
+
+register 'debug', (obj) ->
+  console.debug obj
 
 register 'widget', (tmpl, options) ->
   tmpl = require "views/widgets/templates/#{tmpl}"
@@ -146,7 +148,6 @@ register "form_rows", (size, col, options) ->
       placeholder: __g(placeholder)
 
     attrs = ("#{k}=\"#{v ? ''}\"" for k, v of attrs when v).join(' ')
-    console.log attrs
     data =
       name: name
       attrs: attrs
@@ -162,11 +163,10 @@ register 'url', (routeName, params..., options) ->
   utils.reverse routeName, params
 
 # get model attributes
-register 'attr', (name) ->
-  val = this[name]
-  val = this.get?(name) or this[name]
-  if 'function' is typeof val
-    val = val.call(this)
+register 'attr', (names..., options) ->
+  for name in names
+    val = this.get?(name) or _.result(this, name)
+    return val if val? && val isnt ''
   return val
 
 
@@ -192,7 +192,5 @@ register 'mapImg', (lat, lng, args..., options) ->
 
 exports.globals =
   consts: consts
-  locale: i18n.locale
-  locale_text: consts.LOCALES[i18n.locale]
   mediator: Chaplin.mediator
   site_url: consts.SITE_ROOT + '/'

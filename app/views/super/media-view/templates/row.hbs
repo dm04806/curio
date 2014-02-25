@@ -14,9 +14,9 @@
   {{#if admins}}
     {{widget 'links' route='super/user#show' items=admins sep=','}}
   {{else}}
-    <a class="link" href="">[+{{t 'add'}}]</a>
+    <a class="link" href="#assign-admin">[+{{t 'add'}}]</a>
   {{/if}}
 </td>
 <td>
-  <a data-media="{{id}}" class="to-admin btn btn-xs btn-info" href="/">{{t 'medias.dashboard'}}</a>
+  <a class="to-admin btn btn-xs btn-info" href="/">{{t 'medias.dashboard'}}</a>
 </td>

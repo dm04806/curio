@@ -4,7 +4,6 @@ UserShow = require 'views/super/user-view/show'
 User = require 'models/user'
 
 module.exports = class UserHome extends SuperHome
-  route: 'super/user'
   MainViews:
     index: UserIndexView
     show: UserShow

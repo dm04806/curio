@@ -11,6 +11,7 @@ login:
   submit: Sign me in
   success: "login success!"
 name: Name
+unnamed: 未命名
 desc: Description
 title: Title
 operations: Operations
@@ -44,6 +45,7 @@ edit:
     "can't be blank": 名称不能为空
     is blank: 名称不能为空
   uid:
+    conflict: 已存在
     must lowercase: 必须全部为小写字母
     not word: 只能包含字母、数字和下划线
 header:
@@ -135,7 +137,7 @@ medias:
   index:
     h1: All medias
   dashboard: Dashboard
-  edit: Edit media account "%s"
+  edit: "Edit media account \"%s\""
   create: Create new media account
 media:
   name_tip: the name of this wechat official account
@@ -154,6 +156,7 @@ media:
   admin:
     assign: Assign Admins
     assign_for: "Assign admins for <strong>%s</strong>"
+    type_to_search: 键入以搜索
     not_set: Admins not setted
     role: Role
     roles:

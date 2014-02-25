@@ -1,15 +1,24 @@
 Model = require 'models/base/model'
+mediator = require 'mediator'
 
 permissions = require './permissions'
 
 module.exports = class User extends Model
   kind: 'user'
 
+  initialize: ->
+    super
+    @on 'sync', ->
+      mediator.publish 'users:update'
+
   defaults:
     uid: null
     name: null
     email: null
     desc: null
+
+  uniqName: ->
+    "#{@get('name') or '[no name]'} (#{@get('uid')})"
 
   hasRole: (role, mediaId) ->
     if role is 'login'

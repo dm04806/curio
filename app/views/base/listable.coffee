@@ -1,9 +1,6 @@
-CollectionView = require 'views/base/collection'
+CollectionView = require './collection'
+CollectionItemView = require './collection_item'
 View = require './view'
-
-class ItemView extends View
-  autoRender: true
-  tagName: 'tr'
 
 module.exports = class ListableView extends View
   autoRender: false
@@ -24,7 +21,7 @@ module.exports = class ListableView extends View
     view = @itemView or @collectionView::itemView
     if not view
       itemTemplate = @itemTemplate
-      view = @itemView = class MyItemView extends ItemView
+      view = @itemView = class MyItemView extends CollectionItemView
         template: itemTemplate
     return view
   initialize: ->

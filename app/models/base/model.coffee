@@ -5,11 +5,12 @@ utils = require 'lib/utils'
 module.exports = class Model extends Chaplin.Model
   _.extend @prototype, Chaplin.SyncMachine
 
-  @collection: (items, opts={}) ->
+  @collection: (items, opts) ->
     Collection = require './collection'
     if !Array.isArray(items)
       opts = items
       items = []
+    opts = opts or {}
     opts.model = this
     new Collection items, opts
 
@@ -26,9 +27,7 @@ module.exports = class Model extends Chaplin.Model
   urlPath: ''
 
   urlRoot: ->
-    urlPath = @urlPath
-    if 'function' is typeof urlPath
-      urlPath = @urlPath()
+    urlPath = _.result this, 'urlPath'
     if not urlPath and @kind
       urlPath = "/#{@kind}s"
     if urlPath
@@ -57,13 +56,12 @@ module.exports = class Model extends Chaplin.Model
   # return a jqXHR promise
   load: (what, args..., callback) ->
     config = @loaders[what]
-    if not config and @relations[what]
-      config = ->
-        @related(what, args...).fetch()
-    if not config
-      throw new Error "don't know how to load '#{what}'"
     if 'function' == typeof config
       return config.call(this, args..., callback)
+    if not config and @relations[what]
+      config = @related(what, args...).fetch()
+    if not config
+      throw new Error "don't know how to load '#{what}'"
     # default arguments
     callback = callback or ->
     url = config.url

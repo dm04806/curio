@@ -31,3 +31,21 @@ mediator.setHandler 'site-error', (err)->
       mediator.site_error = null
   err.resolver? err_view
   utils.error err
+
+
+#
+# Global ajax error handler
+#
+mediator.setHandler 'ajax-error', (xhr) ->
+  if xhr.status == 401
+    # this ajax request is unauthorized
+    err = new AccessError('session_timeout')
+  else if xhr.status == 403
+    err = new AccessError('not_allowed')
+  else if xhr.status == 404
+    err = 'not_found'
+  else if xhr.status
+    err = 'server'
+  else
+    err = 'network'
+  mediator.execute 'site-error', err

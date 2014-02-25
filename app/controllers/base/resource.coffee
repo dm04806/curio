@@ -1,4 +1,5 @@
 Controller = require './controller'
+utils = require 'lib/utils'
 
 module.exports = class ResourceController extends Controller
   MainViews:
@@ -6,18 +7,18 @@ module.exports = class ResourceController extends Controller
     show: null
     create: null
   Model: null
-  route: null
   index: (params, route, options) ->
     @view = new @MainViews.index region: 'main', params: params
   show: (params) ->
     model = new @Model({ id: params.id })
     model.fetch().then =>
       @view = new @MainViews.show region: 'main', model: model
-  create: (params) ->
+  create: (params, route) ->
+    _.defaults params, utils.queryParams.parse(route.query)
     model = new @Model(params)
     model.on 'sync', () =>
       return unless model.id
       setTimeout =>
-        @redirectTo "#{@route}#show", id: model.id
+        @redirectTo "#{route.name.replace('create', 'show')}", id: model.id
       , 400
     @view = new @MainViews.show region: 'main', model: model

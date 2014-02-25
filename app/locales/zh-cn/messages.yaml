@@ -13,6 +13,7 @@ login:
 
 # Common nouns:
 name: 名称
+unnamed: 未命名
 desc: 说明
 title: 标题
 operations: 操作
@@ -50,6 +51,7 @@ edit:
     "can't be blank": 名称不能为空
     is blank: 名称不能为空
   uid:
+    conflict: 已存在此ID
     must lowercase: 必须全部为小写字母
     not word: 只能包含英文字母、数字和下划线(_)
 
@@ -89,7 +91,7 @@ error:
 
 api_error:
   general: 请求失败
-  login failed: 用户名或密码不正确
+  login failed: 密码错误
   not found: 找不到请求的资源
   not allowed: 你没有权限执行这项操作
   Internal Server Error: 服务器内部错误
@@ -180,6 +182,7 @@ media:
   admin:
     assign: 设置管理员
     assign_for: 为微信号 <strong>%s</strong> 设置管理员
+    type_to_search: 键入以搜索
     not_set: 还没有设置管理员
     role: 权限
     roles:

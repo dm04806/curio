@@ -1,8 +1,8 @@
 <table class="table table-striped">
   <colgroup>
     <col>
-    <col>
-    <col width="100">
+    <col width="35%">
+    <col width="15%">
   </colgroup>
   <tr>
     <th>
@@ -15,30 +15,42 @@
     </th>
   </tr>
   {{#each admins}}
-  <tr>
+  <tr class="norm-row">
     <td>
       <a href="{{url 'super/user#show' id}}" target="_blank">{{name}}</a>
       {{#if uid}}
       ({{uid}})
       {{/if}}
-      <input type="hidden" name="user_id" value="{{id}}">
+      <input data-datum="{{json this}}" type="hidden" name="user_id" value="{{id}}">
     </td>
     <td>
       {{widget 'form/select' name='role' value=role options=../consts.MEDIA_ROLES}}
     </td>
-    <td>
-      <a class="btn btn-xs btn-default delete">
+    <td align="right">
+      <a class="btn btn-danger delete">
         <span class="icon-remove"></span>
-        {{t 'delete'}}
       </a>
     </td>
   </tr>
-  {{else}}
   {{/each}}
   <tfoot>
+  <tr class="dup-row hidden">
+    <td>
+      <input name="user_id" class="form-control typeahead" type="text" placeholder="{{t 'media.admin.type_to_search'}}"
+         autocomplete="off" spellcheck="false" dir="auto">
+    </td>
+    <td>
+      {{widget 'form/select' name='role' options=consts.MEDIA_ROLES}}
+    </td>
+    <td align="right">
+      <a class="btn btn-danger delete">
+        <span class="icon-remove"></span>
+      </a>
+    </td>
+  </tr>
   <tr class="add-row">
     <td colspan="3">
-      <a class="btn btn-xs btn-default delete">
+      <a class="btn btn-default add">
         <span class="icon-plus2"></span>
         {{t 'add'}}
       </a>

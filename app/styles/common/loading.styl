@@ -30,11 +30,11 @@ dot_color = rgba(200,100,10, 0.9)
 .bouncing-bar
   position: absolute
   width: 100%
-  bottom: -24px
+  top: -21px
   left: 0
-  opacity: 0
   overflow: hidden
   padding: 20px 0
+  display: none
   .bar
     height: 4px
     background: brand-info
@@ -57,8 +57,10 @@ dot_color = rgba(200,100,10, 0.9)
     animation-delay: .4s
 
 .syncing .bouncing-bar
-  opacity: 1
+  display: block
 
+.modal-open #main .bouncing-bar
+  display: none
 
 spinner-size(size)
   border-width: (size/7)
