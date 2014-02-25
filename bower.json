@@ -35,7 +35,10 @@
       ]
     },
     "typeahead.js": {
-      "main": "dist/typeahead.bundle.js"
+      "main": "dist/typeahead.bundle.js",
+      "dependencies": {
+        "jquery": "*"
+      }
     },
     "async": {
       "main": "lib/async.js"
