@@ -37,11 +37,14 @@
     "typeahead.js": {
       "main": "dist/typeahead.bundle.js",
       "dependencies": {
-        "jquery": "*"
+        "jquery": ">=1.9"
       }
     },
     "async": {
       "main": "lib/async.js"
     }
+  },
+  "resolutions": {
+    "jquery": ">=1.2"
   }
 }

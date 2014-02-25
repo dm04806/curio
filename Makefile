@@ -5,7 +5,8 @@ server:
 	@gnode `which coffee` `which brunch` watch -P --server
 
 build:
-	bower install
+	rm -rf ./bower_components/
+	bower install -F
 	npm install --production
 	brunch build --production
 
