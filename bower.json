@@ -37,7 +37,12 @@
     "typeahead.js": {
       "main": "dist/typeahead.bundle.js",
       "dependencies": {
-        "jquery": ">=1.9"
+        "jquery": "~2.1.0"
+      }
+    },
+    "jquery-cookie": {
+      "dependencies": {
+        "jquery": "~2.1.0"
       }
     },
     "async": {
@@ -45,6 +50,6 @@
     }
   },
   "resolutions": {
-    "jquery": ">=1.2"
+    "jquery": "~2.1.0"
   }
 }

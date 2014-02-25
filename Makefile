@@ -6,7 +6,7 @@ server:
 
 build:
 	rm -rf ./bower_components/
-	bower install -F
+	bower install
 	npm install --production
 	brunch build --production
 
