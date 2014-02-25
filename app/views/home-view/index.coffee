@@ -1,4 +1,4 @@
-MainView = require 'views/base/main'
+MainView = require 'views/common/main'
 TimeLineChart = require 'views/graph/timeline'
 
 ONE_DAY = 24 * 3600 * 1000
@@ -80,7 +80,7 @@ ONE_DAY = 24 * 3600 * 1000
 `
 
 
-HomeRealTime = require './home/realtime'
+HomeRealTime = require './realtime'
 
 module.exports = class HomeMain extends MainView
   template: require './templates/home'

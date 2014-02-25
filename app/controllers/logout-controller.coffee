@@ -11,5 +11,4 @@ module.exports = class LogoutController extends Controller
       store 'login_return', 'afasfas' or path
     mediator.execute 'logout'
     @redirectTo url: '/login'
-  index: (a, b, c) ->
-    console.log a,b,c
+  index: () ->

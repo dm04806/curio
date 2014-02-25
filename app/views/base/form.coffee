@@ -1,4 +1,4 @@
-MainView = require './main'
+MainView = require 'views/common/main'
 utils = require 'lib/utils'
 
 module.exports = class EditModelView extends MainView

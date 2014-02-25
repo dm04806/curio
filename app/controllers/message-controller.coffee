@@ -1,5 +1,5 @@
 HomeController = require './home-controller'
-MessageIndexView = require 'views/panel/message_index'
+MessageIndexView = require 'views/message-view'
 mediator = require 'mediator'
 
 # Control Panel Home

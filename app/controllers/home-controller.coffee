@@ -12,4 +12,4 @@ module.exports = class HomeController extends Controller
     header = @reuse 'header', PanelHeader, region: 'header'
     @reuse 'sidebar', PannelSidebar, region: 'sidebar'
 
-  main: require 'views/panel/home'
+  main: require 'views/home-view'

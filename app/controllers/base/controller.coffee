@@ -64,5 +64,6 @@ module.exports = class Controller extends Chaplin.Controller
     return if mediator.site_error then defer() else permit()
 
   index: (params) ->
+    console.log @view
     if not @view and @main
       @view = new @main region: 'main', params: params

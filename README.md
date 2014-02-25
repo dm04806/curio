@@ -18,3 +18,6 @@ make
 ```
 
 同时，你还需要启动 curio-api 服务。
+
+
+consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你可能需要在 nginx 里面配一下代理。

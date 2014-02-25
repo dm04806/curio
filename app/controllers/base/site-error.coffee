@@ -1,6 +1,6 @@
 mediator = require 'mediator'
 utils = require 'lib/utils'
-ErrorView = require 'views/errors/site-error'
+ErrorView = require 'views/common/site-error'
 PageView = require 'views/base/page'
 {CurioError} = require 'models/errors'
 

@@ -3,7 +3,7 @@ User = require 'models/user'
 
 module.exports = class UserIndexView extends ListableView
   _model: User
-  template: require './templates/user_index'
+  template: require './templates/index'
   context:
-    thead: require './templates/user_thead'
-  itemTemplate: require './templates/user_row'
+    thead: require './templates/thead'
+  itemTemplate: require './templates/row'

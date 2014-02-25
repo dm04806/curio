@@ -1,20 +1,12 @@
 SuperHome = require './home-controller'
-UserIndexView = require 'views/super/user_index'
-UserShow = require 'views/super/user_show'
+UserIndexView = require 'views/super/user-view'
+UserShow = require 'views/super/user-view/show'
 User = require 'models/user'
 
 module.exports = class UserHome extends SuperHome
-  index: (params, route, options) ->
-    @view = new UserIndexView region: 'main', params: params
-  show: (params) ->
-    model = new User({ id: params.id })
-    model.fetch().then =>
-      @view = new UserShow region: 'main', model: model
-  create: (params) ->
-    model = new User(params)
-    model.on 'sync', () =>
-      if model.id
-        setTimeout =>
-          @redirectTo 'super/user#show', id: model.id
-        , 400
-    @view = new UserShow region: 'main', model: model
+  route: 'super/user'
+  MainViews:
+    index: UserIndexView
+    show: UserShow
+    create: UserShow
+  Model: User

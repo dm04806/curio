@@ -135,12 +135,12 @@ medias:
   index:
     h1: All medias
   dashboard: Dashboard
-  edit: Edit media account
-  create: 添加新的微信号
+  edit: Edit media account "%s"
+  create: Create new media account
 media:
-  name_tip: 微信号的名称
+  name_tip: the name of this wechat official account
   uid: Wechat ID
-  uid_tip: The login name for mp.weixin.qq.com
+  uid_tip: the login name for mp.weixin.qq.com
   oid: Original ID
   oid_tip: eg. gh_abcd123
   desc_tip: " "
@@ -149,8 +149,8 @@ media:
   secret: AppSecret
   secret_tip: AppSecret
   token: Token
-  token_tip: 微信自动回复接口的token
-  advanced: 高级功能
+  token_tip: token for wechat auto reply API
+  advanced: Advanced
   admin:
     assign: Assign Admins
     assign_for: "Assign admins for <strong>%s</strong>"
@@ -160,16 +160,16 @@ media:
       chief: Chief
 edit_media:
   uid:
-    is blank: 微信号不能为空
-    conflict: 已存在此微信号
+    is blank: Wechat ID cannot be blank
+    conflict: Already exists this account
   oid:
-    is blank: 原始ID不能为空
-    oid: 已存在此原始ID
+    is blank: cannot be blank
+    oid: This original ID already exists
 users:
   title: Users
   index:
     h1: All users
-  edit: Edit user account %s
+  edit: "Edit user account %s"
   create: Create user
 user:
   name: Username

@@ -1,13 +1,13 @@
-Controller = require 'controllers/base/controller'
+ResourceController = require 'controllers/base/resource'
 
-SuperHeader = require 'views/super/widgets/header'
-SuperSidebar = require 'views/super/widgets/sidebar'
+SuperHeader = require 'views/super/header'
+SuperSidebar = require 'views/super/sidebar'
 
-module.exports = class SuperHome extends Controller
+module.exports = class SuperHome extends ResourceController
   needPermit: 'super'
   _beforeAction: ->
     super
     @reuse 'super-header', SuperHeader, region: 'header'
     @reuse 'super-sidebar', SuperSidebar, region: 'sidebar'
-
-  main: require 'views/super/home'
+  MainViews:
+    index: require 'views/super/home-view'
