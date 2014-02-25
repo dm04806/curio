@@ -2,12 +2,18 @@
   #header .navbar
     margin-bottom: 0
   #main
+    .bouncing-bar
+      z-index: header_index
+      left: sidebar_width
+      top: header_height - 20px
+    // DON'T set this with relative
     margin-left: sidebar_width
     min-height: 600px
-    position: relative
-    z-index: header_index
     padding-top: 24px
     margin-top: -3px
+
+.modal-open #main > .bouncing-bar
+  display: none
 
 .layout-single
   padding: 8% 0

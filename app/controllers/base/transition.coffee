@@ -10,7 +10,7 @@ Backbone.ajax = (opts, args...) ->
     # show loading when ajax takes too long
     if not resolved and not $('body').find('.loading-indicator:visible').length
       $('body').addClass('syncing')
-  , 1000
+  , 800
   _ajax = =>
     ajax.call(this, opts, args...).always (xhr) ->
       resolved = true
