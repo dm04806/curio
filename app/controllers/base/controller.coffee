@@ -34,10 +34,10 @@ module.exports = class Controller extends Chaplin.Controller
 
   checkPermission: ->
     permit = @needPermit
+    # There is already an error, don't continue no matter what
+    return false if mediator.site_error
     return true unless permit
     if permit
-      # There is already an error, don't continue no matter what
-      return false if mediator.site_error
       if not mediator.user
         store 'login_return', window.location.pathname
         @redirectTo 'login#index'
@@ -55,7 +55,7 @@ module.exports = class Controller extends Chaplin.Controller
     promise.done (=> @_beforeAction())
     defer = ->
       mediator.site_error.on 'resolve', ->
-        promise.resolve()
+        permit()
       return promise
     permit = =>
       if @checkPermission()
@@ -64,6 +64,5 @@ module.exports = class Controller extends Chaplin.Controller
     return if mediator.site_error then defer() else permit()
 
   index: (params) ->
-    console.log @view
     if not @view and @main
       @view = new @main region: 'main', params: params
