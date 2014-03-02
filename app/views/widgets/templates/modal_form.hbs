@@ -1,0 +1,25 @@
+<div class="{{any class 'modal fade'}}" id="{{id}}">
+  <div class="modal-dialog">
+    <form class="{{any contentClass 'modal-content'}}" method="POST">
+      {{#if title}}
+      <div class="modal-header">
+        {{#compare closable '!==' false}}
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        {{/compare}}
+        <h4 class="modal-title">{{t title name}}</h4>
+      </div>
+      {{/if}}
+      <div class="modal-body">
+        <div class="bouncing-bar">
+          <div class="bar"></div>
+        </div>
+        {{{caller}}}
+      </div>
+      {{#if footer}}
+        <div class="modal-footer">
+          {{footer}}
+        </div>
+      {{/if}}
+    </form><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

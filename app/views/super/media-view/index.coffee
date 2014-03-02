@@ -10,10 +10,10 @@ class DeleteItemModal extends ModalView
   template: require './templates/delete_item_modal'
   confirmed: ->
     model = @model
-    model.destroy().done ->
-      model.dispose()
+    @$el.modal('hide')
+    @trigger 'confirmed'
   events:
-    'click .btn-confirm': 'confirmed'
+    'click .to-confirm': 'confirmed'
 
 module.exports = class MediaIndexView extends ListableView
   _collection: MediaCollection
@@ -42,8 +42,12 @@ module.exports = class MediaIndexView extends ListableView
     @assign_admin?.clear()
 
   deleteItem: (e) ->
-    model = @collection.get @_getId(e.target)
-    view = new DeleteItemModal model: model
+    item = @collection.get @_getId(e.target)
+    view = new DeleteItemModal model: item
+    view.once 'confirmed', =>
+      itemView = @getViewForItem(item)
+      itemView.$el.fadeOut().promise().done =>
+        item.destroy()
 
   events:
     'click .to-admin': 'setPanelMedia'

@@ -2,21 +2,28 @@
   <div class="modal-dialog">
     <div class="modal-content">
       {{#if title}}
-      <div class="modal-header">
-        {{#compare closable '!==' false}}
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        {{/compare}}
-        <h4 class="modal-title">{{t title name}}</h4>
-      </div>
+        <div class="modal-header">
+          {{#compare closable '!==' false}}
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          {{/compare}}
+          <h4 class="modal-title">{{t title name}}</h4>
+        </div>
       {{/if}}
       <div class="modal-body">
+        {{#if title}}
         <div class="bouncing-bar">
           <div class="bar"></div>
         </div>
+        {{/if}}
         {{{caller}}}
       </div>
       {{#if footer}}
         <div class="modal-footer">
+          {{#unless title}}
+          <div class="bouncing-bar">
+            <div class="bar"></div>
+          </div>
+          {{/unless}}
           {{footer}}
         </div>
       {{/if}}

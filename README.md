@@ -24,8 +24,7 @@ make
 
 consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你还需要在 nginx 里面配一下代理。
 
-```
-
+```nginx
     server {
       listen 80;
       server_name curio.com *.curio.com;
@@ -63,6 +62,8 @@ consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你�
         proxy_set_header Host $http_host;
       }
     }
-
-
 ```
+
+## 风格约定
+
+1. js events 总是绑定到 `.to-xxx` 上，带语义的表单按钮除外

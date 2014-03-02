@@ -17,8 +17,7 @@
     "backbone.stickit": "~0.7.0",
     "typeahead.js": "~0.10.1",
     "typeahead.js-bootstrap3.less": "~0.2.2",
-    "jquery-color": "~2.1.2",
-    "bootbox": "~4.2.0"
+    "jquery-color": "~2.1.2"
   },
   "overrides": {
     "backbone": {

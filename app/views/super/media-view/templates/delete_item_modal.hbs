@@ -1,11 +1,13 @@
-{{#widget 'modal' id='delete-item'}}
-  <p>
+{{#widget 'modal' id='delete-item' class='modal alert-modal'}}
+  <h4>
     {{t 'medias.delete.confirm' name}}
+  </h4>
+  <p>
+    {{t 'medias.delete.consequece'}}
   </p>
-  {{include 'views/super/media-view/templates/assign_admin'}}
   {{#set 'footer'}}
     <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'cancel'}}</button>
-    <button type="submit" class="btn btn-primary">{{t 'update'}}</button>
+    <button type="submit" class="to-confirm btn btn-danger">{{t 'confirm.delete'}}</button>
   {{/set}}
 {{/widget}}
 

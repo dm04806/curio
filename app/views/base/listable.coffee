@@ -36,6 +36,8 @@ module.exports = class ListableView extends View
     if not @autoRender
       collection.fetch().done =>
         @render()
+  getViewForItem: (item) ->
+    (@subview 'listable').subview "itemView:#{item.cid}"
   render: ->
     super
     collection = @collection
