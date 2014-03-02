@@ -30,8 +30,11 @@ consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你�
       listen 80;
       server_name curio.com *.curio.com;
       root /Users/jesse/projects/curio/public/;
+
       index index.html;
+
       try_files $uri @curio_www;
+
       location @curio_www {
         proxy_pass http://127.0.0.1:3333;
         proxy_set_header Host $http_host;
@@ -42,6 +45,20 @@ consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你�
       server_name api.curio.com;
 
       location / {
+
+        # For CORS
+        if ($request_method = OPTIONS ) {
+          add_header Access-Control-Allow-Methods "GET,HEAD,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Origin "http://www.curio.com";
+          add_header Access-Control-Allow-Credentials "true";
+          add_header Access-Control-Allow-Headers 'x-csrf-token';
+          add_header Content-Length 0;
+          add_header Content-Type text/plain;
+          # Tell client that this pre-flight info is valid for one hour
+          add_header Access-Control-Max-Age 3600;
+          return 204;
+        }
+
         proxy_pass http://127.0.0.1:3301;
         proxy_set_header Host $http_host;
       }

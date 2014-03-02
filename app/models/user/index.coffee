@@ -16,6 +16,7 @@ module.exports = class User extends Model
     name: null
     email: null
     desc: null
+    password: null
 
   uniqName: ->
     "#{@get('name') or '[no name]'} (#{@get('uid')})"

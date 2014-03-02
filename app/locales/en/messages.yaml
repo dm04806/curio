@@ -37,6 +37,8 @@ edit:
   success: "Edit success!"
   network_error: Save failed..
   bad fields: Please fill the form correctly
+  not found: 此项目已被删除
+  Not Found: 此项目已不存在
   email:
     bad: Bad email format
     conflict: There is already a user with that email
@@ -139,6 +141,8 @@ medias:
   dashboard: Dashboard
   edit: "Edit media account \"%s\""
   create: Create new media account
+  delete:
+    confirm: "真的要删除微信号 %s ?"
 media:
   name_tip: the name of this wechat official account
   uid: Wechat ID
@@ -180,9 +184,19 @@ user:
   screen_name: Screen name
   screen_name_tip: How do we call you
   email_tip: "username@example.com"
+  enter_new_password: 输入新密码
   modify_password: Modify password
   modify_password_for: "Modify password for <strong>%s</strong>"
   new_password: New password
   new_password_tip: At lease 6 characters
   new_password2: Input again
   new_password2_tip: Input the password again to confirm
+edit_passport:
+  password:
+    is blank: 请输入密码
+    too short: 密码太简单了吧
+    missmatch: 两次输入的密码不一样
+  "#passwd":
+    is blank: 请输入密码
+    too short: 密码至少需要6个字符
+    missmatch: 两次输入的密码不一样

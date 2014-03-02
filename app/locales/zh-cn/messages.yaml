@@ -43,6 +43,8 @@ edit:
   success: 保存成功
   network_error: 保存失败&nbsp;&nbsp; :-(
   bad fields: 请正确填写每一项
+  not found: 此项目已不存在
+  Not Found: 此项目已不存在
   email:
     bad: 错误的Email格式
     conflict: 系统中已存在此Email
@@ -164,6 +166,8 @@ medias:
   dashboard: 去后台
   edit: 编辑公共账号 %s
   create: 添加新的微信号
+  delete:
+    confirm: 真的要删除微信号 %s ?
 
 media:
   name_tip: 微信号的名称
@@ -188,6 +192,8 @@ media:
     roles:
       chief: 全权
 
+# Format followed by model properties,
+# see view/base/edit_form.coffee
 edit_media:
   uid:
     is blank: 微信号不能为空
@@ -209,9 +215,17 @@ user:
   screen_name: 姓名
   screen_name_tip: 用户的姓名
   email_tip: username@example.com
+  enter_new_password: 输入新密码
   modify_password: 修改登录密码
   modify_password_for: 修改 <strong>%s</strong> 的登录密码
   new_password: 新密码
   new_password_tip: 不少于6位的字母、标点符号或数字
   new_password2: 确认新密码
   new_password2_tip: 再次输入以确认
+
+
+edit_passport:
+  password:
+    is blank: 请输入密码
+    too short: 密码至少需要6个字符
+    missmatch: 两次输入的密码不一样

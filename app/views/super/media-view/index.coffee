@@ -1,9 +1,19 @@
 mediator = require 'mediator'
 utils = require 'lib/utils'
+ModalView = require 'views/common/modal'
 ListableView = require 'views/base/listable'
 MediaCollection = require 'models/media/collection'
 AssignAdmin = require './assign_admin'
 
+
+class DeleteItemModal extends ModalView
+  template: require './templates/delete_item_modal'
+  confirmed: ->
+    model = @model
+    model.destroy().done ->
+      model.dispose()
+  events:
+    'click .btn-confirm': 'confirmed'
 
 module.exports = class MediaIndexView extends ListableView
   _collection: MediaCollection
@@ -31,6 +41,11 @@ module.exports = class MediaIndexView extends ListableView
     # clear the user list cache
     @assign_admin?.clear()
 
+  deleteItem: (e) ->
+    model = @collection.get @_getId(e.target)
+    view = new DeleteItemModal model: model
+
   events:
     'click .to-admin': 'setPanelMedia'
+    'click .to-delete': 'deleteItem'
     'click .admins a': 'assignAdmin'

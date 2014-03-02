@@ -1,8 +1,10 @@
 EditFormView = require 'views/base/edit_form'
+Passport = require 'models/user/passport'
 
 ModifyPasswd = require './modify_passwd'
 
 module.exports = class UserView extends EditFormView
+  className: 'main-container'
   template: require './templates/show'
   context: ->
     isNew: @model.isNew()
@@ -10,7 +12,11 @@ module.exports = class UserView extends EditFormView
   modifyPasswd: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    new ModifyPasswd model: @model
+    user = @model
+    model = new Passport
+      id: user.id
+      name: user.get 'name'
+    new ModifyPasswd model: model
 
   events:
     'click .modify-passwd': 'modifyPasswd'

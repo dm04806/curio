@@ -2,15 +2,18 @@
   {{#set 'title'}}
   {{t 'user.modify_password_for' name}}
   {{/set}}
-  <form class="form-horizontal" action="" method="post">
+  <form class="edit-form form-horizontal" action="" method="post">
     {{#form_rows 'sm' 3}}
       {{form_input 'password' '' 'user.new_password' type='password'}}
       {{form_input 'password2' '' 'user.new_password2' type='password'}}
     {{/form_rows}}
+    {{! 必须有一个submit button才可以enter键提交 }}
+    <button type="submit" class="invisible"></button>
+    <div class="form-message holded"></div>
   </form>
   {{#set 'footer'}}
   <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
-  <button type="button" class="btn btn-primary">{{t 'save'}}</button>
+  <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
   {{/set}}
 {{/widget}}
 

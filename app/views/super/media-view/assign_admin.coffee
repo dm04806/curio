@@ -2,6 +2,10 @@ mediator = require 'mediator'
 ModalView = require 'views/common/modal'
 User = require 'models/user'
 
+uniqName = (d) ->
+  "#{d.name or d.uid} (#{d.uid})"
+
+BACKSPACE = 8
 TT_TEMPLATES =
   empty: (opt) ->
     """
@@ -12,7 +16,7 @@ TT_TEMPLATES =
     </div>
     """
   suggestion: (d) ->
-    "<p>#{d.name or d.uid} (#{d.uid})</p>"
+    "<p>#{uniqName(d)}</p>"
 
 
 datums = []
@@ -61,17 +65,22 @@ module.exports = class AssignAdmin extends ModalView
       autoselect: true
     }, {
       templates: TT_TEMPLATES
-      displayKey: 'uid'
+      displayKey: uniqName
       name: 'users-list'
       source: getBB()
     })
     .on 'typeahead:selected', (e, datum) ->
-      $(this).data('datum', datum)
+      node = $(this).data('datum', datum)
+    .on 'keydown', (e) ->
+      val = this.value or ''
+      if e.which == BACKSPACE and val[val.length-1] == ')'
+        this.value = ''
     .on 'focus', (e) ->
       tt = $(this).data('ttTypeahead')
       tt.dropdown.open()
     .on 'blur', (e) ->
-      tt = $(this).data('ttTypeahead')
+      node = $(this)
+      tt = node.data('ttTypeahead')
       datum = tt.dropdown.getDatumForCursor() or
               tt.dropdown.getDatumForTopSuggestion()
       if datum

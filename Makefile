@@ -1,8 +1,8 @@
 start:
-	@gnode `which coffee` `which brunch` watch --server
+	@node --harmony `which coffee` `which brunch` watch --server
 
 server:
-	@gnode `which coffee` `which brunch` watch -P --server
+	@node --harmony ./server.js
 
 build:
 	bower install

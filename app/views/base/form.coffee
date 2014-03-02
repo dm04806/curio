@@ -1,7 +1,8 @@
-MainView = require 'views/common/main'
+View = require 'views/base/view'
 utils = require 'lib/utils'
 
-module.exports = class EditModelView extends MainView
+module.exports = class FormView extends View
+  autoRender: true
   render: ->
     super
     @$form = @$el.find('form')
@@ -20,7 +21,16 @@ module.exports = class EditModelView extends MainView
     #
     __g(text) or __(text.replace "_#{@model?.kind}", '')
 
+
+  #
+  #  Show global form message
+  #
+  #  form > .form-message
+  #
   msg: (text, type='danger', expires='flash') ->
+    if not text
+      @$el.find('.form-message').html('')
+      return
     alerted = @$el.find('.alert').length
     text = @t(text)
     msg = @$el.find('.form-message')
@@ -40,6 +50,11 @@ module.exports = class EditModelView extends MainView
       msg.anim(expires)
     return msg
 
+  #
+  # Show message per row, given the HTML structure:
+  #
+  #  form > .form-group > .form-tip
+  #
   row_msg: (name, text, type='danger') ->
     msg = @$el.find(".form-tip[for=\"#{name}\"]")
     row = @$el.find(".form-group[for=\"#{name}\"]")
@@ -56,7 +71,7 @@ module.exports = class EditModelView extends MainView
 
   clearErrors: ->
     @$el.find('.has-error').removeClass('has-error')
-      .find('.form-message').text('')
+    @$el.find('.form-message').text('')
 
   submit: (e) ->
     e.preventDefault()
@@ -64,10 +79,10 @@ module.exports = class EditModelView extends MainView
     @disable()
 
   disable: (e) ->
-    @$form.find('[type=submit]').attr('disabled', true)
+    @$el.find('[type=submit]').attr('disabled', true)
 
   enable: (e) ->
-    @$form.find('[type=submit]').removeAttr('disabled')
+    @$el?.find('[type=submit]').removeAttr('disabled')
 
   events:
     'submit form': 'submit'
