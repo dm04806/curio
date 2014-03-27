@@ -15,6 +15,4 @@ module.exports = class LoginController extends Controller
       if not redir
         redir = (store 'login_return') or '/'
         redir = '/' if not @isRedirectable(redir)
-        redir = { url: redir }
-      @redirectTo redir
-
+      location.href = redir

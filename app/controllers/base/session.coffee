@@ -22,17 +22,20 @@ mediator.setHandler 'logout', ->
 mediator.setHandler 'login', (data) ->
   userInfo = data.user
   admins = data.admins
+
   user = mediator.user = new User(userInfo)
+
   if user.isSuper and not admins or not admins.length
     admins = session.allAdmins() or []
-  roles = {}
+
+  roles = user.roles = {}
   # assign media admin role to user
-  for item in admins
-    roles[item.media_id] = item.role
-  mediator.user.roles = roles
+  for admin in admins
+    roles[admin.media_id] = admin.role
   admin = session.pickAdmin(admins, user.isSuper)
   if admin
-    mediator.media = new Media admin.media
+    media = admin.media or { id: admin.media_id }
+    mediator.media = new Media media
   utils.debug '[login]', user
   mediator.publish 'session:login'
 

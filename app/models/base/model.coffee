@@ -61,20 +61,27 @@ module.exports = class Model extends Chaplin.Model
     if not config and @relations[what]
       config = @related(what, args...).fetch()
     if not config
-      throw new Error "don't know how to load '#{what}'"
+      # load from url
+      config =
+        url: "/#{what}"
+        params: args[0]
+      utils.debug "don't know how to load '#{what}', try conventional url"
+
     # default arguments
     callback = callback or ->
     url = config.url
     if 'string' is typeof url
       url = (=> @url() + config.url)
+
     $.ajax
       type: config.method or 'get',
       data: config.params,
       url: url.call(this)
     .done (res) =>
-      callback null, config.parse.call(this, res)
+      res = config.parse?.call(this, res) or res
+      callback? null, res
     .error (xhr, error) =>
-      callback error
+      callback? error
 
   # always return a Model / Collection
   related: (what, args...) ->

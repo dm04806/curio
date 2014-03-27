@@ -1,6 +1,6 @@
 {
   "name": "curio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "public/js/app.js",
   "dependencies": {
     "chaplin": "~1.0.0",
@@ -8,7 +8,7 @@
     "lodash": "~2.4.1",
     "jquery": "~2.1.0",
     "nvd3": "~1.1.15",
-    "d3": "3.3.x",
+    "d3": "~3.4.4",
     "console-polyfill": "~0.1.0",
     "jquery-i18n": "~1.1.1",
     "animate.css": "~3.0.0",
@@ -29,6 +29,11 @@
     },
     "backbone.stickit": {
       "main": "backbone.stickit.js"
+    },
+    "nvd3": {
+      "dependencies": {
+        "d3": "*"
+      }
     },
     "bootstrap": {
       "main": [
@@ -52,8 +57,5 @@
     "async": {
       "main": "lib/async.js"
     }
-  },
-  "resolutions": {
-    "jquery": "~2.1.0"
   }
 }

@@ -1,4 +1,4 @@
-<li class="media {{type}}">
+<li class="box media {{type}}">
   {{#compare type "incoming"}}
     <a class="avatar pull-left" href="{{url 'subscriber#show' subscriber.id}}">
       <img class="media-object img-rounded" src="{{subscriber.avatar}}" alt="">
@@ -11,22 +11,22 @@
     </a>
   {{/compare}}
   <div class="media-body">
-    <div class="{{contentType}}">
-      {{#compare contentType 'text'}}
+    <div class="{{content_type}}">
+      {{#compare content_type 'text'}}
         {{content.content}}
       {{/compare}}
-      {{#compare contentType 'image'}}
+      {{#compare content_type 'image'}}
         <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
       {{/compare}}
-      {{#compare contentType 'location'}}
+      {{#compare content_type 'location'}}
         <p>{{t 'messages.mylocation'}}:</p>
         {{#with content.content}}
           <img src="{{mapImg lat lng}}" alt="{{label}}" class="img-thumbnail">
         {{/with}}
       {{/compare}}
-      {{#compare contentType 'voice'}}
+      {{#compare content_type 'voice'}}
       {{/compare}}
-      {{#compare contentType 'news'}}
+      {{#compare content_type 'news'}}
         {{#compare content.content.length '>' 1}}
           <div class="news-message multi">
             {{#each content.content}}

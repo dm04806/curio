@@ -6,9 +6,9 @@
     {{#if num includeZero=true}}
       <strong>{{num}}</strong><br>
     {{/if}}
-    {{#if signed_num includeZero=true}}
+    {{#if signed includeZero=true}}
     <strong>
-      {{#compare signed_num '>' 0}}+{{/compare}}{{signed_num}}
+      {{#compare signed '>' 0}}+{{/compare}}{{signed}}
     </strong><br>
     {{/if}}
     <span>{{t text}}</span>

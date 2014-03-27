@@ -1,32 +1,78 @@
 View = require 'views/base/view'
+utils = require 'lib/utils'
+colors = require './colors'
 
-module.exports = class ChartView extends View
+nv.utils.defaultColor = ->
+  c = colors.five2
+  (d, i) ->
+    d.color || c[i % c.length]
+
+
+localize_keys = (obj) ->
+  for k of obj
+    if 'object' is typeof obj[k]
+      localize_keys(obj[k])
+    else if k == 'key'
+      obj.key = __(obj.key)
+
+
+class ChartView extends View
   autoRender: true
   optionNames: View::optionNames.concat [
     'data', 'formats', 'scales', 'chartOptions'
   ]
   noWrap: true
+  nvModel: null
+
   getData: ->
-    return @data or []
+    ret = @data or []
+    if !Array.isArray(ret)
+      ret = Object.keys(ret).map (k) ->
+        key: __(k)
+        values: ret[k]
+    else
+      localize_keys(ret)
+    return ret
+
   getChart: (options) ->
     @chart = @nvModel()
+
   template: ->
     '<svg></svg>'
+
   getDatum: ->
     d3.select(@el).datum(@getData())
+
   render: ->
     super
+    chart = @getChart()
+    if @chartOptions
+      chart.options(@chartOptions)
+
     nv.addGraph =>
-      chart = @getChart()
-      if @chartOptions
-        chart.options(@chartOptions)
       @getDatum().call(chart)
+      @trigger('datumBind')
       return chart
-    @_resize = (=> @update())
+
+    @_resize = utils.delayed(=> @update())
     $(window).on 'resize', @_resize
+
   dispose: ->
     if @_resize
       $(window).off 'resize', @_resize
     super
+
   update: ->
     @chart?.update()
+
+
+ChartView.axes =
+  integer: (axis) ->
+    axis.tickFormat d3.format(',d')
+    setTimeout ->
+      console.log axis.scale().domain()
+    , 300
+    axis
+
+module.exports = ChartView
+

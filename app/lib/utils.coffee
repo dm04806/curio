@@ -28,6 +28,13 @@ store = (item, value) ->
   return value
 
 
+delayed = (fn, delay) ->
+  t = 0
+  delay = delay or 120
+  ->
+    clearTimeout t
+    t = setTimeout fn, delay
+
 makeurl = (url, params) ->
   payload = utils.queryParams.stringify params
   if payload
@@ -39,6 +46,7 @@ _.assign utils,
   # collect client side error
   error: console.error.bind(console)
   debug: console.debug.bind(console)
+  delayed: delayed
   makeurl: makeurl
   store: store
 

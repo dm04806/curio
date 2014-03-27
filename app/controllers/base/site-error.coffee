@@ -34,9 +34,9 @@ mediator.setHandler 'site-error', (err)->
 
 
 #
-# Global ajax error handler
+# Ajax error handler
 #
-mediator.setHandler 'ajax-error', (xhr) ->
+mediator.setHandler 'ajax-error', (xhr, fn) ->
   if xhr.status == 401
     # this ajax request is unauthorized
     err = new AccessError('session_timeout')
@@ -48,4 +48,7 @@ mediator.setHandler 'ajax-error', (xhr) ->
     err = 'server'
   else
     err = 'network'
-  mediator.execute 'site-error', err
+  if not fn
+    mediator.execute 'site-error', err
+  else
+    fn err

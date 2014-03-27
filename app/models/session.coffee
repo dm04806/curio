@@ -14,6 +14,7 @@ pickAdmin = (availables, can_empty) ->
   if current
     for admin in availables
       if admin.media_id is current.media_id
+        current.media = admin.media or current.media
         return current
   # Pick the first if the localStorage didn't matched
   admin = availables[0]

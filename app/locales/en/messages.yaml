@@ -11,7 +11,7 @@ login:
   submit: Sign me in
   success: "login success!"
 name: Name
-unnamed: 未命名
+unnamed: Unnamed
 desc: Description
 title: Title
 operations: Operations
@@ -32,16 +32,16 @@ add: Add
 delete: Delete
 cancel: Cancel
 confirm:
-  "": 确认
-  delete: 确认删除
+  "": Confirm
+  delete: Confirm deletion
 loading: Loading...
 edit:
-  "": 编辑
+  "": Edit
   success: "Edit success!"
   network_error: Save failed..
   bad fields: Please fill the form correctly
-  not found: 此项目已被删除
-  Not Found: 此项目已不存在
+  not found: "The resource you requested doesn't exits."
+  Not Found: Not Found
   email:
     bad: Bad email format
     conflict: There is already a user with that email
@@ -68,21 +68,27 @@ error:
     title: Initialization failed
     detail: "This may be temporary, please try again later"
   server:
+    "": "Server falut, sorry.."
     title: Server Fault
     detail: Sorry...
   network:
+    "": Please check you network connection
     title: Network Issue
     detail: Please check your network connection
   session_timeout:
+    "": "Session timeout, try login again"
     title: Session Timeout
     detail: "Please try <a href=\"/login\">Login</a> again."
   need_panel:
+    "": No official wechat account for manage
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
   need_super:
+    "": You must be a super user to continue.
     title: Not Accessible
     detail: You are not a super admin
   not_found:
+    "": The resource you requested seems missing.
     title: Not Found
     detail: The resource you requested seems missing.
 api_error:
@@ -95,7 +101,7 @@ unknown time: Unknown time
 messages:
   "": Messages
   index:
-    h1: All Messages
+    h1: Recent messages
   mylocation: My location
 message:
   "": Message
@@ -114,9 +120,12 @@ subscriber:
   status: Status
   subscribed: Subscribed
   unsubscribed: Unsubscribed
+messaging:
+  "": Messages
 subscribe:
   "": Subscribe
-unsubscribe: Unsubscribe
+unsubscribe:
+  "": Unsubscribe
 stats:
   "": Statistics
 dashboard:
@@ -130,7 +139,7 @@ shares:
   "": Shares
 graph:
   key_index: Key Indexes
-  realtime: Realtime
+  realtime: Last 24 hours
   last30: Last 30 days
   last7: Last 7 days
   yesterday: Yesterday
@@ -145,7 +154,7 @@ medias:
   edit: "Edit media account \"%s\""
   create: Create new media account
   delete:
-    confirm: "真的要删除微信号 %s ?"
+    confirm: "Delete %s ?"
     consequece: 此操作无法恢复
 media:
   name_tip: the name of this wechat official account

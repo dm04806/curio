@@ -76,21 +76,27 @@ error:
     title: 初始化应用失败
     detail: 可能是服务器故障，请刷新页面重试
   server:
+    '': 服务器似乎遇到点麻烦，请稍后再试
     title: 服务器故障
     detail: 我们临时遇到一点问题，请稍后再试
   network:
+    '': 请检查你的网络连接
     title: 网络故障
-    detail: 请检查你的网络链接
+    detail: 请检查你的网络连接
   session_timeout:
+    '': 登录已过期
     title: 无法请求所需资源
     detail: 可能是你的登录已过期，试试<a href="/login">重新登录</a>
   need_panel:
+    '': 没有公共号可供管理
     title: 找不到公共号
     detail: 你名下没有任何微信公众号可供管理，试试<a href="/login">用其他账号登录</a>
   need_super:
+    '': 必须是超级管理员才能继续
     title: 不能继续
     detail: 你并不是超级管理员，<a href="/">返回首页</a>
   not_found:
+    '': 找不到所请求的资源
     title: 没有了
     detail: 这个东西好像已经没有了
 
@@ -106,7 +112,7 @@ unknown time: 未知时间
 messages:
   '': 消息
   index:
-    h1: 全部消息
+    h1: 最近会话
   mylocation: 我的位置
 
 message:
@@ -129,10 +135,12 @@ subscriber:
   subscribed: 活跃
   unsubscribed: 已退订
 
+messaging:
+  '': 消息
 subscribe:
   '': 订阅
-unsubscribe: 退订
-
+unsubscribe:
+  '': 退订
 stats:
   '': 统计
 
@@ -151,7 +159,7 @@ shares:
 # ===== Statstics ==========
 graph:
   key_index: 关键指标
-  realtime: 实时统计
+  realtime: 最近24小时
   last30: 最近30天
   last7: 最近七天
   yesterday: 昨日摘要
