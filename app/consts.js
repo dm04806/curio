@@ -2,12 +2,11 @@ var API_ROOT, DEBUG, SITE_ROOT
 
 DEBUG = typeof window !== "undefined" && window !== null ? window.DEBUG : void 0
 
-SITE_ROOT = 'http://mesa.curiositychina.com'
-API_ROOT = 'http://api.curiositychina.com'
+SITE_ROOT = 'http://wx.curio.im'
+API_ROOT = '/api'
 
 if (DEBUG) {
-  SITE_ROOT = 'http://www.curio.com'
-  API_ROOT = 'http://api.curio.com'
+  SITE_ROOT = window.location.origin
 }
 
 module.exports = {

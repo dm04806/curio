@@ -10,7 +10,7 @@ module.exports = class HomeMain extends MainView
   showGraph: ->
     mediator.media.load 'stats/incoming', { periods: '30days' }, (err, res) =>
       view = @subview 'last30', new TimeLineChart
-        container: '#last30-chart'
+        container: '#stats-last30'
         data: res['30days']
   listen:
     'addedToDOM': 'showGraph'

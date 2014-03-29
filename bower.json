@@ -32,7 +32,7 @@
     },
     "nvd3": {
       "dependencies": {
-        "d3": "*"
+        "d3": "~3.4.4"
       }
     },
     "bootstrap": {

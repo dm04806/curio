@@ -69,9 +69,6 @@ class ChartView extends View
 ChartView.axes =
   integer: (axis) ->
     axis.tickFormat d3.format(',d')
-    setTimeout ->
-      console.log axis.scale().domain()
-    , 300
     axis
 
 module.exports = ChartView
