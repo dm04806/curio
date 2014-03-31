@@ -113,11 +113,13 @@ messages:
   '': 消息
   index:
     h1: 最近会话
-  mylocation: 我的位置
 
 message:
   '': 消息
   view_full: 阅读全文
+  my_location: 我的位置
+  subscribed: 订阅了此账号
+  unsubscribed: 已取消关注
 
 subscribers:
   '': 订阅者

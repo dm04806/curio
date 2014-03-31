@@ -2,7 +2,7 @@ mediator = require 'mediator'
 utils = require 'lib/utils'
 ErrorView = require 'views/common/site-error'
 PageView = require 'views/base/page'
-{CurioError} = require 'models/errors'
+{CurioError,AccessError} = require 'models/errors'
 
 $(window).on 'popstate', ->
   if mediator.site_error

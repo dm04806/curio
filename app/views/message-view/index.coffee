@@ -5,6 +5,4 @@ MessageListView = require './list'
 
 module.exports = class MediaIndexView extends ListableView
   template: require './templates/index'
-  regions:
-    'listable': '.messages'
   collectionView: MessageListView

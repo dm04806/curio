@@ -102,10 +102,12 @@ messages:
   "": Messages
   index:
     h1: Recent messages
-  mylocation: My location
 message:
   "": Message
   view_full: Full article
+  my_location: 我的位置
+  subscribed: 订阅了此账号
+  unsubscribed: 退订了此账号
 subscribers:
   "": Subscribers
   index:

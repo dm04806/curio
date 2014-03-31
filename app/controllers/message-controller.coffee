@@ -4,13 +4,10 @@ mediator = require 'mediator'
 
 # Control Panel Home
 module.exports = class MessageController extends HomeController
-  index: (params) ->
+  index: (params, route, opts) ->
+    params = opts.query
     params.type = 'incoming'
     params.include = 'subscriber'
-    collection = mediator.media.related 'messages', params
     @view = new MessageIndexView
       region: 'main'
-      autoRender: false
-      collection: collection
-    collection.fetch().done =>
-      @view.render()
+      collection: mediator.media.related 'messages', params

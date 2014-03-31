@@ -8,7 +8,11 @@ module.exports = class ResourceController extends Controller
     create: null
   Model: null
   index: (params, route, options) ->
-    @view = new @MainViews.index region: 'main', params: params
+    params = _.assign(options.query, params)
+    @view = new @MainViews.index
+      region: 'main'
+      params: params
+    @view.route = route
   show: (params) ->
     model = new @Model({ id: params.id })
     model.fetch().then =>

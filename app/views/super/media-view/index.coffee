@@ -15,6 +15,7 @@ class DeleteItemModal extends ModalView
   events:
     'click .to-confirm': 'confirmed'
 
+
 module.exports = class MediaIndexView extends ListableView
   _collection: MediaCollection
   template: require './templates/index'

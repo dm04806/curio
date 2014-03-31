@@ -5,6 +5,7 @@ SuperSidebar = require 'views/super/sidebar'
 
 module.exports = class SuperHome extends ResourceController
   needPermit: 'super'
+  pageClass: 'page-super'
   _beforeAction: ->
     super
     @reuse 'super-header', SuperHeader, region: 'header'

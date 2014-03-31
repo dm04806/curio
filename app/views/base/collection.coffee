@@ -1,4 +1,5 @@
 View = require './view'
+PaginatorView = require 'views/widgets/paginator'
 
 module.exports = class CollectionView extends Chaplin.CollectionView
   # This class doesn’t inherit from the application-specific View class,
@@ -21,10 +22,23 @@ module.exports = class CollectionView extends Chaplin.CollectionView
 
   # Show spinner only for >0.3s queries.
   toggleLoadingIndicator: ->
-    unless @collection.length is 0 and @collection.isSyncing()
-      super
-      return
+    return super if @collection.length isnt 0 or not @collection.isSyncing()
     setTimeout =>
       if @collection
         super
     , 300
+
+  getPaginatorView: ->
+    paginator = new PaginatorView
+      route: @route
+      container: @el
+      collection: @collection
+
+  renderPaginator: ->
+    if @collection.isSyncing()
+      return
+    @subview 'paginator', @getPaginatorView()
+
+  listen:
+    'addedToDOM': 'renderPaginator'
+    'sync collection': 'renderPaginator'

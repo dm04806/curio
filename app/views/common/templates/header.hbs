@@ -1,6 +1,6 @@
 <div class="navbar navbar-default">
   <div class="navbar-header">
-    <a class="navbar-brand" href="{{when is_super '/super' site_url}}">
+    <a class="navbar-brand" href="{{when in_super '/super/medias' site_url}}">
       <i></i>
       <span>{{t 'site.name'}}</span>
     </a>
@@ -38,7 +38,7 @@
       <ul class="dropdown-menu" role="menu">
         {{#if is_super}}
           {{#unless in_super}}
-            <li><a href="/super">{{t 'super.title'}}</a></li>
+            <li><a href="/super/medias">{{t 'super.title'}}</a></li>
           {{/unless}}
         {{/if}}
         <!--<li class="divider"></li>-->
@@ -46,7 +46,7 @@
       </ul>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="icon-cog2"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="icon-earth"></b></a>
         <ul class="dropdown-menu toggle-locale">
           {{#each consts.LOCALES}}
             <li><a href="#" data-locale="{{@key}}">{{this}}</a></li>

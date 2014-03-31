@@ -11,12 +11,11 @@ module.exports = class ListableView extends View
   itemTemplate: null
   collectionView: CollectionView
   collectionTemplate: null
-  #pagerView: PagerView
-  regions:
-    'listable': '#listable'
+
   context: ->
     fallback:
       title: 'error.noresult'
+
   getItemView: ->
     view = @itemView or @collectionView::itemView
     if not view
@@ -24,6 +23,7 @@ module.exports = class ListableView extends View
       view = @itemView = class MyItemView extends CollectionItemView
         template: itemTemplate
     return view
+
   initialize: ->
     super
     collection = @collection
@@ -34,18 +34,23 @@ module.exports = class ListableView extends View
         collection = @_model.collection [], params: @params
       @collection = collection
     if not @autoRender
+      # if not autoRender,
+      # will still render after a auto fetch
       collection.fetch().done =>
         @render()
+
   getViewForItem: (item) ->
     (@subview 'listable').subview "itemView:#{item.cid}"
+
   render: ->
     super
     collection = @collection
     collection.fetch() if not collection.length
     listable = new @collectionView
-      region: 'listable'
+      container: @$el.find('.list-container')
       itemView: @getItemView()
       context: @context
       collection: collection
+    listable.route = @route # pass on route information
     @subview 'listable', listable
-    #@subview 'pager', pager
+

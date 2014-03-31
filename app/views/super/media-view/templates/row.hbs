@@ -2,10 +2,10 @@
   {{id}}
 </td>
 <td class="id">
-  <a href="{{url 'super/media#show' id}}">{{uid}}</a>
+  <a class="to-admin" href="/">{{uid}}</a>
 </td>
 <td class="name">
-  <a href="{{url 'super/media#show' id}}">{{name}}</a>
+  <a class="to-admin" href="/">{{name}}</a>
 </td>
 <td class="oid">
   {{oid}}
@@ -18,7 +18,7 @@
   {{/if}}
 </td>
 <td class="op-btns">
-  <a class="to-admin btn btn-xs btn-info" href="/">{{t 'medias.dashboard'}}</a>
+  <a class="btn btn-xs btn-info" href="{{ url 'super/media#show' id }}">{{t 'edit'}}</a>
   <button class="to-delete btn btn-xs btn-default" type="button">
     <span class="icon-remove"></span>
   </button>

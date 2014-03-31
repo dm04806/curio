@@ -25,8 +25,8 @@ mediator.setHandler 'login', (data) ->
 
   user = mediator.user = new User(userInfo)
 
-  if user.isSuper and not admins or not admins.length
-    admins = session.allAdmins() or []
+  if user.isSuper
+    admins = session.allAdmins() or admins or []
 
   roles = user.roles = {}
   # assign media admin role to user

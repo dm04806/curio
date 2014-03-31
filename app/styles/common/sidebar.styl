@@ -1,26 +1,49 @@
 
+bg_super_sidebar = lighten(bg_sidebar, 3) + #010609
+
+sidebar-colors(base_color)
+  .sidebar-nav
+    border-right: 1px solid darken(base_color, 5%)
+    border-top: 4px solid darken(base_color, 5%)
+    &, .nav
+      background: base_color
+    .nav
+      > li > a:hover
+        background: lighten(base_color, 5%)
+      > li.active > a
+        background: lighten(base_color, 12%)
+  #header
+    .navbar-brand
+      background: lighten(base_color, 10%)
+      &:hover
+        background-color: lighten(base_color, 8%)
+
+
 .sidebar-nav
   text-transform: capitalize
   //height: 100%
   width: sidebar_width
   position: absolute
   z-index: header_index + 1
-  border-right: 1px solid darken(bg_sidebar, 5%)
-  border-top: 4px solid darken(bg_sidebar, 5%)
   left: 0
   bottom: 0
   top: header_height
   box-sizing: border-box
   padding-top: 20px
-  &, .nav
-    background: bg_sidebar
   .nav
     a
       color: #999
+      color: rgba(255,255,255,0.5)
       border-radius: 0
     > li > a:hover
       color: #aaa
-      background: lighten(bg_sidebar, 5%)
+      color: rgba(255,255,255,0.7)
     > li.active > a
       color: #ccc
-      background: lighten(bg_sidebar, 12%)
+      color: rgba(255,255,255,0.9)
+
+
+sidebar-colors(bg_sidebar)
+
+.page-super
+  sidebar-colors(bg_super_sidebar)

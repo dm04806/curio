@@ -1,2 +1,26 @@
 
-
+<ul class="pagination">
+  {{#if showPrev}}
+    {{#if prev_url}}
+      <li><a href="{{ prev_url }}"><span class="icon-angle-left"></span></a>
+    {{else}}
+      <li class="disabled"><span class="icon-angle-left"></span>
+    {{/if}}
+  {{/if}}
+  {{#each pages}}
+    {{#if this.url}}
+      <li class="{{when is_current 'active'}}">
+        <a href="{{ this.url }}">{{ this.text }}</a>
+    {{else}}
+      <li class="disabled">
+        <span>{{ this.text }}</span>
+    {{/if}}
+  {{/each}}
+  {{#if showNext}}
+    {{#if next_url}}
+      <li><a href="{{ next_url }}"><span class="icon-angle-right"></span></a>
+    {{else}}
+      <li class="disabled"><span class="icon-angle-right"></span>
+    {{/if}}
+  {{/if}}
+</ul>

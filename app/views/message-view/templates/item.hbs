@@ -1,8 +1,8 @@
-<li class="box media {{type}}">
+<li class="box media {{type}} msgtype-{{content_type}} {{#if isEventMsg}}msgtype-event{{/if}}">
   {{#compare type "incoming"}}
     <a class="avatar pull-left" href="{{url 'subscriber#show' subscriber.id}}">
       <img class="media-object img-rounded" src="{{subscriber.avatar}}" alt="">
-      <span class="name">{{any subscriber.name subscriber.oid}}</span>
+      <span class="name">{{any subscriber.name}}</span>
     </a>
   {{else}}
     <a class="avatar pull-right">
@@ -19,7 +19,7 @@
         <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
       {{/compare}}
       {{#compare content_type 'location'}}
-        <p>{{t 'messages.mylocation'}}:</p>
+        <p>{{t 'message.my_location'}}:</p>
         {{#with content.content}}
           <img src="{{mapImg lat lng}}" alt="{{label}}" class="img-thumbnail">
         {{/with}}
@@ -62,6 +62,12 @@
             {{/each}}
           </div>
         {{/compare}}
+      {{/compare}}
+      {{#compare content_type 'subscribe'}}
+        <p>{{t 'message.subscribed'}}
+      {{/compare}}
+      {{#compare content_type 'unsubscribe'}}
+        <p>{{t 'message.unsubscribed'}}
       {{/compare}}
     </div>
     <p class="time">

@@ -48,7 +48,7 @@ module.exports = class Controller extends Chaplin.Controller
     true
 
   _beforeAction: ->
-    @reuse 'site', PageView, layout: @pageLayout
+    @reuse 'site', PageView, { layout: @pageLayout, className: @pageClass }
 
   beforeAction: ->
     promise = $.Deferred()
