@@ -7,6 +7,9 @@ Realtime = require 'views/stats-view/realtime'
 module.exports = class HomeMain extends MainView
   template: require './templates/home'
 
+  context: ->
+    media: mediator.media.attributes
+
   showGraph: ->
 
     mediator.media.load 'stats/incoming', (err, res) =>

@@ -9,6 +9,7 @@ module.exports = class Media extends Model
     oid: null
     uid: null
     name: null
+    avatar: '/images/avatar/default.jpg'
     wx_appkey: null
     wx_secret: null
     wx_token: null

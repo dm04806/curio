@@ -44,23 +44,27 @@ register 'not', (val) ->
   return !val
 
 register 'compare', (args..., options) ->
-  if args.length < 2
-    throw new Error('Handlerbars Helper "compare" needs 2 parameters')
+  console.log args
+  if not args.length
+    throw new Error('Handlerbars Helper "compare" needs at least one parameter')
+  if args.length == 1
+    operator = 'truesy'
   [left, operator, right] = args
   if right is undefined
     right = operator
     operator = '==='
 
   operators = `{
-    '==':     function(l, r) {return l == r; },
-    '===':    function(l, r) {return l === r; },
-    '!=':     function(l, r) {return l != r; },
-    '!==':    function(l, r) {return l !== r; },
-    '<':      function(l, r) {return l < r; },
-    '>':      function(l, r) {return l > r; },
-    '<=':     function(l, r) {return l <= r; },
-    '>=':     function(l, r) {return l >= r; },
-    'typeof': function(l, r) {return typeof l == r; }
+    '==':     function(l, r) {return l == r },
+    '===':    function(l, r) {return l === r },
+    '!=':     function(l, r) {return l != r },
+    '!==':    function(l, r) {return l !== r },
+    '<':      function(l, r) {return l < r },
+    '>':      function(l, r) {return l > r },
+    '<=':     function(l, r) {return l <= r },
+    '>=':     function(l, r) {return l >= r },
+    'typeof': function(l, r) {return typeof l == r },
+    'truesy': function(l) { return Boolean(l) }
   }`
 
   if not operators[operator]
@@ -72,6 +76,8 @@ register 'compare', (args..., options) ->
     return options.fn(this)
   else
     return options.inverse(this)
+
+
 
 # Make 'with' behave a little more mustachey.
 register 'with', (context, options) ->
