@@ -13,10 +13,13 @@ module.exports = class SubscriberController extends HomeController
     @view = new SubscriberIndexView
       region: 'main'
       collection: collection
-  show: (params) ->
+  show: (params, route, opts) ->
     media = mediator.media
-    model = @model = media.related 'subscriber', params
-    collection = media.related 'messages', model
+    model = @model = media.related 'subscriber', params.id
+    query = opts.query
+    query.subscriber_id = params.id
+    collection = media.related 'messages', query
+    collection.subscriber = model
     model.fetch().then =>
       @view = new SubscriberShow
         collection: collection

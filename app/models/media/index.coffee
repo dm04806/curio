@@ -21,15 +21,13 @@ module.exports = class Media extends Model
 
   relations:
     subscribers: Subscriber
-    subscriber: (params) ->
-      ret = new Subscriber id: params.id
+    subscriber: (id) ->
+      if id.id
+        id = id.id
+      ret = new Subscriber id: id
       ret.media_id = @id
       return ret
-    messages: (params, subscriber) ->
-      if params instanceof Subscriber
-        subscriber = params
-        params = { subscriber_id: subscriber.id }
+    messages: (params) ->
       coll = new MessageCollection [], params: params
       coll.media = this
-      coll.subscriber = subscriber
       return coll

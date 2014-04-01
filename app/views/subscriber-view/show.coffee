@@ -2,10 +2,7 @@ Subscriber = require 'models/subscriber'
 MessageIndexView = require 'views/message-view'
 
 module.exports = class SubscriberView extends MessageIndexView
-  template: require './templates/show'
+  template: require './templates/dialog'
+  listableSelector: '#message-dialog'
   region: 'main'
-  regions:
-    'listable': '.messages'
-  render: ->
-    super
 

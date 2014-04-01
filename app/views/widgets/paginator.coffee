@@ -13,7 +13,7 @@ module.exports = class PaginatorView extends View
   optionNames: View::optionNames.concat ['route'], Object.keys(DEFAULTS)
   template: require './templates/paginator'
   className: 'paginator'
-  debug: true
+  #debug: true
   context: ->
     pages = @getPages()
     _.assign @getOptions(),

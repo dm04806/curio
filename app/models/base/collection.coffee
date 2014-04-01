@@ -21,7 +21,6 @@ module.exports = class Collection extends Chaplin.Collection
     @on 'error', @unsync
     if not @urlRoot and @model
       @urlRoot = @model::urlRoot()
-    console.log options.params
     if options?.params
       @params = options.params
     _.defaults @params,

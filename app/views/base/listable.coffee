@@ -12,6 +12,7 @@ module.exports = class ListableView extends View
   collectionView: CollectionView
   collectionTemplate: null
 
+  listableSelector: '.list-container'
   context: ->
     fallback:
       title: 'error.noresult'
@@ -47,7 +48,7 @@ module.exports = class ListableView extends View
     collection = @collection
     collection.fetch() if not collection.length
     listable = new @collectionView
-      container: @$el.find('.list-container')
+      container: @$el.find(@listableSelector)
       itemView: @getItemView()
       context: @context
       collection: collection

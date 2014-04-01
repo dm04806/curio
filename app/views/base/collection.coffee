@@ -35,7 +35,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
       collection: @collection
 
   renderPaginator: ->
-    if @collection.isSyncing()
+    if @collection.isSyncing() or not @collection.length
       return
     @subview 'paginator', @getPaginatorView()
 

@@ -1,18 +1,19 @@
-<div class="chat-widget">
-  <ul class="media-list list">
-  </ul>
-</div>
-<div class="placeholder">
-  <div class="loading-indicator spinner spinner30">
-    <!--{{t 'loading'}}-->
+<div class="box">
+  <div class="chat-widget">
+    <ul class="media-list">
+    </ul>
+  </div>
+  <div class="placeholder">
+    <div class="loading-indicator spinner spinner30">
+      <!--{{t 'loading'}}-->
+    </div>
+  </div>
+  <div class="fallback">
+    {{#if fallback.title}}
+      <h2>{{t fallback.title}}</h2>
+    {{/if}}
+    {{#if fallback.message}}
+      <p>{{t fallback.message}}</p>
+    {{/if}}
   </div>
 </div>
-<div class="fallback">
-  {{#if fallback.title}}
-    <h2>{{t fallback.title}}</h2>
-  {{/if}}
-  {{#if fallback.message}}
-    <p>{{t fallback.message}}</p>
-  {{/if}}
-</div>
-
