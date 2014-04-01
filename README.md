@@ -23,6 +23,7 @@ make
 
 
 consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你还需要在 nginx 里面配一下代理。
+API需要挂在在 /api/ 目录下。
 
 ```nginx
     server {
@@ -32,33 +33,17 @@ consts.js 里面写的默认配置本地域名是 `www.curio.com` ，所以你�
 
       index index.html;
 
+      location /api/ {
+        proxy_pass http://127.0.0.1:3301;
+        proxy_set_header Host $http_host;
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      }
+
       try_files $uri @curio_www;
 
       location @curio_www {
         proxy_pass http://127.0.0.1:3333;
-        proxy_set_header Host $http_host;
-      }
-    }
-    server {
-      listen 80;
-      server_name api.curio.com;
-
-      location / {
-
-        # For CORS
-        if ($request_method = OPTIONS ) {
-          add_header Access-Control-Allow-Methods "GET,HEAD,POST,PUT,DELETE,OPTIONS";
-          add_header Access-Control-Allow-Origin "http://www.curio.com";
-          add_header Access-Control-Allow-Credentials "true";
-          add_header Access-Control-Allow-Headers 'x-csrf-token';
-          add_header Content-Length 0;
-          add_header Content-Type text/plain;
-          # Tell client that this pre-flight info is valid for one hour
-          add_header Access-Control-Max-Age 3600;
-          return 204;
-        }
-
-        proxy_pass http://127.0.0.1:3301;
         proxy_set_header Host $http_host;
       }
     }

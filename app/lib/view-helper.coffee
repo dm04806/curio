@@ -44,7 +44,6 @@ register 'not', (val) ->
   return !val
 
 register 'compare', (args..., options) ->
-  console.log args
   if not args.length
     throw new Error('Handlerbars Helper "compare" needs at least one parameter')
   if args.length == 1

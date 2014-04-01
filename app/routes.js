@@ -3,6 +3,7 @@ module.exports = function(match) {
   match('login', 'login#index')
   match('logout', 'logout#index')
   match('users', '')
+  match('settings', 'settings#index')
   match('messages', 'message#index')
   match('subscribers', 'subscriber#index')
   match('subscriber/:id', 'subscriber#show')
@@ -18,5 +19,5 @@ module.exports = function(match) {
   match('super/users/create', 'super/user#create')
   match('super/medias', 'super/media#index')
   match('super/medias/create', 'super/media#create')
-  return match('super/media/:id', 'super/media#show')
+  match('super/media/:id', 'super/media#show')
 }

@@ -1,0 +1,37 @@
+{{widget 'heading2' title='settings.index.h1'}}
+<div class="box">
+  <form class="main-content edit-form form-horizontal" method="post">
+    {{#form_rows 'sm' 2}}
+      <fieldset class="splitted">
+        {{form_input 'name' name 'name' 'media.name_tip' readonly}}
+        {{form_input 'uid' uid 'media.uid' 'media.uid_tip' readonly=true }}
+        {{form_input 'wx_token' wx_token 'media.token'}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label">
+            {{ t 'settings.interface' }}
+          </label>
+          <div class="col-sm-10">
+            <input class="form-control camo" type="text" value="{{consts.WEBOT_ROOT}}{{media.uid}}" readonly size="34">
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="splitted">
+        <legend>
+          <span>{{t 'media.advanced'}}</span>
+        </legend>
+        {{form_input 'oid' oid 'media.oid' 'media.oid_tip'}}
+        {{form_input 'wx_appkey' wx_appkey 'media.appkey'}}
+        {{form_input 'wx_secret' wx_secret 'media.secret'}}
+      </fieldset>
+      <fieldset class="splitted">
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <div class="form-message holded"></div>
+          <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+        </div>
+      </div>
+      </fieldset>
+    {{/form_rows}}
+  </form>
+</div>
+

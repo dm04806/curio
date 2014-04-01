@@ -19,6 +19,7 @@ remark: Remarks
 email: Email
 created_at: Created At
 admins: Admins
+detail: 详细
 save: Save
 save changes: Save changes
 create: Create
@@ -135,6 +136,7 @@ dashboard:
   subtitle: start from here
   docker: Docker
   realtime: Realtime
+  settings_guide: 微信接入指南
 channels:
   "": Channels
 shares:
@@ -211,3 +213,8 @@ edit_passport:
     is blank: 请输入密码
     too short: 密码太简单了吧
     missmatch: 两次输入的密码不一样
+settings:
+  index:
+    h1: 设置
+  interface: 微信接口地址
+  token: 微信接口 token

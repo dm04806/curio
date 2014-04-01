@@ -3,11 +3,6 @@ MenuView = require 'views/widgets/global_menu'
 mediator = require 'mediator'
 
 navItems = [
-  name: 'dashboard'
-  url: '/'
-  strict: true
-  icon: 'home'
-,
   name: 'messages'
   url: '/messages'
   icon: 'bubbles'
