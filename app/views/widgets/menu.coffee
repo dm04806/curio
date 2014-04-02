@@ -1,11 +1,14 @@
 View = require 'views/base'
+utils = require 'lib/utils'
 mediator = require 'mediator'
 
-isActive = (obj) ->
-  path = location.pathname
+isActive = (obj, path) ->
+  path = path or location.pathname
   url = obj.url.replace(/s$/, '')
-  return path is url if obj.strict
-  path.indexOf(url) is 0
+  if obj.strict
+    path is url
+  else
+    path.indexOf(url) is 0
 
 getNavItems = (items) ->
   ret = []
@@ -33,23 +36,37 @@ module.exports = class MenuView extends View
   template: require './templates/menu'
   context: ->
     nav: getNavItems(@items)
+
+  getItem: (name) ->
+    for item in @items
+      if item.name == name
+        return item
+
   getActiveItem: () ->
     for item in @items
       if isActive(item)
         return item
+
   getActiveNode: (name) ->
     return @$el.find("li[data-name='#{name}']")
+
+  getActiveForRouter: (router, params) ->
+    url = utils.reverse router, params
+    for item in @items
+      if item.route == router.name
+        return item
+      if isActive(item, url)
+        return item
+
   updateState: (name) ->
-    if name and name.currentTarget
-      node = $(name.currentTarget)
-    else if 'string' isnt typeof name
-      item = @getActiveItem()
-      return unless item
-      name = item.name
-    node = @getActiveNode(name)
+    if arguments.length == 4
+      [controller, params, router, opts] = arguments
+      item = @getActiveForRouter(router, params)
+    else
+      item = name and getItem(name) or @getActiveItem()
+    if not item
+      @$el.children().removeClass('active')
+      return
+    node = @getActiveNode(item.name)
     node.addClass('active').siblings().removeClass('active')
-  render: ->
-    super
-    @updateState()
-  events:
-    'click li': 'updateState'
+    return

@@ -18,6 +18,14 @@ navItems = [
   name: 'channels'
   url: '/channels'
   icon: 'filter'
+,
+  name: 'Locations'
+  url: '/places'
+  icon: 'location'
+,
+  name: 'settings'
+  url: '/settings'
+  icon: 'cog2'
 ]
 
 module.exports = class SidebarView extends View

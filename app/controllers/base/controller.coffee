@@ -65,4 +65,4 @@ module.exports = class Controller extends Chaplin.Controller
 
   index: (params) ->
     if not @view and @main
-      @view = new @main params: params
+      @view = new @main region: 'main', params: params

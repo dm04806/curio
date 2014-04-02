@@ -11,9 +11,7 @@ module.exports = class HomeMain extends MainView
     media: mediator.media.attributes
 
   showGraph: ->
-
     mediator.media.load 'stats/incoming', (err, res) =>
-
       @subview 'realtime', new Realtime
         container: '#home-realtime'
         data: res['1day']
