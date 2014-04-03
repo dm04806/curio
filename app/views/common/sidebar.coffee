@@ -11,10 +11,6 @@ navItems = [
   url: '/subscribers'
   icon: 'address-book'
 ,
-  name: 'stats'
-  url: '/stats'
-  icon: 'stats'
-,
   name: 'channels'
   url: '/channels'
   icon: 'filter'
@@ -22,6 +18,10 @@ navItems = [
   name: 'Locations'
   url: '/places'
   icon: 'location'
+,
+  name: 'stats'
+  url: '/stats'
+  icon: 'stats'
 ,
   name: 'settings'
   url: '/settings'

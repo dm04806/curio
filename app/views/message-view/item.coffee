@@ -8,7 +8,7 @@ module.exports = class MessageItemView extends View
   template: require './templates/item'
   noWrap: true
   context: ->
-    media: mediator.media
+    media: mediator.media.attributes
     isEventMsg: @isEventMsg()
   isEventMsg: ->
     @model.get('content_type') in EVENT_TYPES

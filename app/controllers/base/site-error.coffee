@@ -37,11 +37,12 @@ mediator.setHandler 'site-error', (err)->
 # Ajax error handler
 #
 mediator.setHandler 'ajax-error', (xhr, fn) ->
+  json = xhr.responseJSON or {}
   if xhr.status == 401
     # this ajax request is unauthorized
-    err = new AccessError('session_timeout')
+    err = new AccessError(json.error or 'session_timeout')
   else if xhr.status == 403
-    err = new AccessError('not_allowed')
+    err = new AccessError(json.error or 'not_allowed')
   else if xhr.status == 404
     err = 'not_found'
   else if xhr.status

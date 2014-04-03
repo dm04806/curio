@@ -93,6 +93,7 @@ register 'without', (context, options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 register 'json', (obj, options) ->
+  console.log obj
   return JSON.stringify obj
 
 register 'debug', (obj) ->
@@ -105,6 +106,7 @@ register 'widget', (tmpl, options) ->
   data.__proto__ = this
   new SafeString tmpl data
 
+
 # update context with a caller
 register 'set', (name, value, options) ->
   if options is undefined
@@ -115,6 +117,7 @@ register 'set', (name, value, options) ->
   # extend the context
   this[name] = new SafeString value
   return
+
 
 # include template
 register 'include', (tmpl, options) ->
@@ -130,6 +133,7 @@ register "form_rows", (size, col, options) ->
   this.label_cls = "col-#{size}-#{col}"
   this.row_cls = "col-#{size}-#{12 - col}"
   return options.fn(this)
+
 
 # form control helpers
 ['input', 'textarea'].forEach (widget) ->
@@ -163,9 +167,11 @@ register "form_rows", (size, col, options) ->
       row_cls: @row_cls
     new SafeString tmpl data
 
+
 # Get Chaplin-declared named routes. {{url "likes#show" "105"}}
 register 'url', (routeName, params..., options) ->
   utils.reverse routeName, params
+
 
 # get model attributes
 register 'attr', (names..., options) ->
@@ -174,6 +180,8 @@ register 'attr', (names..., options) ->
     return val if val? && val isnt ''
   return val
 
+register 'btrunc', (opts..., options) ->
+  return utils.btrunc.apply(this, opts)
 
 # Content formating helpers
 register 'strftime', (format, date, options) ->

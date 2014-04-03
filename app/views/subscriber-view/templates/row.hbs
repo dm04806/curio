@@ -1,11 +1,11 @@
 <td>
   <a class="avatar" href="{{url 'subscriber#show' id}}"><img class="img-rounded" src="{{avatar}}" alt=""></a>
-  <a href="{{url 'subscriber#show' id}}">
-    {{any name oid}}
+  <a title="{{name}}" href="{{url 'subscriber#show' id}}">
+    {{name}}
   </a>
 </td>
 <td class="city">
-  {{city}}
+  {{full_city}}
 </td>
 <td class="sex">
   {{sex}}

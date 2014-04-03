@@ -59,6 +59,7 @@ module.exports = class MenuView extends View
         return item
 
   updateState: (name) ->
+    return if @disposed
     if arguments.length == 4
       [controller, params, router, opts] = arguments
       item = @getActiveForRouter(router, params)

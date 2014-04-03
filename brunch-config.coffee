@@ -21,6 +21,8 @@ exports.config =
     templates:
       joinTo: 'js/app.js'
   plugins:
+    static_jade:
+      path: [ /app(\/|\\)static/ ]
     autoReload:
       enabled:
         css: on

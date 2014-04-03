@@ -42,10 +42,43 @@ makeurl = (url, params) ->
     url = url + sep + payload
   url
 
+
+String.prototype.blength = () ->
+  this.replace(/\n\r/g, '\n').replace(/[^\x00-\xff]/g, 'xx').length
+
+String.prototype.btrunc = (limit) ->
+  btrunc(this, limit)
+
+
+trunc = (text, limit) ->
+  text = if text? then text else ''
+  if text.length < limit
+    text
+  else
+    text.slice(0, limit-2) + '..'
+
+btrunc = (text, limit, ellips='..') ->
+  text = if text? then text else ''
+  limit = Number(limit) || 10
+  if text.blength() < limit * 2
+    return text
+  ret = ''
+  count = 0
+  i = 0
+  max = limit * 2 - 2
+  while (count < max)
+    ret += text[i]
+    count += text[i].blength()
+    i += 1
+  ret + ellips
+
+
 _.assign utils,
   # collect client side error
   error: console.error.bind(console)
   debug: console.debug.bind(console)
+  trunc: trunc
+  btrunc: btrunc
   delayed: delayed
   makeurl: makeurl
   store: store

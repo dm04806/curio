@@ -15,6 +15,7 @@
     "javascript-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
+    "jade-brunch": "brunch/jade-brunch",
     "stylus-brunch": "~1.8.0",
     "handlebars-brunch": ">= 1.0 < 1.8",
     "uglify-js-brunch": ">= 1.0 < 1.8",
