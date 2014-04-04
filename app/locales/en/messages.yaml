@@ -225,3 +225,6 @@ settings:
     h1: 账号设置
   interface: 微信接口地址
   token: 微信接口token
+rrule:
+  keyword: 关键字
+  reply: 回复

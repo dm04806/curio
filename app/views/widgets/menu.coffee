@@ -28,6 +28,11 @@ getNavItems = (items) ->
   return ret
 
 
+
+menuFolded = (name) ->
+  return utils.store "menu-fold-flag:#{name}"
+
+
 module.exports = class MenuView extends View
   autoRender: true
   items: []
@@ -92,11 +97,22 @@ module.exports = class MenuView extends View
           container: @getItemNode(item)
         @subview "submenu-#{item.name}", subnav
         setTimeout ->
-          subnav.$el.addClass('foldable').height(subnav.$el.height())
+          subnav.$el
+            .height(subnav.$el.height())
+            .addClass('foldable')
+          if menuFolded(item.name)
+            subnav.$el.addClass('folded')
 
   toggleSubnav: (e) ->
-    subnav = $(e.target).parent().find('.nav')
+    node = $(e.target).parent()
+    subnav = node.find('.nav')
     subnav.toggleClass('folded')
+    name = node.data('name')
+    key = "menu-fold-flag:#{name}"
+    if subnav.hasClass('folded')
+      utils.store key, 1
+    else
+      utils.store.remove key
 
   events:
     'click .toggler': 'toggleSubnav'

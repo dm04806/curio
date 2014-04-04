@@ -263,3 +263,9 @@ settings:
   interface: 微信接口地址
   token: 微信接口token
 
+
+# ======= Responder ======
+rrule:
+  keyword: 关键字
+  reply: 回复
+

@@ -94,7 +94,7 @@ register 'without', (context, options) ->
 
 register 'json', (obj, options) ->
   console.log obj
-  return JSON.stringify obj
+  return JSON.stringify obj, null, 4
 
 register 'debug', (obj) ->
   console.debug obj

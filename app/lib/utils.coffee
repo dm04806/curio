@@ -27,6 +27,9 @@ store = (item, value) ->
     localStorage.setItem(item, '')
   return value
 
+store.remove = (key) ->
+  utils.debug '[storege delete] %s', key
+  localStorage.removeItem(key)
 
 delayed = (fn, delay) ->
   t = 0

@@ -1,0 +1,19 @@
+<fieldset>
+  <legend>{{index}}</legend>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      {{t 'rrule.keyword'}}
+    </div>
+    <div class="col-sm-8">
+      {{include 'views/autoreply-view/templates/pattern'}}
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2 control-label">
+      {{t 'rrule.reply'}}
+    </div>
+    <div class="col-sm-8">
+      {{include 'views/autoreply-view/templates/handler'}}
+    </div>
+  </div>
+</fieldset>
