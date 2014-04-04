@@ -49,11 +49,17 @@ module.exports = class Model extends Chaplin.Model
         ret[field] = new Date(ret[field])
     return ret
 
+  # loaders use a raw ajax request, and returns a jqXHR promise
+  # relation directly returns a Backbone.Model or Collection,
+  # you must call `model.sync()` manully to start load from remote
   loaders: {}
-  # loaders use a raw ajax request, relation use Backbone.sync to load data,
   relations: {}
 
-  # return a jqXHR promise
+  #
+  # Load from sub-directory of current model's url
+  #
+  # @return {jqXHR} promise
+  #
   load: (what, args..., callback) ->
     config = @loaders[what]
     if 'function' == typeof config
@@ -83,7 +89,9 @@ module.exports = class Model extends Chaplin.Model
     .error (xhr, error) =>
       callback? error
 
-  # always return a Model / Collection
+  #
+  # @return {Model|Collection}
+  #
   related: (what, args...) ->
     model = @relations[what]
     if not model

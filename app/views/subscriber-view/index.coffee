@@ -10,4 +10,6 @@ module.exports = class SubscriberIndexView extends ListableView
   context: ->
     total: @collection.total
     thead: thead
+    fallback:
+      title: 'subscribers.noresult'
 

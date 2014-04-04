@@ -3,6 +3,7 @@ utils = require 'lib/utils'
 mediator = require 'mediator'
 
 isActive = (obj, path) ->
+  return if not obj.url
   path = path or location.pathname
   url = obj.url.replace(/s$/, '')
   if obj.strict
@@ -60,6 +61,8 @@ module.exports = class MenuView extends View
 
   updateState: (name) ->
     return if @disposed
+    for subview in @subviews
+      subview.updateState(arguments...)
     if arguments.length == 4
       [controller, params, router, opts] = arguments
       item = @getActiveForRouter(router, params)
@@ -69,5 +72,31 @@ module.exports = class MenuView extends View
       @$el.children().removeClass('active')
       return
     node = @getActiveNode(item.name)
+    if node.find('.nav').length
+      # has subnav, only need to set subnav active
+      return
     node.addClass('active').siblings().removeClass('active')
     return
+
+  getItemNode: (name) ->
+    name = name.name or name
+    return @$el.find("[data-name=#{name}]")
+
+  render: ->
+    super
+    @items.forEach (item) =>
+      if item.subnav
+        # render subnav
+        subnav = new MenuView
+          items: item.subnav
+          container: @getItemNode(item)
+        @subview "submenu-#{item.name}", subnav
+        setTimeout ->
+          subnav.$el.addClass('foldable').height(subnav.$el.height())
+
+  toggleSubnav: (e) ->
+    subnav = $(e.target).parent().find('.nav')
+    subnav.toggleClass('folded')
+
+  events:
+    'click .toggler': 'toggleSubnav'

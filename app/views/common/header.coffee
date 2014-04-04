@@ -18,7 +18,7 @@ module.exports = class HeaderView extends View
     all_admins = session.allAdmins()
     user: user.attributes
     all_admins: all_admins
-    other_admins: all_admins.filter (item) -> item.id != mediator.media?.id
+    other_admins: all_admins?.filter (item) -> item.id != mediator.media?.id
     media: mediator.media?.attributes
     in_super: @in_super
     is_super: user.isSuper

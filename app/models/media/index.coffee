@@ -1,4 +1,5 @@
 Model = require 'models/base/model'
+Responder = require 'models/responder'
 
 Subscriber = require '../subscriber'
 MessageCollection = require 'models/message/collection'
@@ -16,9 +17,16 @@ module.exports = class Media extends Model
     desc: null
 
   loaders:
+
     admins:
       url: '/admins'
       parse: (res) -> res.items
+
+    # All custom autorely rules
+    responder:
+      url: '/responder'
+      parse: (res) ->
+        new Responder res
 
   relations:
     subscribers: Subscriber

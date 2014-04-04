@@ -21,6 +21,7 @@ remark: 备注
 email: Email
 created_at: 创建日期
 admins: 管理员
+manage: 管理
 detail: 详细
 
 # common verbs:
@@ -107,6 +108,7 @@ error:
 
 unknown time: 未知时间
 
+
 messages:
   '': 消息
   index:
@@ -125,6 +127,7 @@ subscribers:
     h1: 全部订阅者(%s)
   show:
     h1: 与 %s 的会话记录
+  noresult: 暂时没有订阅者信息
 
 subscriber:
   city: 城市
@@ -141,8 +144,23 @@ subscribe:
   '': 订阅
 unsubscribe:
   '': 退订
+
+resources:
+  '': 资源
+autoreply:
+  '': 自动回复
 stats:
   '': 统计
+
+channels:
+  '': 渠道
+locations:
+  '': 门店
+
+shares:
+  '': 图文分享
+
+# ===== Dashboard ==========
 
 dashboard:
   '': 控制台
@@ -151,12 +169,6 @@ dashboard:
   realtime: 最新动态
   settings_guide: 微信接入指南
 
-
-channels:
-  '': 渠道
-
-shares:
-  '': 图文分享
 
 # ===== Statstics ==========
 graph:
@@ -244,8 +256,8 @@ edit_passport:
     too short: 密码至少需要6个字符
     missmatch: 两次输入的密码不一样
 
-
 settings:
+  '': 设置
   index:
     h1: 账号设置
   interface: 微信接口地址

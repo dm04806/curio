@@ -3,21 +3,33 @@ MenuView = require 'views/widgets/global_menu'
 mediator = require 'mediator'
 
 navItems = [
-  name: 'messages'
-  url: '/messages'
-  icon: 'bubbles'
-,
   name: 'subscribers'
-  url: '/subscribers'
-  icon: 'address-book'
+  icon: 'users'
+  subnav: [
+    name: 'messages'
+    url: '/messages'
+    icon: 'bubbles'
+  ,
+    name: 'manage'
+    url: '/subscribers'
+    icon: 'address-book'
+  ]
 ,
-  name: 'channels'
-  url: '/channels'
-  icon: 'filter'
-,
-  name: 'Locations'
-  url: '/places'
-  icon: 'location'
+  name: 'resources'
+  icon: 'drawer2'
+  subnav: [
+    name: 'autoreply'
+    url: '/autoreply'
+    icon: 'chat'
+  ,
+    name: 'locations'
+    url: '/places'
+    icon: 'location'
+  ,
+    name: 'channels'
+    url: '/channels'
+    icon: 'filter'
+  ]
 ,
   name: 'stats'
   url: '/stats'
