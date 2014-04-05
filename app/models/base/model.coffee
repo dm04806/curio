@@ -51,44 +51,59 @@ module.exports = class Model extends Chaplin.Model
 
   # loaders use a raw ajax request, and returns a jqXHR promise
   # relation directly returns a Backbone.Model or Collection,
-  # you must call `model.sync()` manully to start load from remote
+  # you must call `model.fetch()` manully to start load from remote
   loaders: {}
   relations: {}
 
-  #
+  ##
   # Load from sub-directory of current model's url
   #
+  # Example:
+  #
+  #   model.load('/url')
+  #     -> $.get('/model/:id/url')
+  #
+  #   model.load('model2')
+  #     -> model.related('model2').fetch()
+  #
+  # @param {string} what, name of the loader
   # @return {jqXHR} promise
   #
   load: (what, args..., callback) ->
     config = @loaders[what]
+
+    # A direct function
     if 'function' == typeof config
       return config.call(this, args..., callback)
+
+    # not configured in loaders, fetch from relation
     if not config and @relations[what]
-      config = @related(what, args...).fetch()
+      return @related(what, args...).fetch()
+
     if not config
       # load from url
       config =
         url: "/#{what}"
-        params: args[0]
       utils.debug "don't know how to load '#{what}', try conventional url"
 
-    # default arguments
+    # handle default arguments
     callback = callback or ->
+    params = _.extend({}, args[0], config.params)
     url = config.url
     if 'string' is typeof url
       url = (=> @url() + config.url)
 
     $.ajax
       type: config.method or 'get',
-      data: config.params,
+      data: params,
       url: url.call(this)
     .done (res) =>
-      res = config.parse?.call(this, res) or res
+      res = config.parse?.call(this, res, params) or res
       callback? null, res
     .error (xhr, error) =>
       callback? error
 
+  ##
   #
   # @return {Model|Collection}
   #

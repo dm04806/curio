@@ -133,6 +133,9 @@ resources:
   "": 资源
 autoreply:
   "": 自动回复
+  text: 文本消息回复
+  subscribe: 被添加自动回复
+  any: 消息自动回复
 stats:
   "": 统计
 channels:

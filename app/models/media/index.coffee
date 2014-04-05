@@ -25,6 +25,7 @@ module.exports = class Media extends Model
     # All custom autorely rules
     responder:
       url: '/responder'
+      #cache: true  # will cache the result on model
       parse: (res) ->
         new Responder res
 

@@ -6,7 +6,8 @@ module.exports = class View extends Chaplin.View
   context: {}
 
   # Auto-save `template` option passed to any view as `@template`.
-  optionNames: Chaplin.View::optionNames.concat ['template']
+  # `data` and `items` can be misc data which has no need to be a @model or @collection
+  optionNames: Chaplin.View::optionNames.concat ['template', 'data', 'items']
 
   # Precompiled templates function initializer.
   getTemplateFunction: ->

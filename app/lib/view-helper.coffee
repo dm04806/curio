@@ -93,7 +93,7 @@ register 'without', (context, options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 register 'json', (obj, options) ->
-  console.log obj
+  #console.log obj
   return JSON.stringify obj, null, 4
 
 register 'debug', (obj) ->

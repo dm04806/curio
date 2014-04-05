@@ -2,14 +2,6 @@ View = require 'views/base'
 utils = require 'lib/utils'
 mediator = require 'mediator'
 
-isActive = (obj, path) ->
-  return if not obj.url
-  path = path or location.pathname
-  url = obj.url.replace(/s$/, '')
-  if obj.strict
-    path is url
-  else
-    path.indexOf(url) is 0
 
 getNavItems = (items) ->
   ret = []
@@ -27,16 +19,20 @@ getNavItems = (items) ->
     ret.push(obj)
   return ret
 
-
-
 menuFolded = (name) ->
   return utils.store "menu-fold-flag:#{name}"
+
+saveFoldStatus = (name, status) ->
+  key = "menu-fold-flag:#{name}"
+  if status
+    utils.store key, 1
+  else
+    utils.store.remove key
 
 
 module.exports = class MenuView extends View
   autoRender: true
   items: []
-  optionNames: View::optionNames.concat ['items']
   className: 'nav nav-pills nav-stacked'
   tagName: 'ul'
   template: require './templates/menu'
@@ -48,9 +44,21 @@ module.exports = class MenuView extends View
       if item.name == name
         return item
 
+  isActive: (obj, path) ->
+    return if not obj.url
+    path = path or location.pathname
+    url = obj.url.replace(/s$/, '')
+    if '?' in url
+      # if has querystring, must match all
+      return location.pathname + location.search == obj.url
+    if obj.strict
+      path is url
+    else
+      path.indexOf(url) is 0
+
   getActiveItem: () ->
     for item in @items
-      if isActive(item)
+      if @isActive(item)
         return item
 
   getActiveNode: (name) ->
@@ -61,7 +69,7 @@ module.exports = class MenuView extends View
     for item in @items
       if item.route == router.name
         return item
-      if isActive(item, url)
+      if @isActive(item, url)
         return item
 
   updateState: (name) ->
@@ -72,7 +80,7 @@ module.exports = class MenuView extends View
       [controller, params, router, opts] = arguments
       item = @getActiveForRouter(router, params)
     else
-      item = name and getItem(name) or @getActiveItem()
+      item = name and @getItem(name) or @getActiveItem()
     if not item
       @$el.children().removeClass('active')
       return
@@ -107,12 +115,8 @@ module.exports = class MenuView extends View
     node = $(e.target).parent()
     subnav = node.find('.nav')
     subnav.toggleClass('folded')
-    name = node.data('name')
-    key = "menu-fold-flag:#{name}"
-    if subnav.hasClass('folded')
-      utils.store key, 1
-    else
-      utils.store.remove key
+    saveFoldStatus node.data('name'), subnav.hasClass('folded')
 
   events:
     'click .toggler': 'toggleSubnav'
+

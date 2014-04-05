@@ -1,6 +1,14 @@
 .box
   padding: 10px
   background: #fff
+  margin-bottom: 15px
+  .nav > li
+    margin-bottom: 5px
+    margin-top: 5px
+    > a:hover
+      background-color: #f0f0f0
+    &.active > a:hover
+      background-color: brand-primary
 
 .big-box
   @extend .box

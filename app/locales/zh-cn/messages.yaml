@@ -149,6 +149,9 @@ resources:
   '': 资源
 autoreply:
   '': 自动回复
+  text: 关键字自动消息
+  subscribe: 被添加自动回复
+  any: 消息自动回复
 stats:
   '': 统计
 
