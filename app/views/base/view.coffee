@@ -2,8 +2,11 @@ helper = require 'lib/view-helper' # Just load the view helpers, no return value
 utils = require 'lib/utils'
 
 module.exports = class View extends Chaplin.View
-   # Template data context
-  context: {}
+  initialize: ->
+    # Template data context
+    @data = {}
+    @context = @context or {}
+    super
 
   # Auto-save `template` option passed to any view as `@template`.
   # `data` and `items` can be misc data which has no need to be a @model or @collection
@@ -18,7 +21,7 @@ module.exports = class View extends Chaplin.View
   getTemplateData: ->
     data = super
     context = _.result this, 'context'
-    _.defaults data, context, helper.globals
+    _.defaults data, context, @data, helper.globals
     if @debug
       utils.debug '[template]', data
     return data

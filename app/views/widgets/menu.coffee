@@ -3,7 +3,10 @@ utils = require 'lib/utils'
 mediator = require 'mediator'
 
 
-getNavItems = (items) ->
+##
+# Filter nav items by user role
+#
+filterNavItems = (items) ->
   ret = []
   user = mediator.user
   for nav in items
@@ -15,11 +18,12 @@ getNavItems = (items) ->
       url: nav.url
       icon: nav.icon
     if nav.subnav
-      obj.subnav = getNavItems(nav.subnav)
+      obj.subnav = filterNavItems(nav.subnav)
     ret.push(obj)
   return ret
 
-menuFolded = (name) ->
+
+hasMenuFolded = (name) ->
   return utils.store "menu-fold-flag:#{name}"
 
 saveFoldStatus = (name, status) ->
@@ -37,7 +41,7 @@ module.exports = class MenuView extends View
   tagName: 'ul'
   template: require './templates/menu'
   context: ->
-    nav: getNavItems(@items)
+    nav: filterNavItems(@items)
 
   getItem: (name) ->
     for item in @items
@@ -61,8 +65,8 @@ module.exports = class MenuView extends View
       if @isActive(item)
         return item
 
-  getActiveNode: (name) ->
-    return @$el.find("li[data-name='#{name}']")
+  getActiveNode: () ->
+    return @getItemNode @getActiveItem()
 
   getActiveForRouter: (router, params) ->
     url = utils.reverse router, params
@@ -84,7 +88,7 @@ module.exports = class MenuView extends View
     if not item
       @$el.children().removeClass('active')
       return
-    node = @getActiveNode(item.name)
+    node = @getItemNode(item.name)
     if node.find('.nav').length
       # has subnav, only need to set subnav active
       return
@@ -93,7 +97,7 @@ module.exports = class MenuView extends View
 
   getItemNode: (name) ->
     name = name.name or name
-    return @$el.find("[data-name=#{name}]")
+    return @$el.find("[data-name='#{name}']")
 
   render: ->
     super
@@ -108,7 +112,7 @@ module.exports = class MenuView extends View
           subnav.$el
             .height(subnav.$el.height())
             .addClass('foldable')
-          if menuFolded(item.name)
+          if hasMenuFolded(item.name)
             subnav.$el.addClass('folded')
 
   toggleSubnav: (e) ->

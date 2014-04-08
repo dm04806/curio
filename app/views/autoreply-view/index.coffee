@@ -2,11 +2,11 @@ mediator = require 'mediator'
 Rule = require 'models/responder/rule'
 MainView = require 'views/common/main'
 Menu = require 'views/widgets/menu'
-RuleRow = require './row'
+RuleView = require './rule'
 
 navTabs = [
-  name: 'autoreply.text'
-  url: '/autoreply?tab=text'
+  name: 'autoreply.keyword'
+  url: '/autoreply?tab=keyword'
 ,
   name: 'autoreply.subscribe'
   url: '/autoreply?tab=subscribe'
@@ -20,25 +20,25 @@ module.exports = class AutoreplyIndex extends MainView
   template: require './templates/index'
 
   render: ->
-    super
-
+    type = @model.get 'filter'
+    @data.tabname = "autoreply.#{type}"
+    super # render the DOM
     # register tab view
     @subview 'tabs', new Menu
       container: @$el.find('.tabs-filter')
       items: navTabs
+    @subview('tabs').updateState @data.tabname
 
-    @subview('tabs').updateState(@model.get 'filter')
-
+    # render rules list
     listNode = @$el.find('#rules')
-    @model.getRules().each (rule, i) =>
-      rule.set 'index', i + 1
-      row = new RuleRow
+    collection = @model.getRules()
+
+    if @model.canMulti(type) or not collection.length
+      collection.push @model.newRule(type)
+
+    collection.each (rule, index) =>
+      rule.set 'index', index+1
+      row = new RuleView
         model: rule
         container: listNode
-      @subview "rule-#{i}", row
-    newRow = new RuleRow
-      model: new Rule
-        pattern: ''
-        handler: ''
-      container: listNode
-    @subview "rule-new", newRow
+      @subview "rule-#{rule.cid}", row

@@ -1,23 +1,21 @@
-View = require 'views/base'
-utils = require 'lib/utils'
+Menu = require './menu'
 
+##
+#
+# Switchable Tabs based on menu
+#
+# #
+module.exports = class TabsView extends Menu
+  className: 'nav nav-tabs'
 
-# Tab switcher
-module.exports = class TabsView extends View
-  autoRender: true
-  templates: require './templates/tab'
+  render: ->
+    super
+    tgl = if 'nav-pills' in @className then 'pill' else 'tab'
+    @$el.find('.nav>li>a').data('toggle', tgl)
 
-  getTab: (e) ->
-    throw new Error('Please implement @getTab')
-
-  context: ->
-    items: @data
-
-  switch: (e) ->
-    id = $(e.target).data('id')
-    tab = @getTab(id)
-    @currentTab?.dispose()
-    tab.render()
+  doSwitch: (e) ->
+    name = $(e.currentTarget).data('name')
+    view = @subview name
 
   events:
-    'click .switch': 'switch'
+    'click .nav>li': 'doSwitch'

@@ -1,14 +1,14 @@
 {{~#each nav~}}
 <li data-name="{{name}}">
-{{#if this.url}}
-<a href="{{this.url}}" title="{{t title}}">
-  {{#if icon}}<span class="icon-{{icon}}"></span>{{/if}}
-  {{t name}}
-</a>
-{{else}}
-  <a class="toggler">
+  {{#if this.url}}
+  <a href="{{this.url}}" title="{{t title}}">
     {{#if icon}}<span class="icon-{{icon}}"></span>{{/if}}
     {{t name}}
   </a>
-{{/if}}
+  {{else}}
+    <a class="toggler">
+      {{#if icon}}<span class="icon-{{icon}}"></span>{{/if}}
+      {{t name}}
+    </a>
+  {{/if}}
 {{~/each~}}

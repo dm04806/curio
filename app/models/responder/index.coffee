@@ -5,13 +5,29 @@ mediator = require 'mediator'
 Rule = require './rule'
 
 TYPE_FILTERS =
-  text: (rule) ->
+  keyword: (rule) ->
     # rule.pattern is String means to match text messages
-    'string' == typeof rule.pattern
+    # pattern starts with a '$' means this is a shortcode pattern,
+    # should not be treated as plain keyword
+    'string' == typeof rule.pattern and rule.pattern[0] != '$'
   subscribe: (rule) ->
-    rule.pattern.type == 'event' and rule.pattern.event == 'subscribe'
+    rule.pattern == '$subscribe'
   any: (rule) ->
-    rule.pattern == '*'
+    rule.pattern == '$any'
+
+TYPE_RULES =
+  keyword:
+    pattern: ''
+    handler: ''
+  subscribe:
+    index: 0
+    pattern: '$subscribe'
+    handler: ''
+  any:
+    index: Infinity
+    type: 'keyword'
+    pattern: '$any'
+    handler: ''
 
 
 # Reply-rule
@@ -25,6 +41,13 @@ module.exports = class Responder extends Model
       rules = rules.filter(filter)
     new Collection rules, model: Rule
 
-  setFilter: (filter) ->
-    @set 'filter', filter
-    @filter = TYPE_FILTERS[filter]
+  newRule: (type) ->
+    _.extend {type: type}, TYPE_RULES[type]
+
+  canMulti: (type) ->
+    # only keyword type rule can have multiple
+    type == 'keyword'
+
+  setFilter: (type) ->
+    @set 'filter', type
+    @filter = TYPE_FILTERS[type]

@@ -25,8 +25,6 @@ module.exports = class TimeLine extends Line
     return @_timescale if @_timescale
     #.utc() # use UTC time, so dots can align correctly
     timescale = d3.time.scale()
-    if @tickInterval of d3.time
-      timescale.nice(d3.time[@tickInterval])
     @_timescale = timescale
 
   getChart: ->
@@ -42,6 +40,7 @@ module.exports = class TimeLine extends Line
 
     [interval, step] = parseInterval(@tickInterval)
     if interval of d3.time
+      timescale.nice(d3.time[interval])
       axis.tickValues (d) ->
         timescale.ticks(d3.time[interval], step)
 

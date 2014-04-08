@@ -133,8 +133,10 @@ resources:
   "": 资源
 autoreply:
   "": 自动回复
-  text: 文本消息回复
-  subscribe: 被添加自动回复
+  keyword: 关键字自动消息
+  subscribe:
+    "": 被添加自动回复
+    tip: 用户添加关注时回复的内容
   any: 消息自动回复
 stats:
   "": 统计
@@ -228,6 +230,10 @@ settings:
     h1: 账号设置
   interface: 微信接口地址
   token: 微信接口token
-rrule:
+rules:
+  create: 添加规则
+rule:
+  ptitle: "规则%s:%s"
   keyword: 关键字
   reply: 回复
+  "#panel_title": "规则%s:%s"

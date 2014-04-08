@@ -1,4 +1,7 @@
-{{#widget 'heading2' title='autoreply'}}
+{{#widget 'heading2' title=tabname}}
+  {{#compare filter 'keyword'}}
+    <button class="btn btn-sm btn-primary">{{t 'rules.create'}}</button>
+  {{/compare}}
 {{/widget}}
 <div class="row">
   <div class="col-md-3 col-md-push-9">
@@ -6,9 +9,7 @@
     </div>
   </div>
   <div class="col-md-9 col-md-pull-3">
-    <div class="big-box">
-      <form id="rules" class="form form-horizontal">
-      </form>
-    </div>
+    <form id="rules" class="form form-horizontal">
+    </form>
   </div>
 </div>
