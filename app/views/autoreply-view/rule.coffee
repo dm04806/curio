@@ -21,8 +21,9 @@ module.exports = class AutoreplyRuleView extends View
     body: require "./templates/rule/#{type}"
   render: ->
     super
+    @$body = @$el.find('.panel-body')
     replyTabs = new TabsView
       items: replyTabItems
-      container: @$el
+      container: @$body
     @subview 'reply-tabs', replyTabs
     # bind tabs

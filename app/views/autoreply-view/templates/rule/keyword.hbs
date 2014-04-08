@@ -1,16 +1,25 @@
-<div class="form-group">
-  <div class="col-sm-1 control-label">
-    {{t 'rule.keyword'}}
-  </div>
-  <div class="col-sm-9">
-    <textarea name="pattern" rows="4" class="form-control">{{json pattern}}</textarea>
-  </div>
+<div class="section-bar">
+    {{t 'rule.keywords'}}
 </div>
-<div class="form-group">
-  <div class="col-sm-1 control-label">
-    {{t 'rule.reply'}}
-  </div>
-  <div class="col-sm-9">
-    <textarea name="pattern" rows="4" class="form-control">{{json handler}}</textarea>
-  </div>
-</div>
+<ul class="list-group">
+  {{#each pattern}}
+  <li class="list-group-item">
+    <span class="text">
+      {{text}}
+    </span>
+    <span class="pull-right ops">
+      {{#if blur}}
+        <a data-op="toggle" data-blur="true" href="#">{{t 'rule.blur_match'}}</a>
+      {{else}}
+        <a data-op="toggle" data-blur="false" href="#">{{t 'rule.exact_match'}}</a>
+      {{/if}}
+      <a data-op="edit" href="#">
+        <span class="icon-pen"></span>
+      </a>
+      <a data-op="delete" href="#">
+        <span class="icon-delete"></span>
+      </a>
+    </span>
+  </li>
+  {{/each}}
+</ul>

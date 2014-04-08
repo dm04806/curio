@@ -149,7 +149,7 @@ resources:
   '': 资源
 autoreply:
   '': 自动回复
-  keyword: 关键字自动回复
+  keyword: 关键词自动回复
   subscribe:
     '':  被添加自动回复
     tip: 用户添加关注时回复的内容
@@ -274,6 +274,9 @@ rules:
   create: 添加规则
 rule:
   ptitle: 规则%s:%s
-  keyword: 关键字
+  keyword: 关键词
+  keywords: 关键词
   reply: 回复
+  blur_match: 未全部匹配
+  exact_match: 已全部匹配
 

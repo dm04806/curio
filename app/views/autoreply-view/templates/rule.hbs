@@ -1,6 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
+    <button class="btn btn-default btn-xs pull-right">
+      {{t 'expand'}}
+    </button>
     {{t 'rule.ptitle' index name}}
+    <div class="hidden form-inline name-input">
+      {{t 'name'}}
+      <input type="text" name="name" class="form-control input-sm" value="{{name}}">
+    </div>
   </div>
   <div class="panel-body">
     {{include body}}

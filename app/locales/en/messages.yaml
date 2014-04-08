@@ -19,6 +19,7 @@ remark: Remarks
 email: Email
 created_at: Created At
 admins: Admins
+manage: 管理
 detail: 详细
 save: Save
 save changes: Save changes
@@ -92,11 +93,9 @@ error:
     "": The resource you requested seems missing.
     title: Not Found
     detail: The resource you requested seems missing.
-api_error:
-  general: Request failed..
-  login failed: Incorrect username or password
+  login failed: 密码错误
   not found: 找不到请求的资源
-  not allowed: You are not allowed to do this
+  not allowed: 你没有权限执行这项操作
   Internal Server Error: 服务器内部错误
 unknown time: Unknown time
 messages:
@@ -115,6 +114,7 @@ subscribers:
     h1: "All Subscribers (%s)"
   show:
     h1: "Dialog with %s"
+  noresult: 暂时没有订阅者信息
 subscriber:
   city: City
   sex: Sex
@@ -129,18 +129,29 @@ subscribe:
   "": Subscribe
 unsubscribe:
   "": Unsubscribe
+resources:
+  "": Resources
+autoreply:
+  "": AutoReply
+  keyword: Reply by keyword
+  subscribe:
+    "": For new Subscription
+    tip: Reply to user when user first subscribed the account
+  any: For any new message
 stats:
   "": Statistics
+channels:
+  "": Channels
+locations:
+  "": Places
+shares:
+  "": Shares
 dashboard:
   "": Dashboard
   subtitle: start from here
   docker: Docker
   realtime: Realtime
-  settings_guide: 微信接入指南
-channels:
-  "": Channels
-shares:
-  "": Shares
+  settings_guide: Settings guide
 graph:
   key_index: Key Indexes
   realtime: Last 24 hours
@@ -159,7 +170,7 @@ medias:
   create: Create new media account
   delete:
     confirm: "Delete %s ?"
-    consequece: 此操作无法恢复
+    consequece: this is permanant
 media:
   name_tip: the name of this wechat official account
   uid: Wechat ID
@@ -177,7 +188,7 @@ media:
   admin:
     assign: Assign Admins
     assign_for: "Assign admins for <strong>%s</strong>"
-    type_to_search: 键入以搜索
+    type_to_search: Type to search
     not_set: Admins not setted
     role: Role
     roles:
@@ -201,7 +212,7 @@ user:
   screen_name: Screen name
   screen_name_tip: How do we call you
   email_tip: "username@example.com"
-  enter_new_password: 输入新密码
+  enter_new_password: Please enter new password
   modify_password: Modify password
   modify_password_for: "Modify password for <strong>%s</strong>"
   new_password: New password
@@ -210,11 +221,21 @@ user:
   new_password2_tip: Input the password again to confirm
 edit_passport:
   password:
-    is blank: 请输入密码
-    too short: 密码太简单了吧
-    missmatch: 两次输入的密码不一样
+    is blank: Please enter password
+    too short: Too short
+    missmatch: Password not match
 settings:
+  "": Settings
   index:
-    h1: 设置
-  interface: 微信接口地址
-  token: 微信接口 token
+    h1: Settings
+  interface: Wechat Interface
+  token: Wechat interface token
+rules:
+  create: Create a rule
+rule:
+  ptitle: "Rule %s: %s"
+  keyword: Keyword
+  keywords: 关键词
+  reply: Reply
+  blur_match: 未全部匹配
+  exact_match: 已全部匹配

@@ -35,11 +35,11 @@ module.exports = class Responder extends Model
   kind: 'responder'
 
   getRules: ->
-    filter = @filter
-    rules = @get('rules')
+    filter = @get 'filter'
+    rules = new Collection @get('rules'), model: Rule
     if filter
-      rules = rules.filter(filter)
-    new Collection rules, model: Rule
+      rules.set rules.where ({ type: filter })
+    rules
 
   newRule: (type) ->
     _.extend {type: type}, TYPE_RULES[type]
@@ -50,4 +50,3 @@ module.exports = class Responder extends Model
 
   setFilter: (type) ->
     @set 'filter', type
-    @filter = TYPE_FILTERS[type]
