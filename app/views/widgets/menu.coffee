@@ -23,20 +23,8 @@ filterNavItems = (items) ->
   return ret
 
 
-hasMenuFolded = (name) ->
-  return utils.store "menu-fold-flag:#{name}"
-
-saveFoldStatus = (name, status) ->
-  key = "menu-fold-flag:#{name}"
-  if status
-    utils.store key, 1
-  else
-    utils.store.remove key
-
-
 module.exports = class MenuView extends View
   autoRender: true
-  items: []
   className: 'nav nav-pills nav-stacked'
   tagName: 'ul'
   template: require './templates/menu'
@@ -108,19 +96,12 @@ module.exports = class MenuView extends View
           items: item.subnav
           container: @getItemNode(item)
         @subview "submenu-#{item.name}", subnav
-        setTimeout ->
-          subnav.$el
-            .height(subnav.$el.height())
-            .addClass('foldable')
-          if hasMenuFolded(item.name)
-            subnav.$el.addClass('folded')
 
-  toggleSubnav: (e) ->
-    node = $(e.target).parent()
-    subnav = node.find('.nav')
-    subnav.toggleClass('folded')
-    saveFoldStatus node.data('name'), subnav.hasClass('folded')
+  initFoldable: ->
+    setTimeout =>
+      # give a render break for element height
+      for k, v of @subviewsByName
+        v.$el.data('name', k).foldable toggler: v.$el.prev()
 
-  events:
-    'click .toggler': 'toggleSubnav'
-
+  listen:
+    'addedToDOM': 'initFoldable'

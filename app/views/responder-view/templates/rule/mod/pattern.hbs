@@ -1,0 +1,23 @@
+<ul class="list-group">
+  {{#each pattern}}
+  <li class="list-group-item">
+  <span class="text">
+    {{text}}
+  </span>
+  <span class="pull-right ops">
+    {{#if blur}}
+      <a data-op="toggle" data-blur="true" href="#">{{t 'rule.blur_match'}}</a>
+    {{else}}
+      <a data-op="toggle" data-blur="false" href="#">{{t 'rule.exact_match'}}</a>
+    {{/if}}
+    <a data-op="edit" href="#" class="lnk-icon">
+      <span class="icon-pencil"></span>
+    </a>
+    <a data-op="delete" href="#" class="lnk-icon">
+      <span class="icon-remove"></span>
+    </a>
+  </span>
+  </li>
+  {{/each}}
+</ul>
+

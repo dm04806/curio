@@ -90,3 +90,7 @@ _.assign utils,
 Object.seal? utils
 
 module.exports = utils
+
+
+# Load ui plugins
+require './ui/foldable'

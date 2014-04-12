@@ -36,6 +36,8 @@ cancel: Cancel
 confirm:
   "": Confirm
   delete: Confirm deletion
+expand: 展开
+fold: 收起
 loading: Loading...
 edit:
   "": Edit
@@ -93,11 +95,14 @@ error:
     "": The resource you requested seems missing.
     title: Not Found
     detail: The resource you requested seems missing.
-  login failed: 密码错误
+  login failed: Inavalid password or username
   not found: 找不到请求的资源
   not allowed: 你没有权限执行这项操作
   Internal Server Error: 服务器内部错误
 unknown time: Unknown time
+text: 文本
+image: 图片
+news: 图文
 messages:
   "": Messages
   index:
@@ -234,8 +239,13 @@ rules:
   create: Create a rule
 rule:
   ptitle: "Rule %s: %s"
-  keyword: Keyword
-  keywords: 关键词
   reply: Reply
+  keywords: 关键词
+  keyword:
+    "": 关键词
+    add: 添加
   blur_match: 未全部匹配
   exact_match: 已全部匹配
+  input_reply: 输入回复内容
+  choose_image: 请选择图片
+  choose_reply: 选择回复内容

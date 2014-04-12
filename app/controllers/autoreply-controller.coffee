@@ -1,5 +1,5 @@
 HomeController = require './home-controller'
-AutoreplyIndex = require 'views/autoreply-view'
+AutoreplyIndex = require 'views/responder-view'
 mediator = require 'mediator'
 
 module.exports = class AutoreplyController extends HomeController

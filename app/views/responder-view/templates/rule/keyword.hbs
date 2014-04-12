@@ -1,0 +1,36 @@
+<div class="rule-item panel panel-default" id="rule-{{index}}">
+  <div class="panel-heading">
+    <a data-toggle="#rule-detail-{{index}}" data-to-expand="{{t 'expand'}}"
+       data-to-fold="{{t 'fold'}}"
+       class="fold-toggler btn btn-default btn-xs pull-right">
+      {{t 'expand'}}
+    </a>
+    {{t 'rule.ptitle' index name}}
+    <div class="hidden form-inline name-input">
+      {{t 'name'}}
+      <input type="text" name="name" class="form-control input-sm" value="{{name}}">
+    </div>
+  </div>
+  <div id="rule-detail-{{index}}" class="foldable" data-fold="true" data-remember="true">
+    <div class="panel-body">
+      <div class="section-bar">
+        {{t 'rule.keywords'}}
+        <span class="ops pull-right">
+          <a data-op="add" href="#">{{t 'rule.keyword.add'}}</a>
+        </span>
+      </div>
+      {{include 'views/responder-view/templates/rule/mod/pattern'}}
+      <div class="section-bar">
+        {{t 'rule.reply'}}
+      </div>
+      {{include 'views/responder-view/templates/rule/mod/reply'}}
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
+      <button class="btn btn-sm btn-default" type="submit" value="delete">{{t 'delete'}}</button>
+    </div>
+  </div>
+</div>
+
+
+

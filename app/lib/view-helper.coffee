@@ -122,10 +122,12 @@ register 'set', (name, value, options) ->
 # include template
 register 'include', (tmpl, options) ->
   ret = ''
+  data = options.hash
+  data.__proto__ = this
   if 'string' is typeof tmpl
-    ret = (require tmpl)(this)
+    ret = (require tmpl)(data)
   if 'function' is typeof tmpl
-    ret = tmpl this
+    ret = tmpl data
   new SafeString(ret)
 
 

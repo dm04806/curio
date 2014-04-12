@@ -13,10 +13,10 @@
   <div class="media-body">
     <div class="{{content_type}}">
       {{#compare content_type 'text'}}
-        {{content.content}}
+        {{content}}
       {{/compare}}
       {{#compare content_type 'image'}}
-        <img src="{{content.content.picUrl}}" alt="" class="img-thumbnail">
+        <img src="{{content.picUrl}}" alt="" class="img-thumbnail">
       {{/compare}}
       {{#compare content_type 'location'}}
         <p>{{t 'message.my_location'}}:</p>
@@ -27,41 +27,7 @@
       {{#compare content_type 'voice'}}
       {{/compare}}
       {{#compare content_type 'news'}}
-        {{#compare content.content.length '>' 1}}
-          <div class="news-message multi">
-            {{#each content.content}}
-              <a href="{{url}}">
-                <h3 class="title">{{title}}</h3>
-                <div class="pic">
-                  <img src="{{picUrl}}" alt="">
-                </div>
-              </a>
-            {{/each}}
-          </div>
-        {{else}}
-          <div class="news-message">
-            {{#each content.content}}
-              <a href="{{url}}">
-                <h3 class="title">{{title}}</h3>
-                <div class="time">
-                  {{strftime 'MMM Do' created_at}}
-                </div>
-                <div class="pic">
-                  <img src="{{picUrl}}" alt="">
-                </div>
-                {{#if description}}
-                <div class="description">
-                  {{description}}
-                </div>
-                {{/if}}
-                <div class="view-full">
-                  {{t 'message.view_full'}}
-                  <i class="icon-arrow-right"></i>
-                </div>
-              </a>
-            {{/each}}
-          </div>
-        {{/compare}}
+        {{include 'views/message-view/templates/news' news=content}}
       {{/compare}}
       {{#compare content_type 'subscribe'}}
         <p>{{t 'message.subscribed'}}

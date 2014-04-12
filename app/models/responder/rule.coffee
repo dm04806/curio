@@ -11,6 +11,7 @@ module.exports = class Rrule extends Model
 
   defaults:
     type: 'keyword'
+    replyType: 'text'
     name: ''
     pattern: ''
     handler: ''
@@ -25,19 +26,15 @@ module.exports = class Rrule extends Model
     # default name to pattern
     pattern = rule.pattern or ''
     rule.name = rule.name or stringify(pattern)
+    rule.replyType = rule.handler.type or 'text'
     # set type by pattern
-    if pattern == '$subscribe'
-      rule.type = 'subscribe'
-    if pattern[0] == '$any'
-      rule.type = 'any'
+    if 'string' is typeof pattern and pattern[0] == '$'
+      rule.type = pattern.replace('$', '')
     if 'object' is typeof pattern
       rule.type = 'advanced'
     # pattern must be an Array
     if pattern and not Array.isArray(pattern)
       rule.pattern = [{ text: rule.pattern, blur: true }]
-    # handler must be an array
-    if not Array.isArray(rule.handler)
-      rule.handler = [rule.handler]
 
   set: ->
     super

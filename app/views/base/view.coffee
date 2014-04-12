@@ -4,7 +4,7 @@ utils = require 'lib/utils'
 module.exports = class View extends Chaplin.View
   initialize: ->
     # Template data context
-    @data = {}
+    @data = @data or {}
     @context = @context or {}
     super
 

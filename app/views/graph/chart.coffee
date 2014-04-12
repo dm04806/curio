@@ -18,9 +18,6 @@ localize_keys = (obj) ->
 
 class ChartView extends View
   autoRender: true
-  optionNames: View::optionNames.concat [
-    'data', 'formats', 'scales', 'chartOptions'
-  ]
   noWrap: true
   nvModel: null
 

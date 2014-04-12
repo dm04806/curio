@@ -38,7 +38,10 @@ module.exports = class Responder extends Model
     filter = @get 'filter'
     rules = new Collection @get('rules'), model: Rule
     if filter
-      rules.set rules.where ({ type: filter })
+      items = rules.where ({ type: filter })
+      if not items.length
+        items = [@newRule(filter)]
+      rules.set items
     rules
 
   newRule: (type) ->

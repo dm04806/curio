@@ -33,9 +33,6 @@ module.exports = class AutoreplyIndex extends MainView
     listNode = @$el.find('#rules')
     collection = @model.getRules()
 
-    if @model.canMulti(type) or not collection.length
-      collection.push @model.newRule(type)
-
     collection.each (rule, index) =>
       rule.set 'index', index+1
       row = new RuleView

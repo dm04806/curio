@@ -19,3 +19,7 @@ deploy:
 	@npm install
 	@bower install
 	@brunch build --production
+
+
+update_bs:
+	curl http://bootswatch.com/lumen/bootstrap.css > vendor/bootstrap/lumen.css
