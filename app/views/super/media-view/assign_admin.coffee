@@ -89,7 +89,7 @@ module.exports = class AssignAdmin extends ModalView
   clear: ->
     datums = []
 
-  submit: (e) ->
+  submit: () ->
     users = @$el.find('[name=user_id]')
     roles = @$el.find('[name=role]').map(-> @value).toArray()
     media_id = @model.id
@@ -101,15 +101,15 @@ module.exports = class AssignAdmin extends ModalView
         added[datum.id] = true
         datum.role = roles[i]
         admins.push datum
-    $(e.target).attr('disabled', true)
-    @model.save({ admins: admins }).done =>
-      @$el.modal('hide')
+    @model.save({ admins: admins }).always =>
+      @close()
     .error (xhr) =>
-      @$el.modal('hide')
       mediator.execute 'ajax-error', xhr
 
+  listen:
+    'confirm': 'submit'
+
   events:
-    'click .btn-primary': 'submit'
     'click .tt-empty': 'clear'
     'click .delete': 'removeRow'
     'click .add': 'addRow'

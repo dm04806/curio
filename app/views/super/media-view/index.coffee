@@ -8,12 +8,11 @@ AssignAdmin = require './assign_admin'
 
 class DeleteItemModal extends ModalView
   template: require './templates/delete_item_modal'
-  confirmed: ->
+
+  toConfirm: ->
     model = @model
     @$el.modal('hide')
     @trigger 'confirmed'
-  events:
-    'click .to-confirm': 'confirmed'
 
 
 module.exports = class MediaIndexView extends ListableView

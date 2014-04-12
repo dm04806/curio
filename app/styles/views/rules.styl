@@ -1,42 +1,64 @@
-.tab-pane .form-control
-  border-radius: 0 0 2px 2px
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.075)
 
 .rules-list
   .panel-footer
     text-align: right
+  .panel-body
+    padding-left: 30px
+    padding-right: 20px
   .section-bar
     line-height: 32px
-    padding: 5px 30px
-    margin: 0 -15px 15px
+    padding: 5px 25px 5px 15px
+    margin: 0 -20px 20px -30px
     background: #f0f0f0
     border-top: 1px solid #e0e0e0
+    &:first-child
+      margin-top: -15px
   .panel-heading
     font-weight: 600
   .rule-item
     margin-bottom: 10px
+  .section-bar .nav-tabs
+    display: inline-block
+    vertical-align: middle
+    margin-top: -2px
+    margin-left: 1em
+    font-size: 12px
   .nav-tabs > li > a
     border-radius: 1px
-    padding-top: 6px
-    padding-bottom: 6px
+    padding-top: 4px
+    padding-bottom: 4px
     margin-top: 0
     transition: none
+    background: #fff
   .nav-tabs > li.active > a
-    background: lighten(brand-primary, 20%)
-    color: #fff
     border-color: lighten(brand-primary, 15%)
-    border-bottom: 0
-    padding-top: 6px
-    padding-bottom: 7px
+    padding-top: 4px
+    padding-bottom: 4px
 
 
 .rule-item
   .news-message
-    margin: 20px 0
+    margin: 0 10px 0 0
+    display: inline-block
+    vertical-align: top
   .ops .lnk-icon
     margin-left: 8px
     color: #999
     text-decoration: none
 
+
+
+.pattern-item
+  &:before
+    content: '\2248'
+    display: inline-block
+    color: #ccc
+    width: 0.5em
+    font-size: 1.1em
+    line-height: 0
+    margin-top: 0.2em
+    margin-right: 0.4em
+  &.exact-match:before
+    content: '='
 
 

@@ -136,13 +136,6 @@ unsubscribe:
   "": Unsubscribe
 resources:
   "": Resources
-autoreply:
-  "": AutoReply
-  keyword: Reply by keyword
-  subscribe:
-    "": For new Subscription
-    tip: Reply to user when user first subscribed the account
-  any: For any new message
 stats:
   "": Statistics
 channels:
@@ -235,6 +228,13 @@ settings:
     h1: Settings
   interface: Wechat Interface
   token: Wechat interface token
+autoreply:
+  "": AutoReply
+  keyword: Reply by keyword
+  subscribe:
+    "": For new Subscription
+    tip: Reply to user when user first subscribed the account
+  any: For any new message
 rules:
   create: Create a rule
 rule:
@@ -249,3 +249,9 @@ rule:
   input_reply: 输入回复内容
   choose_image: 请选择图片
   choose_reply: 选择回复内容
+  $subscribe:
+    title: 用户添加关注时回复的内容
+  add_pattern:
+    "": 添加关键字
+    tip: 输入回车可添加多个关键字，每个关键字少于30个字符
+  edit_pattern: 修改关键字

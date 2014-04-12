@@ -1,22 +1,20 @@
-<ul class="list-group">
+<ul class="list-group pattern-group">
   {{#each pattern}}
-  <li class="list-group-item">
-  <span class="text">
-    {{text}}
-  </span>
-  <span class="pull-right ops">
-    {{#if blur}}
-      <a data-op="toggle" data-blur="true" href="#">{{t 'rule.blur_match'}}</a>
-    {{else}}
-      <a data-op="toggle" data-blur="false" href="#">{{t 'rule.exact_match'}}</a>
-    {{/if}}
-    <a data-op="edit" href="#" class="lnk-icon">
-      <span class="icon-pencil"></span>
-    </a>
-    <a data-op="delete" href="#" class="lnk-icon">
-      <span class="icon-remove"></span>
-    </a>
-  </span>
+  <li class="list-group-item pattern-item {{#unless blur}}exact-match{{/unless}}" data-index="{{@index}}">
+    <span class="keyword">{{text}}</span>
+    <span class="pull-right ops">
+      {{#if blur}}
+        <a data-op="toggleMatch" data-blur="true" href="#">{{t 'rule.blur_match'}}</a>
+      {{else}}
+        <a data-op="toggleMatch" data-blur="false" href="#">{{t 'rule.exact_match'}}</a>
+      {{/if}}
+      <a data-op="editKeyword" href="#" class="lnk-icon">
+        <span class="icon-pencil"></span>
+      </a>
+      <a data-op="deleteKeyword" href="#" class="lnk-icon">
+        <span class="icon-remove"></span>
+      </a>
+    </span>
   </li>
   {{/each}}
 </ul>

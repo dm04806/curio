@@ -1,8 +1,3 @@
-<ul class="nav nav-tabs nav-tabs-sm reply-types">
-  <li><a data-type="text" href="#reply{{index}}-text" data-toggle="tab">{{t 'text'}}</a></li>
-  <li><a data-type="image" href="#reply{{index}}-image" data-toggle="tab">{{t 'image'}}</a></li>
-  <li><a data-type="news" href="#reply{{index}}-news" data-toggle="tab">{{t 'news'}}</a></li>
-</ul>
 <div class="tab-content">
   <div id="reply{{index}}-text" class="tab-pane">
     <textarea class="form-control" name="handler" cols="40" rows="6" placeholder="{{t 'rule.input_reply'}}">
@@ -17,6 +12,9 @@
     {{~#compare replyType 'news' ~}}
       {{include 'views/message-view/templates/news' news=handler.content }}
     {{~/compare~}}
+    <button data-op="chooseNews" class="btn btn-default" type="button">
+      {{t 'rule.choose_reply'}}
+    </button>
   </div>
 </div>
 

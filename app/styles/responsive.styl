@@ -1,0 +1,40 @@
+screen-phone = screen-xs = 480px
+screen-tablet = screen-sm = 768px
+screen-desktop = screen-md = 992px
+below_md = '(max-width: ' + (screen-md - 1px) + ')'
+below_sm = '(max-width: ' + (screen-sm - 1px) + ')'
+below_xs = '(max-width: ' + (screen-xs - 1px) + ')'
+above_md = '(min-width: ' + screen-md + ')'
+above_sm = '(min-width: ' + screen-sm + ')'
+above_xs = '(min-width: ' + screen-xs + ')'
+
+
+@media below_sm
+  .navbar
+    min-height: 40px
+  #header
+    .navbar-brand
+      width: auto
+      float: none
+      text-align: center
+      height: 40px
+      i
+        margin-left: auto
+        margin-right: auto
+        width: 160px
+  .sidebar-nav
+    position: relative
+    top: -5px
+    padding: 10px 10px 8px
+    width: auto
+    .main-menu > .nav > li
+      width: 33.33%
+      vertical-align: top
+      text-align: center
+      display: inline-block
+      border-width: 1px
+      margin-right: -1px
+      margin-bottom: 5px
+  .layout-normal
+    #main
+      margin-left: 0

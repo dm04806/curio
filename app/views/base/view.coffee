@@ -29,3 +29,13 @@ module.exports = class View extends Chaplin.View
   dispose: ->
     @trigger 'dispose'
     super
+
+  events:
+    # operation handler
+    'click [data-op]': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      node = $(e.currentTarget)
+      op = node.data('op')
+      @[op](node)
+

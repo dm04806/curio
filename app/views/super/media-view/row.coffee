@@ -10,7 +10,6 @@ module.exports = class MediaRowView extends ItemView
     # give an animation to get the user's attention
     node = @$el.children()
     color = node.css('backgroundColor')
-    console.log color
     node.css('backgroundColor', BG_MODIFIED)
       .delay(1000)
       .animate({

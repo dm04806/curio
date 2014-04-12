@@ -1,15 +1,9 @@
 <div class="rule-item panel panel-default" id="rule-{{index}}">
   <div class="panel-heading">
-    {{t 'rule.ptitle' index name}}
-    <div class="hidden form-inline name-input">
-      {{t 'name'}}
-      <input type="text" name="name" class="form-control input-sm" value="{{name}}">
-    </div>
+    {{t title}}
+    <input type="hidden" name="pattern" class="form-control input-sm" value="{{pattern}}">
   </div>
   <div class="panel-body">
-    <p class="tip text-muted">
-    {{t 'autoreply.subscribe.tip'}}
-    </p>
     <input type="hidden" name="pattern" value="{{pattern}}">
     <div class="form-group">
       <div class="col-sm-12">

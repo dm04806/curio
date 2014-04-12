@@ -3,6 +3,12 @@ View = require 'views/base/view'
 ##
 # A auto shown modal
 #
+# Usage:
+#
+#   1. Assign custom template
+#   2. Add a 'button[data-op="toConfirm"]'
+#   3. listenTo 'confirm' event
+#
 module.exports = class ModalView extends View
   autoRender: true
   noWrap: true
@@ -22,3 +28,10 @@ module.exports = class ModalView extends View
       # dispose view when modal closed
       @dispose()
     @$el.modal()
+
+  close: () ->
+    @$el.modal('hide')
+
+  toConfirm: (e) ->
+    $(e.currentTarget).attr('disabled', true)
+    @trigger 'confirm'

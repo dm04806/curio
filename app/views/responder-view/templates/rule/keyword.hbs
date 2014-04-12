@@ -16,18 +16,29 @@
       <div class="section-bar">
         {{t 'rule.keywords'}}
         <span class="ops pull-right">
-          <a data-op="add" href="#">{{t 'rule.keyword.add'}}</a>
+          <a data-op="addPattern" href="#">{{t 'rule.keyword.add'}}</a>
         </span>
       </div>
       {{include 'views/responder-view/templates/rule/mod/pattern'}}
       <div class="section-bar">
         {{t 'rule.reply'}}
+        <ul class="nav nav-tabs nav-tabs-sm reply-types">
+          <li><a data-type="text" href="#reply{{index}}-text" data-toggle="tab">
+            <span class="icon-quill"></span>
+            {{t 'text'}}</a></li>
+          <li><a data-type="image" href="#reply{{index}}-image" data-toggle="tab">
+            <span class="icon-image"></span>
+            {{t 'image'}}</a></li>
+          <li><a data-type="news" href="#reply{{index}}-news" data-toggle="tab">
+            <span class="icon-newspaper"></span>
+            {{t 'news'}}</a></li>
+        </ul>
       </div>
       {{include 'views/responder-view/templates/rule/mod/reply'}}
     </div>
     <div class="panel-footer">
-      <button class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
-      <button class="btn btn-sm btn-default" type="submit" value="delete">{{t 'delete'}}</button>
+      <button data-op="saveRule" class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
+      <button data-op="deleteRule" class="btn btn-sm btn-default" type="submit" value="delete">{{t 'delete'}}</button>
     </div>
   </div>
 </div>
