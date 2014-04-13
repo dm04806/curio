@@ -21,10 +21,20 @@ module.exports = class AutoreplyRuleView extends View
 
   render: ->
     super
-    @$el.find('.foldable').foldable remember: false
-    @switchReplyType()
+    folder = @$el.find('.foldable').foldable({ remember: false })
+    folder.on 'unfold', =>
+      @$el.siblings().each (i, item) ->
+        $(item).data('folder').fold()
+    @$el.data 'folder', folder.data('curio.foldable')
+    @switchReplyTab()
 
-  switchReplyType: () ->
+  fold: ->
+    @$el.data('folder').fold()
+
+  unfold: ->
+    @$el.data('folder').unfold()
+
+  switchReplyTab: () ->
     tab = @$el.find(".reply-types a[data-type=#{@model.get 'replyType'}]")
     return if not tab.length
     target = @$el.find(tab.attr('href'))
@@ -72,15 +82,32 @@ module.exports = class AutoreplyRuleView extends View
     html = require('./templates/rule/mod/pattern')(@model.toJSON())
     @$el.find('.pattern-group').replaceWith html
 
+  renderPtitle: () ->
+    @$el.find('.ptitle').html(@model.ptitle())
+
   saveRule: (node) ->
+    if not @model.get('pattern')?.length
+      common.alert('rule.error.pattern.is required')
+      return
     @disable(node)
-    @model.destroy().done =>
-      @enable(node)
-      @$el.find('.foldable').foldable('toggle')
+    @syncReply()
+    @model.save().done =>
+      setTimeout =>
+        @enable(node)
+        # to enable a slide transition
+        folder = @$el.data('folder')
+        folder.$el.height(folder.$el.height())
+        setTimeout ->
+          folder.fold()
+          folder.$el.height('auto')
+      , 100
     .error (xhr) =>
       @fail(xhr, node)
 
   deleteRule: (node) ->
+    if @model.index < 0
+      @$el.next().data('folder')?.unfold()
+      return @dispose()
     view = common.confirm __('rule.delete_rule.confirm', @model.ptitle())
     view.on 'confirm', =>
       view.close()
@@ -89,6 +116,13 @@ module.exports = class AutoreplyRuleView extends View
         @dispose()
       .error (xhr) =>
         @fail(xhr, node)
+
+  # Sync reply content
+  syncReply: () ->
+    pane = @$el.find('.tab-pane.active')
+    type = pane.data('type')
+    if type == 'text'
+      @model.set 'handler', pane.find('textarea').val()
 
   enable: (node) ->
     (node or @_last_disabled)?.removeAttr('disabled')
@@ -101,10 +135,13 @@ module.exports = class AutoreplyRuleView extends View
 
   fail: (xhr, node) ->
     msg = utils.xhrError(xhr)
+    detail = xhr.responseJSON?.detail?[0]
+    if detail
+      msg = "rule.error.#{detail.field}.#{detail.error}"
     view = common.alert(msg or 'error.general')
     view.on 'dispose', =>
       @enable(node)
 
   listen:
-    'change:replyType model': 'switchReplyType'
     'change:pattern model': 'renderPatternList'
+    'change:name model': 'renderPtitle'

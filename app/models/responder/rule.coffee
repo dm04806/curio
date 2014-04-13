@@ -3,16 +3,19 @@ Model = require 'models/base/model'
 stringify = (s) ->
   if Array.isArray(s)
     s = s.map (item) ->
-      item.text or item
-    s = s.join(', ')
+      (item.text or item.value or item).btrunc(5)
+    s = s.slice(0,3).join(', ')
   if 'string' != typeof s
-    s = JSON.stringify(s)
+    s = (s.value or JSON.stringify(s)).btrunc(15)
   return s
 
 keywords2pattern = (words) ->
   words.map (item) ->
-    text: item,
-    blur: true
+    if 'string' == typeof item
+      text: item
+      blur: true
+    else
+      item
 
 
 
@@ -21,16 +24,14 @@ module.exports = class Rule extends Model
 
   kind: 'rrule'
 
-  defaults:
-    type: 'keyword'
-    replyType: 'text'
-
   is: (type) ->
     @get('type') == type
 
   initialize: ->
     super
     @validate()
+    @on 'change:pattern', (model, data) ->
+      @set 'name', stringify(data)
 
   ##
   # normalize attrs for render and edit
@@ -39,8 +40,8 @@ module.exports = class Rule extends Model
     rule = attrs or @attributes
     pattern = rule.pattern or ''
 
-    # default name to pattern
-    rule.name = rule.name or stringify(pattern)
+    # sync name with pattern
+    rule.name = stringify(pattern)
 
     # determine reply type based on handler
     rule.replyType = rule.handler.type or 'text'
@@ -49,8 +50,10 @@ module.exports = class Rule extends Model
       # set type by pattern
       if 'string' is typeof pattern and pattern[0] == '$'
         rule.type = pattern.replace('$', '')
-      if 'object' is typeof pattern
+      else if 'object' is typeof pattern
         rule.type = 'advanced'
+      else
+        rule.type = 'keyword'
 
     # pattern will always be an Array
     if pattern and not Array.isArray(pattern)
@@ -76,7 +79,6 @@ module.exports = class Rule extends Model
     @set 'pattern', p
 
   removeKeyword: (index) ->
-    console.log index
     p = @attributes.pattern.slice()
     p.splice(index, 1)
     @set 'pattern', p

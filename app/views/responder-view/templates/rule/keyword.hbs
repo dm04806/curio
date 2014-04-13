@@ -8,11 +8,9 @@
        class="fold-toggler btn btn-default btn-xs pull-right">
       {{t 'expand'}}
     </a>
-    {{ptitle}}
-    <div class="hidden form-inline name-input">
-      {{t 'name'}}
-      <input type="text" name="name" class="form-control input-sm" value="{{name}}">
-    </div>
+    <span class="ptitle">
+      {{ptitle}}
+    </span>
   </div>
   <div id="rule-detail-{{index}}" class="foldable" data-fold="true" data-remember="true">
     <div class="panel-body">
@@ -29,6 +27,8 @@
       <button data-op="saveRule" class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
       <button data-op="deleteRule" class="btn btn-sm btn-default" type="submit" value="delete">{{t 'delete'}}</button>
     </div>
+  </div>
+  <div class="sumary">
   </div>
 </div>
 

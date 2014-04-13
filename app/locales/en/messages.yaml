@@ -246,6 +246,7 @@ rules:
 rule:
   ptitle: "Rule %s: %s"
   reply: Reply
+  name: 规则名
   keywords: 关键词
   keyword:
     "": 关键词
@@ -267,3 +268,8 @@ rule:
     "": 删除关键字
   delete_rule:
     confirm: 真的要删除这条规则吗？
+  error:
+    handler:
+      is required: 请填写回复内容
+    pattern:
+      is required: 请填写关键字

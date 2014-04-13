@@ -13,14 +13,14 @@
   </ul>
 </div>
 <div class="tab-content">
-  <div id="reply{{index}}-text" class="tab-pane">
+  <div data-type="text" id="reply{{index}}-text" class="tab-pane">
     <textarea class="form-control" name="handler" cols="40" rows="6" placeholder="{{t 'rule.input_reply'}}">
       {{~#compare replyType 'text' ~}}
         {{handler}}
       {{~/compare~}}
     </textarea>
   </div>
-  <div id="reply{{index}}-image" class="tab-pane">
+  <div data-type="image" id="reply{{index}}-image" class="tab-pane">
     {{~#compare replyType 'image' ~}}
       {{include 'views/message-view/templates/content/image'}}
     {{~/compare~}}
@@ -29,7 +29,7 @@
       {{t 'rule.choose_image'}}
     </button>
   </div>
-  <div id="reply{{index}}-news" class="tab-pane">
+  <div data-type="news" id="reply{{index}}-news" class="tab-pane">
     {{~#compare replyType 'news' ~}}
       {{include 'views/message-view/templates/content/news' content=handler.content }}
     {{~/compare~}}

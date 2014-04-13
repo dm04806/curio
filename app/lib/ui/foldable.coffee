@@ -88,7 +88,7 @@ getId = (node) ->
   node.attr('id') or node.data('name') or node.parent().attr('id')
 
 
-$.fn.foldable = (options) ->
+$.fn.foldable = (options, args...) ->
   options = options or {}
   if 'string' == typeof options
     options = { act: options }
@@ -98,7 +98,7 @@ $.fn.foldable = (options) ->
     foldable = new Foldable(options)
     @data('curio.foldable', foldable)
   if options.act
-    return foldable[options.act]()
+    return foldable[options.act](args...)
   return this
 
 

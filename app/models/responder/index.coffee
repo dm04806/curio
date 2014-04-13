@@ -43,7 +43,6 @@ module.exports = class Responder extends Model
     # create a collection containing all the rules
     @rules = new Collection @get('rules'), model: Rule
     @rules.on 'change', =>
-      console.log @rules.serialize()
       @set 'rules', @rules.serialize()
     @rules.each (rule) =>
       rule.responder = this
@@ -64,8 +63,10 @@ module.exports = class Responder extends Model
     rules
 
   newRule: (type) ->
-    type = type or 'keyword'
-    _.extend {type: type}, TYPE_RULES[type]
+    type = type or @filter or 'keyword'
+    rule = new Rule _.extend {type: type}, TYPE_RULES[type]
+    rule.responder = this
+    rule
 
   canMulti: (type) ->
     # only keyword type rule can have multiple

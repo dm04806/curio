@@ -50,8 +50,8 @@ makeurl = (url, params) ->
 String.prototype.blength = () ->
   this.replace(/\n\r/g, '\n').replace(/[^\x00-\xff]/g, 'xx').length
 
-String.prototype.btrunc = (limit) ->
-  btrunc(this, limit)
+String.prototype.btrunc = (limit, ellips) ->
+  btrunc(this, limit, ellips)
 
 
 trunc = (text, limit) ->
