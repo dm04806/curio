@@ -16,18 +16,15 @@
         {{content}}
       {{/compare}}
       {{#compare content_type 'image'}}
-        <img src="{{content.picUrl}}" alt="" class="img-thumbnail">
+        {{include 'views/message-view/templates/content/image'}}
       {{/compare}}
       {{#compare content_type 'location'}}
-        <p>{{t 'message.my_location'}}:</p>
-        {{#with content.content}}
-          <img src="{{mapImg lat lng}}" alt="{{label}}" class="img-thumbnail">
-        {{/with}}
+        {{include 'views/message-view/templates/content/location'}}
       {{/compare}}
       {{#compare content_type 'voice'}}
       {{/compare}}
       {{#compare content_type 'news'}}
-        {{include 'views/message-view/templates/news' news=content}}
+        {{include 'views/message-view/templates/content/news'}}
       {{/compare}}
       {{#compare content_type 'subscribe'}}
         <p>{{t 'message.subscribed'}}

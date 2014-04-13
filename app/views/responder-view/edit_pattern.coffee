@@ -23,9 +23,10 @@ module.exports = class EditPatternModal extends ModalView
     @$inputer = @$el.find('textarea')
 
   context: ->
-    title: if @isAddMode then 'rule.add_pattern' else 'rule.edit_pattern'
+    title: if @isAddMode then 'rule.add_keyword' else 'rule.edit_keyword'
 
   pushItem: () ->
+    return if not @isAddMode
     p = $.trim(@val())
     if not p
       return

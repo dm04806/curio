@@ -20,8 +20,8 @@ module.exports = class AutoreplyIndex extends MainView
   template: require './templates/index'
 
   render: ->
-    type = @model.get 'filter'
-    @data.tabname = "autoreply.#{type}"
+    filter = @model.filter
+    @data.tabname = "autoreply.#{filter}"
     super # render the DOM
     # register tab view
     @subview 'tabs', new Menu
@@ -32,10 +32,15 @@ module.exports = class AutoreplyIndex extends MainView
     # render rules list
     listNode = @$el.find('#rules')
     collection = @model.getRules()
-
+    counter = 0
     collection.each (rule, index) =>
-      rule.set 'index', index+1
+      return if rule.invisible
+      rule.index = counter
+      counter += 1
       row = new RuleView
         model: rule
         container: listNode
       @subview "rule-#{rule.cid}", row
+
+  context: ->
+    filter: @model.filter

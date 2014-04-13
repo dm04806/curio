@@ -3,6 +3,8 @@ class CurioError extends Error
   constructor: (@code) ->
   category: 'danger'
   closable: true
+  toString: ->
+    @title
   toJSON: ->
     code: @code
     title: @title
@@ -13,7 +15,7 @@ Object.defineProperties CurioError.prototype,
   title:
     get: ->
       # Error messages is stored in i18n
-      __g("error.#{@code}.title") or __('error.general')
+      __g("error.#{@code}.title") or __g("error.#{@code}") or __('error.general')
   detail:
     get: ->
       __g("error.#{@code}.detail")

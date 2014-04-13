@@ -38,15 +38,27 @@ class Foldable
         e.preventDefault()
         @toggle()
 
-  toggle: (e) ->
-    @$el.toggleClass('folded')
+  toggle: (fold) ->
+    fold = if fold? then fold else !@$el.hasClass('folded')
+    if fold
+      @$el.addClass('folded')
+      @$el.trigger('fold')
+    else
+      @$el.removeClass('folded')
+      @$el.trigger('unfold')
     if @options.remember
-      @saveStatus()
+      @saveStatus(fold)
     @updateToggler()
     return this
 
+  fold: ->
+    @toggle(true)
+
+  unfold: ->
+    @toggle(false)
+
   # update toggler text
-  updateToggler: (e) ->
+  updateToggler: () ->
     el = @$el
     node = el.parent().find('.fold-toggler')
     if not node.length
@@ -62,8 +74,8 @@ class Foldable
     # get fold status from storage
     utils.store "fold-flag:#{@id}"
 
-  saveStatus: () ->
-    status = @$el.hasClass('folded')
+  saveStatus: (status) ->
+    status = if status? then status else @$el.hasClass('folded')
     key = "fold-flag:#{@id}"
     if status
       utils.store key, 1

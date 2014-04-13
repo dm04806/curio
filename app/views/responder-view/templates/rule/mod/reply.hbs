@@ -1,3 +1,17 @@
+<div class="section-bar">
+  {{t 'rule.reply'}}
+  <ul class="nav nav-tabs nav-tabs-sm reply-types">
+    <li><a data-type="text" href="#reply{{index}}-text" data-toggle="tab">
+      <span class="icon-quill"></span>
+      {{t 'text'}}</a></li>
+    <li><a data-type="image" href="#reply{{index}}-image" data-toggle="tab">
+      <span class="icon-image"></span>
+      {{t 'image'}}</a></li>
+    <li><a data-type="news" href="#reply{{index}}-news" data-toggle="tab">
+      <span class="icon-newspaper"></span>
+      {{t 'news'}}</a></li>
+  </ul>
+</div>
 <div class="tab-content">
   <div id="reply{{index}}-text" class="tab-pane">
     <textarea class="form-control" name="handler" cols="40" rows="6" placeholder="{{t 'rule.input_reply'}}">
@@ -7,10 +21,17 @@
     </textarea>
   </div>
   <div id="reply{{index}}-image" class="tab-pane">
+    {{~#compare replyType 'image' ~}}
+      {{include 'views/message-view/templates/content/image'}}
+    {{~/compare~}}
+    <button data-op="chooseImage" class="btn btn-default" type="button">
+      <span class="icon-image"></span>
+      {{t 'rule.choose_image'}}
+    </button>
   </div>
   <div id="reply{{index}}-news" class="tab-pane">
     {{~#compare replyType 'news' ~}}
-      {{include 'views/message-view/templates/news' news=handler.content }}
+      {{include 'views/message-view/templates/content/news' content=handler.content }}
     {{~/compare~}}
     <button data-op="chooseNews" class="btn btn-default" type="button">
       {{t 'rule.choose_reply'}}

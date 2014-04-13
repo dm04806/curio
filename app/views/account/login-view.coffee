@@ -35,6 +35,6 @@ module.exports = class LoginMain extends FormView
         @msg("error.#{res?.error or 'general'}")
     .fail (res) =>
       # show as server error
-      mediator.execute 'ajax-error', res, (err) =>
-        err = err.code or err
-        @msg("error.#{err}")
+      err = utils.xhrError(res)
+      err = err.code or err
+      @msg("error.#{err}")

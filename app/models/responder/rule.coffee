@@ -1,6 +1,10 @@
 Model = require 'models/base/model'
 
 stringify = (s) ->
+  if Array.isArray(s)
+    s = s.map (item) ->
+      item.text or item
+    s = s.join(', ')
   if 'string' != typeof s
     s = JSON.stringify(s)
   return s
@@ -10,13 +14,19 @@ keywords2pattern = (words) ->
     text: item,
     blur: true
 
+
+
 # Reply-rule
-module.exports = class Rrule extends Model
+module.exports = class Rule extends Model
+
   kind: 'rrule'
 
   defaults:
     type: 'keyword'
     replyType: 'text'
+
+  is: (type) ->
+    @get('type') == type
 
   initialize: ->
     super
@@ -35,11 +45,12 @@ module.exports = class Rrule extends Model
     # determine reply type based on handler
     rule.replyType = rule.handler.type or 'text'
 
-    # set type by pattern
-    if 'string' is typeof pattern and pattern[0] == '$'
-      rule.type = pattern.replace('$', '')
-    if 'object' is typeof pattern
-      rule.type = 'advanced'
+    if not rule.type
+      # set type by pattern
+      if 'string' is typeof pattern and pattern[0] == '$'
+        rule.type = pattern.replace('$', '')
+      if 'object' is typeof pattern
+        rule.type = 'advanced'
 
     # pattern will always be an Array
     if pattern and not Array.isArray(pattern)
@@ -58,5 +69,35 @@ module.exports = class Rrule extends Model
     @set 'pattern', p
 
   updateKeyword: (index, data) ->
-    _.assign @attributes.pattern[index], data
+    # always use a new Array, to trigger the 'change' event
+    p = @attributes.pattern.slice()
+    # the single element must use new Object, too
+    p[index] = _.assign {}, p[index], data
+    @set 'pattern', p
 
+  removeKeyword: (index) ->
+    console.log index
+    p = @attributes.pattern.slice()
+    p.splice(index, 1)
+    @set 'pattern', p
+
+  save: ->
+    @responder.save()
+
+  destroy: ->
+    resp = @responder
+    coll = @collection
+    coll.remove this
+    resp.save()
+      .error =>
+        # add it back if save failed.
+        coll.add this
+
+  ptitle: ->
+    if @is('keyword')
+      __("rule.ptitle", @index + 1, @get('name'))
+    else
+      __("rule.#{@get 'name'}.title")
+
+  serialize: ->
+    _.clone(@attributes)

@@ -1,0 +1,22 @@
+{{#widget 'modal' id='confirm-modal' class='modal alert-modal'}}
+  {{#if message}}
+    <h4>
+      {{{message}}}
+    </h4>
+  {{/if}}
+  {{#if detail}}
+    <p>
+    {{{detail}}}
+    </p>
+  {{/if}}
+  {{#set 'footer'}}
+    {{#if cancel_button}}
+    <button type="button" class="btn {{cancel_button_class}}" data-op="toCancel">{{cancel_button}}</button>
+    {{/if}}
+    {{#if confirm_button}}
+    <button type="submit" class="btn {{confirm_button_class}}" data-op="toConfirm">{{confirm_button}}</button>
+    {{/if}}
+  {{/set}}
+{{/widget}}
+
+

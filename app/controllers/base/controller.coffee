@@ -43,7 +43,7 @@ module.exports = class Controller extends Chaplin.Controller
         @redirectTo 'login#index'
         return false
       if not mediator.user.permitted(permit, mediator.media)
-        mediator.execute 'site-error', new AccessError "need_#{permit}"
+        mediator.execute 'site-error', new AccessError "need #{permit}"
         return false
     true
 

@@ -82,3 +82,25 @@ spinner-color(color)
 .spinner30
   @extend .spinner
   spinner-size(30px)
+
+.loading-overlay
+  position: absolute
+  z-index: 1
+  left: 0
+  right: 0
+  bottom: 0
+  top: 0
+  background: rgba(255,255,255,0.7)
+  .spinner
+    position: absolute
+    top: 44%
+
+
+.loading-indicator
+  display: none
+  text-align: center
+  padding: 50px
+
+.loading .loading-indicator
+  display: block
+

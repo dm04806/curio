@@ -31,11 +31,16 @@ next: next
 admin: admin
 close: Close
 add: Add
-delete: Delete
+delete:
+  "": 删除
+  confirm: 真的要删除吗？
 cancel: Cancel
+ok: 好了
 confirm:
   "": Confirm
   delete: Confirm deletion
+alert:
+  ok: 知道了
 expand: 展开
 fold: 收起
 loading: Loading...
@@ -79,24 +84,25 @@ error:
     "": Please check you network connection
     title: Network Issue
     detail: Please check your network connection
-  session_timeout:
+  session timeout:
     "": "Session timeout, try login again"
     title: Session Timeout
     detail: "Please try <a href=\"/login\">Login</a> again."
-  need_panel:
+  need panel:
     "": No official wechat account for manage
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
-  need_super:
+  bad fields:
+    "": 非法的请求来源
+  need super:
     "": You must be a super user to continue.
     title: Not Accessible
     detail: You are not a super admin
-  not_found:
-    "": The resource you requested seems missing.
-    title: Not Found
-    detail: The resource you requested seems missing.
+  not found:
+    "": 找不到所请求的资源
+    title: 没有了
+    detail: 这个东西好像已经没有了
   login failed: Inavalid password or username
-  not found: 找不到请求的资源
   not allowed: 你没有权限执行这项操作
   Internal Server Error: 服务器内部错误
 unknown time: Unknown time
@@ -251,7 +257,13 @@ rule:
   choose_reply: 选择回复内容
   $subscribe:
     title: 用户添加关注时回复的内容
-  add_pattern:
+  $any:
+    title: 未匹配到任何其他规则时回复
+  add_keyword:
     "": 添加关键字
-    tip: 输入回车可添加多个关键字，每个关键字少于30个字符
-  edit_pattern: 修改关键字
+    tip: 输入回车可添加多个关键字
+  edit_keyword: 修改关键字
+  delete_keyword:
+    "": 删除关键字
+  delete_rule:
+    confirm: 真的要删除这条规则吗？

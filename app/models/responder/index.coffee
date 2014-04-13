@@ -24,7 +24,7 @@ TYPE_RULES =
     pattern: '$subscribe'
     handler: ''
   any:
-    index: Infinity
+    index: 9999
     type: 'keyword'
     pattern: '$any'
     handler: ''
@@ -34,17 +34,37 @@ TYPE_RULES =
 module.exports = class Responder extends Model
   kind: 'responder'
 
+  url: ->
+    "#{@apiRoot}/medias/#{@get 'media_id'}/responder"
+
+  idAttribute: 'media_id'
+
+  initialize: ->
+    # create a collection containing all the rules
+    @rules = new Collection @get('rules'), model: Rule
+    @rules.on 'change', =>
+      console.log @rules.serialize()
+      @set 'rules', @rules.serialize()
+    @rules.each (rule) =>
+      rule.responder = this
+
   getRules: ->
-    filter = @get 'filter'
-    rules = new Collection @get('rules'), model: Rule
-    if filter
-      items = rules.where ({ type: filter })
-      if not items.length
-        items = [@newRule(filter)]
-      rules.set items
+    filter = @filter
+    total = 0
+    rules = @rules
+    rules.each (rule) ->
+      if filter and not rule.is(filter)
+        rule.invisible = true
+      else
+        total += 1
+        rule.invisible = false
+      return
+    if not total
+      rules.add @newRule(filter)
     rules
 
   newRule: (type) ->
+    type = type or 'keyword'
     _.extend {type: type}, TYPE_RULES[type]
 
   canMulti: (type) ->
@@ -52,4 +72,4 @@ module.exports = class Responder extends Model
     type == 'keyword'
 
   setFilter: (type) ->
-    @set 'filter', type
+    @filter = type

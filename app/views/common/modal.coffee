@@ -23,7 +23,7 @@ module.exports = class ModalView extends View
     super
     @$el.on 'show.bs.modal', ->
       $(document.body).addClass('modal-open')
-    .on 'hidden.bs.modal', '.modal', =>
+    .on 'hidden.bs.modal', =>
       $(document.body).removeClass('modal-open')
       # dispose view when modal closed
       @dispose()
@@ -35,3 +35,7 @@ module.exports = class ModalView extends View
   toConfirm: (e) ->
     $(e.currentTarget).attr('disabled', true)
     @trigger 'confirm'
+
+  toCancel: (e) ->
+    @trigger 'cancel'
+    @close()

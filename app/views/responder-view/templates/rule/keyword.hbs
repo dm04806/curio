@@ -1,11 +1,14 @@
 <div class="rule-item panel panel-default" id="rule-{{index}}">
+  <div class="loading-indicator loading-overlay">
+    <div class="spinner spinner30"></div>
+  </div>
   <div class="panel-heading">
     <a data-toggle="#rule-detail-{{index}}" data-to-expand="{{t 'expand'}}"
        data-to-fold="{{t 'fold'}}"
        class="fold-toggler btn btn-default btn-xs pull-right">
       {{t 'expand'}}
     </a>
-    {{t 'rule.ptitle' index name}}
+    {{ptitle}}
     <div class="hidden form-inline name-input">
       {{t 'name'}}
       <input type="text" name="name" class="form-control input-sm" value="{{name}}">
@@ -16,24 +19,10 @@
       <div class="section-bar">
         {{t 'rule.keywords'}}
         <span class="ops pull-right">
-          <a data-op="addPattern" href="#">{{t 'rule.keyword.add'}}</a>
+          <a data-op="addKeyword" href="#">{{t 'rule.keyword.add'}}</a>
         </span>
       </div>
       {{include 'views/responder-view/templates/rule/mod/pattern'}}
-      <div class="section-bar">
-        {{t 'rule.reply'}}
-        <ul class="nav nav-tabs nav-tabs-sm reply-types">
-          <li><a data-type="text" href="#reply{{index}}-text" data-toggle="tab">
-            <span class="icon-quill"></span>
-            {{t 'text'}}</a></li>
-          <li><a data-type="image" href="#reply{{index}}-image" data-toggle="tab">
-            <span class="icon-image"></span>
-            {{t 'image'}}</a></li>
-          <li><a data-type="news" href="#reply{{index}}-news" data-toggle="tab">
-            <span class="icon-newspaper"></span>
-            {{t 'news'}}</a></li>
-        </ul>
-      </div>
       {{include 'views/responder-view/templates/rule/mod/reply'}}
     </div>
     <div class="panel-footer">

@@ -21,7 +21,7 @@ mediator.setHandler 'site-error', (err)->
     mediator.site_error = null
   if err not instanceof CurioError
     err = new CurioError err
-  if err.code is 'need_panel' and mediator.user?.isSuper
+  if err.code is 'need panel' and mediator.user?.isSuper
     # when no media, redirect to super admin page
     return utils.redirectTo 'super/home#index'
   # try to resolve this error
@@ -36,20 +36,6 @@ mediator.setHandler 'site-error', (err)->
 #
 # Ajax error handler
 #
-mediator.setHandler 'ajax-error', (xhr, fn) ->
-  json = xhr.responseJSON or {}
-  if xhr.status == 401
-    # this ajax request is unauthorized
-    err = new AccessError(json.error or 'session_timeout')
-  else if xhr.status == 403
-    err = new AccessError(json.error or 'not_allowed')
-  else if xhr.status == 404
-    err = 'not_found'
-  else if xhr.status
-    err = 'server'
-  else
-    err = 'network'
-  if not fn
-    mediator.execute 'site-error', err
-  else
-    fn err
+mediator.setHandler 'ajax-error', (xhr) ->
+  err = utils.xhrError(xhr)
+  mediator.execute 'site-error', err

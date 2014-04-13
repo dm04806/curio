@@ -22,8 +22,6 @@ module.exports = class Model extends Chaplin.Model
 
   apiRoot: API_ROOT
 
-  urlKey: 'id'
-
   urlPath: ''
 
   urlRoot: ->
@@ -40,7 +38,7 @@ module.exports = class Model extends Chaplin.Model
   url: ->
     root = @urlRoot()
     return root if @isNew()
-    "#{root}/#{@get @urlKey}"
+    "#{root}/#{@get @idAttribute}"
 
   parse: (res, options) ->
     ret = res

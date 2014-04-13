@@ -8,13 +8,17 @@
       {{else}}
         <a data-op="toggleMatch" data-blur="false" href="#">{{t 'rule.exact_match'}}</a>
       {{/if}}
-      <a data-op="editKeyword" href="#" class="lnk-icon">
+      <a data-op="editKeyword" href="#" class="lnk-icon" title="{{t ''}}" title="{{t 'rule.edit_keyword'}}">
         <span class="icon-pencil"></span>
       </a>
-      <a data-op="deleteKeyword" href="#" class="lnk-icon">
+      <a data-op="deleteKeyword" href="#" class="lnk-icon" title="{{t 'rule.delete_keyword'}}">
         <span class="icon-remove"></span>
       </a>
     </span>
+  </li>
+  {{else}}
+  <li class="list-group-item text-center">
+    <a href="#" data-op="addKeyword">+ {{t 'rule.add_keyword'}}</a>
   </li>
   {{/each}}
 </ul>

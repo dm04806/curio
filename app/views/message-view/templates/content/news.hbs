@@ -1,6 +1,6 @@
-{{#compare news.length '>' 1}}
+{{#compare content.length '>' 1}}
   <div class="news-message multi">
-    {{#each news}}
+    {{#each content}}
       <a href="{{url}}">
         <h3 class="title">{{title}}</h3>
         <div class="pic">
@@ -11,7 +11,7 @@
   </div>
   {{else}}
   <div class="news-message">
-    {{#each news}}
+    {{#each content}}
       <a href="{{url}}">
         <h3 class="title">{{title}}</h3>
         <div class="time">

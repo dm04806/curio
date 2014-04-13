@@ -1,6 +1,7 @@
 # Application-specific utilities
 # ------------------------------
 mediator = require 'mediator'
+{CurioError,AccessError} = require 'models/errors'
 {SITE_ROOT,API_ROOT} = require 'consts'
 
 $.ajaxSetup
@@ -76,10 +77,27 @@ btrunc = (text, limit, ellips='..') ->
   ret + ellips
 
 
+##
+# Parse XHR error message
+xhrError = (xhr) ->
+  json = xhr.responseJSON or {}
+  if xhr.status == 401
+    # this ajax request is unauthorized
+    new AccessError(json.error or 'session_timeout')
+  else if xhr.status == 403
+    new AccessError(json.error or 'not allowed')
+  else if xhr.status == 404
+    new CurioError(json.error or 'not found')
+  else if xhr.status
+    new CurioError(json.error or 'server')
+  else
+    new CurioError('network')
+
 _.assign utils,
   # collect client side error
   error: console.error.bind(console)
   debug: console.debug.bind(console)
+  xhrError: xhrError
   trunc: trunc
   btrunc: btrunc
   delayed: delayed
