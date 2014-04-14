@@ -1,8 +1,9 @@
 mediator = require 'mediator'
+utils = require 'lib/utils'
 Rule = require 'models/responder/rule'
-MainView = require 'views/common/main'
+CollectionView = require 'views/base/collection'
 Menu = require 'views/widgets/menu'
-RuleView = require './rule'
+common = require 'views/common/utils'
 
 navTabs = [
   name: 'autoreply.keyword'
@@ -15,43 +16,78 @@ navTabs = [
   url: '/autoreply?tab=any'
 ]
 
-
-module.exports = class AutoreplyIndex extends MainView
+module.exports = class ResponderIndexView extends CollectionView
+  className: 'main-container'
   template: require './templates/index'
+  itemView: require './rule'
+  listSelector: '#rules'
+  animationDuration: 0
+  renderItems: false
 
   render: ->
     filter = @model.filter
     @data.tabname = "autoreply.#{filter}"
     super # render the DOM
-    @$list = @$el.find('#rules')
-    # register tab view
-    @subview 'tabs', new Menu
+    # register tabs view
+    tabs = new Menu
       container: @$el.find('.tabs-filter')
       items: navTabs
-    @subview('tabs').updateState @data.tabname
+    tabs.updateState @data.tabname
+    @subview 'tabs', tabs
+    items = @collection.models.reverse()
+    @collection.reset()
+    items.forEach (item) =>
+      @collection.add item, at: 0
 
-    # render rules list
-    collection = @collection = @model.getRules()
-    counter = 0
-    collection.each (rule, index) =>
-      return if rule.invisible
-      rule.index = counter
-      counter += 1
-      @push rule
+  filterer: (item, index) ->
+    if not item.index?
+      item.index = @visibleItems.length
+    return true if not @model.filter
+    item.is(@model.filter)
 
+  filterCallback: (view) ->
+    super
+    view.renderPtitle()
+
+  ##
+  # Add new rule
   newRule: ->
+    view = @subview 'newItem'
+    # can only have one new rule input
+    return view.unfold() if view
+
     rule = @model.newRule()
     rule.index = -1
-    @collection.add rule, {at: 0}
-    view = @push rule, 'prepend'
-    view.unfold()
 
-  push: (rule, method='append') ->
-    view = new RuleView
-      model: rule
-      container: @$list
-      containerMethod: method
-    @subview "rule-#{rule.cid}", view
+    @collection.add rule, {at: 0}
+
+    view = @getViewForItem(rule)
+    @subview 'newItem', view
+
+    # Every new rule is unfolded by default
+    view.unfold()
+    rule.once 'save', =>
+      # update rule title
+      for item, i in @visibleItems
+        item.index = i
+        @getViewForItem(item).renderPtitle()
+
+  ##
+  # download rules as json
+  export: (node) ->
+    data = utils.unicodefy(JSON.stringify(@model.rules.serialize(), null, 2))
+    uri = "data:application/json;base64,#{btoa(data)}"
+    view = common.alert
+      title: __('rules.export.title')
+      modal_class: 'modal'
+      detail: """
+        <pre style='max-height:250px;'>#{data}</pre>
+        <a href='#{uri}'download='curio-rules.json'>
+          #{__('download')}
+        </a>
+      """
+      cancel_button: __('close')
+      translate: false
 
   context: ->
     filter: @model.filter

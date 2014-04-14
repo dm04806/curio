@@ -41,7 +41,7 @@ module.exports = class ListableView extends View
         @render()
 
   getViewForItem: (item) ->
-    (@subview 'listable').subview "itemView:#{item.cid}"
+    @subview('listable').getViewForItem(item)
 
   render: ->
     super

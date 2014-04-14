@@ -21,7 +21,9 @@ created_at: Created At
 admins: Admins
 manage: 管理
 detail: 详细
-save: Save
+save:
+  "": 保存
+  success: 保存成功
 save changes: Save changes
 create: Create
 update: Update
@@ -36,14 +38,15 @@ delete:
   confirm: 真的要删除吗？
 cancel: Cancel
 ok: 好了
+got it: 好的
 confirm:
   "": Confirm
   delete: Confirm deletion
-alert:
-  ok: 知道了
 expand: 展开
 fold: 收起
+download: 下载
 loading: Loading...
+comming soon: "敬请期待!"
 edit:
   "": Edit
   success: "Edit success!"
@@ -243,8 +246,12 @@ autoreply:
   any: For any new message
 rules:
   create: Create a rule
+  export:
+    "": 导出规则
+    title: 导出回复规则
 rule:
   ptitle: "Rule %s: %s"
+  new: 新规则
   reply: Reply
   name: 规则名
   keywords: 关键词

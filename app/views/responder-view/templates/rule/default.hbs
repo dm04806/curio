@@ -1,4 +1,7 @@
 <div class="rule-item panel panel-default" id="rule-{{index}}">
+  <div class="loading-indicator loading-overlay">
+    <div class="spinner spinner30"></div>
+  </div>
   <div class="panel-heading">
     {{ptitle}}
     <input type="hidden" name="pattern" class="form-control input-sm" value="{{pattern}}">
@@ -12,8 +15,7 @@
     </div>
   </div>
   <div class="panel-footer">
-    <button class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
-    <button class="btn btn-sm btn-default" type="submit" value="delete">{{t 'delete'}}</button>
+    <button data-op="saveRule" class="btn btn-sm btn-primary" type="submit">{{t 'save'}}</button>
   </div>
 </div>
 

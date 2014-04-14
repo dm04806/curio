@@ -2,32 +2,63 @@ Modal = require './modal'
 
 class AlertModal extends Modal
   template: require './templates/alert_modal'
+  initialize: ->
+    super
   context: ->
+    modal_class: 'modal alert-modal'
     cancel_button_class: 'btn-primary'
-    cancel_button: __('alert.ok')
+    cancel_button: __('got it')
 
 
-class ConfirmModal extends Modal
-  template: require './templates/alert_modal'
+class ConfirmModal extends AlertModal
+  initialize: ->
+    super
   context: ->
+    modal_class: 'modal alert-modal'
     confirm_button_class: 'btn-danger'
-    cancel_button_class: 'btn-default'
     confirm_button: __('confirm')
+    cancel_button_class: 'btn-default'
     cancel_button: __('cancel')
 
 
 exports.alert = (message, detail, opts={}) ->
+  if _.isPlainObject(message)
+    opts = message
+  else
+    opts.message = message
+    opts.detail = detail
+
   if opts.translate isnt false
-    message = __(message)
-    detail = __(detail)
     delete opts.translsate
     for k of opts
       opts[k] = __(opts[k])
-  opts.message = message
-  opts.detail = detail
+
   View = opts.view or AlertModal
   new View data: opts
 
 exports.confirm = (message, detail, opts={}) ->
   opts.view = ConfirmModal
   exports.alert(message, detail, opts)
+
+
+exports.notify = (message, category, duration=1500, opts={}) ->
+  if _.isPlainObject(message)
+    opts = message
+  else
+    opts.message = message
+    opts.duration = duration
+    opts.category = category
+  _.defaults opts,
+    fading: 'fadeOutRight'
+    category: 'warning'
+  content = """
+    <div class="alert alert-#{opts.category}">
+      #{__(opts.message)}
+    </div>
+  """
+  ret = $('#global-noti').html(content)
+    .show()
+    .find('.alert')
+    .delay(opts.duration)
+    .anim(opts.fading)
+  ret

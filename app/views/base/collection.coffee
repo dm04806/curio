@@ -6,6 +6,9 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   # so we need to borrow the method from the View prototype:
   getTemplateFunction: View::getTemplateFunction
   getTemplateData: View::getTemplateData
+  initialize: ->
+    super
+    View::initialize.apply(this, arguments)
 
   optionNames: CollectionView::optionNames.concat ['context']
 
@@ -16,6 +19,11 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   loadingSelector: 'div.placeholder'
   fallbackSelector: 'div.fallback'
   useCssAnimation: true
+  animationStartClass: 'fade'
+  animationEndClass: 'in'
+
+  getViewForItem: (item) ->
+    @subview "itemView:#{item.cid}"
 
   push: (item) ->
     @collection.push item
@@ -42,3 +50,6 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   listen:
     'addedToDOM': 'renderPaginator'
     'sync collection': 'renderPaginator'
+
+  events: View::events
+

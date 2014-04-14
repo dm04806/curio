@@ -21,7 +21,7 @@ module.exports = class View extends Chaplin.View
   getTemplateData: ->
     data = super
     context = _.result this, 'context'
-    _.defaults data, context, @data, helper.globals
+    _.defaults data, @data, context, helper.globals
     if @debug
       utils.debug '[template]', data
     return data

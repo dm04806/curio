@@ -1,6 +1,9 @@
 {{#widget 'heading2' title='autoreply' subtitle=tabname}}
   {{#compare filter 'keyword'}}
     <button class="btn btn-sm btn-primary" data-op="newRule">{{t 'rules.create'}}</button>
+    <button class="btn btn-sm btn-default" data-op="export">
+      {{t 'rules.export'}}
+    </button>
   {{/compare}}
 {{/widget}}
 <div class="row">
@@ -9,7 +12,10 @@
     </div>
   </div>
   <div class="col-md-9 col-md-pull-3">
-    <form id="rules" class="form form-horizontal rules-list" method="post">
-    </form>
+    <div id="rules" class="form form-horizontal rules-list">
+    </div>
+    <div class="fallback">
+      <h2>{{t 'rules.fallback.title'}}</h2>
+    </div>
   </div>
 </div>

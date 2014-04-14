@@ -25,7 +25,9 @@ manage: 管理
 detail: 详细
 
 # common verbs:
-save: 保存
+save:
+  '': 保存
+  success: 保存成功
 save changes: 保存变更
 create: 创建
 update: 更新
@@ -39,16 +41,17 @@ delete:
   '': 删除
   confirm: 真的要删除吗？
 cancel: 取消
-ok: 好了
+ok: OK
+got it: 好的
 confirm:
   '': 确认
   delete: 确认删除
-alert:
-  ok: 知道了
 expand: 展开
 fold: 收起
+download: 下载
 
 loading: 正在加载...
+comming soon: 敬请期待!
 
 edit:
   '': 编辑
@@ -281,8 +284,12 @@ autoreply:
   any: 消息自动回复
 rules:
   create: 添加规则
+  export:
+    '': 导出规则
+    title: 导出回复规则
 rule:
   ptitle: "规则%s: %s"
+  new: 新规则
   reply: 回复
   name: 规则名
   keywords: 关键字

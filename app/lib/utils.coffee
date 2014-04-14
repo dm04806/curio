@@ -93,11 +93,17 @@ xhrError = (xhr) ->
   else
     new CurioError('network')
 
+unicodefy = (str) ->
+  str.replace /[\u007f-\uffff]/g, (c) ->
+    '\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4)
+
+
 _.assign utils,
   # collect client side error
   error: console.error.bind(console)
   debug: console.debug.bind(console)
   xhrError: xhrError
+  unicodefy: unicodefy
   trunc: trunc
   btrunc: btrunc
   delayed: delayed

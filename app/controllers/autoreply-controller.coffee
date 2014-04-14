@@ -8,4 +8,5 @@ module.exports = class AutoreplyController extends HomeController
       responder.setFilter(opts.query.tab or 'keyword')
       @view = new AutoreplyIndex
         region: 'main'
+        collection: responder.getRules()
         model: responder

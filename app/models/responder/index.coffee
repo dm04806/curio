@@ -4,31 +4,6 @@ mediator = require 'mediator'
 
 Rule = require './rule'
 
-TYPE_FILTERS =
-  keyword: (rule) ->
-    # rule.pattern is String means to match text messages
-    # pattern starts with a '$' means this is a shortcode pattern,
-    # should not be treated as plain keyword
-    'string' == typeof rule.pattern and rule.pattern[0] != '$'
-  subscribe: (rule) ->
-    rule.pattern == '$subscribe'
-  any: (rule) ->
-    rule.pattern == '$any'
-
-TYPE_RULES =
-  keyword:
-    pattern: ''
-    handler: ''
-  subscribe:
-    index: 0
-    pattern: '$subscribe'
-    handler: ''
-  any:
-    index: 9999
-    type: 'keyword'
-    pattern: '$any'
-    handler: ''
-
 
 # Reply-rule
 module.exports = class Responder extends Model
@@ -42,29 +17,23 @@ module.exports = class Responder extends Model
   initialize: ->
     # create a collection containing all the rules
     @rules = new Collection @get('rules'), model: Rule
-    @rules.on 'change', =>
-      @set 'rules', @rules.serialize()
-    @rules.each (rule) =>
+    @rules.comparator = 'index' # always sort collection based on 'index'
+    @rules.each (rule, i) =>
+      # reset index based on Array order
+      rule.set 'index', i
       rule.responder = this
+    @rules.on 'change remove add', =>
+      @set 'rules', @rules.serialize()
 
   getRules: ->
-    filter = @filter
-    total = 0
-    rules = @rules
-    rules.each (rule) ->
-      if filter and not rule.is(filter)
-        rule.invisible = true
-      else
-        total += 1
-        rule.invisible = false
-      return
-    if not total
-      rules.add @newRule(filter)
-    rules
+    @rules
+    #coll = new Collection [], model: Rule
+    #rules = coll.source = @rules
+    #coll
 
   newRule: (type) ->
     type = type or @filter or 'keyword'
-    rule = new Rule _.extend {type: type}, TYPE_RULES[type]
+    rule = Rule.create(type)
     rule.responder = this
     rule
 
@@ -74,3 +43,5 @@ module.exports = class Responder extends Model
 
   setFilter: (type) ->
     @filter = type
+    if not @rules.some((rule) -> rule.is(type))
+      @rules.add @newRule(filter)

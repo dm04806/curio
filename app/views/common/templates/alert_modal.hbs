@@ -1,13 +1,13 @@
-{{#widget 'modal' id='confirm-modal' class='modal alert-modal'}}
+{{#widget 'modal' id='confirm-modal' class=modal_class}}
   {{#if message}}
     <h4>
       {{{message}}}
     </h4>
   {{/if}}
   {{#if detail}}
-    <p>
+    <div class="detail">
     {{{detail}}}
-    </p>
+    </div>
   {{/if}}
   {{#set 'footer'}}
     {{#if cancel_button}}

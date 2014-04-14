@@ -6,8 +6,7 @@ EditPatternModal = require './edit_pattern'
 ChooseNewsModal = require './choose_news'
 
 
-module.exports = class AutoreplyRuleView extends View
-  autoRender: true
+module.exports = class RuleView extends View
   noWrap: true
   getTemplateFunction: ->
     try
@@ -17,14 +16,13 @@ module.exports = class AutoreplyRuleView extends View
 
   context: ->
     ptitle: @model.ptitle()
-    index: @model.index
 
   render: ->
     super
     folder = @$el.find('.foldable').foldable({ remember: false })
     folder.on 'unfold', =>
       @$el.siblings().each (i, item) ->
-        $(item).data('folder').fold()
+        $(item).data('folder')?.fold()
     @$el.data 'folder', folder.data('curio.foldable')
     @switchReplyTab()
 
@@ -33,6 +31,9 @@ module.exports = class AutoreplyRuleView extends View
 
   unfold: ->
     @$el.data('folder').unfold()
+
+  toggle: ->
+    @$el.data('folder').toggle()
 
   switchReplyTab: () ->
     tab = @$el.find(".reply-types a[data-type=#{@model.get 'replyType'}]")
@@ -76,11 +77,15 @@ module.exports = class AutoreplyRuleView extends View
 
 
   chooseNews: (node) ->
-    view = new ChooseNewsModal
+    common.alert 'comming soon'
+
+  chooseImage: (node) ->
+    common.alert 'comming soon'
 
   renderPatternList: () ->
     html = require('./templates/rule/mod/pattern')(@model.toJSON())
     @$el.find('.pattern-group').replaceWith html
+    @renderPtitle()
 
   renderPtitle: () ->
     @$el.find('.ptitle').html(@model.ptitle())
@@ -89,13 +94,17 @@ module.exports = class AutoreplyRuleView extends View
     if not @model.get('pattern')?.length
       common.alert('rule.error.pattern.is required')
       return
+
     @disable(node)
     @syncReply()
+
     @model.save().done =>
       setTimeout =>
         @enable(node)
-        # to enable a slide transition
         folder = @$el.data('folder')
+        common.notify("#{__('save.success')}!", 'success')
+        return if not folder
+        # to enable a slide transition, we must assign height
         folder.$el.height(folder.$el.height())
         setTimeout ->
           folder.fold()
@@ -105,9 +114,9 @@ module.exports = class AutoreplyRuleView extends View
       @fail(xhr, node)
 
   deleteRule: (node) ->
-    if @model.index < 0
+    if @model.isNew()
       @$el.next().data('folder')?.unfold()
-      return @dispose()
+      return @model.destroy()
     view = common.confirm __('rule.delete_rule.confirm', @model.ptitle())
     view.on 'confirm', =>
       view.close()
@@ -125,6 +134,7 @@ module.exports = class AutoreplyRuleView extends View
       @model.set 'handler', pane.find('textarea').val()
 
   enable: (node) ->
+    return if @disposed
     (node or @_last_disabled)?.removeAttr('disabled')
     @$el.removeClass('loading')
 
@@ -134,14 +144,13 @@ module.exports = class AutoreplyRuleView extends View
     @$el.addClass('loading')
 
   fail: (xhr, node) ->
-    msg = utils.xhrError(xhr)
+    err = utils.xhrError(xhr)
     detail = xhr.responseJSON?.detail?[0]
     if detail
-      msg = "rule.error.#{detail.field}.#{detail.error}"
-    view = common.alert(msg or 'error.general')
+      err = "rule.error.#{detail.field}.#{detail.error}"
+    view = common.alert(err)
     view.on 'dispose', =>
       @enable(node)
 
   listen:
     'change:pattern model': 'renderPatternList'
-    'change:name model': 'renderPtitle'
