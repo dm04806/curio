@@ -43,9 +43,9 @@ module.exports = class EditFormView extends FormView
         attrs[name] = $.trim(elem.value)
 
     model.save(attrs).always =>
-      @$el.promise().done (=> @enable())
-    .done (res) => @_submitDone(res)
-    .error (xhr) => @_submitError(xhr)
+      @$el.promise().done(=> @enable())
+    .done((res) => @_submitDone(res))
+    .error((xhr) => @_submitError(xhr))
 
   # display validation errors
   _submitError: (xhr) ->
@@ -53,7 +53,7 @@ module.exports = class EditFormView extends FormView
 
     json = xhr.responseJSON
     error = json?.error or 'network_error'
-    return @msg "edit_#{@model.kind}.#{error}" if not json
+    return @notify "edit_#{@model.kind}.#{error}" if not json
 
     detail = if 'object' == typeof json.detail then json.detail else {}
 
@@ -66,10 +66,10 @@ module.exports = class EditFormView extends FormView
       $('body,html').animate { scrollTop: first.offset().top - 80 }, ->
         first.find(':input').focus()
     else
-      @msg "edit_#{@model.kind}.#{error}", 'danger'
+      @notify "edit_#{@model.kind}.#{error}", 'danger'
 
   _submitDone: (res) ->
     @model.set(res)
-    @msg "edit_#{@model.kind}.success", 'success', 1200
+    @notify "edit_#{@model.kind}.success", 'success', 1200
     @$el.promise().done =>
       @trigger 'submitted', res

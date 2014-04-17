@@ -41,7 +41,10 @@ exports.confirm = (message, detail, opts={}) ->
   exports.alert(message, detail, opts)
 
 
-exports.notify = (message, category, duration=1500, opts={}) ->
+exports.notify = (message, category, duration=1600, opts={}) ->
+  if 'number' is typeof category
+    duration = category
+    category = null
   if _.isPlainObject(message)
     opts = message
   else
@@ -49,7 +52,7 @@ exports.notify = (message, category, duration=1500, opts={}) ->
     opts.duration = duration
     opts.category = category
   _.defaults opts,
-    fading: 'fadeOutRight'
+    fading: 'fadeOutUp'
     category: 'warning'
   content = """
     <div class="alert alert-#{opts.category}">

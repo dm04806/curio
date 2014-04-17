@@ -1,5 +1,6 @@
 View = require 'views/base/view'
 utils = require 'lib/utils'
+common = require './utils'
 
 module.exports = class FormView extends View
   region: 'main'
@@ -22,11 +23,14 @@ module.exports = class FormView extends View
     #
     __g(text) or __(text.replace "_#{@model?.kind}", '')
 
+  notify: (args...) ->
+    args[0] = @t(args[0])
+    common.notify(args...)
 
   #
-  #  Show global form message
+  #  Show global form message at:
   #
-  #  form > .form-message
+  #    form > .form-message
   #
   msg: (text, type='danger', expires='flash') ->
     if not text
@@ -103,7 +107,7 @@ module.exports = class FormView extends View
     # show as server error
     err = utils.xhrError(xhr)
     err = err.code or err
-    @msg("error.#{err}")
+    @notify "error.#{err}"
     @trigger 'submitError', err, xhr
 
   _submitDone: (res) ->
