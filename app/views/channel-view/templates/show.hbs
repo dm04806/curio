@@ -1,0 +1,12 @@
+{{#widget 'heading2' back='/channels'}}
+{{#set 'title'}}
+  {{#if isNew}}
+    {{t 'channels.create'}}
+  {{else}}
+    {{t 'channels.edit' name}}
+  {{/if}}
+{{/set}}
+{{/widget}}
+<div class="box clearfix">
+</div>
+
