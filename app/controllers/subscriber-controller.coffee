@@ -7,9 +7,10 @@ Message = require 'models/message'
 
 # Control Panel Home
 module.exports = class SubscriberController extends HomeController
-  index: (params) ->
-    params.include = 'props'
-    collection = mediator.media.related 'subscribers', params
+  index: (params, route, opts) ->
+    query = opts.query
+    query.include = 'props'
+    collection = mediator.media.related 'subscribers', query
     @view = new SubscriberIndexView
       region: 'main'
       collection: collection

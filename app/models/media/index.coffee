@@ -1,8 +1,9 @@
 Model = require 'models/base/model'
 Responder = require 'models/responder'
-
-Subscriber = require '../subscriber'
+Subscriber = require 'models/subscriber'
+Message = require 'models/message'
 MessageCollection = require 'models/message/collection'
+Channel = require 'models/channel'
 
 module.exports = class Media extends Model
   kind: 'media'
@@ -37,7 +38,5 @@ module.exports = class Media extends Model
       ret = new Subscriber id: id
       ret.media_id = @id
       return ret
-    messages: (params) ->
-      coll = new MessageCollection [], params: params
-      coll.media = this
-      return coll
+    messages: MessageCollection
+    channels: Channel

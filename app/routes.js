@@ -21,8 +21,8 @@ module.exports = function(match) {
 
   match('super', 'super/home#index')
   match('super/users', 'super/user#index')
-  match('super/user/:id', 'super/user#show')
   match('super/users/create', 'super/user#create')
+  match('super/user/:id', 'super/user#show')
 
   match('super/medias', 'super/media#index')
   match('super/medias/create', 'super/media#create')

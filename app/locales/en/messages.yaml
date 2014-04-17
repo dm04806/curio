@@ -51,7 +51,7 @@ edit:
   "": Edit
   success: "Edit success!"
   network_error: Save failed..
-  bad fields: Please fill the form correctly
+  bad request: Please fill the form correctly
   not found: "The resource you requested doesn't exits."
   Not Found: Not Found
   email:
@@ -95,8 +95,8 @@ error:
     "": No official wechat account for manage
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
-  bad fields:
-    "": 非法的请求来源
+  bad request:
+    "": 非法请求
   need super:
     "": You must be a super user to continue.
     title: Not Accessible
@@ -149,6 +149,11 @@ stats:
   "": Statistics
 channels:
   "": Channels
+  index:
+    h1: 推广渠道
+  create: 创建渠道
+  there_is_none: 你还为创建任何推广渠道
+  create_one_now: 现在就创建一个
 locations:
   "": Places
 shares:
@@ -207,6 +212,9 @@ edit_media:
   oid:
     is blank: cannot be blank
     oid: This original ID already exists
+  wx_appkey:
+    invalid: 不正确的 AppId
+    secret: AppSecret 与 AppId 不匹配
 users:
   title: Users
   index:

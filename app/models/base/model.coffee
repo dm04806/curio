@@ -1,5 +1,9 @@
 {API_ROOT} = require 'consts'
 utils = require 'lib/utils'
+Collection = require './collection'
+
+plular = (name) ->
+  name + 's'
 
 # Base model.
 module.exports = class Model extends Chaplin.Model
@@ -102,6 +106,13 @@ module.exports = class Model extends Chaplin.Model
       callback? error
 
   ##
+  # Usage
+  #
+  #   Model.prototype.relations = {
+  #     model2: Model2
+  #   }
+  #
+  #   model.related('model2')
   #
   # @return {Model|Collection}
   #
@@ -109,12 +120,19 @@ module.exports = class Model extends Chaplin.Model
     model = @relations[what]
     if not model
       throw new Error("No relation about '#{what}' for #{@kind}")
-    if model.__super__?.constructor is Model
-      opts = args[0] || {}
+    params = args[0] || {}
+    collection = null
+    if model.__super__?.constructor is Collection
+      collection = new model [], params: params
+      collection.urlRoot = "#{@url()}/#{plular(model::model::kind)}"
+    else if model.__super__?.constructor is Model
       #opts["#{@kind}_id"] = @id
-      collection = model.collection params: opts
-      collection.urlRoot = "#{@url()}/#{model::kind}s"
-      return collection
-    model.call(this, args...)
+      collection = model.collection params: params
+      collection.urlRoot = "#{@url()}/#{plular(model::kind)}"
+    if collection
+      collection[@kind] = this
+      collection
+    else
+      model.call(this, args...)
 
 

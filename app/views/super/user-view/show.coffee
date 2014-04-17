@@ -1,4 +1,4 @@
-EditFormView = require 'views/base/edit_form'
+EditFormView = require 'views/common/edit_form'
 Passport = require 'models/user/passport'
 
 ModifyPasswd = require './modify_passwd'

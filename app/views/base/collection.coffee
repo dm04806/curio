@@ -19,6 +19,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   loadingSelector: 'div.placeholder'
   fallbackSelector: 'div.fallback'
   useCssAnimation: true
+  animationDuration: 0
   animationStartClass: 'fade'
   animationEndClass: 'in'
 

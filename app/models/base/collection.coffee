@@ -10,8 +10,6 @@ module.exports = class Collection extends Chaplin.Collection
 
   params: {}
 
-  model: require './model'
-
   PERPAGE: LIMIT
 
   initialize: (models, options) ->

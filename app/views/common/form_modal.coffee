@@ -1,5 +1,5 @@
 ModalView = require './modal'
-FormView = require '../base/form'
+FormView = require './form'
 
 module.exports = class FormModalView extends FormView
   _.extend @prototype, ModalView.prototype
@@ -10,8 +10,10 @@ module.exports = class FormModalView extends FormView
 
   listen:
     'submitted': ->
+      # hide modal when form submitted
       @$el.delay(200).promise().done =>
         @$el.modal('hide')
     'confirm': ->
+      # submit form when click on confirm button
       @$el.find('form').trigger('submit')
 

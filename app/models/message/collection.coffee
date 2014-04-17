@@ -3,8 +3,8 @@ Subscriber = require 'models/subscriber'
 Message = require 'models/message'
 
 module.exports = class MessageCollection extends Collection
-  urlRoot: ->
-    "#{@media.url()}/messages"
+  model: Message
+
   parse: () ->
     ret = super
     ret.map (item) =>

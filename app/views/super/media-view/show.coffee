@@ -1,4 +1,4 @@
-EditFormView = require 'views/base/edit_form'
+EditFormView = require 'views/common/edit_form'
 
 module.exports = class MediaView extends EditFormView
   className: 'main-container'
