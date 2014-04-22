@@ -11,9 +11,11 @@ module.exports = class SubscriberController extends HomeController
     query = opts.query
     query.include = 'props'
     collection = mediator.media.related 'subscribers', query
-    @view = new SubscriberIndexView
-      region: 'main'
-      collection: collection
+    collection.fetch().then =>
+      @view = new SubscriberIndexView
+        region: 'main'
+        collection: collection
+  # messages with this subscriber
   show: (params, route, opts) ->
     media = mediator.media
     model = @model = media.related 'subscriber', params.id
@@ -21,7 +23,8 @@ module.exports = class SubscriberController extends HomeController
     query.subscriber_id = params.id
     collection = media.related 'messages', query
     collection.subscriber = model
-    model.fetch().then =>
+    $.when(model.fetch(), collection.fetch()).then =>
       @view = new SubscriberShow
+        region: 'main'
         collection: collection
         model: model

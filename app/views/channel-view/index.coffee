@@ -11,6 +11,10 @@ module.exports = class ChannelIndexView extends CollectionView
   context: ->
     total: @collection.total
 
+  render: ->
+    super
+    #@toCreate()
+
   # Create a channel
   toCreate: ->
     view = new CreateView

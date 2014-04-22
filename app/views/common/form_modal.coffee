@@ -2,6 +2,7 @@ ModalView = require './modal'
 FormView = require './form'
 
 module.exports = class FormModalView extends FormView
+  # Also inherit from ModalView
   _.extend @prototype, ModalView.prototype
 
   render: ->

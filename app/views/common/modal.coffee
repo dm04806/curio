@@ -12,14 +12,9 @@ View = require 'views/base/view'
 module.exports = class ModalView extends View
   autoRender: true
   noWrap: true
+  region: null
   container: 'body'
   render: ->
-    #origin = @model
-    #if origin
-      #clone = origin.clone()
-      #clone.on 'change', (item) ->
-        #origin.set item.attributes
-      #@model = clone
     super
     @$el.on 'show.bs.modal', ->
       $(document.body).addClass('modal-open')

@@ -1,11 +1,39 @@
 {{#widget 'modal' id='create-channel' title='channels.create'}}
 
+<form method="put" action="{{form_action}}">
+  <table class="table">
+    <colgroup>
+      <col width="60%">
+      <col width="40%">
+    </colgroup>
+    <tr>
+      <th>{{t 'channel.name'}}</th>
+      <th>{{t 'channel.related_place'}}</th>
+    </tr>
+    <tr>
+      <td>
+        <input required name="name" class="form-control" type="text" placeholder="{{t 'channel.input_name'}}">
+      </td>
+      <td>
+        # TODO
+      </td>
+    </tr>
+    <tr class="add-row">
+      <td colspan="3">
+        <a class="btn btn-default" data-op="addRow">
+          <span class="icon-plus2"></span>
+          {{t 'more'}}
+        </a>
+      </td>
+    </tr>
+  </table>
+</form>
 
 {{#set 'footer'}}
-  <button class="btn btn-default">
+  <button class="btn btn-default" data-op="toCancel">
     {{t 'cancel'}}
   </button>
-  <button class="btn btn-primary">
+  <button class="btn btn-primary" data-op="toConfirm">
     {{t 'create'}}
   </button>
 {{/set}}

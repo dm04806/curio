@@ -8,12 +8,10 @@ module.exports = class ChannelController extends HomeController
   index: (params, route, opts) ->
     query = opts.query
     collection = mediator.media.related 'channels', query
-    @view = new ChannelIndex
-      autoRender: false
-      region: 'main'
-      collection: collection
     collection.fetch().done =>
-      @view.render()
+      @view = new ChannelIndex
+        region: 'main'
+        collection: collection
   show: (params, route, opts) ->
     model = @model = mediator.media.related 'channel', params.id
     model.fetch().then =>

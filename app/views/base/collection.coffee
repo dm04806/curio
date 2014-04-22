@@ -1,19 +1,19 @@
 View = require './view'
 PaginatorView = require 'views/widgets/paginator'
+CollectionItemView = require './collection_item'
 
 module.exports = class CollectionView extends Chaplin.CollectionView
   # This class doesn’t inherit from the application-specific View class,
   # so we need to borrow the method from the View prototype:
   getTemplateFunction: View::getTemplateFunction
   getTemplateData: View::getTemplateData
-  initialize: ->
-    super
-    View::initialize.apply(this, arguments)
 
   optionNames: CollectionView::optionNames.concat ['context']
 
+  # default list is a table
   template: require './templates/listable'
-  className: 'listable'
+  # default CollectionView as the main view
+  className: 'main-container'
 
   listSelector: '.list'
   loadingSelector: 'div.placeholder'
@@ -22,6 +22,28 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   animationDuration: 0
   animationStartClass: 'fade'
   animationEndClass: 'in'
+
+  initialize: ->
+    super
+    View::initialize.apply(this, arguments)
+    collection = @collection
+    # get collection from constuctor class
+    if not collection
+      if @_collection
+        collection = new @_collection [], params: @params
+      else if @_model
+        collection = @_model.collection [], params: @params
+      if collection
+        @collection = collection
+
+  initItemView: (model) ->
+    view = @itemView
+    if not view
+      itemTemplate = @itemTemplate
+      view = @itemView = class MyItemView extends CollectionItemView
+        template: itemTemplate
+    new view
+      model: model
 
   getViewForItem: (item) ->
     @subview "itemView:#{item.cid}"
@@ -40,7 +62,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   getPaginatorView: ->
     paginator = new PaginatorView
       route: @route
-      container: @el
+      container: @$list.closest('div')
       collection: @collection
 
   renderPaginator: ->

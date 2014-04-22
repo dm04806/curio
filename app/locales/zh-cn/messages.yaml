@@ -37,6 +37,7 @@ next: 下一步
 admin: 管理
 close: 关闭
 add: 添加
+more: 更多
 delete:
   '': 删除
   confirm: 真的要删除吗？
@@ -171,6 +172,13 @@ channels:
   create: 创建渠道
   there_is_none: 目前没有推广渠道可用
   create_one_now: 现在就创建一个
+
+channel:
+  name: 渠道名
+  scene_id: 场景ID
+  input_name: 输入渠道名
+  related_place: 相关门店
+
 locations:
   '': 门店
 

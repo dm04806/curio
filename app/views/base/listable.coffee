@@ -48,6 +48,7 @@ module.exports = class ListableView extends View
     collection = @collection
     collection.fetch() if not collection.length
     listable = new @collectionView
+      className: 'listable'
       container: @$el.find(@listableSelector)
       itemView: @getItemView()
       context: @context

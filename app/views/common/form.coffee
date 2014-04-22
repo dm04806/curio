@@ -100,8 +100,8 @@ module.exports = class FormView extends View
     .always =>
       @$el.removeClass('loading')
       setTimeout (=> @enable()), 500
-    .done (res) => @_submitDone(res)
-    .error (xhr) => @_submitError(xhr)
+    .done((res) => @_submitDone(res))
+    .error((xhr) => @_submitError(xhr))
 
   _submitError: (xhr) ->
     # show as server error

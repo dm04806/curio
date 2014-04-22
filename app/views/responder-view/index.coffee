@@ -17,7 +17,6 @@ navTabs = [
 ]
 
 module.exports = class ResponderIndexView extends CollectionView
-  className: 'main-container'
   template: require './templates/index'
   itemView: require './rule'
   listSelector: '#rules'

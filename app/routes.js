@@ -16,8 +16,6 @@ module.exports = function(match) {
   match('channel/:id', 'channel#show')
 
   match('autoreply', 'autoreply#index')
-  match('autoreply/:id', 'autoreply#show')
-  match('autoreply/:id/edit', 'autoreply#edit')
 
   match('super', 'super/home#index')
   match('super/users', 'super/user#index')

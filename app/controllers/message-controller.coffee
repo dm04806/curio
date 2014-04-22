@@ -3,11 +3,13 @@ MessageIndexView = require 'views/message-view'
 mediator = require 'mediator'
 
 module.exports = class MessageController extends HomeController
-  # Dialog with xxx, message list
+  # All Dialogs with this media account
   index: (params, route, opts) ->
     params = opts.query
     params.type = 'incoming'
     params.include = 'subscriber'
-    @view = new MessageIndexView
-      region: 'main'
-      collection: mediator.media.related 'messages', params
+    collection = mediator.media.related 'messages', params
+    collection.fetch().done =>
+      @view = new MessageIndexView
+        region: 'main'
+        collection: collection
