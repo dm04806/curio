@@ -1,13 +1,21 @@
 <li class="media box">
   <a class="pull-left" href="">
-    <img src="{{qrcode_url}}" alt="">
+    <img class="qrcode" src="{{qrcode_url}}" alt="">
   </a>
   <div class="media-body">
-    <dl class="dl-horizontal">
-      <dt>{{t 'channel.name'}}</dt>
-      <dd>{{name}}</dd>
-      <dt>{{t 'channel.scene_id'}}</dt>
-      <dd>{{scene_id}}</dd>
-    </dl>
+    <div class="ops">
+      <a href="{{url 'channel#show' id}}">
+        <i class="icon-file"></i> {{t 'detail'}}
+      </a>
+      <a href="" data-op="destroyOne" data-id="{{id}}">
+        <i class="icon-remove"></i>{{t 'delete'}}
+      </a>
+    </div>
+    <h5 class="title">
+      <span class="text-muted scene-id">
+        {{scene_id}}
+      </span>
+      {{name}}
+    </h5>
   </div>
 </li>

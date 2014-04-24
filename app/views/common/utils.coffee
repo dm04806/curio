@@ -41,7 +41,7 @@ exports.confirm = (message, detail, opts={}) ->
   exports.alert(message, detail, opts)
 
 
-exports.notify = (message, category, duration=1600, opts={}) ->
+exports.notify = (message, category, duration=2000, opts={}) ->
   if 'number' is typeof category
     duration = category
     category = null
@@ -52,15 +52,17 @@ exports.notify = (message, category, duration=1600, opts={}) ->
     opts.duration = duration
     opts.category = category
   _.defaults opts,
+    el: '#global-noti'
     fading: 'fadeOutUp'
-    category: 'warning'
+    category: 'danger'
   content = """
     <div class="alert alert-#{opts.category}">
       #{__(opts.message)}
     </div>
   """
-  ret = $('#global-noti').html(content)
+  ret = $(opts.el).html(content)
     .show()
+    .anim('fadeInDown', 200)
     .find('.alert')
     .delay(opts.duration)
     .anim(opts.fading)

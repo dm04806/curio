@@ -54,7 +54,6 @@ edit:
   network_error: Save failed..
   bad request: Please fill the form correctly
   not found: "The resource you requested doesn't exits."
-  Not Found: Not Found
   email:
     bad: Bad email format
     conflict: There is already a user with that email
@@ -213,10 +212,10 @@ media:
       chief: Chief
 edit_media:
   uid:
-    is blank: Wechat ID cannot be blank
+    is blank: 微信号不能为空
     conflict: Already exists this account
   oid:
-    is blank: cannot be blank
+    is blank: 原始ID不能为空
     oid: This original ID already exists
   wx_appkey:
     invalid: 不正确的 AppId

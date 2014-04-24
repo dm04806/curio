@@ -59,6 +59,7 @@ module.exports = class EditFormView extends FormView
 
     # display error details by row
     for row, errs of json.detail
+      continue if not _.isArray(errs)
       @row_msg row, "edit_#{@model.kind}.#{row}.#{errs.pop()}"
 
     first = @$el.find('.has-error:visible').eq(0)

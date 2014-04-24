@@ -60,7 +60,6 @@ edit:
   network_error: 保存失败&nbsp;&nbsp; :-(
   bad request: 请正确填写每一项
   not found: 此项目已不存在
-  Not Found: 此项目已不存在
   email:
     bad: 错误的Email格式
     conflict: 系统中已存在此Email
@@ -171,7 +170,7 @@ channels:
     h1: 推广渠道
   create: 创建渠道
   there_is_none: 目前没有推广渠道可用
-  create_one_now: 现在就创建一个
+  create_one_now: 现在创建一个
 
 channel:
   name: 渠道名

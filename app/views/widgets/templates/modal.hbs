@@ -10,19 +10,21 @@
         </div>
       {{/if}}
       <div class="modal-body">
+        {{! modal form notification }}
+        <div class="noti"></div>
         {{#if title}}
-        <div class="bouncing-bar">
-          <div class="bar"></div>
-        </div>
+          <div class="bouncing-bar">
+            <div class="bar"></div>
+          </div>
         {{/if}}
         {{{caller}}}
       </div>
       {{#if footer}}
         <div class="modal-footer">
           {{#unless title}}
-          <div class="bouncing-bar">
-            <div class="bar"></div>
-          </div>
+            <div class="bouncing-bar">
+              <div class="bar"></div>
+            </div>
           {{/unless}}
           {{footer}}
         </div>

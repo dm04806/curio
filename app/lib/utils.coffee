@@ -14,6 +14,17 @@ $.ajaxSetup
     if @type in ['POST', 'PUT', 'DELETE']
       xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
 
+# Send json data to the server
+$.send = (url, data) ->
+  Backbone.ajax
+    url: url
+    type: 'POST'
+    data: JSON.stringify data
+    contentType: 'application/json'
+    processData: false
+
+
+
 # Delegate to Chaplin’s utils module.
 utils = Chaplin.utils.beget Chaplin.utils
 

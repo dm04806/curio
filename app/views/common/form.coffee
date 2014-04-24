@@ -33,14 +33,15 @@ module.exports = class FormView extends View
   #    form > .form-message
   #
   msg: (text, type='danger', expires='flash') ->
-    if not text
-      @$el.find('.form-message').html('')
-      return
-    alerted = @$el.find('.alert').length
-    text = @t(text)
     msg = @$el.find('.form-message')
-      .html("<div class=\"alert alert-#{type}\">#{text}</div>")
+    return msg.html('') if not text
+
+    text = @t(text)
+    msg.html("<div class=\"alert alert-#{type}\">#{text}</div>")
     alert = @$alert = msg.find('.alert')
+
+    existing = @$el.find('.alert').length
+
     if 'number' == typeof expires
       alert.delay(1200) # show message for 1.2s
          # start a fadeOutDown with duration 400ms
@@ -51,8 +52,9 @@ module.exports = class FormView extends View
         # when all animation is done, remove this alert
         alert.remove()
         @$alert = null
-    else if alerted and type != 'success'
+    else if existing and type != 'success'
       msg.anim(expires)
+
     return msg
 
   #
@@ -93,11 +95,14 @@ module.exports = class FormView extends View
     # override this function, to do something more
     @_submit(e)
 
+  _send: (e) ->
+    form = $(e.target)
+    form.serialize()
+    $.post(e.target.action, form.serialize())
+
   _submit: (e) ->
     @$el.addClass('loading')
-    form = $(e.target)
-    $.post(e.target.action, form.serialize())
-    .always =>
+    @_send(e)?.always =>
       @$el.removeClass('loading')
       setTimeout (=> @enable()), 500
     .done((res) => @_submitDone(res))
@@ -107,7 +112,7 @@ module.exports = class FormView extends View
     # show as server error
     err = utils.xhrError(xhr)
     err = err.code or err
-    @notify "error.#{err}"
+    @msg "error.#{err}"
     @trigger 'submitError', err, xhr
 
   _submitDone: (res) ->
