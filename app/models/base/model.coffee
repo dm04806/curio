@@ -79,8 +79,15 @@ module.exports = class Model extends Chaplin.Model
       return config.call(this, args..., callback)
 
     # not configured in loaders, fetch from relation
-    if not config and @relations[what]
-      return @related(what, args...).fetch()
+    if not config
+      obj = @related(what, args...)
+      if obj
+        promise = obj.fetch()
+        promise.done (res) ->
+          callback? null, obj
+        .error (xhr, err) ->
+          callback? err
+      return promise
 
     if not config
       # load from url
@@ -109,7 +116,12 @@ module.exports = class Model extends Chaplin.Model
   # Usage
   #
   #   Model.prototype.relations = {
-  #     model2: Model2
+  #     hasMany: {
+  #       model2: Model2
+  #     },
+  #     hasOne: {
+  #       model3: Model3
+  #     }
   #   }
   #
   #   model.related('model2')
@@ -117,22 +129,36 @@ module.exports = class Model extends Chaplin.Model
   # @return {Model|Collection}
   #
   related: (what, args...) ->
-    model = @relations[what]
-    if not model
-      throw new Error("No relation about '#{what}' for #{@kind}")
+    hasMany = what of @relations.hasMany
+    cls = @relations.hasMany[what] or @relations.hasOne[what]
+
+    if not cls
+      utils.error("No relation about '#{what}' for #{@kind}")
+      return
+
     params = args[0] || {}
-    collection = null
-    if model.__super__?.constructor is Collection
-      collection = new model [], params: params
-      collection.urlRoot = "#{@url()}/#{plular(model::model::kind)}"
-    else if model.__super__?.constructor is Model
-      #opts["#{@kind}_id"] = @id
-      collection = model.collection params: params
-      collection.urlRoot = "#{@url()}/#{plular(model::kind)}"
-    if collection
+
+    if hasMany
+      collection = null
+      if cls.__super__?.constructor is Collection
+        # construct from a Collection
+        collection = new cls [], params: params
+        collection.urlRoot = "#{@url()}/#{plular(cls::model::kind)}"
+      else if cls.__super__?.constructor is Model
+        # construct from cls.collection
+        collection = cls.collection params: params
+        collection.urlRoot = "#{@url()}/#{plular(cls::kind)}"
+      else
+        # cls is a pure function
+        return cls.call(this, args...)
+
+      # sign:
+      #   users.media = media
       collection[@kind] = this
       collection
     else
-      model.call(this, args...)
+      model = new cls
+      model.set "#{@kind}_id", @id
+      model
 
 

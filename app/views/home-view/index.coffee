@@ -8,22 +8,25 @@ module.exports = class HomeMain extends MainView
   template: require './templates/home'
 
   context: ->
+    console.log @data
+    yesterday: @data['7days']
     media: mediator.media.attributes
 
   showGraph: ->
-    mediator.media.load 'stats/incoming', (err, res) =>
-      @subview 'realtime', new Realtime
-        container: '#home-realtime'
-        data: res['1day']
+    console.log @data
+    data = @data
+    @subview 'realtime', new Realtime
+      container: '#home-realtime'
+      data: data['1day']
 
-      @subview 'last7', new TimeLineChart
-        container: '#last7-chart'
-        tickInterval: 'day'
-        data: res['7days']
+    @subview 'last7', new TimeLineChart
+      container: '#last7-chart'
+      tickInterval: 'day'
+      data: data['7days']
 
-      @subview 'last30', new TimeLineChart
-        container: '#last30-chart'
-        data: res['30days']
+    @subview 'last30', new TimeLineChart
+      container: '#last30-chart'
+      data: data['30days']
 
   listen:
     'addedToDOM': 'showGraph'

@@ -16,14 +16,21 @@ module.exports = class Responder extends Model
 
   initialize: ->
     # create a collection containing all the rules
-    @rules = new Collection @get('rules'), model: Rule
+    @rules = new Collection [], model: Rule
     @rules.comparator = 'index' # always sort collection based on 'index'
-    @rules.each (rule, i) =>
-      # reset index based on Array order
-      rule.set 'index', i
-      rule.responder = this
-    @rules.on 'change remove add', =>
-      @set 'rules', @rules.serialize()
+    @on 'change:rules', (options) ->
+      # set rules of collection
+      @rules.reset( @get 'rules' )
+      @rules.each (rule, i) =>
+        # reset index based on Array order
+        rule.set 'index', i
+        rule.responder = this
+    @rules.on 'change remove add', => @syncRules()
+
+
+  syncRules: ->
+    # silently set rules, don't trigger event
+    @set 'rules', @rules.serialize(), { silent: true }
 
   getRules: ->
     @rules
@@ -44,4 +51,4 @@ module.exports = class Responder extends Model
   setFilter: (type) ->
     @filter = type
     if not @rules.some((rule) -> rule.is(type))
-      @rules.add @newRule(filter)
+      @rules.add @newRule(type)

@@ -42,6 +42,7 @@ exports.confirm = (message, detail, opts={}) ->
 
 
 exports.notify = (message, category, duration=2000, opts={}) ->
+  return if not message
   if 'number' is typeof category
     duration = category
     category = null
