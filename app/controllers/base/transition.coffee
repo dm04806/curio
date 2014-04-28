@@ -16,6 +16,7 @@ Backbone.ajax = (opts, args...) ->
       resolved = true
       $('body').removeClass('syncing')
     .error (xhr) ->
+      # for none GET request, you'd better handle errors for yourself
       return if opts.type isnt 'GET'
       mediator.execute 'ajax-error', xhr
   return _ajax() unless mediator.site_error

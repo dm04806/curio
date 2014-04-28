@@ -1,14 +1,20 @@
 <li class="media box">
-  <a class="pull-left" href="">
+<a class="pull-left" href="{{url 'channel#show' id}}/users">
     <img class="qrcode" src="{{qrcode_url}}" alt="">
   </a>
   <div class="media-body">
     <div class="ops">
       <a href="{{url 'channel#show' id}}">
-        <i class="icon-file"></i> {{t 'detail'}}
+        <i class="icon-pencil"></i>
+        <!--{{t 'edit'}}-->
       </a>
-      <a href="" data-op="destroyOne" data-id="{{id}}">
-        <i class="icon-remove"></i>{{t 'delete'}}
+      <a href="{{url 'channel#show' id}}">
+        <i class="icon-file"></i>
+        <!--{{t 'detail'}}-->
+      </a>
+      <a href="" data-op="toDestroy">
+        <i class="icon-remove"></i>
+        <!--{{t 'delete'}}-->
       </a>
     </div>
     <h5 class="title">

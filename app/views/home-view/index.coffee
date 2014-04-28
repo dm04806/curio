@@ -8,12 +8,13 @@ module.exports = class HomeMain extends MainView
   template: require './templates/home'
 
   context: ->
-    console.log @data
-    yesterday: @data['7days']
+    yesterday = {}
+    for v in @data['7days']
+      yesterday[v.key] = v.values[v.values.length-2].count
+    yesterday: yesterday
     media: mediator.media.attributes
 
   showGraph: ->
-    console.log @data
     data = @data
     @subview 'realtime', new Realtime
       container: '#home-realtime'

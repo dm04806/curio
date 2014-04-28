@@ -1,4 +1,5 @@
 Modal = require './modal'
+utils = require 'lib/utils'
 
 class AlertModal extends Modal
   template: require './templates/alert_modal'
@@ -41,11 +42,14 @@ exports.confirm = (message, detail, opts={}) ->
   exports.alert(message, detail, opts)
 
 
-exports.notify = (message, category, duration=2000, opts={}) ->
+exports.notify = (message, category, duration=1600, opts={}) ->
   return if not message
+  message += ''
   if 'number' is typeof category
     duration = category
-    category = null
+    category = undefined
+  if not category
+    category = if message.indexOf('success') >= 1 then 'success' else 'danger'
   if _.isPlainObject(message)
     opts = message
   else
@@ -62,9 +66,12 @@ exports.notify = (message, category, duration=2000, opts={}) ->
     </div>
   """
   ret = $(opts.el).html(content)
-    .show()
     .anim('fadeInDown', 200)
     .find('.alert')
     .delay(opts.duration)
     .anim(opts.fading)
   ret
+
+exports.xhrError = (xhr) ->
+  err = utils.xhrError xhr
+  exports.notify err

@@ -3,6 +3,9 @@ Model = require 'models/base/model'
 module.exports = class Channel extends Model
   kind: 'channel'
 
+  url: ->
+    "#{@apiRoot}/medias/#{@get 'media_id'}/channels/#{@id}"
+
   # 二维码图片地址
   qrcodeUrl: ->
     return '' if not @get 'ticket'

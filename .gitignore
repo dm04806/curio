@@ -35,3 +35,5 @@ bower_components/
 # icoon moon fonts
 misc/curio/
 
+# Redis dump file
+dump.rdb

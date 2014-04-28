@@ -41,6 +41,7 @@ more: 更多
 delete:
   '': 删除
   confirm: 真的要删除吗？
+  success: 已删除
 cancel: 取消
 ok: OK
 got it: 好的

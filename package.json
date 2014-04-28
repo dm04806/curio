@@ -24,5 +24,6 @@
     "js-yaml": "~3.0.1"
   },
   "devDependencies": {
+    "mocha-lcov-reporter": "0.0.1"
   }
 }

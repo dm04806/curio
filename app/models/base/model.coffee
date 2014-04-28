@@ -87,7 +87,7 @@ module.exports = class Model extends Chaplin.Model
           callback? null, obj
         .error (xhr, err) ->
           callback? err
-      return promise
+        return promise
 
     if not config
       # load from url
@@ -133,7 +133,7 @@ module.exports = class Model extends Chaplin.Model
     cls = @relations.hasMany[what] or @relations.hasOne[what]
 
     if not cls
-      utils.error("No relation about '#{what}' for #{@kind}")
+      utils.debug("No relation about '#{what}' for #{@kind}")
       return
 
     params = args[0] || {}

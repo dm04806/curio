@@ -26,7 +26,3 @@ module.exports = class CreateChannel extends FormModalView
         items.push({ name: val, media_id: media_id })
     return if not items.length
     $.send(e.target.action, items)
-
-  listen:
-    # 表单提交成功后刷新页面
-    'submitted': -> location.reload()

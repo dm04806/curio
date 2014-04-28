@@ -37,5 +37,7 @@ module.exports = class View extends Chaplin.View
       e.stopPropagation()
       node = $(e.currentTarget)
       op = node.data('op')
+      if op not of this
+        throw new Error("How to \"#{op}\"?")
       @[op](node)
 
