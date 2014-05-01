@@ -57,5 +57,8 @@
     "async": {
       "main": "lib/async.js"
     }
+  },
+  "resolutions": {
+    "d3": "~3.4.4"
   }
 }

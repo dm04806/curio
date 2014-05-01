@@ -7,6 +7,7 @@ mediator = require 'mediator'
 module.exports = class ChannelController extends HomeController
   index: (params, route, opts) ->
     query = opts.query
+    query.limit = 18
     collection = mediator.media.related 'channels', query
     collection.fetch().done =>
       @view = new ChannelIndex

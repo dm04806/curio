@@ -12,26 +12,13 @@
   {{/compare}}
   <div class="media-body">
     <div class="{{content_type}}">
-      {{#compare content_type 'text'}}
-        {{content}}
-      {{/compare}}
-      {{#compare content_type 'image'}}
-        {{include 'views/message-view/templates/content/image'}}
-      {{/compare}}
-      {{#compare content_type 'location'}}
-        {{include 'views/message-view/templates/content/location'}}
-      {{/compare}}
-      {{#compare content_type 'voice'}}
-      {{/compare}}
-      {{#compare content_type 'news'}}
-        {{include 'views/message-view/templates/content/news'}}
-      {{/compare}}
-      {{#compare content_type 'subscribe'}}
-        <p>{{t 'message.subscribed'}}
-      {{/compare}}
-      {{#compare content_type 'unsubscribe'}}
-        <p>{{t 'message.unsubscribed'}}
-      {{/compare}}
+      {{#if content_tmpl}}
+        {{include content_tmpl}}
+      {{else}}
+        {{#if eventLine}}
+          <p>{{{eventLine}}}
+        {{/if}}
+      {{/if}}
     </div>
     <p class="time">
       {{strftime 'LLL' created_at showInvalid=true}}

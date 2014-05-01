@@ -123,6 +123,9 @@ message:
   my_location: 我的位置
   subscribed: 订阅了此账号
   unsubscribed: 退订了此账号
+  click: "点击了菜单项 %s"
+  scan: "扫描二维码 场景%s"
+  from_scan: "来自二维码 <a href=\"/channel/%1$s\">场景#%1$s</a>"
 subscribers:
   "": Subscribers
   index:
