@@ -141,6 +141,8 @@ subscriber:
   status: Status
   subscribed: Subscribed
   unsubscribed: Unsubscribed
+  tags: 标签
+  sync_with_wechat: 与微信服务器同步
 messaging:
   "": Messages
 subscribe:
@@ -156,6 +158,7 @@ channels:
   index:
     h1: 推广渠道
   create: 创建渠道
+  edit: 编辑渠道信息
   there_is_none: 你还为创建任何推广渠道
   create_one_now: 现在就创建一个
 channel:

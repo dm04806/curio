@@ -11,15 +11,10 @@
   {{sex}}
 </td>
 <td class="datetime">
-  {{strftime 'YYYY-MM-DD HH:mm:ss' created_at}}
-</td>
-<td class="datetime">
   {{strftime 'YYYY-MM-DD HH:mm:ss' updated_at}}
 </td>
 <td>
-  {{#if subscribe}}
-    {{t 'subscriber.subscribed'}}
-  {{else}}
-    {{t 'subscriber.unsubscribed'}}
-  {{/if}}
+  {{#each tags}}
+  <a class="tag {{type}}-tag" href="/{{type}}/{{id}}">{{name}}</a>
+  {{/each}}
 </td>

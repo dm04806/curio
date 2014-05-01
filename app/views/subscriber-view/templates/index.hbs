@@ -1,3 +1,9 @@
-{{widget 'heading2' title='subscribers.index.h1' name=total}}
+{{#widget 'heading2' title='subscribers.index.h1' name=total}}
+
+<button class="btn btn-xs btn-primary" title="{{t 'subscriber.sync_with_wechat'}}">
+  {{t 'sync'}}
+</button>
+
+{{/widget}}
 
 {{include 'views/base/templates/listable' }}

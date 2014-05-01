@@ -9,7 +9,7 @@ Message = require 'models/message'
 module.exports = class SubscriberController extends HomeController
   index: (params, route, opts) ->
     query = opts.query
-    query.include = 'props'
+    query.include = 'props,tags'
     collection = mediator.media.related 'subscribers', query
     collection.fetch().then =>
       @view = new SubscriberIndexView

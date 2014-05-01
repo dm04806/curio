@@ -17,8 +17,12 @@ module.exports = class Media extends Model
     wx_token: null
     desc: null
 
-  loaders:
+  # whether this media can use advance API
+  canAdvance: ->
+    attrs = @attributes
+    'wx_appkey' of attrs and 'wx_secret' of attrs
 
+  loaders:
     admins:
       url: '/admins'
       parse: (res) -> res.items

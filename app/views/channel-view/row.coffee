@@ -7,8 +7,9 @@ module.exports = class ChannelRow extends View
   template: require './templates/row'
 
   toDestroy: (node) ->
-    @model.destroy({ wait: true })
-      .error(common.xhrError)
-      .done(-> common.notify('delete.success', 1000))
+    common.confirm 'delete.confirm', =>
+      @model.destroy({ wait: true })
+        .error(common.xhrError)
+        .done(-> common.notify('delete.success', 1000))
 
 

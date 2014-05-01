@@ -117,9 +117,8 @@ module.exports = class RuleView extends View
     if @model.isNew()
       @$el.next().data('folder')?.unfold()
       return @model.destroy()
-    view = common.confirm __('rule.delete_rule.confirm', @model.ptitle())
-    view.on 'confirm', =>
-      view.close()
+    text = __('rule.delete_rule.confirm', @model.ptitle())
+    common.confirm text, =>
       @disable(node)
       @model.destroy().done =>
         @dispose()

@@ -155,6 +155,8 @@ subscriber:
   status: 状态
   subscribed: 活跃
   unsubscribed: 已退订
+  tags: 标签
+  sync_with_wechat: 与微信服务器同步
 
 messaging:
   '': 消息
@@ -173,6 +175,7 @@ channels:
   index:
     h1: 推广渠道
   create: 创建渠道
+  edit: 编辑渠道信息
   there_is_none: 目前没有推广渠道可用
   create_one_now: 现在创建一个
 

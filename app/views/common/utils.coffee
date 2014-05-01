@@ -37,9 +37,16 @@ exports.alert = (message, detail, opts={}) ->
   View = opts.view or AlertModal
   new View data: opts
 
-exports.confirm = (message, detail, opts={}) ->
+exports.confirm = (opts, callback) ->
   opts.view = ConfirmModal
-  exports.alert(message, detail, opts)
+  if 'string' == typeof opts
+    opts =
+      message: opts
+      view: ConfirmModal
+  view = exports.alert(opts)
+  view.on 'confirm', ->
+    view.close()
+    callback?()
 
 
 exports.notify = (message, category, duration=1600, opts={}) ->

@@ -76,7 +76,7 @@ module.exports = class ResponderIndexView extends CollectionView
   export: (node) ->
     data = utils.unicodefy(JSON.stringify(@model.rules.serialize(), null, 2))
     uri = "data:application/json;base64,#{btoa(data)}"
-    view = common.alert
+    common.alert
       title: __('rules.export.title')
       modal_class: 'modal'
       detail: """

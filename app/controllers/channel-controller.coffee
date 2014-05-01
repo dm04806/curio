@@ -14,7 +14,7 @@ module.exports = class ChannelController extends HomeController
         region: 'main'
         collection: collection
   show: (params, route, opts) ->
-    model = @model = mediator.media.related 'channel', params.id
+    model = @model = new Channel {id: params.id, media_id: mediator.media.id}
     model.fetch().then =>
       @view = new ChannelShow
         model: model
