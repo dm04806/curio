@@ -25,7 +25,9 @@ save:
   "": 保存
   success: 保存成功
 save changes: Save changes
-create: Create
+create:
+  "": 创建
+  success: "创建成功!"
 update: Update
 modify: Modify
 back: back
@@ -246,6 +248,18 @@ user:
   new_password_tip: At lease 6 characters
   new_password2: Input again
   new_password2_tip: Input the password again to confirm
+  delete:
+    "": 删除此账号
+    confirm: 真的要删除此账号？
+    consequece: 此操作无法恢复
+    "#0": 删
+    "#1": 除
+    "#2": 此
+    "#3": 账
+    "#4": 号
+edit_user:
+  uid:
+    is blank: 用户名不能为空
 edit_passport:
   password:
     is blank: Please enter password

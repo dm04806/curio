@@ -44,9 +44,11 @@ exports.confirm = (opts, callback) ->
       message: opts
       view: ConfirmModal
   view = exports.alert(opts)
-  view.on 'confirm', ->
-    view.close()
-    callback?()
+  if callback
+    view.on 'confirm', ->
+      view.close()
+      callback()
+  view
 
 
 exports.notify = (message, category, duration=1600, opts={}) ->
@@ -73,10 +75,13 @@ exports.notify = (message, category, duration=1600, opts={}) ->
     </div>
   """
   ret = $(opts.el).html(content)
+    .stop(true)
+    .css('display', 'block')
     .anim('fadeInDown', 200)
-    .find('.alert')
     .delay(opts.duration)
-    .anim(opts.fading)
+    .anim(opts.fading, 600)
+  ret.promise().done ->
+    ret.css('display', 'none')
   ret
 
 exports.xhrError = (xhr) ->

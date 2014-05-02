@@ -27,5 +27,11 @@ module.exports = class SiteErrorMain extends View
   resolve: ->
     setTimeout =>
       @trigger 'resolve'
+  goback: (node) ->
+    history.go(-1)
+    href = location.href
+    setTimeout ->
+      location.href = '/' if href == location.href
+    , 100
 
 

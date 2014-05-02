@@ -13,7 +13,7 @@
       <a href="/super" class="noscript">&raquo; {{t 'error.gosuper'}}</a> &nbsp;&nbsp;
     {{/if}}
     {{#compare code '!=' 'bootfail'}}
-      <a href="/" class="noscript">&raquo; {{t 'error.goback'}}</a>
+      <a data-op="goback" href="javascript:histroy.go(-1)">&raquo; {{t 'error.goback'}}</a>
     {{/compare}}
   </div>
 </div>

@@ -25,4 +25,5 @@ module.exports = class ResourceController extends Controller
       setTimeout =>
         @redirectTo "#{route.name.replace('create', 'show')}", id: model.id
       , 400
-    @view = new @MainViews.show region: 'main', model: model
+    View = @MainViews.create or @MainViews.show
+    @view = new View region: 'main', model: model

@@ -42,10 +42,12 @@ module.exports = class EditFormView extends FormView
       if name of updatables
         attrs[name] = $.trim(elem.value)
 
-    model.save(attrs).always =>
-      @$el.promise().done(=> @enable())
+    @_isNew = @model.isNew()
+    model.save(attrs)
     .done((res) => @_submitDone(res))
     .error((xhr) => @_submitError(xhr))
+    # enable button again, when notify animation is done
+    .always => (@$noti or @$el).promise().done(=> @enable())
 
   # display validation errors
   _submitError: (xhr) ->
@@ -71,6 +73,7 @@ module.exports = class EditFormView extends FormView
 
   _submitDone: (res) ->
     @model.set(res)
-    @notify "edit_#{@model.kind}.success", 'success', 1200
+    act = if @_isNew then 'create' else 'edit'
+    @notify "#{act}_#{@model.kind}.success", 'success', 1000
     @$el.promise().done =>
       @trigger 'submitted', res

@@ -10,10 +10,11 @@
 <div class="box clearfix">
   <form class="main-content edit-form form-horizontal" method="post">
     <div class="rows">
-      <div class="col-sm-10">
+      <div class="col-sm-8">
         {{#form_rows 'sm' 2}}
           {{#if isNew}}
             {{form_input 'uid' uid 'login.username' 'user.uid_tip'}}
+            {{form_input 'password' uid 'login.password' 'user.password'}}
           {{else}}
             {{form_input 'uid' uid 'login.username' 'user.uid_tip' readonly='readonly'}}
             <div class="form-group" for="password">
@@ -31,8 +32,10 @@
         {{/form_rows}}
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
-            <div class="form-message holded"></div>
             <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+            <small class="pull-right">
+              <a class="text-muted" href="" data-op="toDestroy">{{t 'user.delete'}}</a>
+            </small>
           </div>
         </div>
       </div>

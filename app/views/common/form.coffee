@@ -25,7 +25,7 @@ module.exports = class FormView extends View
 
   notify: (args...) ->
     args[0] = @t(args[0])
-    common.notify(args...)
+    @$noti = common.notify(args...)
 
   #
   #  Show global form message at:
@@ -45,8 +45,8 @@ module.exports = class FormView extends View
     if 'number' == typeof expires
       alert.delay(1200) # show message for 1.2s
          # start a fadeOutDown with duration 400ms
-        .anim('fadeOutDown', 400, 200)
          # then start slideUp in 200ms
+        .anim('fadeOutDown', 400, 200)
         .slideUp(300)
       alert.promise().done =>
         # when all animation is done, remove this alert
