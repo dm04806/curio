@@ -90,6 +90,7 @@ error:
     "": Please check you network connection
     title: Network Issue
     detail: Please check your network connection
+  internal server error: 服务器错误
   session timeout:
     "": "Session timeout, try login again"
     title: Session Timeout
@@ -252,11 +253,6 @@ user:
     "": 删除此账号
     confirm: 真的要删除此账号？
     consequece: 此操作无法恢复
-    "#0": 删
-    "#1": 除
-    "#2": 此
-    "#3": 账
-    "#4": 号
 edit_user:
   uid:
     is blank: 用户名不能为空

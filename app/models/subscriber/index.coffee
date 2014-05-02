@@ -11,9 +11,10 @@ module.exports = class Subscriber extends Model
     phone: null
     name: null
     active: true
-  urlPath: ->
-    return unless @media_id
-    "/medias/#{@media_id}/subscribers"
+
+  url: ->
+    "#{@apiRoot}/medias/#{@get 'media_id'}/subscribers/#{@id}"
+
   set: ->
     super
     attrs = @attributes

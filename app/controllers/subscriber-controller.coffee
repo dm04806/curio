@@ -18,7 +18,7 @@ module.exports = class SubscriberController extends HomeController
   # messages with this subscriber
   show: (params, route, opts) ->
     media = mediator.media
-    model = @model = media.related 'subscriber', params.id
+    model = @model = new Subscriber {media_id: media.id, id: params.id}
     query = opts.query
     query.subscriber_id = params.id
     collection = media.related 'messages', query
