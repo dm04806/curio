@@ -6,6 +6,7 @@ FormView = require './form'
 # and call `modal.validate()` before submit
 #
 module.exports = class EditFormView extends FormView
+
   # the front end validations
   validates: {}
 

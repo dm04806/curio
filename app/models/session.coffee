@@ -1,34 +1,23 @@
 utils = require 'lib/utils'
-
-# Store Key
-SK_ALL_MEDIA_ADMINS = 'all_media_admins'
+# Store Key for current admin
 SK_MEDIA_ADMIN = 'media_admin'
 
-
-pickAdmin = (availables, can_empty) ->
-  current = currentAdmin()
-  if not availables or not availables.length
-    return if can_empty then current
-  utils.store SK_ALL_MEDIA_ADMINS, availables
+pickAdmin = (availables) ->
+  return if not availables.length
+  current = currentMedia()
   # Find out which media is now managing
   if current
     for admin in availables
-      if admin.media_id is current.media_id
-        current.media = admin.media or current.media
-        return current
+      if admin.media_id is current
+        return admin
   # Pick the first if the localStorage didn't matched
   admin = availables[0]
-  utils.store SK_MEDIA_ADMIN, admin
+  currentMedia(admin.media_id)
   return admin
 
-
-currentAdmin = ->
-  utils.store SK_MEDIA_ADMIN
-
-allAdmins = (value) ->
-  utils.store SK_ALL_MEDIA_ADMINS, value
+currentMedia = (media_id) ->
+  utils.store SK_MEDIA_ADMIN, media_id
 
 module.exports =
   pickAdmin: pickAdmin
-  currentAdmin: currentAdmin
-  allAdmins: allAdmins
+  currentMedia: currentMedia

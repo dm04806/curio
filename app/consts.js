@@ -1,4 +1,6 @@
-var API_ROOT, DEBUG, SITE_ROOT
+"use strict";
+
+var API_ROOT, DEBUG, SITE_ROOT, API_ROOT, WEBOT_ROOT
 
 DEBUG = typeof window !== "undefined" && window !== null ? window.DEBUG : void 0
 

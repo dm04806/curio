@@ -4,6 +4,7 @@ common = require './utils'
 
 module.exports = class FormView extends View
   region: 'main'
+  className: 'main-container'
   autoRender: true
   render: ->
     super

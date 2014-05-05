@@ -7,9 +7,3 @@ session = require 'models/session'
 
 module.exports = class MediaCollection extends Collection
   model: Media
-  # save to localStorage as admin selections
-  asAdmins: ->
-    session.allAdmins @map (item) ->
-      role: null,
-      media_id: item.id
-      media: item.attributes

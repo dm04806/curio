@@ -4,6 +4,7 @@ Subscriber = require 'models/subscriber'
 Message = require 'models/message'
 MessageCollection = require 'models/message/collection'
 Channel = require 'models/channel'
+{WEBOT_ROOT} = require 'consts'
 
 module.exports = class Media extends Model
   kind: 'media'
@@ -35,3 +36,12 @@ module.exports = class Media extends Model
       subscribers: Subscriber
       messages: MessageCollection
       channels: Channel
+
+  serialize: ->
+    ret = _.clone(@attributes)
+    ret.webotUrl = @webotUrl()
+    ret
+
+  webotUrl: (uid) ->
+    "#{WEBOT_ROOT}#{uid or @get 'uid'}"
+

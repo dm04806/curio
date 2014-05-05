@@ -15,14 +15,16 @@ module.exports = class MediaIndexView extends ListableView
   _getId: (elem) ->
     $(elem).closest('tr').data('id')
 
+  _getModel: (elem) ->
+    @collection.get @_getId(elem)
+
   setPanelMedia: (e) ->
     # save as all media admins
-    @collection.asAdmins()
-    mediator.execute 'toggle-media', @_getId(e.target)
+    mediator.execute 'toggle-media', @_getModel(e.target)
 
   assignAdmin: (e) ->
     @assign_admin = new AssignAdmin
-      model: @collection.get @_getId(e.target)
+      model: @_getModel(e.target)
     e.preventDefault()
     e.stopPropagation()
 

@@ -8,6 +8,7 @@ mediator = require 'mediator'
 
 mediator.user = null
 mediator.media = null
+mediator.all_admins = null
 
 mediator.setHandler 'logout', ->
   return unless mediator.user
@@ -21,35 +22,25 @@ mediator.setHandler 'logout', ->
 
 mediator.setHandler 'login', (data) ->
   userInfo = data.user
-  admins = data.admins
-
+  admins = mediator.all_admins = data.admins or []
   user = mediator.user = new User(userInfo)
-
-  if user.isSuper
-    admins = session.allAdmins() or admins or []
 
   roles = user.roles = {}
   # assign media admin role to user
   for admin in admins
     roles[admin.media_id] = admin.role
+
   admin = session.pickAdmin(admins, user.isSuper)
+  console.log admin
   if admin
-    media = admin.media or { id: admin.media_id }
-    mediator.media = new Media media
+    mediator.execute 'toggle-media', admin.media
+
   utils.debug '[login]', user
   mediator.publish 'session:login'
 
 
-mediator.setHandler 'toggle-media', (media_id) ->
-  all = session.allAdmins()
-  return unless all
-  for admin in all
-    if admin.media_id is media_id
-      utils.store 'media_admin',
-        role: admin.role
-        media_id: media_id
-        media: admin.media
-      utils.debug 'change media to ->', admin.media
-      mediator.media = new Media admin.media
-      mediator.publish 'session:togglemedia', admin
-      return admin
+mediator.setHandler 'toggle-media', (media) ->
+  return if not media
+  if media not instanceof Media
+    media = new Media(media)
+  mediator.media = media
