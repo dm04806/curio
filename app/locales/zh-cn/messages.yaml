@@ -188,6 +188,8 @@ channel:
   scene_id: 场景ID
   input_name: 输入渠道名
   related_place: 相关门店
+  qrcode_img: 二维码
+  desc_tip: 为渠道添加备注信息
 
 locations:
   '': 门店

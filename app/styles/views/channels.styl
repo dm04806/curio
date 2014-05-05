@@ -1,9 +1,13 @@
 @import "base/mixins"
 
-img.qrcode
+.qrcode
   width: 100px
   height: 100px
   sharp-image()
+
+.qrcode-150
+  width: 150px
+  height: 150px
 
 .channel-list
   list-style: none
@@ -11,6 +15,9 @@ img.qrcode
   .title span
     display: inline-block
     margin-right: 0.2em
+  .title
+    margin-top: 6px
+    margin-bottom: 6px
   .box
     position: relative
     margin-bottom: 30px

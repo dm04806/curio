@@ -52,7 +52,7 @@ module.exports = class Rule extends Model
     @on 'change:pattern', (model, data) ->
       @set 'name', stringify(data)
 
-  serialize: ->
+  toJSON: ->
     attrs = @attributes
     index: attrs.index
     replyType: attrs.replyType

@@ -42,8 +42,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
       itemTemplate = @itemTemplate
       view = @itemView = class MyItemView extends CollectionItemView
         template: itemTemplate
-    new view
-      model: model
+    new view model: model
 
   getViewForItem: (item) ->
     @subview "itemView:#{item.cid}"

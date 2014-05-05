@@ -23,6 +23,11 @@
         </span>
         {{name}}
       </h5>
+      {{#if desc}}
+        <small class="text-muted">
+          {{btrunc desc 14}}
+        </small>
+      {{/if}}
     </div>
   </div>
 </div>

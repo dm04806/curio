@@ -30,7 +30,7 @@ module.exports = class Responder extends Model
 
   syncRules: ->
     # silently set rules, don't trigger event
-    @set 'rules', @rules.serialize(), { silent: true }
+    @set 'rules', @rules.toJSON(), { silent: true }
 
   getRules: ->
     @rules

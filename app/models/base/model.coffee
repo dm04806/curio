@@ -160,5 +160,3 @@ module.exports = class Model extends Chaplin.Model
       model = new cls
       model.set "#{@kind}_id", @id
       model
-
-
