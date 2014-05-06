@@ -1,0 +1,37 @@
+{{#widget 'heading2' back='/places'}}
+{{#set 'title'}}
+  {{#if isNew}}
+    {{t 'places.create'}}
+  {{else}}
+    {{t 'places.edit' name}}
+  {{/if}}
+{{/set}}
+{{/widget}}
+<div class="box">
+  <div class="rows">
+    <div class="col-md-9">
+      <form class="main-content edit-form form-horizontal" method="post">
+        {{#form_rows 'sm' 2}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label">
+            {{ t 'place.location' }}
+          </label>
+          <div class="col-sm-10">
+            <div id="place-marker" class="map">
+            </div>
+          </div>
+        </div>
+        {{form_input 'name' name 'place.name' 'place.name_tip'}}
+        {{form_textarea 'address' name 'place.address' 'place.address_tip'}}
+        {{form_textarea 'desc' desc 'desc' 'place.desc_tip' rows=5}}
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+          </div>
+        </div>
+        {{/form_rows}}
+      </form>
+    </div>
+  </div>
+</div>
+

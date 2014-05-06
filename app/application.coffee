@@ -25,9 +25,3 @@ module.exports = class Application extends Chaplin.Application
       mediator.unsubscribe 'initialize'
       super
       mediator.publish 'initialized'
-    # change title every time router changed
-    mediator.subscribe 'dispatcher:dispatch', (controller) ->
-      title = null
-      if controller.view
-        title = controller.view.$el.find('.view-title h1').text()
-      controller.adjustTitle(title || '')

@@ -1,5 +1,6 @@
 helper = require 'lib/view-helper' # Just load the view helpers, no return value
 utils = require 'lib/utils'
+mediator = require 'mediator'
 
 module.exports = class View extends Chaplin.View
   initialize: ->
@@ -7,6 +8,7 @@ module.exports = class View extends Chaplin.View
     @data = @data or {}
     @context = @context or {}
     super
+    @on 'addedToDOM', => @adjustTitle()
 
   # Auto-save `template` option passed to any view as `@template`.
   # `data` and `items` can be misc data which has no need to be a @model or @collection
@@ -41,3 +43,7 @@ module.exports = class View extends Chaplin.View
         throw new Error("How to \"#{op}\"?")
       @[op](node)
 
+  adjustTitle: ->
+    return if @region isnt 'main'
+    subtitle = @$el.find('.view-title h1').text() or ''
+    mediator.execute('adjustTitle', subtitle)

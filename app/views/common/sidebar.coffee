@@ -22,7 +22,7 @@ navItems = [
     url: '/autoreply'
     icon: 'chat'
   ,
-    name: 'locations'
+    name: 'places'
     url: '/places'
     icon: 'location'
   ,

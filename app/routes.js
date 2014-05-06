@@ -17,6 +17,10 @@ module.exports = function(match) {
   match('channels', 'channel#index')
   match('channel/:id', 'channel#show')
 
+  match('places', 'place#index')
+  match('places/create', 'place#create')
+  match('place/:id', 'place#show')
+
   match('autoreply', 'autoreply#index')
 
   match('super', 'super/home#index')

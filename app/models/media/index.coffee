@@ -3,6 +3,7 @@ Responder = require 'models/responder'
 Subscriber = require 'models/subscriber'
 Message = require 'models/message'
 MessageCollection = require 'models/message/collection'
+Place = require 'models/place'
 Channel = require 'models/channel'
 {WEBOT_ROOT} = require 'consts'
 
@@ -36,6 +37,7 @@ module.exports = class Media extends Model
       subscribers: Subscriber
       messages: MessageCollection
       channels: Channel
+      places: Place
 
   serialize: ->
     ret = _.clone(@attributes)

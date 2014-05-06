@@ -172,8 +172,16 @@ channel:
   related_place: 相关门店
   qrcode_img: 二维码
   desc_tip: 此渠道的回复内容
-locations:
-  "": Places
+places:
+  "": 门店
+  index:
+    h1: 门店信息
+  there_is_none: 暂时还没有配置任何门店
+  create_one_now: 现在添加一个
+place:
+  name: 门店名称
+  location: 标记位置
+  address: 详细地址
 shares:
   "": Shares
 dashboard:

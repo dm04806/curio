@@ -1,10 +1,13 @@
 {API_ROOT} = require 'consts'
 utils = require 'lib/utils'
 mediator = require 'mediator'
+session = require 'models/session'
 {CurioError,RetriableError} = require 'models/errors'
 
 boot = ->
-  $.get(API_ROOT).done (bs) ->
+  media_id = session.currentMedia()
+  # pass current managing media_id to server
+  $.get(API_ROOT, { current: media_id }).done (bs) ->
     if bs?.user
       mediator.execute 'login', bs
 

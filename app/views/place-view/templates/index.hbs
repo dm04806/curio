@@ -1,0 +1,26 @@
+{{#widget 'heading2' title='places.index.h1'}}
+  {{#if total}}
+  <a href="{{url 'place#create'}}" class="btn btn-sm btn-primary">
+      <i class="icon-plus22"></i>
+      {{t 'create'}}
+    </a>
+  {{/if}}
+  <form class="form-inline pull-right search-sm" action="">
+    <input class="form-control input-sm" type="text" name="q" placeholder="{{t 'search'}}">
+    <button class="btn btn-sm"><i class="icon-search"></i></button>
+  </form>
+{{/widget}}
+<div class="row list place-list">
+</div>
+<div class="placeholder">
+  <div class="loading-indicator spinner spinner30">
+    <!--{{t 'loading'}}-->
+  </div>
+</div>
+<div class="fallback big-box">
+  <p class="text-muted">
+  {{t 'places.there_is_none'}}
+  </p>
+  <br>
+  <a href="{{url 'place#create'}}" class="btn btn-primary btn-md">{{t 'places.create_one_now'}}</a>
+</div>

@@ -43,4 +43,5 @@ mediator.setHandler 'toggle-media', (media) ->
   return if not media
   if media not instanceof Media
     media = new Media(media)
+  session.currentMedia(media.id)
   mediator.media = media

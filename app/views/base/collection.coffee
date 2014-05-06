@@ -7,6 +7,7 @@ module.exports = class CollectionView extends Chaplin.CollectionView
   # so we need to borrow the method from the View prototype:
   getTemplateFunction: View::getTemplateFunction
   getTemplateData: View::getTemplateData
+  adjustTitle: View::adjustTitle
 
   optionNames: CollectionView::optionNames.concat ['context']
 

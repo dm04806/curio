@@ -191,8 +191,17 @@ channel:
   qrcode_img: 二维码
   desc_tip: 为渠道添加备注信息
 
-locations:
+places:
   '': 门店
+  index:
+    h1: 门店信息
+  there_is_none: 暂时没有添加任何门店
+  create_one_now: 现在添加一个
+
+place:
+  name: 名称
+  location: 位置
+  address: 地址
 
 shares:
   '': 图文分享
