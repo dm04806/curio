@@ -1,68 +1,68 @@
 <!--创建菜单实例2-->
 <script type="text/template" id="main_menu_item_template">
-	<li class="main_menu_item">
-		<label>主菜单</label>
-	</li>
-	<p class="menu_item_console">
-		<a><img src="/images/edit.png" /></a>
-		<a><img src="/images/delete.png" /></a>
-	</p>
-	<input type="text" class="menu_edit" />
+  <li class="main_menu_item">
+    <label>主菜单</label>
+  </li>
+  <p class="menu_item_console">
+    <a><img src="/images/edit.png" /></a>
+    <a><img src="/images/delete.png" /></a>
+  </p>
+  <input type="text" class="menu_edit" />
 </script>
 <script type="text/template" id="sub_menus_container_template">
-	<div class="sub_menus">
-	</div>
+  <div class="sub_menus">
+  </div>
 </script>
 <script type="text/template" id="sub_menu_item_template">
-	<li class="sub_menu_item">
-		<label>二级菜单</label>
-	</li>
-	<p class="menu_item_console">
-		<a><img src="/images/edit.png" /></a>
-		<a><img src="/images/delete.png" /></a>
-	</p>
-	<input type="text" class="menu_edit" />
+  <li class="sub_menu_item">
+    <label>二级菜单</label>
+  </li>
+  <p class="menu_item_console">
+    <a><img src="/images/edit.png" /></a>
+    <a><img src="/images/delete.png" /></a>
+  </p>
+  <input type="text" class="menu_edit" />
 </script>
 <script type="text/template" id="sub_menus_template">
-	<a class="add_sub_menu_button">+添加</a>
+  <a class="add_sub_menu_button">+添加</a>
 </script>
 <div class="menu_main_container">
-	<h3>创建微信菜单</h3>
-	<div class="menu_top_console">
-		<button class="btn btn-sm btn-primary" data-op="save">{{t 'menu.save'}}
-		</button>
-		<button class="btn btn-sm btn-default" data-op="reset">
-		  {{t 'menu.reset'}}
-		</button>
-	</div>
-	<div class="operate_mode">
-		<label>操作模式:</label>
-		<div>
-			<ul class="operate_mode_status">
-				<i class="switch_status on"></i>
-				<span>编辑模式已开启</span>
-			</ul>
-			<span class="switch_area on">
-				<strong>关闭</strong>
-				<i class="icon_mode_switch on"></i>
-				<a>开启</a>
-			</span>
-		</div>
-	</div>
-	<div class="menus_container">
-		<div class="main_menu_container">
-			<label class="main_menu_title">一级菜单:</label>
-			<div class="main_menus">
-				
-			</div>
-			<a class="add_main_menu_button">+添加</a>
-		</div>
-	</div>
-	<!--
-	<div class="console_bar">
-		<label>操作:</label>
-		<input id="save_and_submit_btn" type="button" value="提交保存" />
-		<input id="reset_btn" type="button" value="重置" />
-	</div>
-	-->
+  <h3>创建微信菜单</h3>
+  <div class="menu_top_console">
+    <button class="btn btn-sm btn-primary" data-op="save">{{t 'menu.save'}}
+    </button>
+    <button class="btn btn-sm btn-default" data-op="reset">
+      {{t 'menu.reset'}}
+    </button>
+  </div>
+  <div class="operate_mode">
+    <label>操作模式:</label>
+    <div>
+      <ul class="operate_mode_status">
+        <i class="switch_status on"></i>
+        <span>编辑模式已开启</span>
+      </ul>
+      <span class="switch_area on">
+        <strong>关闭</strong>
+        <i class="icon_mode_switch on"></i>
+        <a>开启</a>
+      </span>
+    </div>
+  </div>
+  <div class="menus_container">
+    <div class="main_menu_container">
+      <label class="main_menu_title">一级菜单:</label>
+      <div class="main_menus">
+        
+      </div>
+      <a class="add_main_menu_button">+添加</a>
+    </div>
+  </div>
+  <!--
+  <div class="console_bar">
+    <label>操作:</label>
+    <input id="save_and_submit_btn" type="button" value="提交保存" />
+    <input id="reset_btn" type="button" value="重置" />
+  </div>
+  -->
 </div>
