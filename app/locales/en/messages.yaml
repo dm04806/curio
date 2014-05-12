@@ -323,3 +323,7 @@ rule:
       is required: 请填写回复内容
     pattern:
       is required: 请填写关键字
+menu:
+  "": WeChat menu
+  save: save
+  reset: reset

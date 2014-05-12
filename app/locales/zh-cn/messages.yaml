@@ -367,3 +367,8 @@ rule:
     pattern:
       is required: 关键字不能为空
 
+# ======= Menu ======
+menu:
+  '': 微信菜单
+  save: 保存
+  reset: 重置

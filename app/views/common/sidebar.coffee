@@ -29,6 +29,10 @@ navItems = [
     name: 'channels'
     url: '/channels'
     icon: 'filter'
+  ,
+    name: 'menu'
+    url: "/menu"
+    icon: "map"
   ]
 ,
   name: 'stats'
