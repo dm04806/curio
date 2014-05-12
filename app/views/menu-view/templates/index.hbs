@@ -1,7 +1,7 @@
 <!--创建菜单实例2-->
 <script type="text/template" id="main_menu_item_template">
   <li class="main_menu_item">
-    <label>主菜单</label>
+    <label>{{t 'menu.main_menu'}}</label>
   </li>
   <p class="menu_item_console">
     <a><img src="/images/edit.png" /></a>
@@ -15,7 +15,7 @@
 </script>
 <script type="text/template" id="sub_menu_item_template">
   <li class="sub_menu_item">
-    <label>二级菜单</label>
+    <label>{{t 'menu.sub_menu'}}</label>
   </li>
   <p class="menu_item_console">
     <a><img src="/images/edit.png" /></a>
@@ -24,10 +24,10 @@
   <input type="text" class="menu_edit" />
 </script>
 <script type="text/template" id="sub_menus_template">
-  <a class="add_sub_menu_button">+添加</a>
+  <a class="add_sub_menu_button">+{{t 'menu.add'}}</a>
 </script>
 <div class="menu_main_container">
-  <h3>创建微信菜单</h3>
+  <h3>{{t 'menu'}}</h3>
   <div class="menu_top_console">
     <button class="btn btn-sm btn-primary" data-op="save">{{t 'menu.save'}}
     </button>
@@ -35,27 +35,13 @@
       {{t 'menu.reset'}}
     </button>
   </div>
-  <div class="operate_mode">
-    <label>操作模式:</label>
-    <div>
-      <ul class="operate_mode_status">
-        <i class="switch_status on"></i>
-        <span>编辑模式已开启</span>
-      </ul>
-      <span class="switch_area on">
-        <strong>关闭</strong>
-        <i class="icon_mode_switch on"></i>
-        <a>开启</a>
-      </span>
-    </div>
-  </div>
   <div class="menus_container">
     <div class="main_menu_container">
-      <label class="main_menu_title">一级菜单:</label>
+      <label class="main_menu_title">{{t 'menu.main_menu'}}:</label>
       <div class="main_menus">
         
       </div>
-      <a class="add_main_menu_button">+添加</a>
+      <a class="add_main_menu_button">+{{t 'menu.add'}}</a>
     </div>
   </div>
   <!--

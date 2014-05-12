@@ -327,3 +327,13 @@ menu:
   "": WeChat menu
   save: save
   reset: reset
+  prop: properties
+  label: label
+  type: type
+  value: value
+  keyword: keyword
+  url: url
+  click: click
+  add: add
+  main_menu: main menu
+  sub_menu: sub menu

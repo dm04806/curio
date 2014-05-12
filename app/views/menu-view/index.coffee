@@ -14,7 +14,6 @@ module.exports = class MenuIndexView extends View
   template: require './templates/index'
   mode: "edit"
   events:
-    "click .switch_area": "onOperateModeSwitcherClick"#模式切换
     "click .add_main_menu_button": "onAddMainMenuButtonClick"#添加主菜单按钮
   initialize: ->
     #初始化
@@ -29,10 +28,6 @@ module.exports = class MenuIndexView extends View
     mediator.subscribe "changeMenuIndex",@changeMenuIndex
   render: ->
     super
-    @modeStatus = @$(".switch_status")
-    @modeStatusLabel = @$(".operate_mode_status span")
-    @switcher = @$(".switch_area")
-    @switcherIcon = @$(".icon_mode_switch")
 
     @menuProp = new MenuProp
     @$(".menu_main_container").append @menuProp.render().el
@@ -50,29 +45,6 @@ module.exports = class MenuIndexView extends View
 
     #@parseMenu JSON.parse(@model.get "menu")
     this.parseMenu(@model.get "menu")
-
-  onOperateModeSwitcherClick: ->
-    #模式切换
-    if @mode is "edit"
-      #切换到预览模式
-      @mode = "preview"
-      @modeStatus.removeClass 'on'
-      @switcher.removeClass 'on'
-      @switcherIcon.removeClass 'on'
-      @modeStatus.addClass 'off'
-      @switcher.addClass 'off'
-      @switcherIcon.addClass 'off'
-      @modeStatusLabel.html "编辑模式已关闭"
-    else if @mode is "preview"
-      #切换到编辑模式
-      @mode = "edit"
-      @modeStatus.removeClass 'off'
-      @switcher.removeClass 'off'
-      @switcherIcon.removeClass 'off'
-      @modeStatus.addClass 'on'
-      @switcher.addClass 'on'
-      @switcherIcon.addClass 'on'
-      @modeStatusLabel.html "编辑模式已开启"
   addMainMenu:(data) ->
     #添加一个主菜单
     item = new MainMenuItem model:data
