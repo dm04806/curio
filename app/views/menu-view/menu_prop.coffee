@@ -25,7 +25,8 @@ module.exports = class MenuProp extends View
   setProp: ->
     @labelInput.val @model.get "label"
     #@combox.val @model.get "type"
-    $("input: radio[value="+@model.get("type")+"]").prop('checked', 'true');
+    console.log(@model.get "type")
+    $("input:radio[value=" + @model.get("type") + "]").prop('checked', 'true');
     @valueInput.val @model.get "value"
   setMenuItemModel: (model)->
     #设置菜单的数据对象
@@ -63,6 +64,6 @@ module.exports = class MenuProp extends View
     #保存
     data =
       label: @labelInput.val()
-      type: $('input[name="menu_type"]: checked').val()
+      type: $('input[name="menu_type"]:checked').val()
       value: @valueInput.val()
     @model.set data
