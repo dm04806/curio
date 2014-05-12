@@ -7,6 +7,9 @@ MenuProp = require './menu_prop'
 MenuCell = require 'models/menu/menu_cell'
 MenuList = require 'models/menu/menu_list'
 
+common = require 'views/common/utils'
+
+
 module.exports = class MenuIndexView extends View
   template: require './templates/index'
   mode: "edit"
@@ -43,7 +46,10 @@ module.exports = class MenuIndexView extends View
     #menu_json = '{"buttons":[{"name":"热门活动","sub_button":[{"name":"热门视频","type":"click","key":"video"},{"name":"必玩推荐","type":"click","key":"wan"},{"name":"精彩回顾","type":"click","key":"huigu"},{"name":"演出日历","type":"click","key":"calendar"}]},{"name":"Play","sub_button":[{"name":"罗志祥 Show Lo","type":"click","key":"lzx"}]},{"name":"服务","sub_button":[{"name":"Hotline 客服热线","type":"view","url":"http://kefu"},{"name":"VIP Room 贵宾服务","type":"click","key":"vip"},{"name":"Location 如何到达","type":"view","url":"http://map.baidu.com"},{"name":"Guide 畅游飞碟","type":"view","url":"feidie"}]}]}'
     #@parseMenu JSON.parse(menu_json)
 
-    @parseMenu JSON.parse(@model.get "menu")
+    console.log(@model.get "menu")
+
+    #@parseMenu JSON.parse(@model.get "menu")
+    this.parseMenu(@model.get "menu")
 
   onOperateModeSwitcherClick: ->
     #模式切换
@@ -167,7 +173,7 @@ module.exports = class MenuIndexView extends View
       @setSubMenusPositionIn @submenus.model.get "index"
   parseMenu:(menu)->
     #解析菜单
-    buttons = menu["buttons"]
+    buttons = menu["button"]
     _.each buttons,(item,index,list)=>
       @formatMenuItemData @menus,item,index,index,index is buttons.length-1
   filterMenuItemData:(item)->
@@ -229,19 +235,19 @@ module.exports = class MenuIndexView extends View
   save:->
     #alert "save"
     menu = 
-      buttons:[]
+      button:[]
     _.each @menus.models,(item,index) =>
       obj = @formatMenuItemForSave item
-      menu["buttons"].push obj
+      menu["button"].push obj
 
     menu_json = JSON.stringify(menu)
 
     #alert menu_json
 
-    @model.save(menu:menu_json).done =>
-      alert "保存成功"
-    .error(xhr) =>
-      alert "保存失败"
+    @model.save(menu:menu).done (result) =>
+      common.notify "保存成功"
+    .error (xhr) =>
+      common.notify "保存失败"
 
   reset:->
     alert "reset"

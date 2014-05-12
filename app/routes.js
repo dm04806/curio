@@ -31,4 +31,6 @@ module.exports = function(match) {
   match('super/medias', 'super/media#index')
   match('super/medias/create', 'super/media#create')
   match('super/media/:id', 'super/media#show')
+
+  match('menu', 'menu#index')
 }
