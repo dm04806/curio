@@ -201,7 +201,7 @@ register 'strftime', (format, date, options) ->
 register 'mapImg', (lat, lng, args..., options) ->
   size = args[0] || '350*180'
   zoom = args[1] || 16
-  "http://st.map.qq.com/api?size=#{size}&center=#{lng},#{lat}&zoom=#{zoom}"
+  "http://st.map.qq.com/api?size=#{size}&markers=#{lng},#{lat}&zoom=#{zoom}"
 
 
 
