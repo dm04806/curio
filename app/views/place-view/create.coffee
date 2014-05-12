@@ -1,5 +1,4 @@
 EditFormView = require 'views/common/edit_form'
-Place = require 'models/place'
 mediator = require 'mediator'
 
 module.exports = class CreatePlace extends EditFormView
