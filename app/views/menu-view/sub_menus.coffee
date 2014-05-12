@@ -6,14 +6,14 @@ SubMenuItem = require './sub_menu_item'
 module.exports = class SubMenus extends View
   tagName: "div"
   template: require './templates/sub_menus'
-  events:
-    "click .add_sub_menu_button":"onAddSubMenuButtonClick"
+  events: 
+    "click .add_sub_menu_button": "onAddSubMenuButtonClick"
   initialize: ->
     #初始化
     @menuItems = []
 
     #监听全局事件
-  render:->
+  render: ->
     super
     #渲染
     @$el.html @template()
@@ -24,23 +24,23 @@ module.exports = class SubMenus extends View
     submenus = @model.get "submenus"
 
     self = @
-    _.each submenus.models,(value,index,list) ->
-      item = new SubMenuItem model:value
+    _.each submenus.models, (value, index, list) ->
+      item = new SubMenuItem model: value
       $(item.render().el).insertAfter self.addButton
       self.menuItems.push item
 
-    if submenus.length>=5
+    if submenus.length >= 5
       @addButton.hide()
 
     #监听添加
-    @listenTo submenus,"add",@addSubMenu
-    @listenTo submenus,"remove",@removeSubMenu
-    @listenTo submenus,"sort",@sortMenu
+    @listenTo submenus, "add", @addSubMenu
+    @listenTo submenus, "remove", @removeSubMenu
+    @listenTo submenus, "sort", @sortMenu
 
     return @
-  addSubMenu:(data)->
+  addSubMenu: (data) ->
     #添加一个子菜单
-    item = new SubMenuItem model:data
+    item = new SubMenuItem model: data
     $(item.render().el).insertAfter @addButton
 
     @menuItems.push item
@@ -48,17 +48,17 @@ module.exports = class SubMenus extends View
     #子菜单
     submenus = @model.get "submenus"
 
-    if submenus.length>=5
+    if submenus.length >= 5
       @addButton.hide()
-  removeSubMenu:->
+  removeSubMenu: ->
     #子菜单
     submenus = @model.get "submenus"
 
-    if submenus.length<5
+    if submenus.length < 5
       @addButton.show()
 
     submenus resetIndexs
-  onAddSubMenuButtonClick:->
+  onAddSubMenuButtonClick: ->
     #添加子菜单按钮被点击
     submenus = @model.get "submenus"
     order = submenus.nextOrder()
@@ -71,17 +71,17 @@ module.exports = class SubMenus extends View
       menutype: "sub"
       selected: true
 
-    submenus.add new MenuCell data,sort:false
-  sortMenu:->
+    submenus.add new MenuCell data, sort: false
+  sortMenu: ->
     #排序菜单
     #alert "sort submenus"
 
     #删除
-    _.each @$el.children(),(item,index,arr)->
-      if index>0
+    _.each @$el.children(), (item, index, arr) ->
+      if index > 0
         $(item).remove()
 
-    _.each @menuItems,(item,index,arr)->
+    _.each @menuItems, (item, index, arr) ->
       item.clearListening()
 
     @menuItems = []
@@ -90,10 +90,10 @@ module.exports = class SubMenus extends View
     submenus = @model.get "submenus"
 
     #添加
-    _.each submenus.models,(value,index,arr)=>
+    _.each submenus.models, (value, index, arr) =>
       @addSubMenu value
   close: ->
     #清除监听关闭
-    _.each @menuItems,(item,index,arr)->
+    _.each @menuItems, (item, index, arr) ->
       item.clearListening()
     @remove()

@@ -13,19 +13,19 @@ common = require 'views/common/utils'
 module.exports = class MenuIndexView extends View
   template: require './templates/index'
   mode: "edit"
-  events:
+  events: 
     "click .add_main_menu_button": "onAddMainMenuButtonClick"#添加主菜单按钮
   initialize: ->
     #初始化
     @menus = new MenuList
-    @listenTo @menus,"add",@addMainMenu
-    @listenTo @menus,"remove",@removeMainMenu
-    @listenTo @menus,"sort",@sortMenu
+    @listenTo @menus, "add", @addMainMenu
+    @listenTo @menus, "remove", @removeMainMenu
+    @listenTo @menus, "sort", @sortMenu
 
     #监听全局事件
-    mediator.subscribe "menuItemClick",@selectedMenuItemChanged
-    mediator.subscribe "selectedMenuItemChanged",@selectedMenuItemChanged
-    mediator.subscribe "changeMenuIndex",@changeMenuIndex
+    mediator.subscribe "menuItemClick", @selectedMenuItemChanged
+    mediator.subscribe "selectedMenuItemChanged", @selectedMenuItemChanged
+    mediator.subscribe "changeMenuIndex", @changeMenuIndex
   render: ->
     super
 
@@ -38,16 +38,16 @@ module.exports = class MenuIndexView extends View
     @mainMenuAddButton = @$(".add_main_menu_button")
 
     #初始化保存的菜单
-    #menu_json = '{"buttons":[{"name":"热门活动","sub_button":[{"name":"热门视频","type":"click","key":"video"},{"name":"必玩推荐","type":"click","key":"wan"},{"name":"精彩回顾","type":"click","key":"huigu"},{"name":"演出日历","type":"click","key":"calendar"}]},{"name":"Play","sub_button":[{"name":"罗志祥 Show Lo","type":"click","key":"lzx"}]},{"name":"服务","sub_button":[{"name":"Hotline 客服热线","type":"view","url":"http://kefu"},{"name":"VIP Room 贵宾服务","type":"click","key":"vip"},{"name":"Location 如何到达","type":"view","url":"http://map.baidu.com"},{"name":"Guide 畅游飞碟","type":"view","url":"feidie"}]}]}'
+    #menu_json = '{"buttons": [{"name": "热门活动", "sub_button": [{"name": "热门视频", "type": "click", "key": "video"}, {"name": "必玩推荐", "type": "click", "key": "wan"}, {"name": "精彩回顾", "type": "click", "key": "huigu"}, {"name": "演出日历", "type": "click", "key": "calendar"}]}, {"name": "Play", "sub_button": [{"name": "罗志祥 Show Lo", "type": "click", "key": "lzx"}]}, {"name": "服务", "sub_button": [{"name": "Hotline 客服热线", "type": "view", "url": "http: //kefu"}, {"name": "VIP Room 贵宾服务", "type": "click", "key": "vip"}, {"name": "Location 如何到达", "type": "view", "url": "http: //map.baidu.com"}, {"name": "Guide 畅游飞碟", "type": "view", "url": "feidie"}]}]}'
     #@parseMenu JSON.parse(menu_json)
 
     console.log(@model.get "menu")
 
     #@parseMenu JSON.parse(@model.get "menu")
     this.parseMenu(@model.get "menu")
-  addMainMenu:(data) ->
+  addMainMenu: (data) ->
     #添加一个主菜单
-    item = new MainMenuItem model:data
+    item = new MainMenuItem model: data
     @mainMenuContainer.append item.render().el
 
     #监听主菜单点击
@@ -58,9 +58,9 @@ module.exports = class MenuIndexView extends View
     if @menus.length >= 3
       @mainMenuAddButton.hide()
   removeMainMenu: ->
-    #删除了一个主菜单,重新设置索引
-    _.each @menus.models,(model,index,context) ->
-      model.set index:index
+    #删除了一个主菜单, 重新设置索引
+    _.each @menus.models, (model, index, context) ->
+      model.set index: index
 
     if @menus.length<3
       @mainMenuAddButton.show()
@@ -72,7 +72,7 @@ module.exports = class MenuIndexView extends View
       @setSubMenusPositionIn sub_index
     else
       @submenus.close()
-  selectedMenuItemChanged:(item) =>
+  selectedMenuItemChanged: (item) =>
     #alert "select menu item changed "+item.model.get "label"
     if @selectedMenuItem? and @selectedMenuItem isnt item
       if @selectedMenuItem and @selectedMenuItem.model isnt item.model
@@ -80,18 +80,18 @@ module.exports = class MenuIndexView extends View
       
     @selectedMenuItem = item
     @menuProp.setMenuItemModel item.model
-  changeMenuIndex:(type,index)=>
+  changeMenuIndex: (type, index) =>
     #改变菜单顺序
     switch type
       when "left"
-        @menus.swapIndexs index,index-1
+        @menus.swapIndexs index, index-1
       when "right"
-        @menus.swapIndexs index,index+1
+        @menus.swapIndexs index, index+1
       when "up"
-        @submenus.model.get("submenus").swapIndexs index,index+1
+        @submenus.model.get("submenus").swapIndexs index, index+1
       when "down"
-        @submenus.model.get("submenus").swapIndexs index,index-1
-  onMainMenuItemClick:(menuItem) =>
+        @submenus.model.get("submenus").swapIndexs index, index-1
+  onMainMenuItemClick: (menuItem) =>
     if (not @submenus? or (@submenus? and menuItem.model isnt @submenus.model))
       index = menuItem.model.get "index"
       @showSubMenusIn index
@@ -102,15 +102,15 @@ module.exports = class MenuIndexView extends View
     index = @menus.length
     sub_menus = new MenuList
     data =
-      label:"item "+order
-      order:order
-      index:index
+      label: "item "+order
+      order: order
+      index: index
       menutype: "main"
-      submenus:sub_menus
-      selected:true
+      submenus: sub_menus
+      selected: true
 
-    @menus.add new MenuCell data,sort:false
-  showSubMenusIn:(index) ->
+    @menus.add new MenuCell data, sort: false
+  showSubMenusIn: (index) ->
     #在指定位置显示子菜单
 
     if @submenus?
@@ -118,14 +118,14 @@ module.exports = class MenuIndexView extends View
 
     model = @menus.at index
 
-    @submenus = new SubMenus model:model
+    @submenus = new SubMenus model: model
     @$el.append @submenus.render().el
-    @submenus.$el.css "left",@mainMenuTitle.width()+index*200+171
-  setSubMenusPositionIn:(index)->
+    @submenus.$el.css "left", @mainMenuTitle.width()+index*200+171
+  setSubMenusPositionIn: (index)->
       #在指定位置显示子菜单
       if @submenus?
-        @submenus.$el.css "left",@mainMenuTitle.width()+index*200+171
-  sortMenu:->
+        @submenus.$el.css "left", @mainMenuTitle.width()+index*200+171
+  sortMenu: ->
     #排序菜单
     #alert("sort main menu");
 
@@ -133,8 +133,8 @@ module.exports = class MenuIndexView extends View
     @mainMenuContainer.html("");
 
     #添加
-    _.each @menus.models,(value,index,list)=>
-      item = new MainMenuItem model:value
+    _.each @menus.models, (value, index, list) =>
+      item = new MainMenuItem model: value
       @mainMenuContainer.append item.render().el
 
       #监听主菜单点击
@@ -143,17 +143,17 @@ module.exports = class MenuIndexView extends View
     #子菜单位置
     if @submenus?
       @setSubMenusPositionIn @submenus.model.get "index"
-  parseMenu:(menu)->
+  parseMenu: (menu) ->
     #解析菜单
     buttons = menu["button"]
-    _.each buttons,(item,index,list)=>
-      @formatMenuItemData @menus,item,index,index,index is buttons.length-1
-  filterMenuItemData:(item)->
+    _.each buttons, (item, index, list)=>
+      @formatMenuItemData @menus, item, index, index, index is buttons.length-1
+  filterMenuItemData: (item) ->
     #筛选菜单数据
     data=
-      label:item["name"]
+      label: item["name"]
     if not item["sub_button"]?
-      #没有子菜单的,需要提取数据
+      #没有子菜单的, 需要提取数据
       data["type"] = item["type"]
       if data["type"] is "view"
         data["value"]=item["url"]
@@ -161,9 +161,9 @@ module.exports = class MenuIndexView extends View
         data["value"]=item["key"]
 
     return data
-  formatMenuItemData:(target_menus,item,order,index,selected)->
+  formatMenuItemData: (target_menus, item, order, index, selected) ->
     #对菜单数据和子菜单数据进行数据对象化
-    #alert(index+":"+item["name"]);
+    #alert(index+": "+item["name"]);
 
     sub_menus = new MenuList
     data = @filterMenuItemData item
@@ -172,26 +172,26 @@ module.exports = class MenuIndexView extends View
     data["selected"] = selected
     data["submenus"] = sub_menus
 
-    target_menus.add(new MenuCell(data),sort:false)
+    target_menus.add(new MenuCell(data), sort: false)
 
-    #target_menus.create(data,{sort:false,request:false});
+    #target_menus.create(data, {sort: false, request: false});
 
     if item["sub_button"]
       #有子菜单
       sub_button = item["sub_button"]
 
-      _.each sub_button,(sub_item,sub_index,list)=>
-        @formatMenuItemData sub_menus,sub_item,sub_index,sub_index,false
-  formatMenuItemForSave:(data)->
+      _.each sub_button, (sub_item, sub_index, list) =>
+        @formatMenuItemData sub_menus, sub_item, sub_index, sub_index, false
+  formatMenuItemForSave: (data) ->
     #格式化菜单数据为微信菜单
     obj=
-      name:data.get("label")
+      name: data.get("label")
 
     if data.get("submenus")? and data.get("submenus").length > 0
-      #有子菜单,子菜单优先
+      #有子菜单, 子菜单优先
       obj["sub_button"] = []
 
-      _.each data.get("submenus").models,(item,index)=>
+      _.each data.get("submenus").models, (item, index) =>
         obj["sub_button"].push @formatMenuItemForSave item
     else
       obj["type"] = data.get("type")#类型
@@ -204,11 +204,11 @@ module.exports = class MenuIndexView extends View
         obj["key"] = data.get("value")
 
     return obj
-  save:->
+  save: ->
     #alert "save"
     menu = 
-      button:[]
-    _.each @menus.models,(item,index) =>
+      button: []
+    _.each @menus.models, (item, index) =>
       obj = @formatMenuItemForSave item
       menu["button"].push obj
 
@@ -216,11 +216,11 @@ module.exports = class MenuIndexView extends View
 
     #alert menu_json
 
-    @model.save(menu:menu).done (result) =>
+    @model.save(menu: menu).done (result) =>
       common.notify "保存成功"
     .error (xhr) =>
       common.notify "保存失败"
 
-  reset:->
+  reset: ->
     alert "reset"
 
