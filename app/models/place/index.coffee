@@ -5,5 +5,9 @@ module.exports = class Place extends Model
   defaults:
     lat: null
     lng: null
+    address: null
+    phone: null
+    name: null
+    intro: null
   url: ->
     "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}"

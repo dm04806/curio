@@ -1,7 +1,10 @@
-# Google Maps help utilities
-{GMAP_AK} = require 'consts'
+#
+# Async load of map libraries
+#
+{AMAP_AK,GMAP_AK} = require 'consts'
 
-MAP_JS = "//maps.googleapis.com/maps/api/js?key=#{GMAP_AK}&sensor=false"
+MAP_JS = "http://webapi.amap.com/maps?v=1.2&key=#{AMAP_AK}"
+#MAP_JS = "//maps.googleapis.com/maps/api/js?key=#{GMAP_AK}&sensor=false&libraries=places"
 
 
 $.cachedScript = (url, options) ->
@@ -13,7 +16,7 @@ $.cachedScript = (url, options) ->
   return jQuery.ajax options
 
 start = (cb) ->
-  cb_name = '_gmap_callback_'
+  cb_name = '_map_callback_'
   if not cb
     throw new Error('Must provide a callback')
   js = "#{MAP_JS}&callback=#{cb_name}"

@@ -193,6 +193,7 @@ channel:
 
 places:
   '': 门店
+  search: 在此输入以开始搜索
   index:
     h1: 门店信息
   there_is_none: 暂时没有添加任何门店
@@ -201,7 +202,11 @@ places:
 place:
   name: 名称
   location: 位置
+  empty_search: 搜索不到此地址，请手动标记
   address: 地址
+  address_tip: 输入详细地址并标注
+  phone: 电话
+  intro: 说明
 
 shares:
   '': 图文分享

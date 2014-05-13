@@ -174,6 +174,7 @@ channel:
   desc_tip: 此渠道的回复内容
 places:
   "": 门店
+  search: 在此搜索地点
   index:
     h1: 门店信息
   there_is_none: 暂时还没有配置任何门店
@@ -181,7 +182,11 @@ places:
 place:
   name: 门店名称
   location: 标记位置
+  empty_search: 搜索不到此地址
   address: 详细地址
+  address_tip: 输入详细地址并标注
+  phone: 电话
+  intro: 说明
 shares:
   "": Shares
 dashboard:

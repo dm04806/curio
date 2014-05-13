@@ -17,13 +17,12 @@
             {{ t 'place.location' }}
           </label>
           <div class="col-sm-10">
-            <div id="place-marker" class="map">
-            </div>
+            <div id="place-marker"></div>
           </div>
         </div>
         {{form_input 'name' name 'place.name' 'place.name_tip'}}
-        {{form_textarea 'address' name 'place.address' 'place.address_tip'}}
-        {{form_textarea 'desc' desc 'desc' 'place.desc_tip' rows=5}}
+        {{form_textarea 'phone' name 'place.phone' 'place.phone_tip'}}
+        {{form_textarea 'intro' desc 'place.intro' 'place.intro_tip' rows=5}}
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <button type="submit" class="btn btn-primary">{{t 'save'}}</button>

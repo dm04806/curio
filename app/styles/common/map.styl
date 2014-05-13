@@ -1,4 +1,44 @@
 
-.map
-  min-height: 200px
+.map-container
+  // 小于此数值「地图数据」将显示得很长
+  height: 255px
   background: #f0f0f0
+
+.map-marker
+  overflow: hidden
+
+.map-control
+  position: relative
+  z-index: 1
+  .form-control
+    border-radius: 0
+  .toggler
+    position: absolute
+    top: 0
+    right: 0
+    border-bottom-width: 1px
+    border-radius: 0
+    &:hover, &:active
+      margin-top: 0
+  .to-shrink
+    display: none
+  .to-enlarge
+    display: inline-block
+
+.map-autocomplete
+  z-index: 2
+  .tt-dropdown-menu
+    z-index: 2
+    border-radius: 0 0 2px 2px
+    .district
+      color: #999
+
+.large
+  .to-shrink
+    display: inline-block
+  .to-enlarge
+    display: none
+
+.map-marker.large
+  .map-container
+    height: 460px
