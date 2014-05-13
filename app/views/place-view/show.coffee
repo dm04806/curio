@@ -13,24 +13,22 @@ module.exports = class ChannelView extends EditFormView
 
   render: ->
     super
-
     marker = @subview 'marker', new MarkerView
       container: @$el.find('#place-marker')
       model: @model
-    # display big map for new creating place
-    if @model.isNew()
-      @toBigMap()
     marker.on 'searched', @updateByPOI.bind(this)
+    marker.initAutocomplete @$el.find("input[name=address]")
 
   toBigMap: ->
     @subview('marker').enlarge()
 
   updateByPOI: (poi) ->
-    console.log poi
     @model.set
       address: "#{poi.city} #{poi.address}"
-      phone: poi.tel
+      phone: poi.tel?.split(';').join(', ')
       name: poi.name
+      lat: poi.location.lat
+      lng: poi.location.lng
 
   updateInput: (model) ->
     for k, v of model.changed

@@ -49,10 +49,12 @@ module.exports = class MapMarker extends View
     map.plugin ['AMap.ToolBar'], ->
       map.addControl new AMap.ToolBar(direction: false)
 
-    @marker = new AMap.Marker
+    marker = @marker = new AMap.Marker
       map: map
       position: map.getCenter()
       draggable: true
+
+    AMap.event.addListener marker, 'dragend', => @updateByMarker()
 
     @infoWindow = new AMap.InfoWindow
       position: center
@@ -62,18 +64,15 @@ module.exports = class MapMarker extends View
     @_ready = true
     @trigger 'ready'
 
-  initAutocomplete: ->
-    node = @$searcher = @$el.find('input.searcher')
-    return if not node[0]
+  initAutocomplete: (node) ->
+    @$searcher = node
     @ready @_initAutocomplete
 
   _initAutocomplete: ->
     map = @map
-
+    inputer = @$searcher
     city = ''
     district = ''
-
-    inputer = @$searcher
 
     map.plugin ['AMap.CitySearch'], =>
       citysearch = new AMap.CitySearch()
@@ -98,7 +97,7 @@ module.exports = class MapMarker extends View
       bb.initialize()
 
       inputer.typeahead({
-        autoselect: false
+        autoselect: true
       }, {
         templates: TT_TEMPLATES
         displayKey: 'name'
@@ -128,8 +127,8 @@ module.exports = class MapMarker extends View
         setTimeout ->
           info.setContent(renderInfoWindow(poi)).open(map, pos)
           # pan the map, to leave room for info window
-          map.panBy(-20, 60)
-        , 600
+          map.panBy(-10, 30)
+        , 900
         if poi.address
           poi.city = district or city
         @trigger 'searched', poi
@@ -160,18 +159,27 @@ module.exports = class MapMarker extends View
 
   enlarge: ->
     @$el.addClass('large')
+    @trigger 'enlarge'
     @redraw()
-    @initAutocomplete() if not @$searcher
-    if not @$searcher.val()
-      @$searcher.focus()
 
   shrink: ->
     @$el.removeClass('large')
+    @trigger 'shrink'
     @redraw()
 
   redraw: ->
     return unless @map
     AMap.event.trigger @map, 'resize'
+
+  setLatlng: (lat, lng) ->
+    @model.set
+      lat: lat
+      lng: lng
+
+  ##
+  # Update map details based on marker
+  #
+  updateByMarker: ->
 
   listen:
     'addedToDOM': 'showMap'

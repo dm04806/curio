@@ -33,17 +33,17 @@ module.exports = class Controller extends Chaplin.Controller
   needPermit: 'user'
 
   checkPermission: ->
-    permit = @needPermit
+    permitLevel = @needPermit
     # There is already an error, don't continue no matter what
     return false if mediator.site_error
-    return true unless permit
-    if permit
+    return true unless permitLevel
+    if permitLevel
       if not mediator.user
         store 'login_return', window.location.pathname
         @redirectTo 'login#index'
         return false
-      if not mediator.user.permitted(permit, mediator.media)
-        mediator.execute 'site-error', new AccessError "need #{permit}"
+      if not mediator.user.permitted(permitLevel, mediator.media)
+        mediator.execute 'site-error', new AccessError "need #{permitLevel}"
         return false
     true
 

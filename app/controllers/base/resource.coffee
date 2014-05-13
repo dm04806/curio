@@ -7,18 +7,21 @@ module.exports = class ResourceController extends Controller
     show: null
     create: null
   Model: null
+
   index: (params, route, options) ->
     params = _.assign(options.query, params)
     @view = new @MainViews.index
       region: 'main'
       params: params
     @view.route = route
+
   show: (params) ->
-    model = new @Model({ id: params.id })
+    model = new @Model(params)
     model.fetch().then =>
       @view = new @MainViews.show region: 'main', model: model
-  create: (params, route) ->
-    _.defaults params, utils.queryParams.parse(route.query)
+
+  create: (params, route, options) ->
+    _.defaults params, options.query
     model = new @Model(params)
     model.on 'sync', () =>
       return unless model.id

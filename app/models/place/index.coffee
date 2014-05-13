@@ -10,4 +10,7 @@ module.exports = class Place extends Model
     name: null
     intro: null
   url: ->
-    "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}"
+    if @id
+      "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}"
+    else
+      "#{@apiRoot}/medias/#{@get 'media_id'}/places"

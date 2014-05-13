@@ -1,14 +1,8 @@
 <div class="col-md-4 col-sm-6 col-xs-12">
   <div class="box">
-    <a class="pull-left" href="{{url 'channel#show' id}}">
-      <img class="qrcode" src="{{qrcode_url}}" alt="">
-    </a>
     <div class="media-body">
       <div class="ops">
-        <a target="_blank" href="{{qrcode_url}}" download="qrcode-{{scene_id}}.jpg" title="download">
-          <i class="icon-download"></i>
-        </a>
-        <a href="{{url 'channel#show' id}}">
+        <a href="{{url 'place#show' id}}">
           <i class="icon-file"></i>
           <!--{{t 'detail'}}-->
         </a>
@@ -18,16 +12,11 @@
         </a>
       </div>
       <h5 class="title">
-        <span class="text-muted scene-id">
-          {{scene_id}}
-        </span>
         {{name}}
       </h5>
-      {{#if desc}}
-        <small class="text-muted">
-          {{btrunc desc 14}}
-        </small>
-      {{/if}}
+      <div class="map">
+        <img class="img-rounded" src="{{mapImg lat lng '273*120'}}" alt="">
+      </div>
     </div>
   </div>
 </div>

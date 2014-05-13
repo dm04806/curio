@@ -52,6 +52,8 @@ download: 下载
 sync: 同步
 loading: Loading...
 comming soon: "敬请期待!"
+enlarge: 放大
+shrink: 收起
 edit:
   "": Edit
   success: "Edit success!"
@@ -174,6 +176,8 @@ channel:
   desc_tip: 此渠道的回复内容
 places:
   "": 门店
+  create: 添加门店
+  edit: 编辑门店详情
   search: 在此搜索地点
   index:
     h1: 门店信息
@@ -187,6 +191,9 @@ place:
   address_tip: 输入详细地址并标注
   phone: 电话
   intro: 说明
+edit_place:
+  address:
+    "can't be blank": 地址不能为空
 shares:
   "": Shares
 dashboard:

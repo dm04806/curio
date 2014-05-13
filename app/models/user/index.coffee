@@ -40,8 +40,9 @@ module.exports = class User extends Model
     # super user can do anything
     return isSuper or passed
 
+  # Permission group
   permitted: (action, mediaId=null) ->
-    roles = permissions[action] # ['editor', 'mananger']
+    roles = permissions[action]
     for role in roles
       if @hasRole(role, mediaId)
         return true

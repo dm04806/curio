@@ -11,18 +11,24 @@
   <div class="rows">
     <div class="col-md-9">
       <form class="main-content edit-form form-horizontal" method="post">
+        <input type="hidden" name="lat" value="{{lat}}">
+        <input type="hidden" name="lng" value="{{lng}}">
         {{#form_rows 'sm' 2}}
-        <div class="form-group">
+        <div class="form-group" for="address">
           <label class="col-sm-2 control-label">
             {{ t 'place.location' }}
           </label>
           <div class="col-sm-10">
+            <div class="form-tip" for="address"></div>
+            <div class="map-control map-autocomplete">
+              <input name="address" value="{{address}}" class="typeahead form-control searcher" type="text" placeholder="{{t 'place.address_tip'}}" >
+            </div>
             <div id="place-marker"></div>
           </div>
         </div>
         {{form_input 'name' name 'place.name' 'place.name_tip'}}
-        {{form_textarea 'phone' name 'place.phone' 'place.phone_tip'}}
-        {{form_textarea 'intro' desc 'place.intro' 'place.intro_tip' rows=5}}
+        {{form_input 'phone' phone 'place.phone' 'place.phone_tip'}}
+        {{form_textarea 'intro' intro 'place.intro' 'place.intro_tip' rows=5}}
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <button type="submit" class="btn btn-primary">{{t 'save'}}</button>

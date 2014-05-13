@@ -1,10 +1,17 @@
+ResourceController = require './base/resource'
 HomeController = require './home-controller'
+
 PlaceIndex = require 'views/place-view'
 PlaceShow = require 'views/place-view/show'
 Place = require 'models/place'
 mediator = require 'mediator'
 
-module.exports = class PlaceController extends HomeController
+module.exports = class PlaceController extends ResourceController
+  MainViews:
+    index: PlaceIndex
+    show: PlaceShow
+  Model: Place
+  _beforeAction: HomeController::_beforeAction
   index: (params, route, opts) ->
     query = opts.query
     query.limit = 18
@@ -13,12 +20,9 @@ module.exports = class PlaceController extends HomeController
       @view = new PlaceIndex
         region: 'main'
         collection: collection
-  show: (params, route, opts) ->
-    model = @model = new Place {id: params.id, media_id: mediator.media.id}
-    model.fetch().then =>
-      @view = new PlaceShow
-        model: model
+  show: (params) ->
+    arguments[0] = { id: params.id, media_id: mediator.media.id }
+    super
   create: (params, route, opts) ->
-    model = @model = new Place { media_id: mediator.media.id }
-    @view = new PlaceShow
-      model: model
+    arguments[0] = { media_id: mediator.media.id }
+    super
