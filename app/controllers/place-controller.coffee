@@ -11,6 +11,7 @@ module.exports = class PlaceController extends ResourceController
     index: PlaceIndex
     show: PlaceShow
   Model: Place
+  needPermit: 'panel'
   _beforeAction: HomeController::_beforeAction
   index: (params, route, opts) ->
     query = opts.query

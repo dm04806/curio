@@ -15,7 +15,7 @@
     "jquery-cookie": "~1.4.0",
     "moment": "~2.5.1",
     "backbone.stickit": "~0.7.0",
-    "typeahead.js": "~0.10.1",
+    "typeahead.js": "~0.10.2",
     "typeahead.js-bootstrap3.less": "~0.2.2",
     "jquery-color": "~2.1.2"
   },
