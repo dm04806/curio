@@ -70,6 +70,9 @@ module.exports = class CollectionView extends Chaplin.CollectionView
       return
     @subview 'paginator', @getPaginatorView()
 
+  context: ->
+    tableClass: 'table-striped table-bordered'
+
   listen:
     'addedToDOM': 'renderPaginator'
     'sync collection': 'renderPaginator'

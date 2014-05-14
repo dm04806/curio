@@ -6,5 +6,8 @@ module.exports = class SubscriberItem extends View
   template: require './templates/row'
   tagName: 'tr'
   className: ->
-    'unsubscribed' if not @model.get('subscribe')
+    cls = ''
+    cls += ' unsubscribed' if not @model.get('subscribe')
+    cls += ' actived' if @model.recentlyActived()
+    cls
 

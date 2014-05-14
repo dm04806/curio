@@ -5,7 +5,7 @@ thead = require './templates/thead'
 
 module.exports = class SubscriberIndexView extends CollectionView
   template: require './templates/index'
-  itemView: require './item'
+  itemView: require './row'
 
   context: ->
     total: @collection.total

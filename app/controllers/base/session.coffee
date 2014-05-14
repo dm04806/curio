@@ -31,7 +31,6 @@ mediator.setHandler 'login', (data) ->
     roles[admin.media_id] = admin.role
 
   admin = session.pickAdmin(admins, user.isSuper)
-  console.log admin
   if admin
     mediator.execute 'toggle-media', admin.media
 

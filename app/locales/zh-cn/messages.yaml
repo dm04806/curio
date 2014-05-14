@@ -23,6 +23,9 @@ created_at: 创建日期
 admins: 管理员
 manage: 管理
 detail: 详细
+male: 男
+female: 女
+unknown: 未知
 
 # common verbs:
 save:

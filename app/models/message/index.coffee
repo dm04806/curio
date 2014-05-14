@@ -1,4 +1,6 @@
 Model = require 'models/base/model'
+Subscriber = require 'models/subscriber'
+
 
 EVENT_TYPES = ['subscribe', 'unsubscribe', 'click']
 
@@ -25,3 +27,8 @@ module.exports = class Message extends Model
       when 'click' then __ 'message.click', @get('content').eventKey
       when 'scan' then __ 'message.scan', @get('content').scene_id
 
+  serialize: ->
+    ret = @toJSON()
+    if ret.subscriber instanceof Subscriber
+      ret.subscriber = ret.subscriber.serialize()
+    ret
