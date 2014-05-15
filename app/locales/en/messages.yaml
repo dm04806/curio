@@ -142,6 +142,9 @@ subscribers:
   show:
     h1: "Dialog with %s"
   noresult: 暂时没有订阅者信息
+  sync:
+    ing: 正在同步...
+    start_fail: "创建同步任务失败!"
 subscriber:
   city: City
   sex: Sex

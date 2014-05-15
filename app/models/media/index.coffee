@@ -49,3 +49,10 @@ module.exports = class Media extends Model
   webotUrl: (uid) ->
     "#{WEBOT_ROOT}#{uid or @get 'uid'}"
 
+  # Create async job
+  addJob: (jobname, data) ->
+    url = "#{@url()}/jobs/#{jobname}"
+    xhr = $.send(url, data, { type: 'PUT' })
+
+
+

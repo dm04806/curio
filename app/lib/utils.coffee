@@ -15,14 +15,15 @@ $.ajaxSetup
       xhr.setRequestHeader('x-csrf-token', $.cookie('csrf'))
 
 # Send json data to the server
-$.send = (url, data) ->
-  Backbone.ajax
-    url: url
+$.send = (url, data, opts) ->
+  defaults =
     type: 'POST'
-    data: JSON.stringify data
     contentType: 'application/json'
     processData: false
-
+  opts = _.defaults(opts or {}, defaults)
+  # data cannot be empty string, otherwise server will report "unexpected end"
+  data = JSON.stringify(data) or '{}'
+  Backbone.ajax _.assign(opts, { url: url, data: data })
 
 
 # Delegate to Chaplin’s utils module.

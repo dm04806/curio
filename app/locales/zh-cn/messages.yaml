@@ -154,6 +154,9 @@ subscribers:
   show:
     h1: 与 %s 的会话记录
   noresult: 暂时没有订阅者信息
+  sync:
+    ing: 正在同步...
+    start_fail: 创建同步任务失败!
 
 subscriber:
   city: 城市
