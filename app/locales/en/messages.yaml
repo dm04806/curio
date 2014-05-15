@@ -19,18 +19,18 @@ remark: Remarks
 email: Email
 created_at: Created At
 admins: Admins
-manage: 管理
-detail: 详细
-male: 男
-female: 女
-unknown: 未知
+manage: Manage
+detail: Detail
+male: Male
+female: Female
+unknown: Unknown
 save:
-  "": 保存
-  success: 保存成功
+  "": Save
+  success: Save success
 save changes: Save changes
 create:
-  "": 创建
-  success: "创建成功!"
+  "": Create
+  success: "Create success!"
 update: Update
 modify: Modify
 back: back
@@ -38,25 +38,25 @@ next: next
 admin: admin
 close: Close
 add: Add
-more: 更多
+more: more
 delete:
-  "": 删除
-  confirm: 真的要删除吗？
-  success: 已成功删除
+  "": Delete
+  confirm: Do you really want to delete?
+  success: Delete success!
 cancel: Cancel
-ok: 好了
-got it: 好的
+ok: OK
+got it: Got it
 confirm:
   "": Confirm
   delete: Confirm deletion
-expand: 展开
-fold: 收起
-download: 下载
-sync: 同步
+expand: Expand
+fold: Fold
+download: Download
+sync: Sync
 loading: Loading...
 comming soon: "敬请期待!"
-enlarge: 放大
-shrink: 收起
+enlarge: Enlarge
+shrink: Shrink
 edit:
   "": Edit
   success: "Edit success!"
@@ -96,7 +96,7 @@ error:
     "": Please check you network connection
     title: Network Issue
     detail: Please check your network connection
-  internal server error: 服务器错误
+  internal server error: Internal Server Error
   session timeout:
     "": "Session timeout, try login again"
     title: Session Timeout
@@ -106,45 +106,45 @@ error:
     title: Not Available
     detail: "There's no wechat media under this account. Try <a href=\"/login\">login with another account.</a>"
   bad request:
-    "": 非法请求
+    "": Bad request
   need super:
     "": You must be a super user to continue.
     title: Not Accessible
     detail: You are not a super admin
   not found:
-    "": 找不到所请求的资源
-    title: 没有了
-    detail: 这个东西好像已经没有了
+    "": Not found
+    title: Nothing here
+    detail: The resource your request seems missing
   login failed: Inavalid password or username
-  not allowed: 你没有权限执行这项操作
-  Internal Server Error: 服务器内部错误
+  not allowed: You have no right to do so
+  Internal Server Error: Internal Server Error
 unknown time: Unknown time
-text: 文本
-image: 图片
-news: 图文
+text: Text
+image: Image
+news: News
 messages:
   "": Messages
   index:
     h1: Recent messages
 message:
   "": Message
-  view_full: Full article
-  my_location: 我的位置
-  subscribed: 订阅了此账号
-  unsubscribed: 退订了此账号
-  click: "点击了菜单项 %s"
-  scan: "扫描二维码 场景%s"
-  from_scan: "来自二维码 <a href=\"/channel/%1$s\">场景#%1$s</a>"
+  view_full: full article
+  my_location: my location
+  subscribed: subscribed
+  unsubscribed: unsubscribed
+  click: "clicked menu item \"%s\""
+  scan: "scan QRCode Scene#%s"
+  from_scan: "from channel <a href=\"/channel/%1$s\">Scene#%1$s</a>"
 subscribers:
   "": Subscribers
   index:
     h1: "All Subscribers (%s)"
   show:
     h1: "Dialog with %s"
-  noresult: 暂时没有订阅者信息
+  noresult: No subscribers
   sync:
-    ing: 正在同步...
-    start_fail: "创建同步任务失败!"
+    ing: Syncing...
+    start_fail: "Fail to sync!"
 subscriber:
   city: City
   sex: Sex
@@ -153,8 +153,8 @@ subscriber:
   status: Status
   subscribed: Subscribed
   unsubscribed: Unsubscribed
-  tags: 标签
-  sync_with_wechat: 与微信服务器同步
+  tags: Tags
+  sync_with_wechat: Sync with wechat server
 messaging:
   "": Messages
 subscribe:
@@ -168,38 +168,38 @@ stats:
 channels:
   "": Channels
   index:
-    h1: 推广渠道
-  create: 创建渠道
-  edit: 编辑渠道信息
-  there_is_none: 你还为创建任何推广渠道
-  create_one_now: 现在就创建一个
+    h1: Channels
+  create: Create
+  edit: Edit
+  there_is_none: There is no channel yet
+  create_one_now: Create one now
 channel:
-  name: 渠道名
-  scene_id: 场景ID
-  input_name: 输入渠道名
-  related_place: 相关门店
-  qrcode_img: 二维码
-  desc_tip: 此渠道的回复内容
+  name: Channel name
+  scene_id: Scene ID
+  input_name: Input channel name
+  related_place: Related place
+  qrcode_img: QRCode
+  desc_tip: description for this channel
 places:
-  "": 门店
-  create: 添加门店
-  edit: 编辑门店详情
-  search: 在此搜索地点
+  "": Place
+  create: Create a place
+  edit: Edit place details
+  search: Search
   index:
-    h1: 门店信息
-  there_is_none: 暂时还没有配置任何门店
-  create_one_now: 现在添加一个
+    h1: Places
+  there_is_none: There isn't a single place yet.
+  create_one_now: Create one now
 place:
-  name: 门店名称
-  location: 标记位置
-  empty_search: 搜索不到此地址
-  address: 详细地址
-  address_tip: 输入详细地址并标注
-  phone: 电话
-  intro: 说明
+  name: Place name
+  location: Location
+  empty_search: Search returns no result
+  address: Full address
+  address_tip: Input the address and mark
+  phone: Phone
+  intro: Introduction
 edit_place:
   address:
-    "can't be blank": 地址不能为空
+    "can't be blank": Address is required
 shares:
   "": Shares
 dashboard:
@@ -227,8 +227,8 @@ medias:
   delete:
     confirm: "Delete %s ?"
     consequece: this is permanant
-  add_new: 新加微信账号
-  pick_another: 去超级后台选一个
+  add_new: Add new account
+  pick_another: Pick another account
 media:
   name_tip: the name of this wechat official account
   uid: Wechat ID
@@ -253,14 +253,14 @@ media:
       chief: Chief
 edit_media:
   uid:
-    is blank: 微信号不能为空
+    is blank: Wechat ID cannot be blank
     conflict: Already exists this account
   oid:
-    is blank: 原始ID不能为空
+    is blank: Original ID cannot be blank
     oid: This original ID already exists
   wx_appkey:
-    invalid: 不正确的 AppId
-    secret: AppSecret 与 AppId 不匹配
+    invalid: Invalid AppId
+    secret: AppId and AppSecret missmatch
 users:
   title: Users
   index:
@@ -281,12 +281,12 @@ user:
   new_password2: Input again
   new_password2_tip: Input the password again to confirm
   delete:
-    "": 删除此账号
-    confirm: 真的要删除此账号？
-    consequece: 此操作无法恢复
+    "": Delete user
+    confirm: Do you really want to delete this user?
+    consequece: This is irrevocable.
 edit_user:
   uid:
-    is blank: 用户名不能为空
+    is blank: User ID is required.
 edit_passport:
   password:
     is blank: Please enter password
@@ -308,39 +308,39 @@ autoreply:
 rules:
   create: Create a rule
   export:
-    "": 导出规则
-    title: 导出回复规则
+    "": Export
+    title: Export reply rules
 rule:
   ptitle: "Rule %s: %s"
-  new: 新规则
+  new: New rule
   reply: Reply
-  name: 规则名
-  keywords: 关键词
+  name: Rule name
+  keywords: Keywords
   keyword:
-    "": 关键词
-    add: 添加
-  blur_match: 未全部匹配
-  exact_match: 已全部匹配
-  input_reply: 输入回复内容
-  choose_image: 请选择图片
-  choose_reply: 选择回复内容
+    "": keyword
+    add: add keyword
+  blur_match: blur match
+  exact_match: exact match
+  input_reply: input reply
+  choose_image: choose image
+  choose_reply: choose reply
   $subscribe:
-    title: 用户添加关注时回复的内容
+    title: When user subscribed to the account
   $any:
-    title: 未匹配到任何其他规则时回复
+    title: When no other reply was found
   add_keyword:
-    "": 添加关键字
-    tip: 输入回车可添加多个关键字
-  edit_keyword: 修改关键字
+    "": Add keyword
+    tip: Use <kbd>Enter</kbd> to add multiple keywords
+  edit_keyword: Edit keyword
   delete_keyword:
-    "": 删除关键字
+    "": Delete keyword
   delete_rule:
-    confirm: 真的要删除这条规则吗？
+    confirm: Do you really want to delete the rule?
   error:
     handler:
-      is required: 请填写回复内容
+      is required: The reply content is required
     pattern:
-      is required: 请填写关键字
+      is required: Please set at lease one keyword
 menu:
   "": WeChat menu
   save: save
