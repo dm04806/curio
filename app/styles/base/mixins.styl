@@ -4,4 +4,14 @@ sharp-image()
   image-rendering: -o-crisp-edges;
   image-rendering: -webkit-optimize-contrast;
   -ms-interpolation-mode: nearest-neighbor;
+
+tri-down(size=5px, color=#ccc, wingSize)
+  display: inline-block
+  width: 0
+  height: 0
+  border: solid size transparent
+  border-top-color: color
+  border-bottom: 0
+  if wingSize
+    border-width: size wingSize 0
   

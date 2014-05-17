@@ -17,9 +17,13 @@
     "backbone.stickit": "~0.7.0",
     "typeahead.js": "~0.10.2",
     "typeahead.js-bootstrap3.less": "~0.2.3",
-    "jquery-color": "~2.1.2"
+    "jquery-color": "~2.1.2",
+    "html5sortable": "voidberg/html5sortable#~0.1.2"
   },
   "overrides": {
+    "html5sortable": {
+      "main": "dist/html.sortable.0.1.2.js"
+    },
     "backbone": {
       "dependencies": {
         "lodash": "*",

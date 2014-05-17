@@ -31,6 +31,9 @@ unknown: 未知
 save:
   '': 保存
   success: 保存成功
+reset:
+  '': 重置
+  success: 已重置
 save changes: 保存变更
 create:
   '': 创建
@@ -386,17 +389,42 @@ rule:
       is required: 关键字不能为空
 
 # ======= Menu ======
+
+wx:
+  window:
+    placeholder: '微信会话窗口'
+
 menu:
   '': 微信菜单
-  save: 保存
-  reset: 重置
-  prop: 属性
-  label: 标签
-  type: 类型
-  value: 数值
-  keyword: 关键字
-  url: 网页链接
-  click: 点击
-  add: 添加
-  main_menu: 主菜单
-  sub_menu: 二级菜单
+  input_label: 输入菜单标题
+  click_to_input: 点此输入标题
+  add_submenu: 添加子菜单
+  text_overflow: 菜单标题不要超过8个中文字
+  main:
+    add: 添加主菜单项
+    delete:
+      confirm: 真的要删除此菜单项？
+  button:
+    name: 标题
+    type: 类型
+    value: 值
+    value_tip: 此菜单项所代表的关键字或URL
+    is_url: 这是一个网页链接
+  help: 微信菜单使用帮助
+  help_text: |
+    <ol>
+      <li>
+      点击「添加主菜单项」按钮开始
+      </li>
+      <li>双击菜单项编辑其标题</li>
+      <li>填入的菜单值即自动回复里的关键字</li>
+      <li>如果填入网址，点击菜单项讲打开网页</li>
+    </ol>
+
+menu_error:
+  items required: 菜单项不能为空
+  all btns must have text: 请填写每个菜单项的标题
+  invalid media: 请先<a href="/settings">配置高级API</a>
+  wechat api fail: 同步到微信时出错了 :-(
+  invalid url: 有菜单项输入了不正确的网页链接
+

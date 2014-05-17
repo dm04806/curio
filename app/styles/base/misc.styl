@@ -19,3 +19,18 @@ input.tt-hint[disabled]
   border-top-width: 0 !important
   border-bottom-width: 0 !important
   height: 0 !important
+
+
+.ops
+  a
+    display: inline-block
+    line-height: 1em
+    padding: 0.25em
+    cursor: pointer
+    color: #999
+    &:hover
+      color: #379
+      text-decoration: none
+  a[data-op=toDelete]
+    &:hover
+      color: red

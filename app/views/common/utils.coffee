@@ -84,6 +84,7 @@ exports.notify = (message, category, duration=1600, opts={}) ->
     ret.css('display', 'none')
   ret
 
-exports.xhrError = (xhr) ->
+exports.xhrError = (xhr, prefix) ->
   err = utils.xhrError xhr
+  err = (prefix or '') + err.code
   exports.notify err

@@ -1,19 +1,35 @@
 Model = require 'models/base/model'
 
+foo2value = (item) ->
+  item.value = item.key or item.url
+  if item.sub_button
+    item.sub_button.forEach foo2value
+
+value2foo = (item) ->
+  if item.sub_button
+    item.sub_button.forEach value2foo
+    return
+  if item.type == 'view'
+    item.url = item.value
+  else
+    item.key = item.value || item.name
+  delete item.value
+
 module.exports = class Menu extends Model
   kind: 'menu'
+  idAttribute: 'media_id'
+
   defaults:
-    menu:""
+    items: []
+
   url: ->
     "#{@apiRoot}/medias/#{@get 'media_id'}/menu"
-    #"#{@apiRoot}/medias/60/menu"
-  idAttribute: 'media_id'
-  initialize:->
-    # alert "init menu model"
-    # alert @get "buttons"
-    #@save (menu:"test for save"),(error:@saveError,success:@saveSuccess)
-  saveSuccess:(ret)->
-    alert "save success "+ret
-  saveError:(error)->
-    alert "save error "+error
-    
+
+  toJSON: ->
+    obj = super
+    obj.items.forEach value2foo
+    obj
+
+  parse: (obj) ->
+    obj.items.forEach foo2value
+    obj

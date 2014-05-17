@@ -6,9 +6,8 @@ mediator = require 'mediator'
 module.exports = class MenuController extends HomeController
   index: (params, route, opts) ->
     mediator.media.load 'menu', (err, menu) =>
-      console.log(menu)
       @view = new MenuIndex
         model: menu
         autoRender: true
         region: 'main'
-    
+

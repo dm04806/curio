@@ -4,6 +4,13 @@ mediator = require 'mediator'
 {CurioError,AccessError} = require 'models/errors'
 {SITE_ROOT,API_ROOT} = require 'consts'
 
+$.fn.disable = ->
+  @prop('disabled', true)
+
+$.fn.enable = ->
+  @prop('disabled', false)
+
+
 $.ajaxSetup
   dataType: 'json',
   beforeSend: (xhr) ->
@@ -47,9 +54,10 @@ store.remove = (key) ->
 delayed = (fn, delay) ->
   t = 0
   delay = delay or 120
-  ->
+  (args...) ->
+    self = this
     clearTimeout t
-    t = setTimeout fn, delay
+    t = setTimeout (-> fn.apply(self, args)), delay
 
 makeurl = (url, params) ->
   payload = utils.queryParams.stringify params
@@ -121,6 +129,8 @@ _.assign utils,
   delayed: delayed
   makeurl: makeurl
   store: store
+  isUrl: (str) ->
+    /(tel|https?)\:\/\/.{3,}/i.test(str)
 
 # Prevent creating new properties and stuff.
 Object.seal? utils
