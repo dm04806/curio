@@ -27,10 +27,14 @@ unknown: Unknown
 save:
   "": Save
   success: Save success
+reset:
+  "": 重置
+  success: 已重置
 save changes: Save changes
 create:
   "": Create
   success: "Create success!"
+  continue: 点此继续添加
 update: Update
 modify: Modify
 back: back
@@ -42,7 +46,7 @@ more: more
 delete:
   "": Delete
   confirm: Do you really want to delete?
-  success: Delete success!
+  success: "Delete success!"
 cancel: Cancel
 ok: OK
 got it: Got it
@@ -182,12 +186,13 @@ channel:
   desc_tip: description for this channel
 places:
   "": Place
-  create: Create a place
+  create:
+    "": 添加门店
   edit: Edit place details
   search: Search
   index:
     h1: Places
-  there_is_none: There isn't a single place yet.
+  there_is_none: "There isn't a single place yet."
   create_one_now: Create one now
 place:
   name: Place name
@@ -330,7 +335,7 @@ rule:
     title: When no other reply was found
   add_keyword:
     "": Add keyword
-    tip: Use <kbd>Enter</kbd> to add multiple keywords
+    tip: "Use <kbd>Enter</kbd> to add multiple keywords"
   edit_keyword: Edit keyword
   delete_keyword:
     "": Delete keyword
@@ -341,17 +346,30 @@ rule:
       is required: The reply content is required
     pattern:
       is required: Please set at lease one keyword
+wx:
+  window:
+    placeholder: 微信会话窗口
 menu:
   "": WeChat menu
-  save: save
-  reset: reset
-  prop: properties
-  label: label
-  type: type
-  value: value
-  keyword: keyword
-  url: url
-  click: click
-  add: add
-  main_menu: main menu
-  sub_menu: sub menu
+  input_label: 输入菜单标题
+  click_to_input: 点此输入标题
+  add_submenu: 添加子菜单
+  text_overflow: 菜单标题不要超过8个中文字
+  main:
+    add: 添加主菜单项
+    delete:
+      confirm: 真的要删除此菜单项？
+  button:
+    name: 标题
+    type: 类型
+    value: 值
+    value_tip: 此菜单项所代表的关键字或URL
+    is_url: 这是一个网页链接
+  help: 微信菜单使用帮助
+  help_text: "<ol>\n  <li>\n  点击「添加主菜单项」按钮开始\n  </li>\n  <li>双击菜单项编辑其标题</li>\n  <li>填入的菜单值即自动回复里的关键字</li>\n  <li>如果填入网址，点击菜单项讲打开网页</li>\n</ol>\n"
+menu_error:
+  items required: 菜单项不能为空
+  all btns must have text: 请填写每个菜单项的标题
+  invalid media: "请先<a href=\"/settings\">配置高级API</a>"
+  wechat api fail: "同步到微信时出错了 :-("
+  invalid url: 有菜单项输入了不正确的网页链接

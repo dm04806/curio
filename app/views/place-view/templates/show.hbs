@@ -6,6 +6,13 @@
     {{t 'places.edit' name}}
   {{/if}}
 {{/set}}
+{{#if fromCreate}}
+  <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-op="dissmissAlert">&times;</button>
+    {{t 'create.success'}}
+    <a href="{{url 'place#create'}}">{{t 'create.continue'}}</a>
+  </div>
+{{/if}}
 {{/widget}}
 <div class="box">
   <div class="rows">

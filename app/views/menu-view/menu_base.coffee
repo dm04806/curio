@@ -39,6 +39,13 @@ module.exports =
     @enableAdd()
     @trigger 'button-remove'
 
+  removeAllButtons: ->
+    for view in @buttons
+      @removeSubview view
+    @buttons = []
+    @enableAdd()
+    @trigger 'button-remove'
+
   deactivateOthers: (activeOne) ->
     for view in @buttons
       if view isnt activeOne

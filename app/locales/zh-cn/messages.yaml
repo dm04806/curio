@@ -37,7 +37,8 @@ reset:
 save changes: 保存变更
 create:
   '': 创建
-  'success': 创建成功!
+  success: 创建成功!
+  continue: 继续添加
 update: 更新
 modify: 修改
 back: 返回
@@ -203,7 +204,8 @@ channel:
 
 places:
   '': 门店
-  create: 添加门店
+  create:
+    '': 添加门店
   edit: 编辑门店详情
   search: 在此输入以开始搜索
   index:
@@ -418,7 +420,7 @@ menu:
       </li>
       <li>双击菜单项编辑其标题</li>
       <li>填入的菜单值即自动回复里的关键字</li>
-      <li>如果填入网址，点击菜单项讲打开网页</li>
+      <li>如果填入网址，点击菜单项将打开网页</li>
     </ol>
 
 menu_error:

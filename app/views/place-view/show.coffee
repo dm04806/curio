@@ -9,7 +9,12 @@ module.exports = class ChannelView extends EditFormView
   template: require './templates/show'
 
   context: ->
-    isNew: @model.isNew()
+    isNew: @isNew
+    fromCreate: @data.from == 'create'
+
+  initialize: ->
+    super
+    @isNew = @model.isNew()
 
   render: ->
     super
@@ -35,6 +40,10 @@ module.exports = class ChannelView extends EditFormView
       input = @$el.find("input[name='#{k}']")
       continue if not input[0] or input.val() == v
       input.blur().val(v)
+
+  _submitDone: (res) ->
+    # do nothing when create, cause will notify user in the next page
+    super if not @isNew
 
   listen:
     'change model': 'updateInput'

@@ -50,6 +50,9 @@ module.exports = class MenuIndexView extends MainView
     .always ->
       node.delay(800).promise().done -> @enable()
 
+  reset: ->
+    @removeAllButtons()
+    @renderButtons()
 
   listen:
     'addedToDOM': 'renderButtons'

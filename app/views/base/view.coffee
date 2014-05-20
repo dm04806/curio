@@ -3,16 +3,15 @@ utils = require 'lib/utils'
 mediator = require 'mediator'
 
 module.exports = class View extends Chaplin.View
-  initialize: ->
+  # Auto-save `template` option passed to any view as `@template`.
+  # `data` and `items` can be misc data which has no need to be a @model or @collection
+  optionNames: Chaplin.View::optionNames.concat ['template', 'data', 'items']
+
+  initialize: (options) ->
     # Template data context
     @data = @data or {}
     @context = @context or {}
     super
-    @on 'addedToDOM', => @adjustTitle()
-
-  # Auto-save `template` option passed to any view as `@template`.
-  # `data` and `items` can be misc data which has no need to be a @model or @collection
-  optionNames: Chaplin.View::optionNames.concat ['template', 'data', 'items']
 
   # Precompiled templates function initializer.
   getTemplateFunction: ->
@@ -32,6 +31,9 @@ module.exports = class View extends Chaplin.View
     @trigger 'dispose'
     super
 
+  dissmissAlert: (node) ->
+    node.closest('.alert').anim('fadeOut', 300).promise().done -> @remove()
+
   events:
     # operation handler
     'click [data-op]': (e) ->
@@ -47,3 +49,6 @@ module.exports = class View extends Chaplin.View
     return if @region isnt 'main'
     subtitle = @$el.find('.view-title h1').text() or ''
     mediator.execute('adjustTitle', subtitle)
+
+  listen:
+    'addedToDOM': 'adjustTitle'
