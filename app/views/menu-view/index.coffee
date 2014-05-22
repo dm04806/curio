@@ -11,6 +11,7 @@ MAIN_BUTTON_LIMIT = 3
 
 
 module.exports = class MenuIndexView extends MainView
+  region: 'main'
   _.extend @prototype, MenuBase
 
   template: require './templates/index'
@@ -37,6 +38,7 @@ module.exports = class MenuIndexView extends MainView
     @resizeButtons()
 
   renderButtons: ->
+    return if not @model
     items = @model.get 'items'
     items.forEach (item) => @addButtonView(item)
 

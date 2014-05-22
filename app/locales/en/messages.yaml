@@ -28,13 +28,13 @@ save:
   "": Save
   success: Save success
 reset:
-  "": 重置
-  success: 已重置
+  "": Reset
+  success: Reset success
 save changes: Save changes
 create:
   "": Create
   success: "Create success!"
-  continue: 点此继续添加
+  continue: click here to continue
 update: Update
 modify: Modify
 back: back
@@ -72,10 +72,10 @@ edit:
     conflict: There is already a user with that email
     is blank: Email is required
   name:
-    "can't be blank": 名称不能为空
-    is blank: 名称不能为空
+    "can't be blank": Name required
+    is blank: name is required
   uid:
-    conflict: 已存在
+    conflict: "Conflicted!"
     must lowercase: 必须全部为小写字母
     not word: 只能包含字母、数字和下划线
 header:
@@ -122,6 +122,10 @@ error:
   login failed: Inavalid password or username
   not allowed: You have no right to do so
   Internal Server Error: Internal Server Error
+  invalid appkey:
+    "": {}
+    title: Not Available
+    detail: "You'll need enable Wechat advanced API first, try <a href=\"/settings\">input correct Appkey</a>"
 unknown time: Unknown time
 text: Text
 image: Image
@@ -130,6 +134,7 @@ messages:
   "": Messages
   index:
     h1: Recent messages
+  noresult: 暂时没有消息，首次接入后只能查看后续消息
 message:
   "": Message
   view_full: full article
@@ -145,7 +150,7 @@ subscribers:
     h1: "All Subscribers (%s)"
   show:
     h1: "Dialog with %s"
-  noresult: No subscribers
+  noresult: No subscribers yet
   sync:
     ing: Syncing...
     start_fail: "Fail to sync!"
@@ -348,7 +353,7 @@ rule:
       is required: Please set at lease one keyword
 wx:
   window:
-    placeholder: 微信会话窗口
+    placeholder: Wechat App View
 menu:
   "": WeChat menu
   input_label: 输入菜单标题
@@ -356,17 +361,17 @@ menu:
   add_submenu: 添加子菜单
   text_overflow: 菜单标题不要超过8个中文字
   main:
-    add: 添加主菜单项
+    add: add main button
     delete:
       confirm: 真的要删除此菜单项？
   button:
-    name: 标题
-    type: 类型
-    value: 值
-    value_tip: 此菜单项所代表的关键字或URL
-    is_url: 这是一个网页链接
-  help: 微信菜单使用帮助
-  help_text: "<ol>\n  <li>\n  点击「添加主菜单项」按钮开始\n  </li>\n  <li>双击菜单项编辑其标题</li>\n  <li>填入的菜单值即自动回复里的关键字</li>\n  <li>如果填入网址，点击菜单项讲打开网页</li>\n</ol>\n"
+    name: Text
+    type: Type
+    value: Value
+    value_tip: What this button represents
+    is_url: This is a URL
+  help: Help
+  help_text: "<ol>\n  <li>\n  Click the \"add main button\" to continue\n  </li>\n  <li>Double click to edit</li>\n  <li>The \"value\" is keywords in autoreply rules</li>\n  <li>Fill in a URL, click the button will open it</li>\n</ol>\n"
 menu_error:
   items required: 菜单项不能为空
   all btns must have text: 请填写每个菜单项的标题

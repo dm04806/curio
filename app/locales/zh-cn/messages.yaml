@@ -129,6 +129,10 @@ error:
   login failed: 用户名或密码错误
   not allowed: 你没有权限执行这项操作
   Internal Server Error: 服务器内部错误
+  invalid appkey:
+    '': 不正确的Appkey
+    title: 功能不可用
+    detail: 需要先启用微信高级功能API，请<a href="/settings">配置正确的Appkey</a>
 
 unknown time: 未知时间
 
@@ -140,6 +144,7 @@ messages:
   '': 消息
   index:
     h1: 最近会话
+  noresult: 暂时没有消息，首次接入后只能查看后续消息
 
 message:
   '': 消息
