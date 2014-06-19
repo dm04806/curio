@@ -214,7 +214,7 @@ places:
   '': 门店
   create:
     '': 添加门店
-  edit: 编辑门店详情
+  edit: 编辑门店
   search: 在此输入以开始搜索
   index:
     h1: 门店信息

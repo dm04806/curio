@@ -11,12 +11,13 @@ TT_TEMPLATES =
   suggestion: (d) ->
     "<p>#{d.name} <small class=\"district\">#{d.district}</small></p>"
 
+LOADING_SPINNER = '<div class="loading text-center"><span class="spinner30"></span></div>'
 
 renderInfoWindow = (poi) ->
   """
   <h4 class="place-title">#{poi.name}</h4>
   <div class="detail">
-    #{poi.city or ''}#{poi.address or ''}
+    #{poi.district or ''}#{poi.address or ''}
   </div>
   """
 
@@ -43,7 +44,7 @@ module.exports = class MapMarker extends View
       center = new AMap.LngLat @model.get('lng'), @model.get('lat')
     if center
       opts.center = center
-      opts.level = 12
+      opts.level = 14
 
     map = @map = new AMap.Map @$el.find('.map')[0], opts
     map.plugin ['AMap.ToolBar'], ->
@@ -60,17 +61,24 @@ module.exports = class MapMarker extends View
     @trigger 'ready'
 
 
-  openInfoWindow: (poi, pos) ->
-    if not info = @infoWindow
-      info = @infoWindow = new AMap.InfoWindow
-        offset: new AMap.Pixel(0, -40)
-      AMap.event.addListener @marker, 'dragstart', => info.close()
-    if not poi
-      poi = @model.attributes
-    info.setContent(renderInfoWindow(poi))
-      .open @map, @marker.getPosition()
-    @map.panBy(-10, 30)
+  _initInfoWIndow: ->
+    info = @infoWindow = new AMap.InfoWindow
+      offset: new AMap.Pixel(0, -40)
+    AMap.event.addListener @marker, 'dragstart', => info.close()
+    info
 
+  openInfoWindow: (pos, content) ->
+    @infoWindow = @infoWindow or @_initInfoWIndow()
+    if pos
+      @marker.setPosition pos
+    @setInfoWindow(content)
+      .open @map, @marker.getPosition()
+
+  setInfoWindow: (content) ->
+    if not content
+      poi = @model.attributes if not poi
+      content = renderInfoWindow(poi)
+    @infoWindow.setContent(content)
 
   initAutocomplete: (node) ->
     @$searcher = node
@@ -79,14 +87,14 @@ module.exports = class MapMarker extends View
   _initAutocomplete: ->
     map = @map
     inputer = @$searcher
-    city = ''
+    @city = ''
     district = ''
 
     map.plugin ['AMap.CitySearch'], =>
       citysearch = new AMap.CitySearch()
       citysearch.getLocalCity()
       AMap.event.addListener citysearch, 'complete', (result) ->
-        city = result.city
+        @city = result.city
 
     map.plugin ['AMap.Autocomplete', 'AMap.PlaceSearch'], =>
       bb = new Bloodhound
@@ -98,7 +106,7 @@ module.exports = class MapMarker extends View
             res.filter (item) -> item.district.toString()
           transport: (url, opt, success, error) ->
             keyword = decodeURIComponent(url)
-            auto = new AMap.Autocomplete city: city
+            auto = new AMap.Autocomplete city: @city
             auto.search keyword
             AMap.event.addListener auto, 'complete', (obj) ->
               success(obj.tips or [])
@@ -120,23 +128,19 @@ module.exports = class MapMarker extends View
 
     doSearch = (keyword) =>
       return if ps
-      ps = new AMap.PlaceSearch city: city
+      ps = new AMap.PlaceSearch city: @city
       ps.search keyword
       AMap.event.addListener ps, 'complete', (result) =>
         ps = null
         marker = @marker
         poi = result.poiList?.pois?[0]
         return common.notify('place.empty_search', 'warning') if not poi
-        loc = poi.location
-        pos = new AMap.LngLat loc.lng, loc.lat
-        map.setCenter(pos).setZoom(15)
-        marker.setPosition(pos)
+        poi.district = if poi.address then district else ''
+        map.setZoom(15)
+        @setPOI poi
         setTimeout =>
           @openInfoWindow()
         , 900
-        if poi.address
-          poi.city = district or city
-        @trigger 'searched', poi
 
     inputer.on 'typeahead:selected', (e, query) ->
       district = query.district
@@ -177,9 +181,15 @@ module.exports = class MapMarker extends View
     AMap.event.trigger @map, 'resize'
 
   setLatlng: (lat, lng) ->
-    @model.set
-      lat: lat
-      lng: lng
+    @model.set lat: lat, lng: lng
+
+  setPOI: (poi) ->
+    loc = poi.location
+    pos = new AMap.LngLat loc.lng, loc.lat
+    @marker.setPosition(pos)
+    @trigger 'updated', poi
+    @openInfoWindow()
+
 
   ##
   # Update map details based on marker
@@ -187,13 +197,46 @@ module.exports = class MapMarker extends View
   updateByMarker: ->
     @infoWindow?.close()
     latlng = @marker.getPosition()
-    @setLatlng(latlng.lat, latlng.lng)
+    # open a loading spinner
+    @openInfoWindow(latlng, LOADING_SPINNER)
     @map.plugin ['AMap.Geocoder'], =>
-      search = new AMap.Geocoder()
+      search = new AMap.Geocoder
+        city: @city
+        extensions: 'all'
       search.getAddress(latlng)
       AMap.event.addListener search, 'complete', (res) =>
-        console.log arguments
+        res = res.regeocode
+        comp = res.addressComponent
+        address = "#{comp.city}#{comp.district}#{comp.street}#{comp.streetNumber}"
+        poi = res.pois[0]
+        @city = comp.city or comp.province
+        if poi
+          poi = {
+            city: if poi.address then comp.district else ''
+            location: poi.location
+            name: poi.name
+            address: poi.address or res.formattedAddress
+          }
+        else
+          poi = {
+            city: if res.formattedAddress then '' else comp.district or comp.city
+            location: latlng
+            name: comp.building or '未知地点'
+            address: poi?.address or res.formattedAddress or address
+          }
+        @setPOI poi
 
+  ##
+  # Update model based on POI
+  #
+  updateByPOI: (poi) ->
+    @model.set
+      address: "#{poi.district or ''}#{poi.address}"
+      phone: poi.tel?.split(';').join(', ')
+      name: poi.name
+      lat: poi.location.lat
+      lng: poi.location.lng
 
   listen:
     'addedToDOM': 'showMap'
+    'updated': 'updateByPOI'

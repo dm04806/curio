@@ -23,7 +23,6 @@ module.exports = class ChannelView extends EditFormView
     marker = @subview 'marker', new MarkerView
       container: @$('#place-marker')
       model: @model
-    marker.on 'searched', @updateByPOI.bind(this)
 
     marker.on 'enlarge', =>
       @$('div[for=address] .col-sm-7').attr('class', 'col-sm-11')
@@ -50,14 +49,6 @@ module.exports = class ChannelView extends EditFormView
       ## automatical save changes
       @model.save() if not @model.isNew()
       view.close()
-
-  updateByPOI: (poi) ->
-    @model.set
-      address: "#{poi.city} #{poi.address}"
-      phone: poi.tel?.split(';').join(', ')
-      name: poi.name
-      lat: poi.location.lat
-      lng: poi.location.lng
 
   updateInput: (model) ->
     for k, v of model.changed
