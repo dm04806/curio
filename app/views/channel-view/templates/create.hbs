@@ -3,19 +3,19 @@
 <form method="put" action="{{form_action}}">
   <table class="table">
     <colgroup>
-      <col width="60%">
-      <col width="40%">
+      <col width="30%">
+      <col width="70%">
     </colgroup>
     <tr>
+      <th>{{t 'channel.scene_id'}}</th>
       <th>{{t 'channel.name'}}</th>
-      <th>{{t 'channel.related_place'}}</th>
     </tr>
     <tr>
       <td>
-        <input required name="name" class="form-control" type="text" placeholder="{{t 'channel.input_name'}}">
+        <input value="{{start_scene_id}}" required name="scene_id" class="form-control" type="text" placeholder="{{t 'channel.input_scene_id'}}">
       </td>
       <td>
-        # TODO
+        <input required name="name" class="form-control" type="text" placeholder="{{t 'channel.input_name'}}">
       </td>
     </tr>
     <tr class="add-row">

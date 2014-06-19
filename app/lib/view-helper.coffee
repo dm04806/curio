@@ -131,9 +131,11 @@ register 'include', (tmpl, options) ->
   new SafeString(ret)
 
 
-register "form_rows", (size, col, options) ->
-  this.label_cls = "col-#{size}-#{col}"
-  this.row_cls = "col-#{size}-#{12 - col}"
+register "form_rows", (size, args..., options) ->
+  col1 = args[0]
+  col2 = args[1] or (12 - col1)
+  this.label_cls = "col-#{size}-#{col1}"
+  this.row_cls = "col-#{size}-#{col2}"
   return options.fn(this)
 
 

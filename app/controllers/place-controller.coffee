@@ -22,7 +22,9 @@ module.exports = class PlaceController extends ResourceController
         region: 'main'
         collection: collection
   show: (params) ->
-    arguments[0] = { id: params.id, media_id: mediator.media.id }
+    arguments[0] =
+      id: params.id
+      media_id: mediator.media.id
     super
   create: (params, route, opts) ->
     arguments[0] = { media_id: mediator.media.id }

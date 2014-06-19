@@ -5,6 +5,7 @@ Message = require 'models/message'
 MessageCollection = require 'models/message/collection'
 Place = require 'models/place'
 Channel = require 'models/channel'
+ChannelCollection = require 'models/channel/collection'
 Menu = require 'models/menu'
 {WEBOT_ROOT} = require 'consts'
 
@@ -38,7 +39,7 @@ module.exports = class Media extends Model
     hasMany:
       subscribers: Subscriber
       messages: MessageCollection
-      channels: Channel
+      channels: ChannelCollection
       places: Place
 
   serialize: ->

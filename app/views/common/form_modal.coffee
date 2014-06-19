@@ -1,6 +1,5 @@
 ModalView = require './modal'
 FormView = require './form'
-common = require './utils'
 
 module.exports = class FormModalView extends FormView
   # Also inherit from ModalView
@@ -9,10 +8,6 @@ module.exports = class FormModalView extends FormView
   render: ->
     super
     ModalView::render.call(this)
-
-  # display form message in modal
-  msg: (text, type='danger', expires=2100) ->
-    common.notify(text, type, expires, el: @$el.find('.noti'))
 
   listen:
     'submitted': ->

@@ -1,4 +1,5 @@
 View = require 'views/base/view'
+common = require './utils'
 
 ##
 # A auto shown modal
@@ -26,6 +27,10 @@ module.exports = class ModalView extends View
 
   close: () ->
     @$el.modal('hide')
+
+  # display form message in modal
+  msg: (text, type='danger', expires=2100) ->
+    common.notify(text, type, expires, el: @$el.find('.noti'))
 
   toConfirm: (e) ->
     $(e.currentTarget).attr('disabled', true)

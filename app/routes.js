@@ -21,7 +21,7 @@ module.exports = function(match) {
   match('places/create', 'place#create')
   match('place/:id', 'place#show')
 
-  match('autoreply', 'autoreply#index')
+  match('rules', 'rules#index')
 
   match('super', 'super/home#index')
   match('super/users', 'super/user#index')

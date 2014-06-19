@@ -1,4 +1,5 @@
 Model = require 'models/base/model'
+Channel = require 'models/channel'
 
 module.exports = class Place extends Model
   kind: 'place'
@@ -10,10 +11,11 @@ module.exports = class Place extends Model
     phone: null
     name: null
     intro: null
+    channels: []
 
   url: ->
     if @id
-      "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}"
+      "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}?include=channels"
     else
       "#{@apiRoot}/medias/#{@get 'media_id'}/places"
 

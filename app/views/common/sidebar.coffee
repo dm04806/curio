@@ -19,7 +19,7 @@ navItems = [
   icon: 'drawer2'
   subnav: [
     name: 'autoreply'
-    url: '/autoreply'
+    url: '/rules'
     icon: 'chat'
   ,
     name: 'places'

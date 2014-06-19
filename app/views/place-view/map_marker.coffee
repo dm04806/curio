@@ -56,13 +56,21 @@ module.exports = class MapMarker extends View
 
     AMap.event.addListener marker, 'dragend', => @updateByMarker()
 
-    @infoWindow = new AMap.InfoWindow
-      position: center
-      offset: new AMap.Pixel(0, -40)
-      content: @model.get 'address'
-
     @_ready = true
     @trigger 'ready'
+
+
+  openInfoWindow: (poi, pos) ->
+    if not info = @infoWindow
+      info = @infoWindow = new AMap.InfoWindow
+        offset: new AMap.Pixel(0, -40)
+      AMap.event.addListener @marker, 'dragstart', => info.close()
+    if not poi
+      poi = @model.attributes
+    info.setContent(renderInfoWindow(poi))
+      .open @map, @marker.getPosition()
+    @map.panBy(-10, 30)
+
 
   initAutocomplete: (node) ->
     @$searcher = node
@@ -117,17 +125,14 @@ module.exports = class MapMarker extends View
       AMap.event.addListener ps, 'complete', (result) =>
         ps = null
         marker = @marker
-        info = @infoWindow
         poi = result.poiList?.pois?[0]
         return common.notify('place.empty_search', 'warning') if not poi
         loc = poi.location
         pos = new AMap.LngLat loc.lng, loc.lat
         map.setCenter(pos).setZoom(15)
         marker.setPosition(pos)
-        setTimeout ->
-          info.setContent(renderInfoWindow(poi)).open(map, pos)
-          # pan the map, to leave room for info window
-          map.panBy(-10, 30)
+        setTimeout =>
+          @openInfoWindow()
         , 900
         if poi.address
           poi.city = district or city
@@ -180,6 +185,15 @@ module.exports = class MapMarker extends View
   # Update map details based on marker
   #
   updateByMarker: ->
+    @infoWindow?.close()
+    latlng = @marker.getPosition()
+    @setLatlng(latlng.lat, latlng.lng)
+    @map.plugin ['AMap.Geocoder'], =>
+      search = new AMap.Geocoder()
+      search.getAddress(latlng)
+      AMap.event.addListener search, 'complete', (res) =>
+        console.log arguments
+
 
   listen:
     'addedToDOM': 'showMap'

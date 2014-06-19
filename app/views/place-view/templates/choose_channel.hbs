@@ -1,0 +1,20 @@
+{{#widget 'modal' id='choose-channel' title='place.related_channel'}}
+  <form data-modal-submit="false" action="" method="post">
+    <div class="input-group">
+      <input class="form-control" type="text" name="scene_id" placeholder="{{t 'place.channel.type_scene'}}" />
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-mini">{{t 'add'}}</button>
+      </span>
+    </div>
+    <p class="help-block">
+      {{t 'place.channel.create_tip'}}
+    </p>
+  </form>
+  <div class="place-channels">
+  </div>
+  {{#set 'footer'}}
+    <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'cancel'}}</button>
+    <button type="submit" class="btn btn-primary" data-op="toConfirm">{{t 'confirm'}}</button>
+  {{/set}}
+{{/widget}}
+

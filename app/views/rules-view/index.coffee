@@ -7,13 +7,13 @@ common = require 'views/common/utils'
 
 navTabs = [
   name: 'autoreply.keyword'
-  url: '/autoreply?tab=keyword'
+  url: '/rules?tab=keyword'
 ,
   name: 'autoreply.subscribe'
-  url: '/autoreply?tab=subscribe'
+  url: '/rulew?tab=subscribe'
 ,
   name: 'autoreply.any'
-  url: '/autoreply?tab=any'
+  url: '/rules?tab=any'
 ]
 
 module.exports = class ResponderIndexView extends CollectionView

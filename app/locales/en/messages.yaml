@@ -61,6 +61,7 @@ loading: Loading...
 comming soon: "敬请期待!"
 enlarge: Enlarge
 shrink: Shrink
+preview: 预览
 edit:
   "": Edit
   success: "Edit success!"
@@ -126,6 +127,7 @@ error:
     "": {}
     title: Not Available
     detail: "You'll need enable Wechat advanced API first, try <a href=\"/settings\">input correct Appkey</a>"
+  scene_id too large: "场景ID不得大于100,000"
 unknown time: Unknown time
 text: Text
 image: Image
@@ -186,6 +188,7 @@ channel:
   name: Channel name
   scene_id: Scene ID
   input_name: Input channel name
+  input_scene_id: 输入场景ID
   related_place: Related place
   qrcode_img: QRCode
   desc_tip: description for this channel
@@ -207,6 +210,12 @@ place:
   address_tip: Input the address and mark
   phone: Phone
   intro: Introduction
+  related_channel: 关联二维码
+  channel:
+    type_scene: 输入场景ID或场景名
+    empty_scene_id: 场景ID必须是数字
+    fetch_failed: 获取场景信息失败，请重试
+    create_tip: 若场景不存在，将新建
 edit_place:
   address:
     "can't be blank": Address is required

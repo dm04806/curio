@@ -19,6 +19,8 @@ module.exports = class ChannelIndexView extends CollectionView
   # Create a channel
   toCreate: ->
     view = new CreateView
+      data:
+        start_scene_id: @collection.next_scene_id
     view.on 'submitted', (items) =>
       # when modal is fully closed
       view.on 'dispose', =>

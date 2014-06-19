@@ -1,4 +1,5 @@
 Model = require 'models/base/model'
+mediator = require 'mediator'
 
 module.exports = class Channel extends Model
   kind: 'channel'
@@ -7,7 +8,15 @@ module.exports = class Channel extends Model
     name: null
     scene_id: null
 
-  url: ->
+  @findOrCreate: (scene_id) ->
+    url = @urlRoot()
+    $.post url, { scene_id: scene_id }
+
+  @urlRoot: ->
+    "#{mediator.media.url()}/channels"
+
+  url: (params) ->
+    console.log arguments
     "#{@apiRoot}/medias/#{@get 'media_id'}/channels/#{@id}"
 
   # 二维码图片地址
