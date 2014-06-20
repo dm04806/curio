@@ -44,7 +44,7 @@ module.exports = class MapMarker extends View
       center = new AMap.LngLat @model.get('lng'), @model.get('lat')
     if center
       opts.center = center
-      opts.level = 14
+      opts.level = 15
 
     map = @map = new AMap.Map @$el.find('.map')[0], opts
     map.plugin ['AMap.ToolBar'], ->
@@ -207,23 +207,22 @@ module.exports = class MapMarker extends View
       AMap.event.addListener search, 'complete', (res) =>
         res = res.regeocode
         comp = res.addressComponent
-        address = "#{comp.city}#{comp.district}#{comp.street}#{comp.streetNumber}"
-        poi = res.pois[0]
         @city = comp.city or comp.province
-        if poi
-          poi = {
-            city: if poi.address then comp.district else ''
-            location: poi.location
-            name: poi.name
-            address: poi.address or res.formattedAddress
-          }
-        else
-          poi = {
-            city: if res.formattedAddress then '' else comp.district or comp.city
-            location: latlng
-            name: comp.building or '未知地点'
-            address: poi?.address or res.formattedAddress or address
-          }
+        streetNumber = comp.streetNumber and "#{comp.streetNumber}号".replace(/[号號]+/g, '号')
+        formattedAddress = res.formattedAddress.replace(comp.province, '').replace(/[号號]+/g, '号')
+        address = "#{comp.city}#{comp.district}#{comp.street}#{streetNumber}"
+        pois = res.pois.sort((a, b) -> a.distance - b.distance)
+        poi = pois[0]
+        # 优先使用 building 作为地点名
+        name = comp.building or comp.neighborhood
+        if poi and poi.distance < 10
+          name = name or poi.name
+        poi = {
+          city: ''
+          location: latlng
+          name: name or formattedAddress
+          address: address
+        }
         @setPOI poi
 
   ##
