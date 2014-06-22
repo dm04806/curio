@@ -21,6 +21,9 @@ module.exports = function(match) {
   match('places/create', 'place#create')
   match('place/:id', 'place#show')
 
+  // for PingMedium backend
+  match('pm', 'pm/authorize#index')
+
   match('rules', 'rules#index')
 
   match('super', 'super/home#index')
