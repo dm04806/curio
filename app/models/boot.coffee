@@ -7,7 +7,7 @@ session = require 'models/session'
 boot = ->
   media_id = session.currentMedia()
   # pass current managing media_id to server
-  $.get(API_ROOT, { current: media_id }).done (bs) ->
+  $.get(API_ROOT + '/', { current: media_id }).done (bs) ->
     if bs?.user
       mediator.execute 'login', bs
 

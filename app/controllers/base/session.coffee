@@ -9,6 +9,7 @@ mediator = require 'mediator'
 mediator.user = null
 mediator.media = null
 mediator.all_admins = null
+mediator.pmwx = null
 
 mediator.setHandler 'logout', ->
   return unless mediator.user
@@ -24,6 +25,7 @@ mediator.setHandler 'login', (data) ->
   userInfo = data.user
   admins = mediator.all_admins = data.admins or []
   user = mediator.user = new User(userInfo)
+  mediator.pmwx = data.pmwx
 
   roles = user.roles = {}
   # assign media admin role to user

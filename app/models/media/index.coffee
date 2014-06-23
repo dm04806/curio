@@ -55,5 +55,3 @@ module.exports = class Media extends Model
     url = "#{@url()}/jobs/#{jobname}"
     xhr = $.send(url, data, { type: 'PUT' })
 
-
-

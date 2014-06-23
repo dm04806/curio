@@ -1,10 +1,14 @@
 View = require 'views/base/view'
+mediator = require 'mediator'
 
 module.exports = class PageView extends View
   optionNames: View::optionNames.concat ['layout']
   container: 'body'
   id: 'site-container'
   layout: 'normal'
+  debug: true
+  context: ->
+    pmwx: mediator.pmwx
   regions:
     header: '#header'
     sidebar: '#sidebar'
