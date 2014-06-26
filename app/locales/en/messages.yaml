@@ -192,6 +192,8 @@ channel:
   related_place: Related place
   qrcode_img: QRCode
   desc_tip: description for this channel
+  subscribe_reply: 未关注扫描回复
+  scan_reply: 已关注扫描回复
 places:
   "": Place
   create:
@@ -216,6 +218,11 @@ place:
     empty_scene_id: 场景ID必须是数字
     fetch_failed: 获取场景信息失败，请重试
     create_tip: 若场景不存在，将新建
+  reply:
+    settings: 设置回复模板
+    scan: 扫描二维码回复
+    scan_tmpl: {}
+    scan_tip: 使用占位符
 edit_place:
   address:
     "can't be blank": Address is required

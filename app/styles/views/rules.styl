@@ -11,28 +11,10 @@
     margin: 0 -20px 20px -30px
     background: #f0f0f0
     border-top: 1px solid #e0e0e0
-    &:first-child
+  .panel-body > .section-bar:first-child
       margin-top: -15px
   .panel-heading
     font-weight: 600
-  .section-bar .nav-tabs
-    display: inline-block
-    vertical-align: middle
-    margin-top: -2px
-    margin-left: 1em
-    font-size: 12px
-  .nav-tabs > li > a
-    border-radius: 1px
-    padding-top: 4px
-    padding-bottom: 4px
-    margin-top: 0
-    transition: none
-    background: #fff
-  .nav-tabs > li.active > a
-    border-color: lighten(brand-primary, 15%)
-    padding-top: 4px
-    padding-bottom: 4px
-
 
 .rule-item
   position: relative
@@ -66,3 +48,26 @@
       color: #999
 
 
+.rule-reply
+  .section-title
+    display: none
+    margin-right: 1em
+  .section-bar .nav-tabs
+    display: inline-block
+    vertical-align: middle
+    margin-top: -2px
+    font-size: 12px
+  .nav-tabs > li > a
+    border-radius: 1px
+    padding-top: 4px
+    padding-bottom: 4px
+    margin-top: 0
+    transition: none
+    background: #fff
+  .nav-tabs > li.active > a
+    border-color: lighten(brand-primary, 15%)
+    padding-top: 4px
+    padding-bottom: 4px
+
+.rule-item .section-title
+  display: inline-block

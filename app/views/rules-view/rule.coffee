@@ -5,6 +5,8 @@ common = require 'views/common/utils'
 EditPatternModal = require './edit_pattern'
 ChooseNewsModal = require './choose_news'
 
+ReplyView = require './reply'
+
 
 module.exports = class RuleView extends View
   noWrap: true
@@ -24,7 +26,7 @@ module.exports = class RuleView extends View
       @$el.siblings().each (i, item) ->
         $(item).data('folder')?.fold()
     @$el.data 'folder', folder.data('curio.foldable')
-    @switchReplyTab()
+    @subview 'reply', new ReplyView model: @model, el: @$('.rule-reply')
 
   fold: ->
     @$el.data('folder').fold()
@@ -34,13 +36,6 @@ module.exports = class RuleView extends View
 
   toggle: ->
     @$el.data('folder').toggle()
-
-  switchReplyTab: () ->
-    tab = @$el.find(".reply-types a[data-type=#{@model.get 'replyType'}]")
-    return if not tab.length
-    target = @$el.find(tab.attr('href'))
-    tab.tab('show')
-    tab.data('bs.tab').activate(target, target.parent())
 
   getPatternItem: (node) ->
     node.closest('.pattern-item')
@@ -75,13 +70,6 @@ module.exports = class RuleView extends View
     index = $item.data('index')
     @model.removeKeyword $item.data('index')
 
-
-  chooseNews: (node) ->
-    common.alert 'comming soon'
-
-  chooseImage: (node) ->
-    common.alert 'comming soon'
-
   renderPatternList: () ->
     html = require('./templates/rule/mod/pattern')(@model.toJSON())
     @$el.find('.pattern-group').replaceWith html
@@ -96,7 +84,7 @@ module.exports = class RuleView extends View
       return
 
     @disable(node)
-    @syncReply()
+    @subview('reply').syncReply()
 
     @model.save().done =>
       setTimeout =>
@@ -124,13 +112,6 @@ module.exports = class RuleView extends View
         @dispose()
       .error (xhr) =>
         @fail(xhr, node)
-
-  # Sync reply content
-  syncReply: () ->
-    pane = @$el.find('.tab-pane.active')
-    type = pane.data('type')
-    if type == 'text'
-      @model.set 'handler', pane.find('textarea').val()
 
   enable: (node) ->
     return if @disposed

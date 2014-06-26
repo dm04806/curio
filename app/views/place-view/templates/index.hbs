@@ -24,3 +24,23 @@
   <br>
   <a href="{{url 'place#create'}}" class="btn btn-primary btn-md">{{t 'places.create_one_now'}}</a>
 </div>
+<!--<div class="big-box">-->
+  <!--<form class="form-horizontal" action="">-->
+    <!--{{#form_rows 'sm' 2 7 }}-->
+    <!--<fieldset>-->
+      <!--<legend>{{t 'place.reply.settings'}}</legend>-->
+      <!--{{form_textarea 'reply_scan' desc 'place.reply.scan' '' rows=4 tip="place.reply.scan_tip"}}-->
+    <!--</fieldset>-->
+    <!--{{/form_rows}}-->
+  <!--</form>-->
+<!--</div>-->
+{{#if pmwx}}
+<div class="big-box">
+  <h4>使用帮助</h4>
+  <ul>
+    <li>
+    安装后设置消息转发至 <a href="http://lbs.curio.im/api/webot">http://lbs.curio.im/api/webot</a>
+    </li>
+  </ul>
+</div>
+{{/if}}

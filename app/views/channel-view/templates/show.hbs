@@ -1,4 +1,4 @@
-{{#widget 'heading2' back='/channels'}}
+{{#widget 'heading2' back='javascript:history.go(-1)'}}
 {{#set 'title'}}
   {{#if isNew}}
     {{t 'channels.create'}}
@@ -24,6 +24,22 @@
         </div>
         {{form_input 'name' name 'name' 'channel.name_tip'}}
         {{form_textarea 'desc' desc 'desc' 'channel.desc_tip'}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label">
+            {{ t 'channel.subscribe_reply' }}
+          </label>
+          <div class="col-sm-10">
+            <div id="subscribe-reply" class="rule-reply"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">
+            {{ t 'channel.scan_reply' }}
+          </label>
+          <div class="col-sm-10">
+            <div id="scan-reply" class="rule-reply"></div>
+          </div>
+        </div>
         <div class="form-group">
           <div class="col-sm-10 col-sm-offset-2">
             <div class="form-message holded"></div>

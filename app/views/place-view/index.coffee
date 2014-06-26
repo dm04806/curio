@@ -10,6 +10,7 @@ module.exports = class PlaceIndexView extends CollectionView
   animationDuration: 500
   context: ->
     total: @collection.total
+    pmwx: mediator.pmwx
 
   render: ->
     super

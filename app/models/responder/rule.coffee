@@ -37,6 +37,10 @@ module.exports = class Rule extends Model
   kind: 'rrule'
 
   @create: (type) ->
+    # if type starts with '$', like '$scan_qrcode',
+    # it is a advanced pattern
+    if type[0] == '$'
+      return new Rule type: 'advanced', pattern: type
     new Rule _.extend {type: type}, RULE_DEFAULTS[type]
 
   is: (type) ->
@@ -71,7 +75,7 @@ module.exports = class Rule extends Model
     rule.name = stringify(pattern)
 
     # determine reply type based on handler
-    rule.replyType = rule.handler.type or 'text'
+    rule.replyType = rule.handler?.type or 'text'
 
     if not rule.type
       # set type by pattern

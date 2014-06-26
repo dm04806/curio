@@ -197,7 +197,7 @@ channels:
   index:
     h1: 推广渠道二维码
   create: 创建渠道
-  edit: 编辑渠道信息
+  edit: "渠道详情: %s"
   there_is_none: 目前没有推广渠道可用
   create_one_now: 现在创建一个
 
@@ -209,6 +209,8 @@ channel:
   related_place: 相关门店
   qrcode_img: 二维码
   desc_tip: 为渠道添加备注信息
+  subscribe_reply: 未关注回复
+  scan_reply: 已关注时回复
 
 places:
   '': 门店
@@ -235,6 +237,11 @@ place:
     empty_scene_id: 场景ID不能为空
     fetch_failed: 获取场景信息失败，请重试
     create_tip: 若场景不存在，将新建
+  reply:
+    settings: 设置回复模板
+    scan: 扫描二维码回复
+    scan_tmpl: "欢迎来到#{place_name}"
+    scan_tip: "可使用占位符 #{place_name}"
 
 edit_place:
   address:

@@ -9,7 +9,7 @@ listItem = (data) ->
         <span class="icon-circledelete"></span>
       </a>
     </span>
-    <a href="/channel/#{data.id}" target="_blank">
+    <a href="/channel/#{data.id}">
       ##{data.scene_id}
       -
       #{data.name}
