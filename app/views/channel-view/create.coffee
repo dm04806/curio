@@ -12,7 +12,6 @@ module.exports = class CreateChannel extends FormModalView
   addRow: (node) ->
     prev = node.closest('tr').prev()
     new_id = Number(prev.find('input[name=scene_id]').val())
-    console.log prev, new_id
     new_id = new_id + 1 or ''
     clone = prev.clone()
     clone.find('input').val('')

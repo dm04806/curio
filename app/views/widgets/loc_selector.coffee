@@ -5,7 +5,11 @@ Loc = require 'models/loc'
 
 renderList = (coll, parent) ->
   level = coll.models[0].level_cn()
-  sel = $("<select class=\"loc-select form-control\"><option>#{__ level}</option></select>")
+  sel = $("""
+      <select class="loc-select form-control">
+        <option value="#{parent?.id}">#{__ level}</option>
+      </select>
+    """)
   if parent
     sel.attr('id', "selloc-#{parent.level}")
   coll.each (item) ->
@@ -22,7 +26,8 @@ module.exports = class LocSelector extends View
 
   render: ->
     if not @collection
-      @collection = Loc.collection params: { level: 'country', limit: null }
+      @collection = Loc.collection
+        params: { level: 'country', limit: null }
       @collection.fetch().done => @_render()
     else
       @_render()

@@ -24,7 +24,6 @@ module.exports = class Collection extends Chaplin.Collection
     _.defaults @params,
       offset: 0
       limit: @PERPAGE
-    console.log @params
 
   urlRoot: ''
 

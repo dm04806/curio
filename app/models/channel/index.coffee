@@ -16,7 +16,6 @@ module.exports = class Channel extends Model
     "#{mediator.media.url()}/channels"
 
   url: (params) ->
-    console.log arguments
     "#{@apiRoot}/medias/#{@get 'media_id'}/channels/#{@id}"
 
   # 二维码图片地址
