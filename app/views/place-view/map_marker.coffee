@@ -136,7 +136,7 @@ module.exports = class MapMarker extends View
         poi = result.poiList?.pois?[0]
         return common.notify('place.empty_search', 'warning') if not poi
         poi.district = if poi.address then district else ''
-        map.setZoom(15)
+        #map.setZoom(15)
         @setPOI poi
         setTimeout =>
           @openInfoWindow()
@@ -182,14 +182,21 @@ module.exports = class MapMarker extends View
 
   setLatlng: (lat, lng) ->
     @model.set lat: lat, lng: lng
+    pos = new AMap.LngLat lng,lat
+    @marker.setPosition(pos)
+    if not @isInsideMap(pos)
+      @map.setCenter(pos)
+      @map.setZoom(12)
 
   setPOI: (poi) ->
     loc = poi.location
-    pos = new AMap.LngLat loc.lng, loc.lat
-    @marker.setPosition(pos)
-    @trigger 'updated', poi
+    @setLatlng(loc.lat, loc.lng)
+    @trigger 'poiChanged', poi
     @openInfoWindow()
 
+
+  isInsideMap: (pos) ->
+    @map.getBounds().contains(pos)
 
   ##
   # Update map details based on marker
@@ -238,4 +245,4 @@ module.exports = class MapMarker extends View
 
   listen:
     'addedToDOM': 'showMap'
-    'updated': 'updateByPOI'
+    'poiChanged': 'updateByPOI'

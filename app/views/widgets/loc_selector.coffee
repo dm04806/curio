@@ -3,20 +3,23 @@ utils = require 'lib/utils'
 
 Loc = require 'models/loc'
 
-renderList = (coll, parent) ->
-  level = coll.models[0].level_cn()
+renderList = (items, level, parent) ->
+  level = level or 'country'
   sel = $("""
-      <select class="loc-select form-control">
-        <option value="#{parent?.id}">#{__ level}</option>
+      <select name="loc_id" class="loc-select form-control">
+        <option value="#{parent?.id}">#{__ "loc.#{level}"}</option>
       </select>
     """)
-  if parent
-    sel.attr('id', "selloc-#{parent.level}")
-  coll.each (item) ->
-    item = item.serialize()
+  sel.attr('id', "selloc-#{level}")
+  items.forEach (item) ->
     sel.append("<option value='#{item.id}'>#{item.name}</option>")
   sel
 
+
+CHINA = {
+  id: 100000,
+  name: '中国'
+}
 
 module.exports = class LocSelector extends View
   autoRender: true
@@ -27,27 +30,50 @@ module.exports = class LocSelector extends View
   render: ->
     if not @collection
       @collection = Loc.collection
-        params: { level: 'country', limit: null }
-      @collection.fetch().done => @_render()
-    else
-      @_render()
+        params: {
+          level: 'country',
+          limit: null,
+          current: @data.current
+        }
+      @collection.fetch().done (res) =>
+        @_render(res.items, res.current)
+        @_renderCurrent(res.current)
+    @_render()
 
-  _render: (coll) ->
+  _render: (coll, cur) ->
     return if @disposed
-    @$el.append(renderList(coll or @collection))
+    sel = renderList(coll or [CHINA])
+    # always select china by default
+    sel.find("[value=#{CHINA.id}]")
+      .attr('selected', true)
+    @$el.html(sel)
+    @loadChildren(sel) if coll and not cur
 
+  _renderCurrent: (cur) ->
+    return unless cur
+    frag = $(document.createDocumentFragment())
+    @$el.append(sel)
+    while cur and cur.siblings and cur.siblings.length
+      sel = renderList(cur.siblings, cur.level, cur.parent)
+      sel.val(cur.id)
+      frag.prepend(sel)
+      cur = cur.parent
+    @$("select:eq(0)").val(cur.id)
+    @$el.append(frag)
 
-  loadChildren: (e) ->
-    node = $(e.target)
+  loadChildren: (node) ->
+    node = node
     loc = new Loc id: node.val()
     return if not loc.id
+    # remove children
+    next = node.nextAll("select").val('')
     loc.fetch().done (ret) =>
-      # remove existing same level
-      $("#selloc-#{ret.level} ~ select").remove()
-      $("#selloc-#{ret.level}").remove()
-      coll = Loc.collection ret.children
+      coll = ret.children
+      next.remove()
       if coll.length
-        node.after(renderList(coll, loc.attributes))
+        level = coll[0].level
+        node.after(renderList(coll, level, loc.attributes))
 
   events:
-    'change select': 'loadChildren'
+    'change select': (e) -> @loadChildren($(e.target))
+

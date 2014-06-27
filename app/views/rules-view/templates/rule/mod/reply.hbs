@@ -13,13 +13,14 @@
     </textarea>
   </div>
   <div data-type="image" id="reply{{index}}-image" class="tab-pane">
+    <input class="form-control" type="text" name="picUrl" value="{{content.picUrl}}" placeholder="{{t 'rule.input_picurl'}}">
     {{~#compare replyType 'image' ~}}
       {{include 'views/message-view/templates/content/image'}}
     {{~/compare~}}
-    <button data-op="chooseImage" class="btn btn-default" type="button">
-      <span class="icon-image"></span>
-      {{t 'rule.choose_image'}}
-    </button>
+    <!--<button data-op="chooseImage" class="btn btn-default" type="button">-->
+      <!--<span class="icon-image"></span>-->
+      <!--{{t 'rule.choose_image'}}-->
+    <!--</button>-->
   </div>
   <div data-type="news" id="reply{{index}}-news" class="tab-pane">
     {{~#compare replyType 'news' ~}}

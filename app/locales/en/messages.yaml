@@ -207,6 +207,7 @@ places:
 place:
   name: Place name
   location: Location
+  city: 城市
   empty_search: Search returns no result
   address: Full address
   address_tip: Input the address and mark
@@ -223,6 +224,9 @@ place:
     scan: 扫描二维码回复
     scan_tmpl: {}
     scan_tip: 使用占位符
+  geo: 坐标
+  lat: 纬度
+  lng: 经度
 edit_place:
   address:
     "can't be blank": Address is required
@@ -232,10 +236,16 @@ locs:
     h1: 行政区划管理
   admin: 城市管理
   selector_preview: 选择器预览
+  edit: "编辑行政区划 %s"
+  edit_city: 编辑城市列表
 loc:
   name: 名称
+  alias: 别名
+  code: 代码
+  code_tip: 缩略码
   level: 层级
   parent: 上级
+  parent_tip: 填写上级区划的ID
   to_select: 请选择
   country: 国家
   province: 省或州
@@ -363,6 +373,7 @@ rule:
   blur_match: blur match
   exact_match: exact match
   input_reply: input reply
+  input_picurl: 输入图片地址
   choose_image: choose image
   choose_reply: choose reply
   $subscribe:

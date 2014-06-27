@@ -7,6 +7,7 @@ module.exports = class Place extends Model
   defaults:
     lat: null
     lng: null
+    loc_id: null
     address: null
     phone: null
     name: null

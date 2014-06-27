@@ -11,6 +11,12 @@ module.exports = class ReplyView extends View
     super
     @switchReplyTab()
 
+  context: ->
+    ret = {}
+    if not @model.get('index')
+      ret.index = @el.id or $.guid++
+    ret
+
   switchReplyTab: () ->
     tab = @$el.find(".reply-types a[data-type=#{@model.get 'replyType'}]")
     return if not tab.length

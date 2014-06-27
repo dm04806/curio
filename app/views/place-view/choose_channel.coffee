@@ -45,5 +45,8 @@ module.exports = class ChooseChannelView extends ModalView
         , 500
 
   events:
+    'click a': (e) ->
+      e.stopPropagation()
+      e.preventDefault()
     'submit form': 'addNew'
 

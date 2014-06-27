@@ -3,8 +3,6 @@ utils = require 'lib/utils'
 
 class AlertModal extends Modal
   template: require './templates/alert_modal'
-  initialize: ->
-    super
   context: ->
     modal_class: 'modal alert-modal'
     cancel_button_class: 'btn-primary'
@@ -12,8 +10,6 @@ class AlertModal extends Modal
 
 
 class ConfirmModal extends AlertModal
-  initialize: ->
-    super
   context: ->
     modal_class: 'modal alert-modal'
     confirm_button_class: 'btn-danger'

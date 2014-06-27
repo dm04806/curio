@@ -11,10 +11,10 @@ module.exports = class ChannelView extends EditFormView
 
   render: ->
     super
-    subRule = Rule.create('$unsubscribed_scan')
-    scanRule = Rule.create('$subscribed_scan')
-    view1 = new ReplyView model: subRule, el: @$('#subscribe-reply')
-    view2 = new ReplyView model: scanRule, el: @$('#scan-reply')
-    @subview 'subscribe-reply', view1
-    @subview 'scan-reply', view2
+    #subRule = Rule.create('$unsubscribed_scan')
+    #scanRule = Rule.create('$subscribed_scan')
+    #view1 = new ReplyView model: subRule, el: @$('#subscribe-reply')
+    #view2 = new ReplyView model: scanRule, el: @$('#scan-reply')
+    #@subview 'subscribe-reply', view1
+    #@subview 'scan-reply', view2
 
