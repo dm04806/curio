@@ -13,6 +13,10 @@ navItems = [
   name: 'users.title'
   url: '/super/users'
   icon: 'users'
+,
+  name: 'locs.admin'
+  url: '/super/locs'
+  icon: 'location2'
 ]
 
 

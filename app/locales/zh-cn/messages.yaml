@@ -247,6 +247,24 @@ edit_place:
   address:
     can't be blank: 地址不能为空
 
+locs:
+  '': 行政区划
+  index:
+    h1: 行政区划管理
+  admin: 行政区划
+  selector_preview: 选择器预览
+
+loc:
+  name: 地名
+  level: 层级
+  parent: 上级
+  to_select: 请选择
+  country: 国家
+  province: 省份
+  city: 城市
+  district: 区县
+
+
 shares:
   '': 图文分享
 

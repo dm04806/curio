@@ -226,6 +226,21 @@ place:
 edit_place:
   address:
     "can't be blank": Address is required
+locs:
+  "": 城市管理
+  index:
+    h1: 行政区划管理
+  admin: 城市管理
+  selector_preview: 选择器预览
+loc:
+  name: 名称
+  level: 层级
+  parent: 上级
+  to_select: 请选择
+  country: 国家
+  province: 省或州
+  city: 地区市
+  district: 区县
 shares:
   "": Shares
 dashboard:

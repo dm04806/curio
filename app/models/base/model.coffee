@@ -6,6 +6,10 @@ plular = (name) ->
   name + 's'
 
 # Base model.
+#
+#  .toJSON    -  for sending request to API
+#  .serialize -  for rendering
+#
 module.exports = class Model extends Chaplin.Model
   _.extend @prototype, Chaplin.SyncMachine
 

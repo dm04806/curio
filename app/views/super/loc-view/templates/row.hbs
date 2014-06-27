@@ -1,0 +1,18 @@
+<td>
+  {{id}}
+</td>
+<td>
+  <a href="{{url 'super/loc#show' id}}">
+    {{name}}
+  </a>
+</td>
+<td>
+  {{level_cn}}
+</td>
+<td>
+  {{#if parent}}
+    <a href="{{url 'super/loc#show' parent.id}}">
+      {{parent.name}}
+    </a>
+  {{/if}}
+</td>

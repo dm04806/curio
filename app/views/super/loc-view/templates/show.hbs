@@ -1,0 +1,31 @@
+{{#widget 'heading2' back='/super/locs'}}
+{{#set 'title'}}
+  {{#if isNew}}
+    {{t 'locs.create'}}
+  {{else}}
+    {{t 'locs.edit' name}}
+  {{/if}}
+{{/set}}
+{{/widget}}
+<div class="box clearfix">
+  <form class="main-content edit-form form-horizontal" method="post">
+    <div class="rows">
+      <div class="col-sm-8">
+        {{#form_rows 'sm' 2}}
+          {{form_input 'name' name 'loc.name' 'loc.name_tip'}}
+        {{/form_rows}}
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary">{{t 'save'}}</button>
+            <small class="pull-right">
+              <a class="text-muted" href="" data-op="toDestroy">{{t 'delete'}}</a>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+  </form>
+</div>
+
