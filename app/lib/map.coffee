@@ -7,6 +7,7 @@ MAP_JS = "http://webapi.amap.com/maps?v=1.2&key=#{AMAP_AK}"
 #MAP_JS = "//maps.googleapis.com/maps/api/js?key=#{GMAP_AK}&sensor=false&libraries=places"
 
 
+
 $.cachedScript = (url, options) ->
   options = $.extend(options or {}, {
     dataType: 'script'
@@ -15,7 +16,7 @@ $.cachedScript = (url, options) ->
   })
   return jQuery.ajax options
 
-start = (cb) ->
+amap_start = (cb) ->
   cb_name = '_map_callback_'
   if not cb
     throw new Error('Must provide a callback')
@@ -25,10 +26,18 @@ start = (cb) ->
     delete window[cb_name]
   $.cachedScript js
 
-module.exports = (cb) ->
-  if google?.maps
+exports.amap = (cb) ->
+  if window.Amap
     cb()
   else
-    start(cb)
+    amap_start(cb)
 
-module.exports.start = start
+
+qs = Chaplin.utils.querystring
+
+exports.gstaticMap = (opts) ->
+  _.defaults opts,
+    size: '600x200'
+    maptype: 'roadmap'
+  "http://maps.google.cn/maps/api/staticmap?#{qs.stringify(opts)}"
+

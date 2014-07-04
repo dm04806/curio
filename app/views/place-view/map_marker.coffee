@@ -1,7 +1,7 @@
 View = require 'views/base'
 utils = require 'lib/utils'
 mediator = require 'mediator'
-amap =  require 'lib/map'
+maplib =  require 'lib/map'
 common = require 'views/common/utils'
 
 {ENTER} = require 'lib/keyboard'
@@ -21,6 +21,13 @@ renderInfoWindow = (poi) ->
   </div>
   """
 
+ZOOMS = {
+  'country': 4,
+  'province': 7,
+  'city': 10,
+  'district': 13
+}
+
 ##
 # 在地图上标记地点
 #
@@ -36,30 +43,24 @@ module.exports = class MapMarker extends View
     @ready @_showMap
 
   _showMap: ->
-
     opts =
       resizeEnable: true
-
     if @model.get 'lat'
       center = new AMap.LngLat @model.get('lng'), @model.get('lat')
     if center
       opts.center = center
       opts.level = 15
-
     map = @map = new AMap.Map @$el.find('.map')[0], opts
     map.plugin ['AMap.ToolBar'], ->
       map.addControl new AMap.ToolBar(direction: false)
-
     marker = @marker = new AMap.Marker
       map: map
       position: map.getCenter()
       draggable: true
-
     AMap.event.addListener marker, 'dragend', => @updateByMarker()
-
+    AMap.event.addListener map, 'dragend', => @updateByMap()
     @_ready = true
     @trigger 'ready'
-
 
   _initInfoWIndow: ->
     info = @infoWindow = new AMap.InfoWindow
@@ -81,7 +82,7 @@ module.exports = class MapMarker extends View
     @infoWindow.setContent(content)
 
   initAutocomplete: (node) ->
-    @$searcher = node
+    @$searcher = node if node
     @ready @_initAutocomplete
 
   _initAutocomplete: ->
@@ -95,7 +96,6 @@ module.exports = class MapMarker extends View
       citysearch.getLocalCity()
       AMap.event.addListener citysearch, 'complete', (result) ->
         @city = result.city
-
     map.plugin ['AMap.Autocomplete', 'AMap.PlaceSearch'], =>
       bb = new Bloodhound
         datumTokenizer: (d) -> [d.name, d.district]
@@ -111,7 +111,6 @@ module.exports = class MapMarker extends View
             AMap.event.addListener auto, 'complete', (obj) ->
               success(obj.tips or [])
       bb.initialize()
-
       inputer.typeahead({
         autoselect: true
       }, {
@@ -120,7 +119,6 @@ module.exports = class MapMarker extends View
         name: 'amap-places'
         source: bb.ttAdapter()
       })
-
       inputer.off 'blur.tt'
 
     # act as a loading indicator, to prevent duplicate request
@@ -146,11 +144,16 @@ module.exports = class MapMarker extends View
       district = query.district
       doSearch(query.district + query.name)
 
-    inputer.on 'keydown', (e) ->
+    inputer.off('keydown.mm').on 'keydown.mm', (e) ->
       if e.which == ENTER
         doSearch(this.value)
         e.preventDefault()
 
+
+  stopAutoComplete: ->
+    inputer = @$searcher
+    inputer.typeahead('destroy')
+    inputer.off('keydown.mm')
 
   # Do things when ready
   ready: (fn) ->
@@ -161,7 +164,7 @@ module.exports = class MapMarker extends View
     else
       @once 'ready', fn
       @_loading = true
-      amap =>
+      maplib.amap =>
         @_ready = true
         @_loading = null
         @trigger 'ready'
@@ -182,18 +185,40 @@ module.exports = class MapMarker extends View
 
   setLatlng: (lat, lng) ->
     @model.set lat: lat, lng: lng
-    pos = new AMap.LngLat lng,lat
-    @marker.setPosition(pos)
-    if not @isInsideMap(pos)
-      @map.setCenter(pos)
-      @map.setZoom(12)
+    if @_foreign_mode
+      @setForeignLoc
+        lat: lat
+        lng: lng
+    else
+      pos = new AMap.LngLat lng,lat
+      @marker.setPosition(pos)
+      if not @isInsideMap(pos)
+        @map.setCenter(pos)
+        @map.setZoom(12)
 
+  ##
+  # Set map by AMap POI
   setPOI: (poi) ->
-    loc = poi.location
-    @setLatlng(loc.lat, loc.lng)
+    pos = poi.location
+    @setLatlng(pos.lat, pos.lng)
     @trigger 'poiChanged', poi
     @openInfoWindow()
 
+
+  ##
+  # Set map with Loc.
+  setLoc: (loc) ->
+    @city = loc.fullName
+    return @setForeignLoc(loc) if loc.country != '中国'
+    @leaveForeign()
+    @map.plugin ['AMap.Geocoder'], =>
+      search = new AMap.Geocoder
+      search.getLocation(@city)
+      AMap.event.addListener search, 'complete', (res) =>
+        pos = res.geocodes[0].location
+        zoom = ZOOMS[loc.level]
+        @map.setCenter pos
+        @map.setZoom zoom
 
   isInsideMap: (pos) ->
     @map.getBounds().contains(pos)
@@ -232,6 +257,12 @@ module.exports = class MapMarker extends View
         }
         @setPOI poi
 
+  updateByMap: ->
+    pos = @marker.getPosition()
+    return if @isInsideMap(pos)
+    @marker.setPosition @map.getCenter()
+    @updateByMarker()
+
   ##
   # Update model based on POI
   #
@@ -242,6 +273,54 @@ module.exports = class MapMarker extends View
       name: poi.name
       lat: poi.location.lat
       lng: poi.location.lng
+
+  ##
+  # 国外地点支持
+  #
+  setForeignLoc: (loc) ->
+    @enterForeign()
+    if not @$fstatic
+      @$fstatic = @$('.foreign-map .static-map')
+    if loc.lat and loc.lng
+      pos = [loc.lat,loc.lng].join(',')
+      opts = {
+        size: '500x255'
+        center: pos
+        markers: pos
+        zoom: 11
+      }
+      @model.set
+        lat: loc.lat
+        lng: loc.lng
+        address: loc.fullName
+    else
+      opts = {
+        size: '500x255'
+        center: loc.fullName
+      }
+      @model.set
+        address: loc.fullName
+    @$fstatic.html("<img src=\"#{maplib.gstaticMap(opts)}\" >")
+
+  ##
+  # Show static map (for outside China)
+  #
+  enterForeign: ->
+    @_foreign_mode = true
+    @$el.addClass('foreign-mode')
+    @stopAutoComplete()
+    inputer = @$searcher
+    inputer.on 'keydown.mm', (e) =>
+      if e.which == ENTER
+        @setForeignLoc({
+          fullName: inputer.val()
+        })
+        e.preventDefault()
+
+  leaveForeign: ->
+    @_foreign_mode = false
+    @$el.removeClass('foreign-mode')
+    @initAutocomplete()
 
   listen:
     'addedToDOM': 'showMap'

@@ -1,15 +1,24 @@
-<div class="map-control">
-  <a class="btn btn-default btn-xs toggler">
-    <span class="to-enlarge" data-op="enlarge">
-      {{t 'enlarge'}}
-      <!--<i class="icon-arrow-down"></i>-->
-    </span>
-    <span class="to-shrink" data-op="shrink">
-      <!--<i class="icon-arrow-up"></i>-->
-      {{t 'shrink'}}
-    </span>
-  </a>
+<div class="domestic-map">
+  <div class="map-control">
+    <a class="btn btn-default btn-xs toggler">
+      <span class="to-enlarge" data-op="enlarge">
+        {{t 'enlarge'}}
+        <!--<i class="icon-arrow-down"></i>-->
+      </span>
+      <span class="to-shrink" data-op="shrink">
+        <!--<i class="icon-arrow-up"></i>-->
+        {{t 'shrink'}}
+      </span>
+    </a>
+  </div>
+  <div class="map-container">
+    <div class="map"></div>
+  </div>
 </div>
-<div class="map-container">
-  <div class="map"></div>
+<div class="foreign-map">
+  <div class="static-map">
+  </div>
+  <div class="help-block">
+    {{t 'place.tip_mark_foreign'}}
+  </div>
 </div>

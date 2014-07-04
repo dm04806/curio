@@ -10,6 +10,7 @@ module.exports = class ChannelRow extends View
     common.confirm 'delete.confirm', =>
       @model.destroy({ wait: true })
         .error(common.xhrError)
-        .done(-> common.notify('delete.success', 1000))
+        .done ->
+          common.notify('delete.success', 1000)
 
 

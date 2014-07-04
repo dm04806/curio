@@ -6,8 +6,8 @@ Loc = require 'models/loc'
 renderList = (items, level, parent) ->
   level = level or 'country'
   sel = $("""
-      <select name="loc_id" class="loc-select form-control">
-        <option value="#{parent?.id}">#{__ "loc.#{level}"}</option>
+      <select data-level="#{level}" name="loc_id" class="loc-select form-control">
+        <option value="#{parent?.id or ''}">#{__ "loc.#{level}"}</option>
       </select>
     """)
   sel.attr('id', "selloc-#{level}")
@@ -63,10 +63,11 @@ module.exports = class LocSelector extends View
 
   loadChildren: (node) ->
     node = node
-    loc = new Loc id: node.val()
-    return if not loc.id
-    # remove children
     next = node.nextAll("select").val('')
+    id = node.val()
+    return next.remove() if not id
+    loc = new Loc id: id
+    # remove children
     loc.fetch().done (ret) =>
       coll = ret.children
       next.remove()
@@ -74,6 +75,33 @@ module.exports = class LocSelector extends View
         level = coll[0].level
         node.after(renderList(coll, level, loc.attributes))
 
+  onSelect: (e) ->
+    @loadChildren($(e.target))
+    @trigger 'selected', @current()
+
+  current: ->
+    cur = @$('option:selected[value!=""]:last')
+    ret = @names()
+    _.assign ret, {
+      id: cur.val(),
+      name: cur.text(),
+      level: cur.closest('select').data('level'),
+      fullName: @fullName(ret),
+    }
+
+  names: ->
+    names = {}
+    @$('option:selected').each (i, item) ->
+      cur = $(item)
+      names[cur.closest('select').data('level')] = cur.text()
+    names
+
+  fullName: (names) ->
+    arr = []
+    for k, v of names or @names()
+      arr.push(v)
+    arr.join(' ')
+
   events:
-    'change select': (e) -> @loadChildren($(e.target))
+    'change select': 'onSelect'
 

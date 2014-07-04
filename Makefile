@@ -1,5 +1,5 @@
 start:
-	@node --harmony `which coffee` `which brunch` watch --server
+	@node --harmony `which brunch` watch --server
 
 server:
 	@node --harmony ./server.js

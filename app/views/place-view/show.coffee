@@ -24,10 +24,12 @@ module.exports = class ChannelView extends EditFormView
 
   render: ->
     super
-    @subview 'selector', new Selector
+    selector = @subview 'selector', new Selector
       el: @$('.loc-selector')
       data:
         current: @model.get 'loc_id'
+    selector.on 'selected', (loc) =>
+      marker.setLoc(loc)
 
     marker = @subview 'marker', new MarkerView
       container: @$('#place-marker')

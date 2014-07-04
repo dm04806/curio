@@ -246,6 +246,7 @@ place:
   geo: 坐标
   lat: 纬度
   lng: 经度
+  tip_mark_foreign: 国外地址请直接输入坐标
 
 edit_place:
   address:

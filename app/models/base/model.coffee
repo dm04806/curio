@@ -55,6 +55,13 @@ module.exports = class Model extends Chaplin.Model
         ret[field] = new Date(ret[field])
     return ret
 
+  toJSON: ->
+    ret = super
+    # set updated_at to current time
+    if ret.updated_at
+      ret.updated_at = new Date()
+    ret
+
   # loaders use a raw ajax request, and returns a jqXHR promise
   # relation directly returns a Backbone.Model or Collection,
   # you must call `model.fetch()` manully to start load from remote
