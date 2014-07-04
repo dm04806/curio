@@ -12,6 +12,7 @@ Selector = require 'views/widgets/loc_selector'
 
 module.exports = class ChannelView extends EditFormView
   template: require './templates/show'
+  debug: true
 
   context: ->
     isNew: @isNew

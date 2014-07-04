@@ -230,6 +230,8 @@ place:
   address: 地址
   address_tip: 输入详细地址并标注
   phone: 电话
+  headimg: 题图
+  headimg_tip: 'http://example.com/place1.jpg'
   intro: 说明
   related_channel: 关联渠道二维码
   channel:

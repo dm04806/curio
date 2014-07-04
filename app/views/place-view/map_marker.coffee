@@ -231,6 +231,7 @@ module.exports = class MapMarker extends View
         zoom = ZOOMS[loc.level]
         @map.setCenter pos
         @map.setZoom zoom
+    @_last_loc = loc.id
 
   isInsideMap: (pos) ->
     @map.getBounds().contains(pos)
@@ -294,7 +295,7 @@ module.exports = class MapMarker extends View
     if not @$fstatic
       @$fstatic = @$('.foreign-map .static-map')
     # Map not initted, use model lat,lng
-    if @model.get 'lat'
+    if not @map
       loc.lat = @model.get 'lat'
       loc.lng = @model.get 'lng'
     if loc.lat and loc.lng

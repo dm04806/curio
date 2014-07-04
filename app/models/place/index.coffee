@@ -14,14 +14,18 @@ module.exports = class Place extends Model
     phone: null
     name: null
     intro: null
+    headimg: null
     channels: []
 
   url: ->
     if @id
-      "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}?include=channels"
+      "#{@apiRoot}/medias/#{@get 'media_id'}/places/#{@id}?include=channels,props"
     else
       "#{@apiRoot}/medias/#{@get 'media_id'}/places"
 
   pageUrl: ->
     "#{PAGE_ROOT}/place/#{@id}"
 
+  inChina: ->
+    loc_id = @get 'loc_id'
+    not loc_id or loc_id >= 100000

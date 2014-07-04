@@ -211,6 +211,8 @@ place:
   address: Full address
   address_tip: Input the address and mark
   phone: Phone
+  headimg: 题图
+  headimg_tip: "http://example.com/place.jpg"
   intro: Introduction
   related_channel: 关联二维码
   channel:

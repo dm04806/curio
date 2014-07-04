@@ -9,7 +9,7 @@ WEBOT_ROOT = 'http://lbs.curio.im/webot'
 PAGE_ROOT = 'http://p.curio.im'
 AMAP_AK = '8bee5fb2af355c5727ed397576f47ce3' // 高德
 BMAP_AK = '2KGr6T5CuGNza0kvrCeS5XrT' // baidu map
-GMAP_AK = 'iAIzaSyDQUDsTP7C-_8miDnewE1uNqhGr2VTxHoA' // google map
+GMAP_AK = 'AIzaSyDQUDsTP7C-_8miDnewE1uNqhGr2VTxHoA' // google map
 
 if (DEBUG) {
   SITE_ROOT = window.location.origin
