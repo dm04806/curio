@@ -5,9 +5,10 @@ Loc = require 'models/loc'
 
 renderList = (items, level, parent) ->
   level = level or 'country'
+  parent_id = parent?.id or ''
   sel = $("""
-      <select data-level="#{level}" name="loc_id" class="loc-select form-control">
-        <option value="#{parent?.id or ''}">#{__ "loc.#{level}"}</option>
+      <select data-id="#{parent_id}" data-level="#{level}" name="loc_id" class="loc-select form-control">
+        <option value="#{parent_id}">#{__ "loc.#{level}"}</option>
       </select>
     """)
   sel.attr('id', "selloc-#{level}")
@@ -66,7 +67,7 @@ module.exports = class LocSelector extends View
     node = node
     next = node.nextAll("select").val('')
     id = node.val()
-    return next.remove() if not id
+    return next.remove() if String(id) == String(node.data('id'))
     loc = new Loc id: id
     # remove children
     loc.fetch().done (ret) =>

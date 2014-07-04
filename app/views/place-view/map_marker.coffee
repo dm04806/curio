@@ -4,7 +4,7 @@ mediator = require 'mediator'
 maplib =  require 'lib/map'
 common = require 'views/common/utils'
 
-{ENTER} = require 'lib/keyboard'
+{ENTER,BACKSPACE} = require 'lib/keyboard'
 
 
 TT_TEMPLATES =
@@ -75,6 +75,9 @@ module.exports = class MapMarker extends View
     @setInfoWindow(content)
       .open @map, @marker.getPosition()
 
+  closeInfoWindow: ->
+    @infoWindow?.close()
+
   setInfoWindow: (content) ->
     if not content
       poi = @model.attributes if not poi
@@ -104,8 +107,9 @@ module.exports = class MapMarker extends View
           url: '%QUERY'
           filter: (res) ->
             res.filter (item) -> item.district.toString()
-          transport: (url, opt, success, error) ->
+          transport: (url, opt, success, error) =>
             keyword = decodeURIComponent(url)
+            console.log @city
             auto = new AMap.Autocomplete city: @city
             auto.search keyword
             AMap.event.addListener auto, 'complete', (obj) ->
@@ -124,14 +128,18 @@ module.exports = class MapMarker extends View
     # act as a loading indicator, to prevent duplicate request
     ps = null
 
-    doSearch = (keyword) =>
+    doSearch = (keyword, isPGUID) =>
       return if ps
       ps = new AMap.PlaceSearch city: @city
-      ps.search keyword
+      if isPGUID
+        ps.getDetails keyword
+      else
+        ps.search keyword
       AMap.event.addListener ps, 'complete', (result) =>
         ps = null
         marker = @marker
         poi = result.poiList?.pois?[0]
+        console.log result
         return common.notify('place.empty_search', 'warning') if not poi
         poi.district = if poi.address then district else ''
         #map.setZoom(15)
@@ -142,12 +150,15 @@ module.exports = class MapMarker extends View
 
     inputer.on 'typeahead:selected', (e, query) ->
       district = query.district
-      doSearch(query.district + query.name)
+      doSearch(query.id, true)
 
     inputer.off('keydown.mm').on 'keydown.mm', (e) ->
       if e.which == ENTER
-        doSearch(this.value)
         e.preventDefault()
+      if e.which == BACKSPACE and not this.value
+        e.preventDefault()
+      if e.which == ENTER and this.value
+        doSearch(this.value)
 
 
   stopAutoComplete: ->
@@ -208,13 +219,14 @@ module.exports = class MapMarker extends View
   ##
   # Set map with Loc.
   setLoc: (loc) ->
-    @city = loc.fullName
+    @city = loc.district or loc.city or loc.province
     return @setForeignLoc(loc) if loc.country != '中国'
     return unless @map
     @leaveForeign() if @_foreign_mode
+    @closeInfoWindow()
     @map.plugin ['AMap.Geocoder'], =>
       search = new AMap.Geocoder
-      search.getLocation(@city)
+      search.getLocation(loc.fullName)
       AMap.event.addListener search, 'complete', (res) =>
         pos = res.geocodes[0].location
         zoom = ZOOMS[loc.level]
@@ -228,7 +240,7 @@ module.exports = class MapMarker extends View
   # Update map details based on marker
   #
   updateByMarker: ->
-    @infoWindow?.close()
+    @closeInfoWindow()
     latlng = @marker.getPosition()
     # open a loading spinner
     @openInfoWindow(latlng, LOADING_SPINNER)
