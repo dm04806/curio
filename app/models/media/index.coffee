@@ -48,7 +48,7 @@ module.exports = class Media extends Model
     ret
 
   webotUrl: (uid) ->
-    "#{WEBOT_ROOT}#{uid or @get 'uid'}"
+    "#{WEBOT_ROOT}/#{uid or @get 'uid'}"
 
   # Create async job
   addJob: (jobname, data) ->

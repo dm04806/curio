@@ -54,6 +54,7 @@ module.exports = class SidebarView extends View
   render: ->
     #@model = mediator.media
     super
+    return if not mediator.media
     mainMenu = new MenuView
       region: 'main_menu'
       items: @navItems

@@ -211,7 +211,7 @@ module.exports = class MapMarker extends View
     @city = loc.fullName
     return @setForeignLoc(loc) if loc.country != '中国'
     return unless @map
-    @leaveForeign()
+    @leaveForeign() if @_foreign_mode
     @map.plugin ['AMap.Geocoder'], =>
       search = new AMap.Geocoder
       search.getLocation(@city)

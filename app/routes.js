@@ -6,6 +6,7 @@ module.exports = function(match) {
   match('logout', 'logout#index')
 
   match('settings', 'settings#index')
+  match('wizard', 'wizard#index')
 
   match('messages', 'message#index')
 

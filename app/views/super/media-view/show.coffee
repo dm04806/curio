@@ -6,3 +6,4 @@ module.exports = class MediaView extends EditFormView
   context: ->
     edit_media: require './templates/edit_media'
     isNew: @model.isNew()
+    back_url: '/super/medias'
