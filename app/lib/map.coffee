@@ -39,5 +39,5 @@ exports.gstaticMap = (opts) ->
   _.defaults opts,
     size: '600x200'
     maptype: 'roadmap'
-  "http://maps.google.cn/maps/api/staticmap?#{qs.stringify(opts)}"
+  "http://maps.google.cn/maps/api/staticmap?key=#{GMAP_AK}&#{qs.stringify(opts)}"
 

@@ -60,6 +60,7 @@ module.exports = class LocSelector extends View
       cur = cur.parent
     @$("select:eq(0)").val(cur.id)
     @$el.append(frag)
+    @trigger 'selected', @current()
 
   loadChildren: (node) ->
     node = node

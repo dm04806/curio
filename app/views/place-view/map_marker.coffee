@@ -210,6 +210,7 @@ module.exports = class MapMarker extends View
   setLoc: (loc) ->
     @city = loc.fullName
     return @setForeignLoc(loc) if loc.country != '中国'
+    return unless @map
     @leaveForeign()
     @map.plugin ['AMap.Geocoder'], =>
       search = new AMap.Geocoder
@@ -281,6 +282,10 @@ module.exports = class MapMarker extends View
     @enterForeign()
     if not @$fstatic
       @$fstatic = @$('.foreign-map .static-map')
+    # Map not initted, use model lat,lng
+    if @model.get 'lat'
+      loc.lat = @model.get 'lat'
+      loc.lng = @model.get 'lng'
     if loc.lat and loc.lng
       pos = [loc.lat,loc.lng].join(',')
       opts = {
