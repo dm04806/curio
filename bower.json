@@ -18,7 +18,8 @@
     "typeahead.js": "~0.10.2",
     "typeahead.js-bootstrap3.less": "~0.2.3",
     "jquery-color": "~2.1.2",
-    "html5sortable": "voidberg/html5sortable#~0.1.2"
+    "html5sortable": "voidberg/html5sortable#~0.1.2",
+    "jquery-qrcode": "*"
   },
   "overrides": {
     "html5sortable": {

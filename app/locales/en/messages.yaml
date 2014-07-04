@@ -227,6 +227,7 @@ place:
   lat: 纬度
   lng: 经度
   tip_mark_foreign: 国外地址请直接输入坐标
+  scan_to_see: 扫描以预览
 edit_place:
   address:
     "can't be blank": Address is required

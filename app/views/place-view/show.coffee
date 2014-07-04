@@ -41,11 +41,12 @@ module.exports = class ChannelView extends EditFormView
       @$('div[for=address] .col-sm-11').attr('class', 'col-sm-7')
       @$('div[for=address] .col-sm-3').show()
     marker.initAutocomplete @$el.find("input[name=address]")
-
     @subview 'channels', new ChannelListView
       container: @$('.place-channels')
       model: @model
     #@chooseChannel()
+    if not @model.isNew()
+      @$('.qrcode').qrcode({ width: 150, height: 150, text: @model.pageUrl() })
 
   toBigMap: ->
     @subview('marker').enlarge()

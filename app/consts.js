@@ -6,7 +6,7 @@ DEBUG = typeof window !== "undefined" && window !== null ? window.DEBUG : void 0
 SITE_ROOT = 'http://wx.curio.im'
 API_ROOT = '/api'
 WEBOT_ROOT = 'http://curio.im/webot'
-PAGE_ROOT = 'http://curio.im'
+PAGE_ROOT = 'http://p.curio.im'
 AMAP_AK = '8bee5fb2af355c5727ed397576f47ce3' // 高德
 BMAP_AK = '2KGr6T5CuGNza0kvrCeS5XrT' // baidu map
 GMAP_AK = 'iAIzaSyDQUDsTP7C-_8miDnewE1uNqhGr2VTxHoA' // google map
@@ -16,7 +16,7 @@ if (DEBUG) {
   AMAP_AK = '1cff40b555f2220b79e9fe6f97cb3450'
   BMAP_AK = ''
   GMAP_AK = 'AIzaSyAbaxTb0pp1qnRBVSJi5qQJmMoxgOrDbDU'
-  PAGE_ROOT = 'http://curio.com'
+  //PAGE_ROOT = 'http://lbs.curio.com'
 }
 
 module.exports = {
