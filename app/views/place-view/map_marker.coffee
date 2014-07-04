@@ -23,7 +23,7 @@ renderInfoWindow = (poi) ->
 
 ZOOMS = {
   'country': 4,
-  'province': 7,
+  'province': 8,
   'city': 10,
   'district': 13
 }
@@ -109,7 +109,6 @@ module.exports = class MapMarker extends View
             res.filter (item) -> item.district.toString()
           transport: (url, opt, success, error) =>
             keyword = decodeURIComponent(url)
-            console.log @city
             auto = new AMap.Autocomplete city: @city
             auto.search keyword
             AMap.event.addListener auto, 'complete', (obj) ->
@@ -139,10 +138,10 @@ module.exports = class MapMarker extends View
         ps = null
         marker = @marker
         poi = result.poiList?.pois?[0]
-        console.log result
         return common.notify('place.empty_search', 'warning') if not poi
         poi.district = if poi.address then district else ''
-        #map.setZoom(15)
+        if isPGUID
+          map.setZoom(15)
         @setPOI poi
         setTimeout =>
           @openInfoWindow()

@@ -3,25 +3,25 @@ MenuView = require 'views/widgets/global_menu'
 mediator = require 'mediator'
 
 navItems = [
-  name: 'subscribers'
-  icon: 'users'
+  name: 'messages'
+  icon: 'bubbles'
   subnav: [
-    name: 'messages'
+    name: 'messages.recent'
     url: '/messages'
-    icon: 'bubbles'
+    icon: 'chat'
   ,
-    name: 'manage'
+    name: 'subscribers'
     url: '/subscribers'
     icon: 'address-book'
+  ,
+    name: 'rules'
+    url: '/rules'
+    icon: 'redo'
   ]
 ,
   name: 'resources'
   icon: 'drawer2'
   subnav: [
-    name: 'autoreply'
-    url: '/rules'
-    icon: 'chat'
-  ,
     name: 'places'
     url: '/places'
     icon: 'location'
@@ -47,15 +47,14 @@ navItems = [
 module.exports = class SidebarView extends View
   autoRender: true
   className: 'sidebar-nav'
-  navItems: navItems
+  items: navItems
   regions:
     main_menu: '.main-menu'
   template: require './templates/sidebar'
   render: ->
     #@model = mediator.media
     super
-    return if not mediator.media
     mainMenu = new MenuView
       region: 'main_menu'
-      items: @navItems
+      items: @items
     @subview 'main_menu', mainMenu

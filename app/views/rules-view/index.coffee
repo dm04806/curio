@@ -10,7 +10,7 @@ navTabs = [
   url: '/rules?tab=keyword'
 ,
   name: 'autoreply.subscribe'
-  url: '/rulew?tab=subscribe'
+  url: '/rules?tab=subscribe'
 ,
   name: 'autoreply.any'
   url: '/rules?tab=any'

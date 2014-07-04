@@ -27,7 +27,7 @@ amap_start = (cb) ->
   $.cachedScript js
 
 exports.amap = (cb) ->
-  if window.Amap
+  if window.AMap
     cb()
   else
     amap_start(cb)

@@ -71,7 +71,9 @@ module.exports = class CollectionView extends Chaplin.CollectionView
     @subview 'paginator', @getPaginatorView()
 
   listen:
-    'addedToDOM': 'renderPaginator'
+    'addedToDOM': ->
+      @renderPaginator()
+      @adjustTitle()
     'sync collection': 'renderPaginator'
 
   events: View::events

@@ -134,8 +134,7 @@ image: Image
 news: News
 messages:
   "": Messages
-  index:
-    h1: Recent messages
+  recent: 最近会话
   noresult: 暂时没有消息，首次接入后只能查看后续消息
 message:
   "": Message
@@ -358,6 +357,7 @@ autoreply:
     tip: Reply to user when user first subscribed the account
   any: For any new message
 rules:
+  "": 回复规则
   create: Create a rule
   export:
     "": Export

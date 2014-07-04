@@ -21,4 +21,4 @@ navItems = [
 
 
 module.exports = class SuperSidebar extends PanelSidebar
-  navItems: navItems
+  items: navItems

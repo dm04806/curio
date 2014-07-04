@@ -144,8 +144,7 @@ news: 图文
 
 messages:
   '': 消息
-  index:
-    h1: 最近会话
+  recent: 最近会话
   noresult: 暂时没有消息，首次接入后只能查看后续消息
 
 message:
@@ -401,7 +400,9 @@ autoreply:
   keyword: 关键字自动回复
   subscribe: 被添加自动回复
   any: 消息自动回复
+
 rules:
+  '': 回复规则
   create: 添加规则
   export:
     '': 导出规则
