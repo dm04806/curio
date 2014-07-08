@@ -28,7 +28,7 @@ module.exports = class Place extends Model
 
   inChina: ->
     loc_id = @get 'loc_id'
-    not loc_id or loc_id >= 100000
+    loc_id >= 100000
 
   serialize: ->
     ret = super
