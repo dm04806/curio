@@ -204,8 +204,8 @@ register 'strftime', (format, date, options) ->
 register 'mapImg', (lat, lng, args..., options) ->
   size = args[0] || '340*120'
   zoom = args[1] || 15
-  #"http://restapi.amap.com/v3/staticmap?size=#{size}&markers=mid,,:#{lng},#{lat}&zoom=#{zoom}&key=#{consts.AMAP_AK}"
-  "http://st.map.qq.com/api?size=#{size}&markers=#{lng},#{lat}&zoom=#{zoom}"
+  "http://restapi.amap.com/v3/staticmap?size=#{size}&markers=mid,,:#{lng},#{lat}&zoom=#{zoom}&key=#{consts.AMAP_AK}"
+  #"http://st.map.qq.com/api?size=#{size}&markers=#{lng},#{lat}&zoom=#{zoom}"
 
 register 'gmapImg', (lat, lng, args..., optins) ->
   maplib.gstaticMap
