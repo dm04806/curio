@@ -204,7 +204,7 @@ module.exports = class MapMarker extends View
       @marker.setPosition(pos)
       if not @isInsideMap(pos)
         @map.setCenter(pos)
-        @map.setZoom(12)
+        @map.setZoom(15)
 
   ##
   # Set map by AMap POI
@@ -295,13 +295,15 @@ module.exports = class MapMarker extends View
     if not @$fstatic
       @$fstatic = @$('.foreign-map .static-map')
     # Map not initted, use model lat,lng
-    if not @map
+    if not @model.isNew()
       loc.lat = @model.get 'lat'
       loc.lng = @model.get 'lng'
     if loc.lat and loc.lng
       pos = [loc.lat,loc.lng].join(',')
       opts = {
         size: '500x255'
+        lat: loc.lat
+        lng: loc.lng
         center: pos
         markers: pos
         zoom: 11
@@ -309,12 +311,12 @@ module.exports = class MapMarker extends View
       @model.set
         lat: loc.lat
         lng: loc.lng
-        address: loc.fullName
     else
       opts = {
         size: '500x255'
         center: loc.fullName
       }
+    if @model.isNew()
       @model.set
         address: loc.fullName
     @$fstatic.html("<img src=\"#{maplib.gstaticMap(opts)}\" >")

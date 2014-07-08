@@ -224,6 +224,7 @@ places:
 
 place:
   name: 名称
+  id_tip: "对于中国地名需大于 100,000 "
   location: 位置
   city: 城市
   empty_search: 搜索不到此地址，请手动标记

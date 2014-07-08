@@ -205,6 +205,7 @@ places:
   create_one_now: Create one now
 place:
   name: Place name
+  id_tip: "大于100,000的为中国地名"
   location: Location
   city: 城市
   empty_search: Search returns no result

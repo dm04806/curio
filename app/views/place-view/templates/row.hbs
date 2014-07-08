@@ -16,7 +16,11 @@
       </h5>
       <div class="map">
         <a href="{{url 'place#show' id}}">
-          <img class="img-rounded" src="{{mapImg lat lng '273*120'}}" alt="">
+          {{#if inChina}}
+            <img class="img-rounded" src="{{mapImg lat lng '273*120'}}" alt="">
+          {{else}}
+            <img class="img-rounded" src="{{gmapImg lat lng '273*120'}}" alt="">
+          {{/if}}
         </a>
       </div>
     </div>

@@ -7,6 +7,9 @@ module.exports = class Loc extends Model
   defaults:
     name: null
     level: null
+    alias: null
+    parent_id: null
+    code: null
     children: []
 
   level_cn: ->

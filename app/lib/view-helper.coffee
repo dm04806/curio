@@ -5,6 +5,7 @@ consts = require 'consts'
 utils = require './utils'
 i18n = require 'lib/i18n'
 moment = require 'lib/moment'
+maplib = require 'lib/map'
 
 _.assign consts, require 'models/consts'
 
@@ -206,6 +207,12 @@ register 'mapImg', (lat, lng, args..., options) ->
   #"http://restapi.amap.com/v3/staticmap?size=#{size}&markers=mid,,:#{lng},#{lat}&zoom=#{zoom}&key=#{consts.AMAP_AK}"
   "http://st.map.qq.com/api?size=#{size}&markers=#{lng},#{lat}&zoom=#{zoom}"
 
+register 'gmapImg', (lat, lng, args..., optins) ->
+  maplib.gstaticMap
+    lat: lat
+    lng: lng
+    size: args[0] || '340*120'
+    zoom: args[1] || 15
 
 
 exports.globals =

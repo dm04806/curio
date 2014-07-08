@@ -35,9 +35,23 @@ exports.amap = (cb) ->
 
 qs = Chaplin.utils.querystring
 
+
+isRentina = window.devicePixelRatio >= 1.5
+mapbox_token = "pk.eyJ1Ijoia3RtdWQiLCJhIjoiaGJfN29BWSJ9.t0tAn4u2xYYFTl7b6-edKg"
+
 exports.gstaticMap = (opts) ->
   _.defaults opts,
     size: '600x200'
+    zoom: 13
     maptype: 'roadmap'
-  "http://maps.google.cn/maps/api/staticmap?key=#{GMAP_AK}&#{qs.stringify(opts)}"
+  if not opts.lat
+    opts.lat = 0
+    opts.lng = 120
+    opts.zoom = 1
+  #"http://maps.google.cn/maps/api/staticmap?key=#{GMAP_AK}&#{qs.stringify(opts)}"
+  #"http://maps.googleapis.com/maps/api/staticmap?key=#{GMAP_AK}&#{qs.stringify(opts)}"
+  center = [opts.lng, opts.lat].join(',')
+  size = opts.size.replace('*', 'x')
+  retina = if isRentina then '@2x' else ''
+  "http://api.tiles.mapbox.com/v4/ktmud.ine3g1oi/pin-s+f44(#{center})/#{center},#{opts.zoom}/#{size}#{retina}.png?access_token=#{mapbox_token}"
 
