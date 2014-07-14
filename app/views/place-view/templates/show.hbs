@@ -78,9 +78,9 @@
     {{form_input 'phone' phone 'place.phone' 'place.phone_tip'}}
     {{form_input 'headimg' headimg 'place.headimg' 'place.headimg_tip'}}
     <div class="form-group" for="intro">
-      <label for="input-intro" class="col-sm-1 control-label">说明</label>
+      <label for="input-intro" class="col-sm-1 control-label">{{t 'desc'}}</label>
       <div class="col-sm-7">
-        <textarea placeholder="可以使用HTML" rows="8"
+        <textarea id="place-intro" placeholder="可以使用HTML" rows="8"
           class="form-control input-intro" name="intro"
         >{{intro}}</textarea>
         <div class="form-tip" for="intro"></div>

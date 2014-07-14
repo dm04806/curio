@@ -5,6 +5,7 @@ server:
 	@node --harmony ./server.js
 
 build:
+	#rm -r ./bower_components/*
 	bower install
 	npm install --production
 	brunch build --production

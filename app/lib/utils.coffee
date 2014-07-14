@@ -4,6 +4,8 @@ mediator = require 'mediator'
 {CurioError,AccessError} = require 'models/errors'
 {SITE_ROOT,API_ROOT} = require 'consts'
 
+Simditor.prototype.opts.defaultImage = '/images/default.png'
+
 $.fn.disable = ->
   @prop('disabled', true)
 

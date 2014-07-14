@@ -78,8 +78,18 @@ module.exports = class ChannelView extends EditFormView
     # do nothing when create, cause will notify user in the next page
     super if not @isNew
 
+  initEditor: (e) ->
+    editor = new Simditor
+      textarea: @$('#place-intro')
+      toolbar: [
+        'title', 'bold', 'italic', 'underline',
+        'ol', 'ul', 'link', 'image', 'hr'
+      ]
+
+
   events:
     'blur input[name=lat],input[name=lng]': 'updateMarker'
 
   listen:
+    'addedToDOM': 'initEditor'
     'change model': 'updateInput'

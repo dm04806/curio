@@ -4,24 +4,34 @@
   "main": "public/js/app.js",
   "dependencies": {
     "chaplin": "~1.0.1",
-    "bootstrap": "~3.1.1",
+    "bootstrap": "~3.2.0",
     "lodash": "~2.4.1",
     "jquery": "~2.1.0",
     "nvd3": "~1.1.15",
     "d3": "~3.4.4",
     "console-polyfill": "~0.1.0",
     "jquery-i18n": "~1.1.1",
-    "animate.css": "~3.0.0",
+    "animate.css": "~3.2.0",
     "jquery-cookie": "~1.4.0",
-    "moment": "~2.5.1",
-    "backbone.stickit": "~0.7.0",
-    "typeahead.js": "~0.10.2",
+    "moment": "~2.7.0",
+    "backbone.stickit": "~0.8.0",
+    "typeahead.js": "~0.10.4",
     "typeahead.js-bootstrap3.less": "~0.2.3",
     "jquery-color": "~2.1.2",
     "html5sortable": "voidberg/html5sortable#~0.1.2",
-    "jquery-qrcode": "*"
+    "jquery-qrcode": "*",
+    "simditor": "mycolorway/simditor#~1.0.3",
+    "font-awesome": "~4.1.0"
   },
   "overrides": {
+    "simditor": {
+      "main": ["lib/simditor-all.js", "styles/simditor.css"],
+      "dependencies": {
+        "jquery": "*",
+        "simple-module": "~1.0.0",
+        "simple-uploader": "~1.0.0"
+      }
+    },
     "html5sortable": {
       "main": "dist/html.sortable.0.1.2.js"
     },
@@ -65,6 +75,7 @@
   },
   "resolutions": {
     "d3": "~3.4.4",
+    "bootstrap": "~3.2.0",
     "jquery": "~2.1.0"
   }
 }
