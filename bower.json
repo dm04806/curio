@@ -27,9 +27,6 @@
     "simditor": {
       "main": ["lib/simditor-all.js", "styles/simditor.css"],
       "dependencies": {
-        "jquery": "*",
-        "simple-module": "~1.0.0",
-        "simple-uploader": "~1.0.0"
       }
     },
     "html5sortable": {
